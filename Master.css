@@ -1,0 +1,36 @@
+body {
+	background: #333333;
+	background: url(datafiles/sprites/bg5FullHd.png) 100% 100%;
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+}
+#myCanvas {
+	transition-timing-function: ease-in-out;
+	transition: width 0.3s, height 0.3s, margin 0.3s, top 0.3s;
+	box-shadow: #000033 0px 0px 90px;
+	border: none;
+	position: fixed;
+	top: 2%;
+	display: block;
+
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+#myCanvas.fullscreen {
+	top: 0;
+}
+
+@font-face {
+	font-family: fnt_Comforta_Regular;
+	src: url(datafiles/fonts/Comfortaa-Regular.ttf);
+}
+@font-face {
+	font-family: fnt_Comforta_Bold;
+	src: url(datafiles/fonts/Comfortaa-Bold.ttf);
+}
+@font-face {
+	font-family: fnt_Comforta_Light;
+	src: url(datafiles/fonts/Comfortaa-Light.ttf);
+}
