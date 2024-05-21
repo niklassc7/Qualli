@@ -2,7 +2,6 @@ class RoomMenu1 extends Room{
 	constructor(){
 		super();
 		this.background = bgMenuDark;
-		this.objlist = [];
 
 		this.n_step = 0;
 

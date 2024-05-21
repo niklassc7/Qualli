@@ -3,9 +3,6 @@ class room0 extends LevelRoom {
 		super();
 
 		this.background = spr_bg_0;
-		this.objlist = [];
-		this.planetlist = [];
-		this.KIlist = [];
 		this.addToObjList(new KI0(2));
 
 		this.planetlist[0] = this.addToObjList(new cls_Planet(128, 640, 1));

@@ -1,9 +1,24 @@
 class LevelRoom extends Room {
 	constructor(){
 		super();
+		this.planetlist = [];
+		this.KIlist = [];
+
 		this.background = undefined;
 		this.alarm = [];
 		this.alarm[0] = 10;
+
+		// Pause button
+		let pauseButton = this.addToObjList(new Button(
+			"⏸",
+			roomWidth - 50,
+			10,
+			40,
+			40,
+			function() { alert("Paused") },
+			false
+		));
+		pauseButton.setFontSize(16);
 	}
 
 	step() {

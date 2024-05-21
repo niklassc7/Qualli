@@ -2,7 +2,6 @@ class RoomMenu0 extends Room{
 	constructor(){
 		super();
 		this.background = spr_bgMenu;
-		this.objlist = [];
 
 		this.n_step = 0;
 
