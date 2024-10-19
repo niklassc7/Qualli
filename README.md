@@ -9,6 +9,16 @@ files (in `datafiles/fonts/`). Refer to the
 [upstream git-repository](https://github.com/googlefonts/comfortaa/)
 for its licensing information.
 
+## Run
+
+### Web
+
+Open `Spiel.html` in a browser.
+
+### Electron
+
+Run `npm run start`
+
 ## Screenshots
 
 ![Screenshot1](screenshots/1.png)
