@@ -3,6 +3,7 @@ function main(){
 	*   android
 	*/
 	platform = "web";
+	debug = false
 
 	roomWidth = 1280;
 	roomHeight = 720;

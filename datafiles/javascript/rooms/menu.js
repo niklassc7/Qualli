@@ -35,16 +35,18 @@ class rom_menu extends Room {
 
 
 		//Zeichne Kringel
-		ctx.lineWidth = 5;
-		ctx.strokeStyle = 'white';
-		ctx.fillStyle = "white";
-		for(var i = 0; i < 5; i++){
-			ctx.beginPath();
-			ctx.arc((roomWidth / 2) * xScalar, (roomHeight - 64) * yScalar, i * ((ctx.lineWidth-1)*2), (this.n_step* (i*0.01+0.1)) + 1.25 * Math.PI, (this.n_step*(i*0.01+0.1)) + 1.75 * Math.PI, false);
-			ctx.stroke();
-			ctx.beginPath();
-			ctx.arc((roomWidth / 2) * xScalar, (roomHeight - 64) * yScalar, ctx.lineWidth+i * ((ctx.lineWidth-1)*2), -(this.n_step* (i*0.01+0.1)) + 1.25 * Math.PI, -(this.n_step*(i*0.01+0.1)) + 1.75 * Math.PI, false);
-			ctx.stroke();
+		if (debug) {
+			ctx.lineWidth = 5;
+			ctx.strokeStyle = 'white';
+			ctx.fillStyle = "white";
+			for(var i = 0; i < 5; i++){
+				ctx.beginPath();
+				ctx.arc((roomWidth / 2) * xScalar, (roomHeight - 64) * yScalar, i * ((ctx.lineWidth-1)*2), (this.n_step* (i*0.01+0.1)) + 1.25 * Math.PI, (this.n_step*(i*0.01+0.1)) + 1.75 * Math.PI, false);
+				ctx.stroke();
+				ctx.beginPath();
+				ctx.arc((roomWidth / 2) * xScalar, (roomHeight - 64) * yScalar, ctx.lineWidth+i * ((ctx.lineWidth-1)*2), -(this.n_step* (i*0.01+0.1)) + 1.25 * Math.PI, -(this.n_step*(i*0.01+0.1)) + 1.75 * Math.PI, false);
+				ctx.stroke();
+			}
 		}
 	}
 }
