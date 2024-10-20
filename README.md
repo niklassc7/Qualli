@@ -13,7 +13,7 @@ for its licensing information.
 
 ### Web
 
-Open `Spiel.html` in a browser.
+Open `index.html` in a browser.
 
 ### Electron
 
