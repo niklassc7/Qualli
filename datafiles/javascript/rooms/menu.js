@@ -26,10 +26,11 @@ class rom_menu extends Room {
 		super.draw();
 		//Überschrift
 		ctx.strokeStyle = "#ffffff";
-		ctx.font = Math.round(128 * ((xScalar + yScalar) / 2)) + "px fnt_Comforta_Bold";
+		ctx.font = Math.round(175 * ((xScalar + yScalar) / 2)) + "px fnt_Comforta_Bold";
 		ctx.textAlign = "center";
-		ctx.lineWidth = 4;
+		ctx.lineWidth = 12;
 		ctx.strokeText("Qualli", roomWidth/2 * xScalar, 148 * yScalar);
+		// ctx.fillText("Qualli", roomWidth/2 * xScalar, 148 * yScalar);
 
 		this.n_step++;
 
