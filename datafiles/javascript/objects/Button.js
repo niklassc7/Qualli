@@ -51,7 +51,7 @@ class Button extends Objekt {
 		ctx.textAlign = "center";
 		ctx.textBaseline = "middle";
 		ctx.font = this.font;
-		ctx.strokeText(
+		ctx.fillText(
 			this.text,
 			(this.x + this.width / 2) * xScalar,
 			(this.y + this.height / 2) * yScalar

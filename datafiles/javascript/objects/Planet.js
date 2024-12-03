@@ -11,6 +11,7 @@ class cls_Planet extends Objekt{
 
 		this.createQueue = new LinkedList();
 	}
+
 	step() {
 		super.step();
 		if(this.team !== 0)
@@ -27,6 +28,7 @@ class cls_Planet extends Objekt{
 		this.ox = this.width / 2;
 		this.oy = this.height / 2;
 	}
+
 	draw() {
 		// Teamfarbe
 		if(this.team !== 0) {
