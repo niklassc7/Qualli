@@ -10,6 +10,10 @@ class cls_mouse{
 		this.right_pressed = false;
 
 		this.selected = undefined;
+
+		// For circle animation
+		this.circleCounterMax = 20;
+		this.circleCounter = 0;
 	}
 	draw() {
 		if(this.selected !== undefined) {
@@ -23,7 +27,15 @@ class cls_mouse{
 			draw_line(this.selected.xD, this.selected.yD, this.xD, this.yD);
 
 			// Highlight selected Planet
-			draw_circle(this.selected.xD, this.selected.yD, this.selected.widthD / 2, this.selected.heightD / 2, false);
+			ctx.lineWidth = 2;
+			for(let i = 0; i < 5 + Math.abs(this.circleCounter - this.circleCounterMax/2); i+=3) {
+				draw_circle(this.selected.xD,
+							this.selected.yD,
+							this.selected.widthD / 2 + i,
+							true);
+			}
+
+			this.circleCounter = (this.circleCounter + 1) % this.circleCounterMax;
 		}
 	}
 }
