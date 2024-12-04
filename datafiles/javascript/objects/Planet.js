@@ -40,11 +40,20 @@ class cls_Planet extends Objekt{
 
 		super.draw();
 
+		// Units
 		ctx.fillStyle = "#eceff1";
 		ctx.font = Math.round(36 * xScalar) + "px fnt_Comforta_Bold";
 		ctx.textBaseline = "middle";
 		ctx.textAlign = "center";
 		ctx.fillText(Math.floor(this.einheiten), this.xD, this.yD);
 
+		// Queue
+		if (!this.createQueue.isEmpty()) {
+			ctx.fillStyle = "#fc9f91";
+			ctx.font = Math.round(18 * xScalar) + "px fnt_Comforta_Bold";
+			ctx.textBaseline = "middle";
+			ctx.textAlign = "center";
+			ctx.fillText(this.createQueue.size, this.xD, this.yD +32);
+		}
 	}
 }
