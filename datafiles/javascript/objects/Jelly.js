@@ -1,5 +1,4 @@
-class Raumschiff extends Objekt{
-
+class Jelly extends Object {
 	constructor(x, y, team, ziel) {
 		super();
 
@@ -11,7 +10,7 @@ class Raumschiff extends Objekt{
 
 		// increases speed and corrects direction until it is done and then deletes itself
 		// this reduces operations after getting to the targetSpeed and right direction
-		class StartHelper extends IObjlistEntry {
+		class StartHelper extends IObjlistentry {
 			constructor(parent, targetSpeed) {
 				super();
 				this.parent = parent;
@@ -27,7 +26,7 @@ class Raumschiff extends Objekt{
 				if(this.parent.speed < this.targetSpeed)
 					this.parent.setSpeed(this.parent.speed + acceleration);
 
-				let zDir = point_direction(this.parent.x, this.parent.y, this.parent.ziel.x, this.parent.ziel.y);
+				let zDir = pointDirection(this.parent.x, this.parent.y, this.parent.ziel.x, this.parent.ziel.y);
 
 				let turnSpeed = 4;
 
@@ -59,7 +58,7 @@ class Raumschiff extends Objekt{
 
 		this.startX = x + (128 - Math.floor(Math.random() * 256));
 		this.startY = y + (128 - Math.floor(Math.random() * 256));
-		this.move_towards_point(this.startX, this.startY, 2);
+		this.moveTowardsPoint(this.startX, this.startY, 2);
 		new StartHelper(this, 5);
 
 	}

@@ -39,36 +39,35 @@ function main(){
 
 	sprLock = document.getElementById("lock");
 
-	function getMousePos(canvas, evt){
-		var rect = canvas.getBoundingClientRect();
-		return {
-			x: evt.clientX - rect.left,
-			y: evt.clientY - rect.top
-		};
-	}
-
-
+	// // TODO remove when old mouse is replaced by input object
+	// function getMousePos(canvas, evt){
+	// 	var rect = canvas.getBoundingClientRect();
+	// 	return {
+	// 		x: evt.clientX - rect.left,
+	// 		y: evt.clientY - rect.top
+	// 	};
+	// }
 
 	// if(window.innerWidth < 1300 || window.innerHeight < 740)
 		toggleFullscreen();
 
-	canvas.addEventListener('mousemove', function(evt) {
-		var mousePos = getMousePos(canvas, evt);
-		// if(fullscreen) {
-			// mouse.x = mousePos.x * (1280 / window.innerWidth);
-			// mouse.y = mousePos.y * (720 / window.innerHeight);
-			// mouse.x = mousePos.x;
-			// mouse.y = mousePos.y;
-			mouse.x = mousePos.x * (roomWidth / canvas.clientWidth);
-			mouse.y = mousePos.y * (roomHeight / canvas.clientHeight);
-			mouse.xD = mouse.x * xScalar; // x it should be drawn at
-			mouse.yD = mouse.y * yScalar; // y it should be drawn at
-			// } else {
-				// mouse.x = mousePos.x;
-				// mouse.y = mousePos.y;
-				// }
-	}, false);
-	mouse = new cls_mouse;
+	// canvas.addEventListener('mousemove', function(evt) {
+	// 	var mousePos = getMousePos(canvas, evt);
+	// 	mouse.x = mousePos.x * (roomWidth / canvas.clientWidth);
+	// 	mouse.y = mousePos.y * (roomHeight / canvas.clientHeight);
+	// 	mouse.xD = mouse.x * xScalar; // x it should be drawn at
+	// 	mouse.yD = mouse.y * yScalar; // y it should be drawn at
+	// }, false);
+	// mouse = new cls_mouse;
+
+	input = new cls_input();
+	
+
+	// canvas.addEventListener('mousedown', input.mousedown, false);
+	// canvas.addEventListener('mousemove', input.mousemove, false);
+	// canvas.addEventListener('mouseup', input.mouseup, false);
+	
+
 
 	room = new rom_menu();
 	// room.constructor();

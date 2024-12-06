@@ -1,4 +1,4 @@
-class KI extends IObjlistEntry {
+class KI extends IObjlistentry {
 	constructor(team) {
 		super();
 		this.team = team;
@@ -24,7 +24,7 @@ class KI extends IObjlistEntry {
 
 	pruefe_ob_eigene_Raumschiffe_im_Spiel() {
 		for(var i = 0; i < room.objlist.length; i++) {
-			if(room.objlist[i] instanceof Raumschiff) {
+			if(room.objlist[i] instanceof Jelly) {
 				if(room.objlist[i].team === this.team) return true;
 			}
 		}

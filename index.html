@@ -16,8 +16,9 @@
 		<title>Qualli</title>
 		<link rel = "Stylesheet"  type = "text/css" href = "Master.css"/>
 
-		<script src="datafiles/javascript/appEtc/IObjlistEntry.js"></script>
+		<script src="datafiles/javascript/appEtc/IObjlistentry.js"></script>
 		<script src="datafiles/javascript/appEtc/mouse.js"></script>
+		<script src="datafiles/javascript/appEtc/input.js"></script>
 		<script src="datafiles/javascript/appEtc/KI.js"></script>
 		<script src="datafiles/javascript/appEtc/KI0.js"></script>
 		<script src="datafiles/javascript/appEtc/KI1.js"></script>
@@ -25,12 +26,12 @@
 		<script src="datafiles/javascript/appEtc/Stack.js"></script>
 		<script src="datafiles/javascript/appEtc/LinkedList.js"></script>
 
-		<script src="datafiles/javascript/objects/Objekt.js"></script>
+		<script src="datafiles/javascript/objects/Object.js"></script>
 		<script src="datafiles/javascript/objects/Button.js"></script>
 		<script src="datafiles/javascript/objects/Sterne.js"></script>
 		<script src="datafiles/javascript/objects/Erde.js"></script>
 		<script src="datafiles/javascript/objects/Planet.js"></script>
-		<script src="datafiles/javascript/objects/Raumschiff.js"></script>
+		<script src="datafiles/javascript/objects/Jelly.js"></script>
 
 		<script src="datafiles/javascript/rooms/Room.js"></script>
 		<script src="datafiles/javascript/rooms/menu.js"></script>
@@ -70,7 +71,7 @@
 	</head>
 
 	<body onLoad="main()" onresize="onResize()">
-		<canvas id="myCanvas" width="1280" height="720" onMouseDown="WhichButton(event)" moz-opaque="true"></canvas>
+		<canvas id="myCanvas" width="1280" height="720" moz-opaque="true"></canvas>
 
 		<div id="ressources" style="visibility: collapse; position: fixed;">
 			<img id="img_Erde" src="datafiles/sprites/Erde3.png" width="0" height="0"/>

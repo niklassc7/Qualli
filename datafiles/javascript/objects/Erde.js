@@ -1,5 +1,5 @@
-class cls_Erde extends Objekt{
-	constructor(){
+class cls_Erde extends Object {
+	constructor() {
 		super();
 		this.width = 512;
 		this.height = 512;

@@ -46,7 +46,7 @@ class room20 extends LevelRoom {
 			// let tmp_y = Math.random() * roomHeight
 			let tmp_y = -100
 			let tmp_ziel = room.planetlist[Math.floor(Math.random() * room.planetlist.length)]
-			new Raumschiff(tmp_x, tmp_y, tmp_team, tmp_ziel)
+			new Jelly(tmp_x, tmp_y, tmp_team, tmp_ziel)
 		}
 	}
 

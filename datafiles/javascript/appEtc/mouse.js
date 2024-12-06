@@ -15,6 +15,7 @@ class cls_mouse{
 		this.circleCounterMax = 20;
 		this.circleCounter = 0;
 	}
+
 	draw() {
 		if(this.selected !== undefined) {
 			// Abbrechen wenn Planet in der Zwischenzeit eingenommen wurde
@@ -38,4 +39,5 @@ class cls_mouse{
 			this.circleCounter = (this.circleCounter + 1) % this.circleCounterMax;
 		}
 	}
+
 }

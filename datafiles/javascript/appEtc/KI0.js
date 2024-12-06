@@ -37,7 +37,7 @@ class KI0 extends KI {
 					var planet_ziel = einnehmlist[Math.round(Math.random() * (einnehmlist.length-1))];
 				}
 
-				// Erstelle Raumschiffe
+				// Create jellies
 				if(planet_start !== planet_ziel)
 					this.angriff(planet_start, planet_ziel);
 

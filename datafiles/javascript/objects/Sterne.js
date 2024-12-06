@@ -1,4 +1,4 @@
-class cls_Sterne extends Objekt{
+class cls_Sterne extends Object {
 	constructor(x, y){
 		super();
 		this.x = x;

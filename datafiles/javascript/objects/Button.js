@@ -1,4 +1,4 @@
-class Button extends Objekt {
+class Button extends Object {
 	constructor(text, x, y, width, height, onClick, disabled) {
 		super(x, y, width, height, sprLock);
 		this.text = text;
@@ -19,13 +19,18 @@ class Button extends Objekt {
 		this.font =  Math.round(this.fontSize * ((xScalar + yScalar) / 2)) + "px fnt_Comforta_Regular";
 	}
 
-	step() {
-		if(mouse.left_pressed && point_in_rectangle(mouse.x, mouse.y, this.x, this.y, this.x + this.width, this.y + this.height))
-			this.onClick();
-	}
+	// step() {
+	// 	if(mouse.left_pressed && point_in_rectangle(mouse.x, mouse.y, this.x, this.y, this.x + this.width, this.y + this.height))
+	// 		this.onClick();
+	// }
 
 	draw() {
 		ctx.lineWidth = Math.round(2 * xScalar);
+
+		if (point_in_rectangle(input.x, input.y, this.x, this.y, this.x+this.width, this.y+this.height)) {
+			ctx.lineWidth = Math.round(8 * xScalar);
+		}
+
 		ctx.strokeStyle = this.borderColour;
 		draw_roundrect(
 			ctx,
@@ -59,18 +64,18 @@ class Button extends Objekt {
 
 
 
-		if(point_in_rectangle(mouse.x, mouse.y, this.x, this.y, this.x + this.width, this.y + this.height) && !this.disabled) {
-			ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
-			ctx.strokeStyle = "yellow";
-			draw_roundrect(
-				ctx,
-				this.xD,
-				this.yD,
-				this.widthD,
-				this.heightD,
-				10,
-				true
-			);
-		}
+		// if(point_in_rectangle(mouse.x, mouse.y, this.x, this.y, this.x + this.width, this.y + this.height) && !this.disabled) {
+		// 	ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+		// 	ctx.strokeStyle = "yellow";
+		// 	draw_roundrect(
+		// 		ctx,
+		// 		this.xD,
+		// 		this.yD,
+		// 		this.widthD,
+		// 		this.heightD,
+		// 		10,
+		// 		true
+		// 	);
+		// }
 	}
 }

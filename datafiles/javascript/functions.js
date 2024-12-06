@@ -67,15 +67,14 @@ function resizeCanvas() {
 }
 
 function room_goto(new_room){
-	mouse.left_pressed = false;
-	mouse.middle_pressed = false;
-	mouse.right_pressed = false;
+	// mouse.left_pressed = false;
+	// mouse.middle_pressed = false;
+	// mouse.right_pressed = false;
 
-	// room.objlist = undefined;
-	mouse.selected = undefined;
-	//Setze neuen Raum
+	// mouse.selected = undefined;
+
+	// Set new room
 	room = new new_room();
-	// room.constructor();
 }
 
 function object_create(cls, px, py) {
@@ -83,14 +82,12 @@ function object_create(cls, px, py) {
 }
 
 function object_create(cls, px, py, parameter){ // Erstellen, Eintragem, obj (inst) wiedergeben // OBSOLETE USE ADDTOOBJLIST AFTER CREATING
-	// Objekt erstellen
+	// Create object
 	var obj = new cls([]);
-	// Objekt eintragen
+	// Register object to game loop
 	room.addToObjList(obj);
-	// var stelle = room.objlist.length;
-	// room.objlist[stelle] = obj;
 
-	// Koordinaten setzen, falls gegeben
+	// Set coordinates, if given
 	if(px !== undefined && py !== undefined) {
 		obj.x = px;
 		obj.y = py;
@@ -136,7 +133,7 @@ function rectangle_in_rectangle(a_x1, a_y1, a_x2, a_y2, b_x1, b_y1, b_x2, b_y2) 
 	return false;
 }
 
-function point_direction(x1, y1, x2, y2){ // Nicht getestet! FEHLERHAFT TODO
+function pointDirection(x1, y1, x2, y2){ // Nicht getestet! FEHLERHAFT TODO
 	let dx = x2 - x1;
 	let dy = y2 - y1;
 
@@ -217,28 +214,28 @@ function draw_roundrect(ctx, x, y, width, height, radius, fill, stroke) {
 	}
 }
 
-// Setzen der Mausvariablen, falls event
-function WhichButton(event) {
-	switch(event.button){
-		case 0:
-			mouse.left_pressed = true;
-			break;
-		case 1:
-			mouse.middle_pressed = true;
-			break;
-		case 2:
-			mouse.right_pressed = true;
-			break;
-		default:
-			console.log("Fehler: Nicht bekannte Maustaste gedrückt (" + event.button + ").");
-			break;
-	}
-}
+// // Setzen der Mausvariablen, falls event
+// function WhichButton(event) {
+// 	switch(event.button){
+// 		case 0:
+// 			mouse.left_pressed = true;
+// 			break;
+// 		case 1:
+// 			mouse.middle_pressed = true;
+// 			break;
+// 		case 2:
+// 			mouse.right_pressed = true;
+// 			break;
+// 		default:
+// 			console.log("Fehler: Nicht bekannte Maustaste gedrückt (" + event.button + ").");
+// 			break;
+// 	}
+// }
 
 // Checks if team has already lost
 function checkIfLost(team) {
 	for(var i = 0; i < room.objlist.length; i++) {
-		if(room.objlist[i] instanceof Raumschiff || room.objlist[i] instanceof cls_Planet) {
+		if(room.objlist[i] instanceof Jelly || room.objlist[i] instanceof cls_Planet) {
 			if(room.objlist[i].team === team) {
 				return false;
 			}
@@ -280,6 +277,16 @@ function showMessage(msg) {
 			alert(msg);
 			break;
 	}
+}
+
+// Converts xD to x
+function xScreenToInternal(xD) {
+	return xD / canvas.width * roomWidth
+}
+
+// Converts yD to y
+function yScreenToInternal(yD) {
+	return yD / canvas.height * roomHeight
 }
 
 function resetProgress() {

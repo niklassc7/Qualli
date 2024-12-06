@@ -1,4 +1,4 @@
-class cls_Planet extends Objekt{
+class cls_Planet extends Object {
 	constructor(x, y, team, groesse, einheiten) {
 		super(x, y);
 
@@ -20,7 +20,7 @@ class cls_Planet extends Objekt{
 		if(!this.createQueue.isEmpty()) {
 			// room.addToObjList(this.createStack.pop());
 			let parameter = this.createQueue.removeFirst();
-			new Raumschiff(parameter[0], parameter[1], parameter[2], parameter[3]);
+			new Jelly(parameter[0], parameter[1], parameter[2], parameter[3]);
 		}
 
 		this.width = 80 * (1 + (this.groesse / 3));
@@ -54,6 +54,17 @@ class cls_Planet extends Objekt{
 			ctx.textBaseline = "middle";
 			ctx.textAlign = "center";
 			ctx.fillText(this.createQueue.size, this.xD, this.yD +32);
+		}
+	}
+
+	// Attack bubble other
+	attack(other) {
+		let amount = Math.floor(this.einheiten / 2)
+		this.einheiten -= amount
+
+		for (let i = 0; i < amount; i++) {
+			// let newJelly = new Jelly(this.x, this.y, this.team, other)
+			this.createQueue.addLast([this.x, this.y, this.team, other])
 		}
 	}
 }

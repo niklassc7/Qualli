@@ -6,27 +6,25 @@ function draw() {
 		ctx.drawImage(room.background, 0, 0, canvas.width, canvas.height);
 	}
 
-	//Objekte (draw)
+	// draw of all `Object`
 	for(var i = 0; i < room.objlist.length; i++){
 		if(room.objlist[i] !== undefined){
 			room.objlist[i].draw();
-		}else{
-			//console.log("step(): objlist[" + i + "] ist undefined.");
-			//console.log("objlist undefinierter Platz");TODO
 		}
 	}
 
 	// GUI
-	mouse.draw();
+	// mouse.draw();
+	input.draw()
 	room.draw();
 
 	text = "Excepturi non voluptate autem error consequuntur et ipsam. In atque aliquam quia mollitia. Excepturi non voluptate autem error consequuntur et ipsam. In atque aliquam quia mollitia. Excepturi non voluptate autem error consequuntur et ipsam.";
 	// drawInfoWindow(text, ["test0, test1"], ["f0", "f1"]); // TODO implement
 
 
-	mouse.left_pressed = false;
-	mouse.middle_pressed = false;
-	mouse.right_pressed = false;
+	// mouse.left_pressed = false;
+	// mouse.middle_pressed = false;
+	// mouse.right_pressed = false;
 }
 
 

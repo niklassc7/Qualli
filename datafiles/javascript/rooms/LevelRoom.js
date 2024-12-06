@@ -34,31 +34,32 @@ class LevelRoom extends Room {
 		}
 
 		super.step();
-		if(mouse.left_pressed) {
-			var visiert = collision_point(mouse.x, mouse.y, cls_Planet);
-			if(mouse.selected === undefined || visiert === undefined) {
-				if(visiert !== undefined && visiert.team !== 1)
-					return;
-				mouse.selected = visiert;
-			}else if(mouse.selected.team === 1) { // Bedingung neu
-				// Raumschiffe erstellen, Einheiten abziehen, selected = undefined
-				for(var i = 0; i < Math.floor(mouse.selected.einheiten / 2); i++) {
-					let nx = mouse.selected.x
-					let ny = mouse.selected.y;
-					// let neu = new Raumschiff(nx, ny, 1, visiert);
+		// TODO replace with new input method
+		// if(mouse.left_pressed) {
+		// 	var visiert = collision_point(mouse.x, mouse.y, cls_Planet);
+		// 	if(mouse.selected === undefined || visiert === undefined) {
+		// 		if(visiert !== undefined && visiert.team !== 1)
+		// 			return;
+		// 		mouse.selected = visiert;
+		// 	}else if(mouse.selected.team === 1) { // Bedingung neu
+		// 		// Raumschiffe erstellen, Einheiten abziehen, selected = undefined
+		// 		for(var i = 0; i < Math.floor(mouse.selected.einheiten / 2); i++) {
+		// 			let nx = mouse.selected.x
+		// 			let ny = mouse.selected.y;
+		// 			// let neu = new Raumschiff(nx, ny, 1, visiert);
 
-					mouse.selected.createQueue.addLast([nx, ny, 1, visiert]);
-					// mouse.selected.createStack.push(neu);
+		// 			mouse.selected.createQueue.addLast([nx, ny, 1, visiert]);
+		// 			// mouse.selected.createStack.push(neu);
 
-					// room.addToObjList(neu);
+		// 			// room.addToObjList(neu);
 
 
-				}
-				mouse.selected.einheiten -= Math.floor(mouse.selected.einheiten / 2);
+		// 		}
+		// 		mouse.selected.einheiten -= Math.floor(mouse.selected.einheiten / 2);
 
-				mouse.selected = undefined;
-			}
-		}
+		// 		mouse.selected = undefined;
+		// 	}
+		// }
 	}
 
 	draw(){
