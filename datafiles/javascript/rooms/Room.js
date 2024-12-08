@@ -1,5 +1,11 @@
+// Abstract Class
+
 class Room {
 	constructor() {
+		if (this.constructor == LevelRoom) {
+			throw new Error("Abstract classes can't be instantiated.");
+		}
+
 		this.background = undefined;
 		this.objlist = [];
 	}
