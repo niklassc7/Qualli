@@ -1,3 +1,11 @@
+class LinkedListNode {
+	constructor(val) {
+		this.val = val;
+		this.next = null;
+		this.prev = null;
+	}
+}
+
 class LinkedList {
 	constructor() {
 		this.head = undefined;
@@ -79,13 +87,5 @@ class LinkedList {
 			str += i.val;
 
 		return str;
-	}
-}
-
-class LinkedListNode {
-	constructor(val) {
-		this.val = val;
-		this.next = null;
-		this.prev = null;
 	}
 }
