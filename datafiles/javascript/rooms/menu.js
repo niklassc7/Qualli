@@ -12,13 +12,11 @@ class rom_menu extends Room {
 		//  var button_main_skalierung = 1;
 		var buttonWidth = 256;
 		var buttonHeight = 192;
-		//  var button_main_n = 3;
 		var buttonMargin = 128;
-		//  var button_main_beschriftung = ["Start", "Vollbild", "Beenden"]
 
-		this.addToObjList(new Button("Start", roomWidth / 2 - buttonMargin - (3/2) * buttonWidth, roomHeight / 2 - buttonHeight / 2, buttonWidth, buttonHeight, function(){ room_goto(RoomMenu0) }  )).borderColour = "yellow";
+		this.addToObjList(new Button("Start", roomWidth / 2 - buttonMargin - (3/2) * buttonWidth, roomHeight / 2 - buttonHeight / 2, buttonWidth, buttonHeight, () => { room_goto(RoomMenu0) }  )).borderColour = "yellow";
 		this.addToObjList(new Button("Vollbild", roomWidth / 2 - buttonWidth / 2, roomHeight / 2 - buttonHeight / 2, buttonWidth, buttonHeight, toggleFullscreen ));
-		this.addToObjList(new Button("Neustart", roomWidth / 2 + buttonMargin + buttonWidth / 2, roomHeight / 2 - buttonHeight / 2, buttonWidth, buttonHeight, function(){ resetProgress(); alert("Fortschritt wurde zurückgesetzt"); } ));
+		this.addToObjList(new Button("Neustart", roomWidth / 2 + buttonMargin + buttonWidth / 2, roomHeight / 2 - buttonHeight / 2, buttonWidth, buttonHeight, resetProgress));
 
 	}
 

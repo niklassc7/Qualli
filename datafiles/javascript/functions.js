@@ -290,7 +290,14 @@ function yScreenToInternal(yD) {
 }
 
 function resetProgress() {
+	let text = "Do you really want to reset your entire progress?"
+	if (!confirm(text)) {
+		return
+	}
+
 	var cookies = document.cookie.split(";");
 	for (var i = 0; i < cookies.length; i++)
 		deleteCookie(cookies[i].split("=")[0]);
+
+	alert("Your progress has been reset.");
 }
