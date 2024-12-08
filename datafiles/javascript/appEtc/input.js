@@ -5,9 +5,8 @@ class cls_input {
 		this.xD = this.x * xScalar; // x it should be drawn at
 		this.yD = this.y * yScalar; // y it should be drawn at
 
-		// this.touched = false
-
 		this.selected = undefined;
+		this.selectedTouch = undefined;
 
 		// For circle animation
 		this.circleCounterMax = 20;
@@ -26,8 +25,6 @@ class cls_input {
 		let rect = canvas.getBoundingClientRect()
 		input.setX(xScreenToInternal(event.clientX - rect.left))
 		input.setY(yScreenToInternal(event.clientY - rect.top))
-		// input.setX(xScreenToInternal(event.clientX) - rect.left)
-		// input.setY(yScreenToInternal(event.clientY) - rect.top)
 	}
 
 	setX(x) {
@@ -45,10 +42,12 @@ class cls_input {
 		input.updateCooordinates(event.touches[0])
 
 		// Planet selection
-		let overBubble = collision_point(input.x, input.y, cls_Planet)
-		if (typeof overBubble !== "undefined") {
-			input.selected = overBubble
-			console.log("SELECTING", overBubble)
+		if (typeof input.selectedTouch === "undefined") {
+			let overBubble = collision_point(input.x, input.y, cls_Planet)
+			if (typeof overBubble !== "undefined") {
+				// Start drag method
+				input.selectedTouch = overBubble
+			}
 		}
 	}
 
@@ -59,18 +58,26 @@ class cls_input {
 
 	// ⚠ `this` does not refer to this class in this event handler, use global `input`
 	touchend(event) {
+		// Button clicking
 		let overButton = collision_point(input.x, input.y, Button)
 		if (typeof overButton !== "undefined") {
 			overButton.onClick()
 		}
 
-		// Planet selection
-		if (typeof input.selected !== "undefined") {
-			let overBubble = collision_point(input.x, input.y, cls_Planet)
-			if (typeof overBubble !== "undefined") {
-				input.selected.attack(overBubble)
+
+		let overBubble = collision_point(input.x, input.y, cls_Planet)
+		if (typeof overBubble !== "undefined") {
+			if (typeof input.selectedTouch !== "undefined") {
+				if (overBubble === input.selectedTouch) {
+					input.selectedTouch = overBubble
+				} else {
+					input.selectedTouch.attack(overBubble)
+					input.selectedTouch = undefined
+				}
+
 			}
-			input.selected = undefined
+		} else {
+			input.selectedTouch = undefined
 		}
 	}
 
@@ -79,10 +86,12 @@ class cls_input {
 		input.updateCooordinates(event)
 
 		// Planet selection
-		let overBubble = collision_point(input.x, input.y, cls_Planet)
-		if (typeof overBubble !== "undefined") {
-			input.selected = overBubble
-			console.log("SELECTING", overBubble)
+		if (typeof input.selected === "undefined") {
+			let overBubble = collision_point(input.x, input.y, cls_Planet)
+			if (typeof overBubble !== "undefined") {
+				// Start drag method
+				input.selected = overBubble
+			}
 		}
 	}
 
@@ -95,48 +104,56 @@ class cls_input {
 	mouseup(event) {
 		input.updateCooordinates(event)
 
+		// Button clicking
 		let overButton = collision_point(input.x, input.y, Button)
 		if (typeof overButton !== "undefined") {
 			overButton.onClick()
 		}
 
-		// Planet selection
-		if (typeof input.selected !== "undefined") {
-			let overBubble = collision_point(input.x, input.y, cls_Planet)
-			if (typeof overBubble !== "undefined") {
-				input.selected.attack(overBubble)
+		let overBubble = collision_point(input.x, input.y, cls_Planet)
+		if (typeof overBubble !== "undefined") {
+			if (typeof input.selected !== "undefined") {
+				if (overBubble === input.selected) {
+					input.selected = overBubble
+				} else {
+					input.selected.attack(overBubble)
+					input.selected = undefined
+				}
+
 			}
+		} else {
 			input.selected = undefined
 		}
 	}
 
-	draw() {
-		ctx.strokeStyle = "white";
-		ctx.fillStyle = "white";
-		draw_circle(this.xD, this.yD, 8, false)
-
-		if(this.selected !== undefined) {
-			// console.log("DEBUG", this.selected)
-			// Abbrechen wenn Planet in der Zwischenzeit eingenommen wurde
-			if(this.selected.team !== 1) {
-				this.selected = undefined; return;
+	// 
+	selectedDrawing(selectedBubble) {
+		if(selectedBubble !== undefined) {
+			// Cancel if selected bubble has been captured in the meantime
+			if(selectedBubble.team !== 1) {
+				selectedBubble = undefined; return;
 			}
 			// Pfeil malen
 			ctx.strokeStyle = "white";
 			ctx.lineWidth = 2;
-			draw_line(this.selected.xD, this.selected.yD, this.xD, this.yD);
+			draw_line(selectedBubble.xD, selectedBubble.yD, this.xD, this.yD);
 
 			// Highlight selected Planet
 			ctx.lineWidth = 2;
 			for(let i = 0; i < 5 + Math.abs(this.circleCounter - this.circleCounterMax/2); i+=3) {
-				draw_circle(this.selected.xD,
-							this.selected.yD,
-							this.selected.widthD / 2 + i,
+				draw_circle(selectedBubble.xD,
+							selectedBubble.yD,
+							selectedBubble.widthD / 2 + i,
 							true);
 			}
 
 			this.circleCounter = (this.circleCounter + 1) % this.circleCounterMax;
 		}
+
 	}
 
+	draw() {
+		this.selectedDrawing(this.selected)
+		this.selectedDrawing(this.selectedTouch)
+	}
 }
