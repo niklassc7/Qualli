@@ -1,6 +1,14 @@
+// Abstract Class LevelRoom
+// All levels should extend from this
+
 class LevelRoom extends Room {
 	constructor(){
 		super();
+
+		if (this.constructor == LevelRoom) {
+			throw new Error("Abstract classes can't be instantiated.");
+		}
+
 		this.planetlist = [];
 		this.KIlist = [];
 
@@ -15,7 +23,7 @@ class LevelRoom extends Room {
 			10,
 			40,
 			40,
-			function() { alert("Paused") },
+			() => { alert("Paused") },
 			false
 		));
 		pauseButton.setFontSize(16);
