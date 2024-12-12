@@ -200,6 +200,11 @@ function mMod(a, b) {
 	return ((a % b + b) % b);
 }
 
+// Checks if the point (x,y) collides with an object of class cls
+// @param {number} - X-coordinate
+// @param {number} - Y-coordinate
+// @param {object} - Class
+// @return {(Object|undefined)} of type cls or undefined
 function collision_point(x, y, cls) { // return obj oder undefined
 	/* Prüft, ob Punkt mit einem Objekt der Klasse cls kollidiert.
 	* Nur unpräzise Prüfung (point_in_rectangle).
@@ -207,10 +212,10 @@ function collision_point(x, y, cls) { // return obj oder undefined
 	for(var i = 0; i < room.objlist.length; i++) {
 		var obj = room.objlist[i];
 		if(obj instanceof cls){
-			var x1 = obj.x - (obj.width/2);
-			var y1 = obj.y - (obj.height/2);
-			var x2 = obj.x + (obj.width/2);
-			var y2 = obj.y + (obj.height/2);
+			var x1 = obj.x - obj.ox
+			var y1 = obj.y - obj.oy
+			var x2 = x1 + obj.width
+			var y2 = y1 + obj.height
 			if(point_in_rectangle(x, y, x1, y1, x2, y2)) return obj;
 		}
 	}
