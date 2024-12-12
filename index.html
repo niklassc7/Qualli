@@ -34,7 +34,8 @@
 		<script src="datafiles/javascript/objects/Jelly.js"></script>
 
 		<script src="datafiles/javascript/rooms/Room.js"></script>
-		<script src="datafiles/javascript/rooms/menu.js"></script>
+		<script src="datafiles/javascript/rooms/Startpage.js"></script>
+		<script src="datafiles/javascript/rooms/MenuOverview.js"></script>
 		<script src="datafiles/javascript/rooms/RoomMenu0.js"></script>
 		<script src="datafiles/javascript/rooms/RoomMenu1.js"></script>
 		<script src="datafiles/javascript/rooms/LevelRoom.js"></script>
@@ -61,6 +62,7 @@
 		<script src="datafiles/javascript/rooms/room20.js"></script>
 		<script src="datafiles/javascript/rooms/room21.js"></script>
 		<script src="datafiles/javascript/rooms/room22.js"></script>
+		<script src="datafiles/javascript/rooms/room23.js"></script>
 
 		<script src="datafiles/javascript/main.js"></script>
 		<script src="datafiles/javascript/step.js"></script>
@@ -79,7 +81,7 @@
 			<img id="img_Linsenreflex_schwach" src="datafiles/sprites/Linsenreflex_schwach.png" width="0" height="0"/>
 			<img id="img_Sterne" src="datafiles/sprites/Sterne.png" width="0" height="0"/>
 			<img id="img_Planet" src="datafiles/sprites/Planet.png" width="0" height="0"/>
-			<img id="lock" src="datafiles/sprites/lock.svg" width="0" height="0"/>
+			<img id="lock" src="datafiles/sprites/lock.png" width="0" height="0"/>
 
 			<img id="qualleRed" src="datafiles/sprites/qualleRed.png" width="0" height="0"/>
 			<img id="qualleBlue" src="datafiles/sprites/qualleBlue.png" width="0" height="0"/>
@@ -95,6 +97,61 @@
 			<img id="bgMenuDark" src="datafiles/sprites/bg5dark.png" width="0" height="0"/>
 		</div>
 
+		<div id="endgameOverlay" class="overlay hidden">
+			<div id="endgameContent" class="overlayContent">
+				<h1>Game Over</h1>
+				<h2 id=egWon></h2>
+				<br>
+				<input id="egRetry" type="button" value="Retry" onClick="room_goto(room.constructor.name)" />
+				<br>
+				<br>
+				<input id="egSettings" type="button" value="Settings" onClick="showSettings()" />
+				<br>
+				<br>
+				<input id="egExit" type="button" value="Exit" onClick="room_goto(room.prevRoom); hideEndgame()" />
+			</div>
+		</div>
+
+		<div id="pausedOverlay" class="overlay hidden">
+			<div id="pausedContent" class="overlayContent">
+				<h1>Paused</h1>
+				<br>
+				<input id="pResume" type="button" value="Resume" onClick="unpause()" />
+				<br>
+				<br>
+				<input id="pSettings" type="button" value="Settings" onClick="showSettings()" />
+				<br>
+				<br>
+				<!-- TODO exit game -->
+				<input id="pExit" type="button" value="Exit" onClick="room_goto(room.prevRoom); unpause()" />
+			</div>
+		</div>
+
+		<div id="settingsOverlay" class="overlay hidden">
+			<div id="settingsContent" class="overlayContent">
+				<h1>Settings</h1>
+				<br>
+				<label for="sScaling">Scaling</label>
+				<input id="sScaling" type="checkbox" checked onchange="toggleScaling()" />
+				<br>
+				<br>
+
+				<label for="sDebug">Debug</label>
+				<input id="sDebug" type="checkbox" onchange="toggleDebug()" />
+				<br>
+				<br>
+
+				<label for="sReset">Scaling</label>
+				<br>
+				<input id="sReset" type="button" value="Reset Progress" onClick="resetProgress()" />
+				<br>
+				<br>
+
+				<label for="sClose">Scaling</label>
+				<br>
+				<input id="sClose" type="button" value="Close Settings" onClick="hideSettings()" />
+			</div>
+		</div>
 
 		<noscript>
 			<p style="font-size: 1.5em; color: red; background: yellow; text-align: center;">
