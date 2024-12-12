@@ -35,7 +35,6 @@ class Button extends Object {
 		ctx.strokeStyle = this.borderColour;
 		// ctx.fillStyle = "white";
 
-
 		// TODO sinus curve
 		let animationN = 32
 		// let animationSpeed = 0.3
@@ -77,21 +76,5 @@ class Button extends Object {
 			(this.x + this.width / 2) * xScalar,
 			(this.y + this.height / 2) * yScalar
 		);
-
-
-
-		// if(point_in_rectangle(mouse.x, mouse.y, this.x, this.y, this.x + this.width, this.y + this.height) && !this.disabled) {
-		// 	ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
-		// 	ctx.strokeStyle = "yellow";
-		// 	draw_roundrect(
-		// 		ctx,
-		// 		this.xD,
-		// 		this.yD,
-		// 		this.widthD,
-		// 		this.heightD,
-		// 		10,
-		// 		true
-		// 	);
-		// }
 	}
 }
