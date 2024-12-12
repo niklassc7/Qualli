@@ -100,7 +100,7 @@
 		<div id="endgameOverlay" class="overlay hidden">
 			<div id="endgameContent" class="overlayContent">
 				<h1>Game Over</h1>
-				<h2 id=egWon></h2>
+				<h2 id="egWon"></h2>
 				<br>
 				<input id="egRetry" type="button" value="Retry" onClick="room_goto(room.constructor.name)" />
 				<br>
@@ -141,15 +141,10 @@
 				<br>
 				<br>
 
-				<label for="sReset">Scaling</label>
-				<br>
-				<input id="sReset" type="button" value="Reset Progress" onClick="resetProgress()" />
-				<br>
-				<br>
-
-				<label for="sClose">Scaling</label>
-				<br>
-				<input id="sClose" type="button" value="Close Settings" onClick="hideSettings()" />
+				<div>
+					<input id="sReset" type="button" value="Reset Progress" onClick="resetProgress()" />
+					<input id="sClose" type="button" value="Close Settings" onClick="hideSettings()" />
+				</div>
 			</div>
 		</div>
 
