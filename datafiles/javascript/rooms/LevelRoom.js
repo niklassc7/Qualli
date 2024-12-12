@@ -50,6 +50,15 @@ class LevelRoom extends Room {
 		//do nothing
 	}
 
+	surrender() {
+		if (!confirm("Do you really want to give up?")) {
+			return
+		}
+
+		room_goto(this.prevRoom)
+		unpause()
+	}
+
 	alarmieren(nr) {
 		switch(nr) {
 			case 0:
