@@ -15,7 +15,7 @@ class Startpage extends Room {
 		var buttonHeight = 192;
 		var buttonMargin = 128;
 
-		this.addToObjList(new Button("Start", roomWidth / 2 - buttonMargin - (3/2) * buttonWidth, roomHeight / 2 - buttonHeight / 2, buttonWidth, buttonHeight, () => { room_goto(RoomMenu0) }  )).borderColour = "yellow";
+		this.addToObjList(new Button("Start", roomWidth / 2 - buttonMargin - (3/2) * buttonWidth, roomHeight / 2 - buttonHeight / 2, buttonWidth, buttonHeight, () => { room_goto(MenuOverview) }  )).borderColour = "yellow";
 		this.addToObjList(new Button("Vollbild", roomWidth / 2 - buttonWidth / 2, roomHeight / 2 - buttonHeight / 2, buttonWidth, buttonHeight, toggleFullscreen ));
 		this.addToObjList(new Button("Settings", roomWidth / 2 + buttonMargin + buttonWidth / 2, roomHeight / 2 - buttonHeight / 2, buttonWidth, buttonHeight, showSettings));
 

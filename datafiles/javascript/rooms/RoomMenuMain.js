@@ -1,4 +1,4 @@
-class RoomMenu0 extends Room{
+class RoomMenuMain extends Room{
 	constructor(){
 		super();
 		this.background = spr_bgMenu;
@@ -17,16 +17,12 @@ class RoomMenu0 extends Room{
                      room9,
                      room10,
                      room11,
-                     room17,
-                     room18,
-                     room19,
                      room20,
                      room21,
                      room22,
                      room23];
 
-		this.addToObjList(new Button("←", 32, roomHeight - 96, 64, 64, function(){ room_goto(Startpage); } )).setFontSize(24) ;
-		this.addToObjList(new Button("→", roomWidth - 96, roomHeight - 96, 64, 64, function(){ room_goto(RoomMenu1); },  (getCookie(rooms[rooms.length-1].name + "W") == ""))).setFontSize(24) ;
+		this.addToObjList(new Button("←", 32, roomHeight - 96, 64, 64, function(){ room_goto(MenuOverview); } )).setFontSize(24) ;
 
 		let buttonWidth = 128;
 		let buttonHeight = 128;
@@ -62,4 +58,14 @@ class RoomMenu0 extends Room{
 
 	}
 
+	draw() {
+		super.draw()
+
+		ctx.lineWidth = 4 * ((xScalar + yScalar) / 2);
+		ctx.font = Math.round(42 * ((xScalar + yScalar) / 2)) + "px fnt_Comforta_Light";
+		ctx.fillStyle = "white"
+		ctx.textAlign = "center";
+		// ctx.strokeText("Main", roomWidth/2 * xScalar, 140 * yScalar)
+		ctx.fillText("Main", roomWidth/2 * xScalar, 32 * yScalar)
+	}
 }
