@@ -58,7 +58,7 @@ body {
 	font-size: 1.4em;
 
 	border-radius: 5px;
-
+	padding: 4px;
 }
 
 .overlayContent input[type="button"] {
