@@ -23,6 +23,7 @@ class cls_input {
 
 	updateCooordinates(event) {
 		let rect = canvas.getBoundingClientRect()
+
 		input.setX(xScreenToInternal(event.clientX - rect.left))
 		input.setY(yScreenToInternal(event.clientY - rect.top))
 	}
@@ -155,5 +156,10 @@ class cls_input {
 	draw() {
 		this.selectedDrawing(this.selected)
 		this.selectedDrawing(this.selectedTouch)
+
+		// // TODO remove
+		// ctx.fillStyle = "white"
+		// draw_circle(this.xD, this.yD, 16, false)
+
 	}
 }
