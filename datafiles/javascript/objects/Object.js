@@ -101,6 +101,8 @@ class Object extends IObjlistentry {
 		}else{
 			console.log("Error: draw-method of an `Object` called which has no sprite.");
 		}
+
+		// this.drawBorder(true)
 	}
 
 	isOutsideRoom_vert() {//obolsete (ORIGIN)
@@ -151,12 +153,25 @@ class Object extends IObjlistentry {
 	}
 
 	// For Debugging, draws border around sprite
-	drawBorder() {
+	// Set `hover` to also show when the object is hovered
+	drawBorder(hover=false) {
+		if (hover) {
+			let x1 = this.x - this.ox
+			let y1 = this.y - this.oy
+			let x2 = x1 + this.width
+			let y2 = y1 + this.height
+			if (point_in_rectangle(input.x, input.y, x1, y1, x2, y2)) {
+				ctx.fillStyle = "rgba(255, 0, 0, 0.3)";
+				ctx.fillRect(this.xD - this.oxD, this.yD - this.oyD, this.widthD, this.heightD);
+			}
+		}
+
 		ctx.strokeStyle = "red";
 		ctx.lineWidth = 3;
 		ctx.setLineDash([6]);
 		ctx.strokeRect(this.xD - this.oxD, this.yD - this.oyD, this.widthD, this.heightD);
 		ctx.setLineDash([]);
+
 	}
 	
 	// For Debugging, draws (x,y)
