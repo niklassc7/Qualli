@@ -200,10 +200,12 @@ function mMod(a, b) {
 	return ((a % b + b) % b);
 }
 
+// TODO move to static method in Object?
+// TODO cls has to be of type Object as it needs to have x,y,ox,oy,width,height
 // Checks if the point (x,y) collides with an object of class cls
 // @param {number} - X-coordinate
 // @param {number} - Y-coordinate
-// @param {object} - Class
+// @param {Object} - Class
 // @return {(Object|undefined)} of type cls or undefined
 function collision_point(x, y, cls) { // return obj oder undefined
 	/* Prüft, ob Punkt mit einem Objekt der Klasse cls kollidiert.
