@@ -5,9 +5,27 @@ class RoomMenu0 extends Room{
 
 		this.n_step = 0;
 
-		let rooms = [room0, room1, room2, room3, room4, room5, room6, room7, room8, room9, room10, room11, room17, room18, room19, room20, room21, room22];
+		let rooms = [room0,
+                     room1,
+                     room2,
+                     room3,
+                     room4,
+                     room5,
+                     room6,
+                     room7,
+                     room8,
+                     room9,
+                     room10,
+                     room11,
+                     room17,
+                     room18,
+                     room19,
+                     room20,
+                     room21,
+                     room22,
+                     room23];
 
-		this.addToObjList(new Button("←", 32, roomHeight - 96, 64, 64, function(){ room_goto(rom_menu); } )).setFontSize(24) ;
+		this.addToObjList(new Button("←", 32, roomHeight - 96, 64, 64, function(){ room_goto(Startpage); } )).setFontSize(24) ;
 		this.addToObjList(new Button("→", roomWidth - 96, roomHeight - 96, 64, 64, function(){ room_goto(RoomMenu1); },  (getCookie(rooms[rooms.length-1].name + "W") == ""))).setFontSize(24) ;
 
 		let buttonWidth = 128;

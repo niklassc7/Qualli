@@ -2,8 +2,10 @@
 // All levels should extend from this
 
 class LevelRoom extends Room {
-	constructor(){
-		super();
+	constructor(prevRoom){
+		super(prevRoom);
+
+		console.log(prevRoom, this.prevRoom)
 
 		if (this.constructor == LevelRoom) {
 			throw new Error("Abstract classes can't be instantiated.");
@@ -23,7 +25,7 @@ class LevelRoom extends Room {
 			10,
 			40,
 			40,
-			() => { alert("Paused") },
+			pause,
 			false
 		));
 		pauseButton.setFontSize(16);
@@ -52,9 +54,10 @@ class LevelRoom extends Room {
 		switch(nr) {
 			case 0:
 				if(checkIfLost(1)) {
-					showMessage("Verloren!");
+					// showMessage("Verloren!");
+					showEndgame(false)
 					storeLevelPlayed(room.constructor.name, false);
-					room_goto(rom_menu);
+					// room_goto(room.prevRoom);
 				}
 				this.alarm[0] = 300;
 

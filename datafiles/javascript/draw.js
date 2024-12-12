@@ -1,10 +1,11 @@
 function draw() {
 	// Background
-	ctx.fillStyle = "#000000";
-	ctx.fillRect(0, 0, canvas_width, canvas_height);
-	if(room.background != undefined){
-		ctx.drawImage(room.background, 0, 0, canvas.width, canvas.height);
-	}
+	// ctx.fillStyle = "#000000";
+	// ctx.fillRect(0, 0, canvas_width, canvas_height);
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	// if(room.background != undefined){
+	// 	ctx.drawImage(room.background, 0, 0, canvas.width, canvas.height);
+	// }
 
 	// draw of all `Object`
 	for(var i = 0; i < room.objlist.length; i++){

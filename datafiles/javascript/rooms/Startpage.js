@@ -1,7 +1,8 @@
-class rom_menu extends Room {
+class Startpage extends Room {
 	constructor(){
 		super();
 		this.background = spr_bgMenu;
+		document.body.style.backgroundImage = spr_bgMenu
 
 
 		this.n_step = 0;
@@ -16,7 +17,7 @@ class rom_menu extends Room {
 
 		this.addToObjList(new Button("Start", roomWidth / 2 - buttonMargin - (3/2) * buttonWidth, roomHeight / 2 - buttonHeight / 2, buttonWidth, buttonHeight, () => { room_goto(RoomMenu0) }  )).borderColour = "yellow";
 		this.addToObjList(new Button("Vollbild", roomWidth / 2 - buttonWidth / 2, roomHeight / 2 - buttonHeight / 2, buttonWidth, buttonHeight, toggleFullscreen ));
-		this.addToObjList(new Button("Neustart", roomWidth / 2 + buttonMargin + buttonWidth / 2, roomHeight / 2 - buttonHeight / 2, buttonWidth, buttonHeight, resetProgress));
+		this.addToObjList(new Button("Settings", roomWidth / 2 + buttonMargin + buttonWidth / 2, roomHeight / 2 - buttonHeight / 2, buttonWidth, buttonHeight, showSettings));
 
 	}
 
@@ -25,15 +26,19 @@ class rom_menu extends Room {
 		//Überschrift
 		ctx.strokeStyle = "#ffffff";
 		ctx.font = Math.round(175 * ((xScalar + yScalar) / 2)) + "px fnt_Comforta_Bold";
+		// TODO
+		// ctx.font = 175 + "px fnt_Comforta_Bold";
 		ctx.textAlign = "center";
-		ctx.lineWidth = 12;
+		ctx.lineWidth = 8 * ((xScalar + yScalar) / 2);
+		let fill = 0.9
+		ctx.strokeStyle = `rgba(210, 230, 255, ${fill})`;
 		ctx.strokeText("Qualli", roomWidth/2 * xScalar, 148 * yScalar);
 		// ctx.fillText("Qualli", roomWidth/2 * xScalar, 148 * yScalar);
 
 		this.n_step++;
 
 
-		//Zeichne Kringel
+		// TODO remove
 		if (debug) {
 			ctx.lineWidth = 5;
 			ctx.strokeStyle = 'white';

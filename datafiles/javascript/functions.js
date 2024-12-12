@@ -40,19 +40,77 @@ function toggleFullscreen() {
 }
 
 function resizeCanvas() {
-	if(window.innerWidth * (9 / 16) > window.innerHeight) {
-		canvas.width = window.innerHeight * (16 / 9);
-		canvas.height = window.innerHeight;
+	let ratioW = 16
+	let ratioH = 9
+	// fp4
+	// let ratioW = 913
+	// let ratioH = 437
+
+	let scale
+	if (optScaling) {
+		scale = window.devicePixelRatio;
 	} else {
-		canvas.width = window.innerWidth;
-		canvas.height = window.innerWidth * (9 / 16);
+		scale = 1.0;
 	}
 
+	let availWidth = window.innerWidth * scale
+	let availHeight = window.innerHeight * scale
+	// let availWidth = window.innerWidth
+	// let availHeight = window.innerHeight
+
+
+	// TODO tmp
+	// canvas.width = availWidth
+	// canvas.height = availHeight
+
+	// Aspect ratio
+	if(availWidth * (ratioH / ratioW) > availHeight) {
+		canvas.width = availHeight * (ratioW / ratioH);
+		canvas.height = availHeight;
+	} else {
+		canvas.width = availWidth;
+		canvas.height = availWidth * (ratioH / ratioW);
+	}
+
+	// canvas.width = window.innerWidth * scale;
+    // canvas.height = window.innerHeight * scale;
+
+
+	// Fit screen TODO combine with if-clause above
+	if(window.innerWidth * (ratioH / ratioW) > window.innerHeight) {
+		canvasStyleWidth = window.innerHeight * (ratioW / ratioH)
+		canvasStyleHeight = window.innerHeight
+		canvas.style.width = `${canvasStyleWidth}px`
+		canvas.style.height = `${canvasStyleHeight}px`
+
+		// xScalar = (window.innerHeight * (ratioW / ratioH)) / roomWidth;
+		// yScalar = window.innerHeight / roomHeight;
+	} else {
+		canvasStyleWidth = window.innerWidth
+		canvasStyleHeight = window.innerWidth * (ratioH / ratioW)
+		canvas.style.width = `${canvasStyleWidth}px`
+		canvas.style.height = `${canvasStyleHeight}px`
+
+		// xScalar = window.innerWidth / roomWidth;
+		// yScalar = (window.innerWidth * (ratioH / ratioW)) / roomHeight;
+	}
+	// canvas.style.width = `${window.innerWidth}px`;
+	// canvas.style.height = `${window.innerHeight}px`;
+
+	// TODO just one scaling?
 	xScalar = canvas.width / roomWidth;
 	yScalar = canvas.height / roomHeight;
 
-	// console.log(fullscreen, canvas.width, canvas.height, window.innerWidth, window.innerHeight, xScalar, yScalar);
+	// TODO
+	// xScalar = (xScalar + yScalar) / 2
+	// xScalar = Math.min(xScalar, yScalar)
+	// yScalar = xScalar
 
+
+	// Scale context
+	// ctx.scale(scale, scale)
+
+	// TODO check
 	try{ room; }
 	catch(e) {
 		if(e.name == "ReferenceError") {
@@ -66,15 +124,11 @@ function resizeCanvas() {
 
 }
 
-function room_goto(new_room){
-	// mouse.left_pressed = false;
-	// mouse.middle_pressed = false;
-	// mouse.right_pressed = false;
-
-	// mouse.selected = undefined;
-
+// Receives room class, instantiates it and changes room to it
+function room_goto(newRoom){
+	console.log("Going to room", newRoom.name)
 	// Set new room
-	room = new new_room();
+	room = new newRoom(room);
 }
 
 function object_create(cls, px, py) {
@@ -268,6 +322,7 @@ function storeLevelPlayed(roomName, won) {
 	}
 }
 
+// TODO remove platform android
 function showMessage(msg) {
 	switch (platform) {
 		case "android":
@@ -279,14 +334,59 @@ function showMessage(msg) {
 	}
 }
 
+function showSettings() {
+	document.getElementById("settingsOverlay").classList.remove("hidden")
+}
+
+function hideSettings() {
+	document.getElementById("settingsOverlay").classList.add("hidden")
+}
+
+function showEndgame(won) {
+	document.getElementById("egWon").innerHTML = won ? "won 🥳" : "lost 🤬"
+	document.getElementById("endgameOverlay").classList.remove("hidden")
+}
+
+function hideEndgame() {
+	document.getElementById("endgameOverlay").classList.add("hidden")
+}
+
+function pause() {
+	paused = true
+	document.getElementById("pausedOverlay").classList.remove("hidden")
+}
+
+function unpause() {
+	paused = false
+	document.getElementById("pausedOverlay").classList.add("hidden")
+}
+
+// TODO move to settings
+function toggleScaling() {
+	// TODO Settings opject insead of opt prefix → toggle method there
+	optScaling = !optScaling;
+	document.getElementById("sScaling").checked = optScaling;
+	resizeCanvas()
+	
+}
+
+// TODO move to settings
+function toggleDebug() {
+	// TODO Settings opject insead of opt prefix → toggle method there
+	debug = !debug;
+	
+}
+
 // Converts xD to x
 function xScreenToInternal(xD) {
-	return xD / canvas.width * roomWidth
+	// return xD / canvas.width * roomWidth
+	return xD / canvasStyleWidth * roomWidth
 }
 
 // Converts yD to y
 function yScreenToInternal(yD) {
-	return yD / canvas.height * roomHeight
+	// return yD / canvas.height * roomHeight
+	return yD / canvasStyleHeight * roomHeight
 }
 
 function resetProgress() {

@@ -7,6 +7,7 @@ class Button extends Object {
 		this.fontSize = 56;
 		this.font =  Math.round(this.fontSize * ((xScalar + yScalar) / 2)) + "px fnt_Comforta_Regular";
 		this.disabled = (disabled === undefined) ? false : disabled;
+		this.animationSpeed = 0.1 + Math.random() * 0.2
 	}
 
 	setFontSize(size) {
@@ -32,6 +33,21 @@ class Button extends Object {
 		}
 
 		ctx.strokeStyle = this.borderColour;
+		// ctx.fillStyle = "white";
+
+
+		// TODO sinus curve
+		let animationN = 32
+		// let animationSpeed = 0.3
+		let fill = stepCount * this.animationSpeed % animationN
+		fill = Math.abs(fill - animationN / 2)
+		// Normalize
+		fill = fill / (animationN/2)
+		//  Scale 
+		fill = fill * 0.3
+
+		ctx.fillStyle = `rgba(200, 200, 255, ${fill})`;
+
 		draw_roundrect(
 			ctx,
 			this.xD,
@@ -39,7 +55,7 @@ class Button extends Object {
 			this.widthD,
 			this.heightD,
 			10,
-			false
+			true
 		);
 
 		// let locked = false; // TODO implement lock system

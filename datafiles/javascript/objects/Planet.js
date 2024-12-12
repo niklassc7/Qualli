@@ -10,6 +10,7 @@ class cls_Planet extends Object {
 		this.sprite = spr_Planet;
 
 		this.createQueue = new LinkedList();
+		this.animationSpeed = 0.1 + Math.random() * 0.2
 	}
 
 	step() {
@@ -30,7 +31,22 @@ class cls_Planet extends Object {
 	}
 
 	draw() {
-		// Teamfarbe
+		// TODO sinus curve
+		let animationN = 32
+		// let animationSpeed = 0.3
+		let fill = stepCount * this.animationSpeed % animationN
+		fill = Math.abs(fill - animationN / 2)
+		// Normalize
+		fill = fill / (animationN/2)
+		//  Scale 
+		fill = fill * 0.1
+
+		ctx.fillStyle = `rgba(200, 200, 255, ${fill})`;
+		ctx.lineWidth = Math.round(8 * xScalar);
+		draw_circle(this.xD, this.yD, this.widthD / 2 * 0.7, false);
+
+
+		// Team colour
 		if(this.team !== 0) {
 			ctx.fillStyle = teamcolour[this.team];
 			ctx.strokeStyle = ctx.fillStyle;
@@ -58,8 +74,23 @@ class cls_Planet extends Object {
 	}
 
 	// Attack bubble other
+	// TODO obsolete?
 	attack(other) {
 		let amount = Math.floor(this.einheiten / 2)
+
+		this.attackN(other, amount)
+	}
+
+	// Attack bubble other
+	attackN(other, amount) {
+		// throw new Error("Cannot attack with more units than bubble has.")
+
+		if (amount > this.einheiten) {
+			console.warn("Tried attacking with more units than bubble has.")
+			amount = this.einheiten
+		}
+		// amount = Math.min(this.einheiten, amount)
+
 		this.einheiten -= amount
 
 		for (let i = 0; i < amount; i++) {

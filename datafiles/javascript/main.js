@@ -2,14 +2,20 @@ function main(){
 	/** web
 	*   android
 	*/
-	platform = "web";
+	platform = "web"; // TODO remove
 	debug = false
+
+
+	// TODO move to settings
+	optScaling = true
+	paused = false
 
 	roomWidth = 1280;
 	roomHeight = 720;
-	canvas_width = 1920; // OBSOLETE
-	canvas_height = 1080; //OBSOLETE
+	canvas_width = 1920; // OBSOLETE TODO
+	canvas_height = 1080; //OBSOLETE TODO
 
+	stepCount = 0
 
 	canvas = document.getElementById("myCanvas");
 	ctx = canvas.getContext("2d");
@@ -45,7 +51,7 @@ function main(){
 	input = new cls_input();
 	
 
-	room = new rom_menu();
+	room = new Startpage();
 
 	teamcolour = [];
 	teamcolour[1] = "rgba(211, 47, 47, 0.6)";
