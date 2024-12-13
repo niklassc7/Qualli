@@ -2,6 +2,8 @@
 
 class Room {
 	constructor(prevRoom) {
+		this.roomEntered = Date.now()
+
 		if (this.constructor == LevelRoom) {
 			throw new Error("Abstract classes can't be instantiated.");
 		}
