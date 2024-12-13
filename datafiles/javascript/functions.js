@@ -350,10 +350,10 @@ function hideSettings() {
 }
 
 function showEndgame(won) {
-	let levelTime = Date.now() - room.roomEntered
+	let levelTimeS = (Date.now() - room.roomEntered) / 1000
 
 	document.getElementById("egWon").innerHTML = won ? "won 🥳" : "lost 🤬"
-	document.getElementById("egTime").innerHTML = levelTime.toLocaleString()
+	document.getElementById("egTime").innerHTML = `${levelTimeS} seconds`
 	document.getElementById("endgameOverlay").classList.remove("hidden")
 }
 
