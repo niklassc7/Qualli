@@ -104,13 +104,11 @@
 				<h2 id="egWon"></h2>
 				<div id="egTime"></div>
 				<br>
-				<input id="egRetry" type="button" value="Retry" onClick="room_goto(room.constructor.name)" />
-				<br>
-				<br>
-				<input id="egSettings" type="button" value="Settings" onClick="showSettings()" />
-				<br>
-				<br>
-				<input id="egExit" type="button" value="Exit" onClick="room_goto(room.prevRoom); hideEndgame()" />
+				<div>
+					<input id="egRetry" type="button" value="Retry" onClick="room_goto(room.constructor.name)" />
+					<!-- <input id="egSettings" type="button" value="Settings" onClick="showSettings()" /> -->
+					<input id="egExit" type="button" value="Exit" onClick="room_goto(room.prevRoom); hideEndgame()" />
+				</div>
 			</div>
 		</div>
 
