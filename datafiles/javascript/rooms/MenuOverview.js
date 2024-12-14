@@ -5,7 +5,7 @@ class MenuOverview extends Room{
 		super();
 		this.background = spr_bgMenu;
 
-		this.addToObjList(new Button("←", 32, roomHeight - 96, 64, 64, function(){ room_goto(Startpage); } )).setFontSize(24) ;
+		this.addToObjList(new Button("←", 42, roomHeight - 128, 90, 90, function(){ room_goto(Startpage); } )).setFontSize(24) ;
 
 
 		let buttonWidth = 256;
