@@ -62,6 +62,7 @@ function main(){
 
 
 	document.addEventListener("keydown", function(e) {
+		// TODO remove
 		if (e.keyCode == 13) {
 			toggleFullScreen(document.getElementById("myCanvas"));
 		}
