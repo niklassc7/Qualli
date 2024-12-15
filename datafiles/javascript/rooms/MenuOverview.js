@@ -15,12 +15,13 @@ class MenuOverview extends Room{
 		let options = [
 			[RoomMenuMain, "Main"],
 			[RoomMenuAdvanced, "Advanced"],
-			[RoomMenuExperimental, "Experimental"], // TODO create experimental
 		]
-		
 
-		//  let itemsInRow = 12;
-		let itemsInRow = 3;
+		if (experimental) {
+			options.push([RoomMenuExperimental, "Experimental"])
+		}
+
+		let itemsInRow = Math.min(3, options.length);
 		let itemsinColumn = Math.ceil(options.length / itemsInRow)
 
 

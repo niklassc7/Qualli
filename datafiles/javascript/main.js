@@ -3,7 +3,8 @@ function main(){
 	*   android
 	*/
 	platform = "web"; // TODO remove
-	debug = false
+	debug = false // TODO move to settings
+	experimental = true // TODO move to settings
 
 
 	// TODO move to settings

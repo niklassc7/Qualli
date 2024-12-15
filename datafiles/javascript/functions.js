@@ -372,6 +372,12 @@ function unpause() {
 }
 
 // TODO move to settings
+function toggleExperimental() {
+	experimental = !experimental
+	document.getElementById("sExperimental").checked = experimental;
+}
+
+// TODO move to settings
 function toggleScaling() {
 	// TODO Settings opject insead of opt prefix → toggle method there
 	optScaling = !optScaling;

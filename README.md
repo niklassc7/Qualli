@@ -1,4 +1,4 @@
-# qualli
+# Qualli
 A JavaScript game
 
 
