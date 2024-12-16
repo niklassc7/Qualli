@@ -16,6 +16,7 @@ class RoomMenuExperimental extends Room{
 			room18,
 			room19,
 			room24,
+			room25,
 		]
 
 		//  let itemsInRow = 12;

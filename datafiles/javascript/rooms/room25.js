@@ -1,10 +1,10 @@
-class room24 extends LevelRoom {
+class room25 extends LevelRoom {
 	constructor() {
 		super();
 
 		this.background = spr_bg_0;
 
-		this.addToObjList(new KI0(2));
+		this.addToObjList(new KI2(2));
 
 		// 40
 
@@ -23,7 +23,7 @@ class room24 extends LevelRoom {
 				}
 
 				// let newTeam = (j < itemsInRow / 2) ? 1 : 2;
-				let newTeam = 1
+				let newTeam = 2
 				let newP = this.addToObjList(new cls_Planet(startMargin + j * planetDistance, 160 + i * planetDistance, newTeam));
 				// newP.groesse = (i == 1) ? 2 : 1;
 				newP.groesse = 1;
@@ -33,7 +33,7 @@ class room24 extends LevelRoom {
 
 			}
 
-		let newP = this.addToObjList(new cls_Planet(startMargin + 4 * planetDistance, 160 + 1 * planetDistance, 2));
+		let newP = this.addToObjList(new cls_Planet(startMargin + 4 * planetDistance, 160 + 1 * planetDistance, 1));
 		newP.einheiten = 9.5 * amount;
 		newP.groesse = 7;
 		this.planetlist.push(newP);
