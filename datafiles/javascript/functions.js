@@ -383,14 +383,12 @@ function toggleScaling() {
 	optScaling = !optScaling;
 	document.getElementById("sScaling").checked = optScaling;
 	resizeCanvas()
-	
 }
 
 // TODO move to settings
 function toggleDebug() {
 	// TODO Settings opject insead of opt prefix → toggle method there
 	debug = !debug;
-	
 }
 
 // Converts xD to x

@@ -6,8 +6,9 @@ class Jelly extends Object {
 
 		this.x = x;
 		this.y = y;
-		this.ziel = ziel;
+		this.ziel = ziel; // TODO rename
 
+		// TODO rename? → express intent, what it does (accelerator or something)
 		// increases speed and corrects direction until it is done and then deletes itself
 		// this reduces operations after getting to the targetSpeed and right direction
 		class StartHelper extends IObjlistentry {
@@ -66,8 +67,8 @@ class Jelly extends Object {
 	step(){
 		super.step();
 
-		//Prüfe, ob Raumschiff mit ziel kollidiert
-		if(rectangle_in_rectangle(
+		// Check if jelly collided with target
+		if (rectangle_in_rectangle(
 			this.x - (this.width/2),
 			this.y - (this.height/2),
 			this.x + (this.width/2),
@@ -78,11 +79,11 @@ class Jelly extends Object {
 			this.ziel.y + (this.ziel.height/2)
 		)){
 			object_destroy(this);
-			if(this.ziel.team !== this.team){
+			if (this.ziel.team !== this.team) {
 				this.ziel.einheiten--;
-				if(this.ziel.einheiten <= 0)
+				if (this.ziel.einheiten <= 0)
 					this.ziel.team = this.team;
-			}else{
+			} else {
 				this.ziel.einheiten++;
 			}
 		}
