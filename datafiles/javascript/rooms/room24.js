@@ -34,7 +34,7 @@ class room24 extends LevelRoom {
 
 		let newP = this.addToObjList(new cls_Planet(startMargin + 4 * planetDistance, 160 + 1 * planetDistance, 2));
 		newP.einheiten = 9.5 * amount;
-		newP.groesse = 8;
+		newP.groesse = 7;
 		this.planetlist.push(newP);
 	}
 }
