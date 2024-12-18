@@ -50,8 +50,7 @@ function main(){
 		toggleFullscreen();
 
 	input = new cls_input();
-	
-
+	storage = new Storage("cookie");
 	room = new Startpage();
 
 	teamcolour = [];

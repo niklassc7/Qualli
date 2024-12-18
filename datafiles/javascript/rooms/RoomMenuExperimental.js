@@ -43,7 +43,7 @@ class RoomMenuExperimental extends Room{
 					buttonWidth,
 					buttonHeight,
 					function() { room_goto(rooms[i*itemsInRow + j]) },
-					(i*itemsInRow + j - 1 < 0) ? false : (getCookie(rooms[i*itemsInRow + j - 1].name + "W") == "") ? true : false
+					(i*itemsInRow + j - 1 < 0) ? false : (storage.get(rooms[i*itemsInRow + j - 1].name + "W") == "") ? true : false
 				)).setFontSize(36);
 			}
 
