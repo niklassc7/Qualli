@@ -111,7 +111,6 @@ class KI extends IObjlistentry {
 			// Prüfen, ob noch eine KI da ist, sonst gewonnen.
 			if(this.pruefe_ob_gewonnen()){
 				showEndgame(true)
-				// Write Cookie won
 				storeLevelPlayed(room.constructor.name, true);
 			}
 			return true;

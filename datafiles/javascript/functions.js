@@ -305,27 +305,14 @@ function checkIfLost(team) {
 	return true;
 }
 
-
-function setCookie(key, val) {
-	document.cookie = key + " = " + val + "; expires=Fri, 01 Jan 2100 12:00:00 UTC";
-}
-
-function getCookie(key) {
-	let regex = new RegExp('(?:(?:^|.*;\\s*)' + key + '\\s*\\=\\s*([^;]*).*$)|^.*$');
-	return document.cookie.replace(regex, "$1");
-}
-
-function deleteCookie(key) {
-	document.cookie = key + " = ; expires=Sat, 01 Jan 2000 12:00:00 UTC";
-}
-
+// TODO move to level-storage-object (separate storage-class (engine) and level-storage (game))
 function storeLevelPlayed(roomName, won) {
 	let cname = roomName + (won ? "W" : "L");
 
-	if(getCookie(cname) == "") {
-		setCookie(cname, 1);
+	if(storage.get(cname) == "") {
+		storage.set(cname, 1);
 	} else {
-		setCookie(cname, parseInt(getCookie(cname)) + 1);
+		storage.set(cname, parseInt(storage.get(cname)) + 1);
 	}
 }
 
@@ -411,7 +398,7 @@ function resetProgress() {
 
 	var cookies = document.cookie.split(";");
 	for (var i = 0; i < cookies.length; i++)
-		deleteCookie(cookies[i].split("=")[0]);
+		storage.delete(cookies[i].split("=")[0]);
 
 	alert("Your progress has been reset.");
 }
