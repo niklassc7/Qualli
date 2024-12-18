@@ -4,6 +4,7 @@ class KI2 extends KI {
 		this.a;
 		this.b;
 	}
+
 	alarmieren(nr) {
 		switch (nr) {
 			case 0:
