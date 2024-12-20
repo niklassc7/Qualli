@@ -1,12 +1,4 @@
 function main(){
-	debug = false // TODO move to settings
-	experimental = true // TODO move to settings
-
-
-	// TODO move to settings
-	optScaling = true
-	paused = false
-
 	roomWidth = 1280;
 	roomHeight = 720;
 	canvas_width = 1920; // OBSOLETE TODO

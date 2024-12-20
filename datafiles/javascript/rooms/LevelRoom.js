@@ -25,7 +25,7 @@ class LevelRoom extends Room {
 			10,
 			40,
 			40,
-			pause,
+			Settings.pause,
 			false
 		));
 		pauseButton.setFontSize(16);
@@ -56,7 +56,7 @@ class LevelRoom extends Room {
 		}
 
 		room_goto(this.prevRoom)
-		unpause()
+		Settings.unpause()
 	}
 
 	alarmieren(nr) {

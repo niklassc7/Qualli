@@ -47,7 +47,7 @@ function resizeCanvas() {
 	// let ratioH = 437
 
 	let scale
-	if (optScaling) {
+	if (Settings.scaling) {
 		scale = window.devicePixelRatio;
 	} else {
 		scale = 1.0;
@@ -326,14 +326,6 @@ function storeLevelPlayed(roomName, won) {
 	}
 }
 
-function showSettings() {
-	document.getElementById("settingsOverlay").classList.remove("hidden")
-}
-
-function hideSettings() {
-	document.getElementById("settingsOverlay").classList.add("hidden")
-}
-
 function showEndgame(won) {
 	let levelTimeS = (Date.now() - room.roomEntered) / 1000
 
@@ -344,36 +336,6 @@ function showEndgame(won) {
 
 function hideEndgame() {
 	document.getElementById("endgameOverlay").classList.add("hidden")
-}
-
-function pause() {
-	paused = true
-	document.getElementById("pausedOverlay").classList.remove("hidden")
-}
-
-function unpause() {
-	paused = false
-	document.getElementById("pausedOverlay").classList.add("hidden")
-}
-
-// TODO move to settings
-function toggleExperimental() {
-	experimental = !experimental
-	document.getElementById("sExperimental").checked = experimental;
-}
-
-// TODO move to settings
-function toggleScaling() {
-	// TODO Settings opject insead of opt prefix → toggle method there
-	optScaling = !optScaling;
-	document.getElementById("sScaling").checked = optScaling;
-	resizeCanvas()
-}
-
-// TODO move to settings
-function toggleDebug() {
-	// TODO Settings opject insead of opt prefix → toggle method there
-	debug = !debug;
 }
 
 // Converts xD to x

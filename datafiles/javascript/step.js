@@ -1,5 +1,5 @@
 function step(){
-	if (paused) {
+	if (Settings.paused) {
 		return;
 	}
 
