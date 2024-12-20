@@ -317,18 +317,6 @@ function storeLevelPlayed(roomName, won) {
 	}
 }
 
-// TODO remove platform android
-function showMessage(msg) {
-	switch (platform) {
-		case "android":
-			window.JSInterface.androidMessage(msg);
-			break;
-		default:
-			alert(msg);
-			break;
-	}
-}
-
 function showSettings() {
 	document.getElementById("settingsOverlay").classList.remove("hidden")
 }

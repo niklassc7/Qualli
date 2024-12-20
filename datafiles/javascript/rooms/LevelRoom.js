@@ -63,7 +63,6 @@ class LevelRoom extends Room {
 		switch(nr) {
 			case 0:
 				if(checkIfLost(1)) {
-					// showMessage("Verloren!");
 					showEndgame(false)
 					storeLevelPlayed(room.constructor.name, false);
 					// room_goto(room.prevRoom);
