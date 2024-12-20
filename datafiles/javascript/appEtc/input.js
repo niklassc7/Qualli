@@ -12,6 +12,7 @@ class cls_input {
 		this.circleCounterMax = 20;
 		this.circleCounter = 0;
 
+
 		canvas.addEventListener('mousedown', this.mousedown, false);
 		canvas.addEventListener('mousemove', this.mousemove, false);
 		canvas.addEventListener('mouseup', this.mouseup, false);
@@ -40,7 +41,8 @@ class cls_input {
 
 	// ⚠ `this` does not refer to this class in this event handler, use global `input`
 	touchstart(event) {
-		input.updateCooordinates(event.touches[0])
+		event.preventDefault(); // Prevent to mouse events to fire as well
+		input.updateCooordinates(event.touches[0]);
 
 		// Planet selection
 		if (typeof input.selectedTouch === "undefined") {
@@ -54,11 +56,13 @@ class cls_input {
 
 	// ⚠ `this` does not refer to this class in this event handler, use global `input`
 	touchmove(event) {
+		event.preventDefault(); // Prevent to mouse events to fire as well
 		input.updateCooordinates(event.touches[0])
 	}
 
 	// ⚠ `this` does not refer to this class in this event handler, use global `input`
 	touchend(event) {
+		event.preventDefault(); // Prevent to mouse events to fire as well
 		// Button clicking
 		let overButton = collision_point(input.x, input.y, Button)
 		if (typeof overButton !== "undefined") {
