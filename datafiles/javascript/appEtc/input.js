@@ -6,7 +6,7 @@ class cls_input {
 		this.yD = this.y * yScalar; // y it should be drawn at
 
 		this.selected = undefined;
-		this.selectedTouch = undefined;
+		this.selectedTouch = undefined; // TODO merge again?
 
 		// For circle animation
 		this.circleCounterMax = 20;
@@ -20,6 +20,17 @@ class cls_input {
 		canvas.addEventListener('touchstart', this.touchstart, false);
 		canvas.addEventListener('touchmove', this.touchmove, false);
 		canvas.addEventListener('touchend', this.touchend, false);
+	}
+
+	// Resets input state
+	reset() {
+		this.x = 0;
+		this.y = 0;
+		this.xD = this.x * xScalar;
+		this.yD = this.y * yScalar;
+
+		this.selected = undefined;
+		this.selectedTouch = undefined;
 	}
 
 	updateCooordinates(event) {
@@ -41,7 +52,7 @@ class cls_input {
 
 	// ⚠ `this` does not refer to this class in this event handler, use global `input`
 	touchstart(event) {
-		event.preventDefault(); // Prevent to mouse events to fire as well
+		event.preventDefault(); // Prevent mouse events to fire as well
 		input.updateCooordinates(event.touches[0]);
 
 		// Planet selection
@@ -56,13 +67,13 @@ class cls_input {
 
 	// ⚠ `this` does not refer to this class in this event handler, use global `input`
 	touchmove(event) {
-		event.preventDefault(); // Prevent to mouse events to fire as well
+		event.preventDefault(); // Prevent mouse events to fire as well
 		input.updateCooordinates(event.touches[0])
 	}
 
 	// ⚠ `this` does not refer to this class in this event handler, use global `input`
 	touchend(event) {
-		event.preventDefault(); // Prevent to mouse events to fire as well
+		event.preventDefault(); // Prevent mouse events to fire as well
 		// Button clicking
 		let overButton = collision_point(input.x, input.y, Button)
 		if (typeof overButton !== "undefined") {

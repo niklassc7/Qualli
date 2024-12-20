@@ -129,6 +129,7 @@ function room_goto(newRoom){
 	console.log("Going to room", newRoom.name)
 	// Set new room
 	room = new newRoom(room);
+	input.reset();
 }
 
 function object_create(cls, px, py) {
