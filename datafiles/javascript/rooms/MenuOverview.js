@@ -17,7 +17,7 @@ class MenuOverview extends Room{
 			[RoomMenuAdvanced, "Advanced"],
 		]
 
-		if (experimental) {
+		if (Settings.experimental) {
 			options.push([RoomMenuExperimental, "Experimental"])
 		}
 

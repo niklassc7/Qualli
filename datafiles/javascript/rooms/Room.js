@@ -23,7 +23,7 @@ class Room {
 		// console.log(this.objlist.length);
 	}
 	draw() {
-		if (debug) {
+		if (Settings.debug) {
 			ctx.font = Math.round(16 * ((xScalar + yScalar) / 2)) + "px fnt_Comforta_Bold";
 			ctx.textAlign = "left";
 			ctx.fillStyle = "white";
@@ -31,7 +31,7 @@ class Room {
 			ctx.fillText("canvas. " + canvas.width + ", " + canvas.height, 16 * xScalar, (16 + 32*1) * yScalar)
 			ctx.fillText("canvas_ " + canvas_width + ", " + canvas_height, 16 * xScalar, (16 + 32*2) * yScalar)
 			ctx.fillText(`window.devicePixelRatio: ${window.devicePixelRatio}`, 16 * xScalar, (16 + 32*3) * yScalar)
-			ctx.fillText(`optScaling: ${optScaling}`, 16 * xScalar, (16 + 32*4) * yScalar)
+			ctx.fillText(`scaling: ${Settings.scaling}`, 16 * xScalar, (16 + 32*4) * yScalar)
 			ctx.fillText(`scaled window-inner: ${window.innerWidth * window.devicePixelRatio}, ${window.innerHeight * window.devicePixelRatio}`, 16 * xScalar, (16 + 32*5) * yScalar)
 
 			// ctx.fillText("view " + view.getWidht() + ", " + view.getHeight(), 16, 112);

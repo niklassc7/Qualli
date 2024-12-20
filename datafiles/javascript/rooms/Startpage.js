@@ -17,7 +17,7 @@ class Startpage extends Room {
 
 		this.addToObjList(new Button("Start", roomWidth / 2 - buttonMargin - (3/2) * buttonWidth, roomHeight / 2 - buttonHeight / 2, buttonWidth, buttonHeight, () => { room_goto(MenuOverview) }  )).borderColour = "yellow";
 		this.addToObjList(new Button("Vollbild", roomWidth / 2 - buttonWidth / 2, roomHeight / 2 - buttonHeight / 2, buttonWidth, buttonHeight, toggleFullscreen ));
-		this.addToObjList(new Button("Settings", roomWidth / 2 + buttonMargin + buttonWidth / 2, roomHeight / 2 - buttonHeight / 2, buttonWidth, buttonHeight, showSettings));
+		this.addToObjList(new Button("Settings", roomWidth / 2 + buttonMargin + buttonWidth / 2, roomHeight / 2 - buttonHeight / 2, buttonWidth, buttonHeight, Settings.show));
 
 	}
 
@@ -32,21 +32,32 @@ class Startpage extends Room {
 		ctx.lineWidth = 8 * ((xScalar + yScalar) / 2);
 		let fill = 0.9
 
-		let animationN = 128
-		let animationSpeed = 0.2
+		let animationN = 16
+		let animationSpeed = 0.3
 		let blur = stepCount * animationSpeed % animationN
 		blur = Math.abs(blur - animationN/2)
 		// Normalize
 		blur = blur / (animationN/2)
-		// Scale
-		blur = 5 + 20*blur
+		// Scale (min + additional)
+		blur = 2 + 4*blur
 
+		// ctx.filter = `drop-shadow(0 0 0.75rem black) blur(${blur}px)`;
 		ctx.filter = `blur(${blur}px)`;
-		// ctx.filter = "drop-shadow(0 0 0.75rem white)";
+		// ctx.filter = "drop-shadow(7px 7px black)";
+
+		// Blur
 		ctx.strokeStyle = `rgba(210, 230, 255, ${fill})`;
-		ctx.strokeText("Qualli", roomWidth/2 * xScalar, 148 * yScalar);
+		// ctx.strokeText("Qualli", roomWidth/2 * xScalar, 148 * yScalar);
 		ctx.filter = "none";
 
+
+		// Shadow
+		ctx.strokeStyle = `rgba(100, 100, 100, ${fill})`;
+		ctx.strokeText("Qualli", (roomWidth/2 + 4) * xScalar, (148 + 4) * yScalar);
+
+		// Main text
+		ctx.strokeStyle = `rgba(210, 230, 255, ${fill})`;
+		ctx.strokeStyle = "white";
 		ctx.strokeText("Qualli", roomWidth/2 * xScalar, 148 * yScalar);
 		// ctx.fillText("Qualli", roomWidth/2 * xScalar, 148 * yScalar);
 
@@ -54,7 +65,7 @@ class Startpage extends Room {
 
 
 		// TODO remove
-		if (debug) {
+		if (Settings.debug) {
 			ctx.lineWidth = 5;
 			ctx.strokeStyle = 'white';
 			ctx.fillStyle = "white";

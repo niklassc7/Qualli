@@ -20,6 +20,7 @@
 		<script src="datafiles/javascript/appEtc/mouse.js"></script>
 		<script src="datafiles/javascript/appEtc/input.js"></script>
 		<script src="datafiles/javascript/engine/Storage.js"></script>
+		<script src="datafiles/javascript/engine/Settings.js"></script>
 		<script src="datafiles/javascript/appEtc/KI.js"></script>
 		<script src="datafiles/javascript/appEtc/KI0.js"></script>
 		<script src="datafiles/javascript/appEtc/KI1.js"></script>
@@ -111,7 +112,6 @@
 				<br>
 				<div>
 					<input id="egRetry" type="button" value="Retry" onClick="room_goto(room.constructor.name)" />
-					<!-- <input id="egSettings" type="button" value="Settings" onClick="showSettings()" /> -->
 					<input id="egExit" type="button" value="Exit" onClick="room_goto(room.prevRoom); hideEndgame()" />
 				</div>
 			</div>
@@ -121,10 +121,10 @@
 			<div id="pausedContent" class="overlayContent">
 				<h1>Paused</h1>
 				<br>
-				<input id="pResume" type="button" value="Resume" onClick="unpause()" />
+				<input id="pResume" type="button" value="Resume" onClick="Settings.unpause()" />
 				<br>
 				<br>
-				<input id="pSettings" type="button" value="Settings" onClick="showSettings()" />
+				<input id="pSettings" type="button" value="Settings" onClick="Settings.show()" />
 				<br>
 				<br>
 				<!-- TODO exit game -->
@@ -138,20 +138,20 @@
 				<br>
 				<label for="sScaling">Scaling</label>
 				<!-- TODO intialize checkboxes in program -->
-				<input id="sScaling" type="checkbox" checked onchange="toggleScaling()" />
+				<input id="sScaling" type="checkbox" checked onchange="Settings.toggleScaling()" />
 				<br>
 
 				<label for="sExperimental">Experimental</label>
-				<input id="sExperimental" type="checkbox" checked onchange="toggleExperimental()" />
+				<input id="sExperimental" type="checkbox" checked onchange="Settings.toggleExperimental()" />
 				<br>
 
 				<label for="sDebug">Debug</label>
-				<input id="sDebug" type="checkbox" onchange="toggleDebug()" />
+				<input id="sDebug" type="checkbox" onchange="Settings.toggleDebug()" />
 				<br>
 
 				<div>
 					<input id="sReset" type="button" value="Reset Progress" onClick="resetProgress()" />
-					<input id="sClose" type="button" value="Close Settings" onClick="hideSettings()" />
+					<input id="sClose" type="button" value="Close Settings" onClick="Settings.hide()" />
 				</div>
 			</div>
 		</div>
