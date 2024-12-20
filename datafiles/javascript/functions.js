@@ -130,6 +130,15 @@ function room_goto(newRoom){
 	// Set new room
 	room = new newRoom(room);
 	input.reset();
+	
+	// TODO remove this workaround once rooms set their background correctly
+	if (newRoom.prototype instanceof LevelRoom) {
+		document.body.style.background= "url(datafiles/sprites/bg8FullHd.png)"
+		document.body.style.backgroundSize = "cover"
+	} else {
+		document.body.style.background= "url(datafiles/sprites/bg5FullHd.png)"
+		document.body.style.backgroundSize = "cover"
+	}
 }
 
 function object_create(cls, px, py) {
