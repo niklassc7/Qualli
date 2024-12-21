@@ -15,12 +15,12 @@ class room27 extends LevelRoom {
 		let marginVert = 30;
 		let marginHorz = 30;
 
-		let newP=this.addToObjList(new cls_Planet(marginVert + 0 * planetDistance, 160 + 0 * planetDistance, 1));
+		let newP=this.addToObjList(new Bubble(marginVert + 0 * planetDistance, 160 + 0 * planetDistance, 1));
 		newP.groesse = 1;
 		newP.einheiten = 5000;
 		this.planetlist.push(newP)
 
-		newP=this.addToObjList(new cls_Planet(marginVert + 4 * planetDistance, 160 + 1 * planetDistance, 2));
+		newP=this.addToObjList(new Bubble(marginVert + 4 * planetDistance, 160 + 1 * planetDistance, 2));
 		newP.groesse = 10;
 		newP.einheiten = 5000;
 		this.planetlist.push(newP)
@@ -50,7 +50,7 @@ class room27 extends LevelRoom {
 		// 		// let newTeam = (j < itemsInRow / 2) ? 1 : 2;
 		// 		let newTeam = j + 1
 		// 		// let newTeam = 2
-		// 		let newP = this.addToObjList(new cls_Planet(startMargin + j * planetDistance, 160 + i * planetDistance, newTeam));
+		// 		let newP = this.addToObjList(new Bubble(startMargin + j * planetDistance, 160 + i * planetDistance, newTeam));
 		// 		// newP.groesse = (i == 1) ? 2 : 1;
 		// 		newP.groesse = 1;
 		// 		newP.einheiten = amount;
@@ -63,12 +63,12 @@ class room27 extends LevelRoom {
 		// this.planetlist[3].team = 1;
 		// this.planetlist[3].einheiten = 300;
 		
-		// let newP = this.addToObjList(new cls_Planet(startMargin + 4 * planetDistance, 160 + 0 * planetDistance, 2));
+		// let newP = this.addToObjList(new Bubble(startMargin + 4 * planetDistance, 160 + 0 * planetDistance, 2));
 		// newP.einheiten = 9.5 * amount;
 		// newP.groesse = 7;
 		// this.planetlist.push(newP);
 
-		// newP = this.addToObjList(new cls_Planet(startMargin + 4 * planetDistance, 160 + 2 * planetDistance, 3));
+		// newP = this.addToObjList(new Bubble(startMargin + 4 * planetDistance, 160 + 2 * planetDistance, 3));
 		// newP.einheiten = 9.5 * amount;
 		// newP.groesse = 7;
 		// this.planetlist.push(newP);

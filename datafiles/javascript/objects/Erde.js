@@ -1,3 +1,5 @@
+// TODO remove
+
 class cls_Erde extends Object {
 	constructor() {
 		super();

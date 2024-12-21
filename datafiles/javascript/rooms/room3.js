@@ -19,7 +19,7 @@ class room3 extends LevelRoom {
 
 		for(let i = 0; i < 3; i++)
 			for(let j = 0; j < itemsInRow; j++) {
-				let newP = this.addToObjList(new cls_Planet(startMargin + j * planetDistance, 160 + i * planetDistance, (i*3+j) % 5 ));
+				let newP = this.addToObjList(new Bubble(startMargin + j * planetDistance, 160 + i * planetDistance, (i*3+j) % 5 ));
 				newP.groesse = 1;
 				this.planetlist[i * itemsInRow + j] = newP;
 			}

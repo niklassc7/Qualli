@@ -288,7 +288,7 @@ function draw_roundrect(ctx, x, y, width, height, radius, fill, stroke) {
 // Checks if team has already lost
 function checkIfLost(team) {
 	for(var i = 0; i < room.objlist.length; i++) {
-		if(room.objlist[i] instanceof Jelly || room.objlist[i] instanceof cls_Planet) {
+		if(room.objlist[i] instanceof Jelly || room.objlist[i] instanceof Bubble) {
 			if(room.objlist[i].team === team) {
 				return false;
 			}
