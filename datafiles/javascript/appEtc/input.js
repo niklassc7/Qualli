@@ -1,3 +1,6 @@
+// TODO make static?
+
+
 class cls_input {
 	constructor() {
 		this.x = 0;
@@ -57,7 +60,7 @@ class cls_input {
 
 		// Planet selection
 		if (typeof input.selectedTouch === "undefined") {
-			let overBubble = collision_point(input.x, input.y, cls_Planet)
+			let overBubble = collision_point(input.x, input.y, Bubble)
 			if (typeof overBubble !== "undefined") {
 				// Start drag method
 				input.selectedTouch = overBubble
@@ -81,7 +84,7 @@ class cls_input {
 		}
 
 
-		let overBubble = collision_point(input.x, input.y, cls_Planet)
+		let overBubble = collision_point(input.x, input.y, Bubble)
 		if (typeof overBubble !== "undefined") {
 			if (typeof input.selectedTouch !== "undefined") {
 				if (overBubble === input.selectedTouch) {
@@ -103,7 +106,7 @@ class cls_input {
 
 		// Planet selection
 		if (typeof input.selected === "undefined") {
-			let overBubble = collision_point(input.x, input.y, cls_Planet)
+			let overBubble = collision_point(input.x, input.y, Bubble)
 			if (typeof overBubble !== "undefined") {
 				// Start drag method
 				input.selected = overBubble
@@ -126,7 +129,7 @@ class cls_input {
 			overButton.onClick()
 		}
 
-		let overBubble = collision_point(input.x, input.y, cls_Planet)
+		let overBubble = collision_point(input.x, input.y, Bubble)
 		if (typeof overBubble !== "undefined") {
 			if (typeof input.selected !== "undefined") {
 				if (overBubble === input.selected) {

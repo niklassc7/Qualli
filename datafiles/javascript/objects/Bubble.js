@@ -1,4 +1,4 @@
-class cls_Planet extends Object {
+class Bubble extends Object {
 	constructor(x, y, team, groesse, einheiten) {
 		super(x, y);
 

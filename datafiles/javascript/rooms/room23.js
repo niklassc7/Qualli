@@ -20,7 +20,7 @@ class room23 extends LevelRoom {
 			for(let j = 0; j < itemsInRow; j++) {
 				let newTeam = 1
 				// TODO const
-				let newP = this.addToObjList(new cls_Planet(startMargin + j * planetDistance, 200 + i * planetDistance, newTeam));
+				let newP = this.addToObjList(new Bubble(startMargin + j * planetDistance, 200 + i * planetDistance, newTeam));
 				newP.groesse = (i == 1) ? 2 : 1;
 				newP.einheiten = jellyAmount;
 				this.planetlist[i * itemsInRow + j] = newP;
