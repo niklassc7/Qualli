@@ -8,6 +8,8 @@ class Button extends Object {
 		this.font =  Math.round(this.fontSize * ((xScalar + yScalar) / 2)) + "px fnt_Comforta_Regular";
 		this.disabled = (disabled === undefined) ? false : disabled;
 		this.animationSpeed = 0.1 + Math.random() * 0.2
+
+		// TODO calculate font size based on width and text
 	}
 
 	setFontSize(size) {

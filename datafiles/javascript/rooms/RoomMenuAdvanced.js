@@ -27,14 +27,13 @@ class RoomMenuAdvanced extends Room{
 
 		for(let i = 0; i < itemsinColumn; i++)
 			for(let j = 0; j < itemsInRow && i*itemsInRow + j < rooms.length; j++) {
-				this.addToObjList(new Button(
+				this.addToObjList(new LevelButton(
 					i*itemsInRow + j,
 					marginLeft + j * (buttonWidth + buttonMargin),
 					marginTop + i * (buttonHeight + buttonMargin),
 					buttonWidth,
 					buttonHeight,
-					function() { room_goto(rooms[i*itemsInRow + j]) },
-					(i*itemsInRow + j - 1 < 0) ? false : (storage.get(rooms[i*itemsInRow + j - 1].name + "W") == "") ? true : false
+					rooms[i*itemsInRow + j]
 				)).setFontSize(36);
 			}
 
