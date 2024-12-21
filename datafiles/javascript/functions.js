@@ -285,24 +285,6 @@ function draw_roundrect(ctx, x, y, width, height, radius, fill, stroke) {
 	}
 }
 
-// // Setzen der Mausvariablen, falls event
-// function WhichButton(event) {
-// 	switch(event.button){
-// 		case 0:
-// 			mouse.left_pressed = true;
-// 			break;
-// 		case 1:
-// 			mouse.middle_pressed = true;
-// 			break;
-// 		case 2:
-// 			mouse.right_pressed = true;
-// 			break;
-// 		default:
-// 			console.log("Fehler: Nicht bekannte Maustaste gedrückt (" + event.button + ").");
-// 			break;
-// 	}
-// }
-
 // Checks if team has already lost
 function checkIfLost(team) {
 	for(var i = 0; i < room.objlist.length; i++) {
