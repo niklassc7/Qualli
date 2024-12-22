@@ -1,4 +1,8 @@
 function main(){
+	msgs = new LinkedList();
+	msgs.addFirst("Test");
+	msgs.addFirst("Test2");
+
 	roomWidth = 1280;
 	roomHeight = 720;
 	canvas_width = 1920; // OBSOLETE TODO
@@ -38,7 +42,7 @@ function main(){
 		toggleFullscreen();
 
 	input = new cls_input();
-	storage = new Storage("cookie");
+	storage = new Storage("localStorage");
 	room = new Startpage();
 
 	teamcolour = [];

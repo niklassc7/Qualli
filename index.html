@@ -16,17 +16,21 @@
 		<title>Qualli</title>
 		<link rel = "Stylesheet"  type = "text/css" href = "Master.css"/>
 
+		<!-- Engine -->
+		<script src="datafiles/javascript/engine/Storage.js"></script>
+		<script src="datafiles/javascript/engine/Settings.js"></script>
+
 		<script src="datafiles/javascript/appEtc/IObjlistentry.js"></script>
 		<script src="datafiles/javascript/appEtc/mouse.js"></script>
 		<script src="datafiles/javascript/appEtc/input.js"></script>
-		<script src="datafiles/javascript/engine/Storage.js"></script>
-		<script src="datafiles/javascript/engine/Settings.js"></script>
 		<script src="datafiles/javascript/appEtc/KI.js"></script>
 		<script src="datafiles/javascript/appEtc/KI0.js"></script>
 		<script src="datafiles/javascript/appEtc/KI1.js"></script>
 		<script src="datafiles/javascript/appEtc/KI2.js"></script>
 		<script src="datafiles/javascript/appEtc/Stack.js"></script>
 		<script src="datafiles/javascript/appEtc/LinkedList.js"></script>
+		<script src="datafiles/javascript/appEtc/ProgressManager.js"></script>
+		<script src="datafiles/javascript/appEtc/LevelStats.js"></script>
 
 		<script src="datafiles/javascript/objects/Object.js"></script>
 		<script src="datafiles/javascript/objects/Button.js"></script>
@@ -151,7 +155,7 @@
 				<br>
 
 				<div>
-					<input id="sReset" type="button" value="Reset Progress" onClick="resetProgress()" />
+					<input id="sReset" type="button" value="Reset Progress" onClick="Storage.resetProgress()" />
 					<input id="sClose" type="button" value="Close Settings" onClick="Settings.hide()" />
 				</div>
 			</div>
