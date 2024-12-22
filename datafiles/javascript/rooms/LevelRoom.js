@@ -2,9 +2,6 @@
 // All levels should extend from this
 
 class LevelRoom extends Room {
-	// Keys that winning this level unlocks (usually other levels)
-	static unlocks = [];
-
 	constructor(prevRoom){
 		super(prevRoom);
 
