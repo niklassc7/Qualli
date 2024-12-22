@@ -111,9 +111,9 @@ function resizeCanvas() {
 	// ctx.scale(scale, scale)
 
 	// TODO check
-	try{ room; }
-	catch(e) {
-		if(e.name == "ReferenceError") {
+	try { room;
+	} catch(e) {
+		if (e.name == "ReferenceError") {
 			return;
 		}
 	}
@@ -121,10 +121,10 @@ function resizeCanvas() {
 	// Reposition objects
 	for(let i = 0; i < room.objlist.length; i++)
 		room.objlist[i].resize();
-
 }
 
 // Receives room class, instantiates it and changes room to it
+// TODO camelCase
 function room_goto(newRoom){
 	console.log("Going to room", newRoom.name)
 	// Set new room
@@ -297,17 +297,6 @@ function checkIfLost(team) {
 	return true;
 }
 
-// TODO move to level-storage-object (separate storage-class (engine) and level-storage (game))
-function storeLevelPlayed(roomName, won) {
-	let cname = roomName + (won ? "W" : "L");
-
-	if(storage.get(cname) == "") {
-		storage.set(cname, 1);
-	} else {
-		storage.set(cname, parseInt(storage.get(cname)) + 1);
-	}
-}
-
 function showEndgame(won) {
 	let levelTimeS = (Date.now() - room.roomEntered) / 1000
 
@@ -330,17 +319,4 @@ function xScreenToInternal(xD) {
 function yScreenToInternal(yD) {
 	// return yD / canvas.height * roomHeight
 	return yD / canvasStyleHeight * roomHeight
-}
-
-function resetProgress() {
-	let text = "Do you really want to reset your entire progress?"
-	if (!confirm(text)) {
-		return
-	}
-
-	var cookies = document.cookie.split(";");
-	for (var i = 0; i < cookies.length; i++)
-		storage.delete(cookies[i].split("=")[0]);
-
-	alert("Your progress has been reset.");
 }

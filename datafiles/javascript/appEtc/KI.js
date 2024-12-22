@@ -85,6 +85,8 @@ class KI extends IObjlistentry {
 		}
 		planet_start.einheiten -= Math.floor(planet_start.einheiten/2)
 	}
+
+	// TODO do this in room
 	pruefe_ob_gewonnen() {
 		for(var i = 0; i < room.objlist.length; i++) {
 			if(room.objlist[i] instanceof KI) {
@@ -111,7 +113,9 @@ class KI extends IObjlistentry {
 			// Prüfen, ob noch eine KI da ist, sonst gewonnen.
 			if(this.pruefe_ob_gewonnen()){
 				showEndgame(true)
-				storeLevelPlayed(room.constructor.name, true);
+
+				// TODO win/lose logic should be in LevelRoom
+				ProgressManager.updateLevelStats(room.constructor.name, true);
 			}
 			return true;
 		}

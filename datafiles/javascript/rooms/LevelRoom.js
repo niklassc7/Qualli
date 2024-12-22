@@ -2,6 +2,9 @@
 // All levels should extend from this
 
 class LevelRoom extends Room {
+	// Keys that winning this level unlocks (usually other levels)
+	static unlocks = [];
+
 	constructor(prevRoom){
 		super(prevRoom);
 
@@ -64,8 +67,7 @@ class LevelRoom extends Room {
 			case 0:
 				if(checkIfLost(1)) {
 					showEndgame(false)
-					storeLevelPlayed(room.constructor.name, false);
-					// room_goto(room.prevRoom);
+					ProgressManager.updateLevelStats(room.constructor.name, false);
 				}
 				this.alarm[0] = 300;
 
