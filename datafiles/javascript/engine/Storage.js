@@ -14,6 +14,7 @@ class Storage {
 				this.get = this.getLocalStorage;
 				this.set = this.setLocalStorage;
 				this.delete = this.deleteLocalStorage;
+				this.clear = this.clearLocalStorage;
 				break;
 			default:
 				console.error(`Storage failed to initialize (${backend} is not a valid storage backend)`)
@@ -54,5 +55,9 @@ class Storage {
 
 	deleteLocalStorage(key) {
 		return localStorage.removeItem(key);
+	}
+
+	clearLocalStorage() {
+		localStorage.clear();
 	}
 }

@@ -8,10 +8,8 @@ class ProgressManager {
 			return;
 		}
 
-		var cookies = document.cookie.split(";");
-		// TODO
-		for (var i = 0; i < cookies.length; i++)
-			storage.delete(cookies[i].split("=")[0]);
+		// TODO only clear progress (in case other things like settings are stored)
+		storage.clear();
 
 		alert("Your progress has been reset.");
 	}
