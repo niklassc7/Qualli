@@ -32,6 +32,17 @@ class ProgressManager {
 		storage.set(levelName, JSON.stringify(levelStats));
 	}
 
+	// Returns object of type LevelStats
+	static getLevelStats(levelName) {
+		let levelStats = storage.get(levelName);
+		
+		if (levelStats == undefined) {
+			return new LevelStats(levelName, 0, 0);
+		} else {
+			return JSON.parse(levelStats);
+		}
+	}
+
 	// Stores that `level` has been unlocked
 	static unlockLevel(level) {
 		
