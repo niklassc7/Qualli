@@ -1,4 +1,5 @@
 class Bubble extends Object {
+	// TODO use default parameters
 	constructor(x, y, team, groesse, einheiten) {
 		super(x, y);
 
@@ -15,11 +16,10 @@ class Bubble extends Object {
 
 	step() {
 		super.step();
-		if(this.team !== 0)
+		if (this.team !== 0)
 			this.einheiten += this.groesse / 60;
 
-		if(!this.createQueue.isEmpty()) {
-			// room.addToObjList(this.createStack.pop());
+		if (!this.createQueue.isEmpty()) {
 			let parameter = this.createQueue.removeFirst();
 			new Jelly(parameter[0], parameter[1], parameter[2], parameter[3]);
 		}
@@ -48,7 +48,7 @@ class Bubble extends Object {
 
 		// Team colour
 		if(this.team !== 0) {
-			ctx.fillStyle = teamcolour[this.team];
+			ctx.fillStyle = Colors.team[this.team].cRgba();
 			ctx.strokeStyle = ctx.fillStyle;
 			ctx.lineWidth = Math.round(8 * xScalar);
 			draw_circle(this.xD, this.yD, this.widthD / 2, true);
