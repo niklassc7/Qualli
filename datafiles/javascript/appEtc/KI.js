@@ -16,7 +16,7 @@ class KI extends IObjlistentry {
 	}
 
 	draw() {
-		ctx.fillStyle = teamcolour[this.team];
+		ctx.fillStyle = Colors.team[this.team].cRgba();
 		ctx.strokeStyle = "#aa0000";
 		ctx.lineWidth = 2;
 		draw_circle((32 + (this.team - 2) * 48) * xScalar, 32 * yScalar, 16 * ((xScalar + yScalar) / 2), false);

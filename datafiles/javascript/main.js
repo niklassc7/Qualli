@@ -36,43 +36,18 @@ function main(){
 	spr_Raumschiff[3] = document.getElementById("qualleGreen");
 	spr_Raumschiff[4] = document.getElementById("qualleYellow");
 
+	sprMedalGold = document.getElementById("medalGold");
+	sprMedalSilver = document.getElementById("medalSilver");
+	sprMedalBronze = document.getElementById("medalBronze");
+
 	sprLock = document.getElementById("lock");
 
-	// if(window.innerWidth < 1300 || window.innerHeight < 740)
-		toggleFullscreen();
+	// TODO check
+	toggleFullscreen();
 
 	input = new cls_input();
 	storage = new Storage("localStorage");
 	room = new Startpage();
 
-	teamcolour = [];
-	teamcolour[1] = "rgba(211, 47, 47, 0.6)";
-	teamcolour[2] = "rgba(48, 63, 159, 0.6)";
-	teamcolour[3] = "rgba(56, 142, 60, 0.6)";
-	teamcolour[4] = "rgba(251, 192, 45, 0.6)";
-
-
-
-	document.addEventListener("keydown", function(e) {
-		// TODO remove
-		if (e.keyCode == 13) {
-			toggleFullScreen(document.getElementById("myCanvas"));
-		}
-	}, false);
-
-
-	/** Room width / height is the position the objects are stored at (x,y).
-		* We use usually 1280 × 720
-		* canvas might be different size and then objects have to be drawn at
-		* different coordinates accordingly
-		*/
-
-		// requestAnimationFrame(function(timestamp) {
-			//   starttime = timestamp;
-			//   console.log(starttime);
-			//   step();
-			// });
-
-	// room_goto(RoomMenu1)
 	setInterval(step, 1000/60); // 60 FPS
 }
