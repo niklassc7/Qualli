@@ -5,7 +5,7 @@ class RoomMenuAdvanced extends Room{
 
 		this.n_step = 0;
 
-		this.addToObjList(new Button("←", 42, roomHeight - 128, 90, 90, function(){ room_goto(MenuOverview); } )).setFontSize(24) ;
+		this.addObject(new Button("←", 42, roomHeight - 128, 90, 90, function(){ room_goto(MenuOverview); } )).setFontSize(24) ;
 
 		let buttonWidth = 128;
 		let buttonHeight = 128;
@@ -27,7 +27,7 @@ class RoomMenuAdvanced extends Room{
 
 		for(let i = 0; i < itemsinColumn; i++)
 			for(let j = 0; j < itemsInRow && i*itemsInRow + j < rooms.length; j++) {
-				this.addToObjList(new LevelButton(
+				this.addObject(new LevelButton(
 					i*itemsInRow + j,
 					marginLeft + j * (buttonWidth + buttonMargin),
 					marginTop + i * (buttonHeight + buttonMargin),

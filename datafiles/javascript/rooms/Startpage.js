@@ -6,19 +6,14 @@ class Startpage extends Room {
 
 
 		this.n_step = 0; // TODO is this needed
-		/*
-		* Erstelle Objekte und trage diese in das Array objlist,
-		* durch die Funktion count_Objekt, ein
-		*/
-		//  var button_main_skalierung = 1;
+
 		var buttonWidth = 256;
 		var buttonHeight = 192;
 		var buttonMargin = 128;
 
-		this.addToObjList(new Button("Start", roomWidth / 2 - buttonMargin - (3/2) * buttonWidth, roomHeight / 2 - buttonHeight / 2, buttonWidth, buttonHeight, () => { room_goto(MenuOverview) }  )).borderColour = "yellow";
-		this.addToObjList(new Button("Vollbild", roomWidth / 2 - buttonWidth / 2, roomHeight / 2 - buttonHeight / 2, buttonWidth, buttonHeight, toggleFullscreen ));
-		this.addToObjList(new Button("Settings", roomWidth / 2 + buttonMargin + buttonWidth / 2, roomHeight / 2 - buttonHeight / 2, buttonWidth, buttonHeight, Settings.show));
-
+		this.addObject(new Button("Start", roomWidth / 2 - buttonMargin - (3/2) * buttonWidth, roomHeight / 2 - buttonHeight / 2, buttonWidth, buttonHeight, () => { room_goto(MenuOverview) }  )).borderColour = "yellow";
+		this.addObject(new Button("Vollbild", roomWidth / 2 - buttonWidth / 2, roomHeight / 2 - buttonHeight / 2, buttonWidth, buttonHeight, toggleFullscreen ));
+		this.addObject(new Button("Settings", roomWidth / 2 + buttonMargin + buttonWidth / 2, roomHeight / 2 - buttonHeight / 2, buttonWidth, buttonHeight, Settings.show));
 	}
 
 	draw(){
@@ -55,9 +50,16 @@ class Startpage extends Room {
 		ctx.strokeStyle = `rgba(100, 100, 100, ${fill})`;
 		ctx.strokeText("Qualli", (roomWidth/2 + 4) * xScalar, (148 + 4) * yScalar);
 
+		// Gradient
+		// const grad = ctx.createLinearGradient(300, 0, roomWidth-300, roomHeight + blur*100);
+		const grad = ctx.createLinearGradient(300*xScalar, 0, (roomWidth-300) * xScalar, (500 + blur*100)*yScalar);
+		grad.addColorStop(0, "#b8f0ec");
+		grad.addColorStop(1, "#139964");
+
 		// Main text
-		ctx.strokeStyle = `rgba(210, 230, 255, ${fill})`;
-		ctx.strokeStyle = "white";
+		// ctx.strokeStyle = `rgba(210, 230, 255, ${fill})`;
+		// ctx.strokeStyle = "white";
+		ctx.strokeStyle = grad;
 		ctx.strokeText("Qualli", roomWidth/2 * xScalar, 148 * yScalar);
 		// ctx.fillText("Qualli", roomWidth/2 * xScalar, 148 * yScalar);
 

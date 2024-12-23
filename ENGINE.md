@@ -12,13 +12,14 @@
 
 ## Room
 
-All rooms extend the Room class. Stores objlists and creates objects.
+All rooms extend the Room class. Stores list of objects `objects` and creates
+objects.
 
 ## step() and draw()
 
 In each interval first step() and then draw() from the room is called. In the
-superclass Room the objlist ist traversed and step() or resp. draw() of each
-object is called.
+superclass Room the list of objects `objects` is traversed and step() or resp.
+draw() of each object is called.
 
 Each room and each object should always call super.step() or super.draw() if
 they override one of these methods.

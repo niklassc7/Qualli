@@ -4,8 +4,8 @@ class room4 extends LevelRoom {
 
 		this.background = spr_bg_0;
 
-		this.addToObjList(new KI0(2));
-		this.addToObjList(new KI0(3));
+		this.addObject(new KI0(2));
+		this.addObject(new KI0(3));
 
 		// 40
 
@@ -19,7 +19,7 @@ class room4 extends LevelRoom {
 		for(let i = 0; i < 3; i++)
 			for(let j = 0; j < itemsInRow; j++) {
 				let newTeam = (j < itemsInRow / 3) ? 1 : (j < 2 * (itemsInRow / 3) ? 2 : 3);
-				let newP = this.addToObjList(new Bubble(startMargin + j * planetDistance, 160 + i * planetDistance, newTeam));
+				let newP = this.addObject(new Bubble(startMargin + j * planetDistance, 160 + i * planetDistance, newTeam));
 				newP.groesse = (i == 1) ? 2 : 1;
 				newP.einheiten = (newP.team == 1) ? 40 : 70;
 				this.planetlist[i * itemsInRow + j] = newP;

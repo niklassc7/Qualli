@@ -2,7 +2,7 @@ class Jelly extends Object {
 	constructor(x, y, team, ziel) {
 		super();
 
-		room.addToObjList(this); // Move to Superclass
+		room.addObject(this); // Move to Superclass
 
 		this.x = x;
 		this.y = y;
@@ -16,7 +16,7 @@ class Jelly extends Object {
 				super();
 				this.parent = parent;
 				this.targetSpeed = targetSpeed;
-				room.addToObjList(this);
+				room.addObject(this);
 			}
 
 			draw() {}
@@ -46,7 +46,7 @@ class Jelly extends Object {
 				if(Math.abs(zDir - this.parent.direction) <= turnSpeed && Math.abs(this.parent.speed - this.targetSpeed) <= acceleration) {
 					this.parent.setSpeed(this.targetSpeed);
 					this.parent.setDirection(zDir);
-					object_destroy(this);
+					room.destroyObject(this);
 				}
 			}
 		}
@@ -78,7 +78,7 @@ class Jelly extends Object {
 			this.ziel.x + (this.ziel.width/2),
 			this.ziel.y + (this.ziel.height/2)
 		)){
-			object_destroy(this);
+			room.destroyObject(this);
 			if (this.ziel.team !== this.team) {
 				this.ziel.einheiten--;
 				if (this.ziel.einheiten <= 0)

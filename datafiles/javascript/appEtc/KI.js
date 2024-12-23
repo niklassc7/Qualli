@@ -23,9 +23,9 @@ class KI extends IObjlistentry {
 	}
 
 	pruefe_ob_eigene_Raumschiffe_im_Spiel() {
-		for(var i = 0; i < room.objlist.length; i++) {
-			if(room.objlist[i] instanceof Jelly) {
-				if(room.objlist[i].team === this.team) return true;
+		for(var i = 0; i < room.objects.length; i++) {
+			if(room.objects[i] instanceof Jelly) {
+				if(room.objects[i].team === this.team) return true;
 			}
 		}
 		return false;
@@ -64,23 +64,13 @@ class KI extends IObjlistentry {
 		return enemyList;
 	}
 
+	// TODO rename
 	angriff(planet_start, planet_ziel){
 		for(var i = 0; i < Math.floor(planet_start.einheiten / 2); i++) {
-			//  var neu = object_create(Raumschiff, planet_start.x + (64 - Math.floor(Math.random() * 128)), planet_start.y + (64 - Math.floor(Math.random() * 128)));
-			//  neu.team = this.team;
-			//  neu.sprite = spr_Raumschiff[this.team];
-			//  neu.ziel = planet_ziel;
-			//  neu.move_towards_point(neu.ziel.x, neu.ziel.y, 3);
-			//  neu.direction = radtodeg(Math.atan2(neu.vspeed, neu.hspeed));
-
-			// let nx = planet_start.x + (64 - Math.floor(Math.random() * 128));
-			// let ny = planet_start.y + (64 - Math.floor(Math.random() * 128));
 			let nx = planet_start.x;
 			let ny = planet_start.y;
-			// let neu = new Raumschiff(nx, ny, this.team, planet_ziel);
+
 			planet_start.createQueue.addLast([nx, ny, this.team, planet_ziel]);
-			// planet_start.createStack.push(neu);
-			// room.addToObjList(neu);
 
 		}
 		planet_start.einheiten -= Math.floor(planet_start.einheiten/2)
@@ -88,8 +78,8 @@ class KI extends IObjlistentry {
 
 	// TODO do this in room
 	pruefe_ob_gewonnen() {
-		for(var i = 0; i < room.objlist.length; i++) {
-			if(room.objlist[i] instanceof KI) {
+		for(var i = 0; i < room.objects.length; i++) {
+			if(room.objects[i] instanceof KI) {
 				return false;
 			}
 		}
@@ -109,7 +99,7 @@ class KI extends IObjlistentry {
 			}
 
 			// KI löschen, wenn weder eigene Planeten, noch Raumschiffe da sind.
-			object_destroy(this);
+			room.destroyObject(this);
 			// Prüfen, ob noch eine KI da ist, sonst gewonnen.
 			if(this.pruefe_ob_gewonnen()){
 				showEndgame(true)

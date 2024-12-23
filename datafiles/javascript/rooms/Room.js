@@ -2,6 +2,7 @@
 
 class Room {
 	constructor(prevRoom) {
+		// TODO check
 		this.roomEntered = Date.now()
 
 		if (this.constructor == LevelRoom) {
@@ -14,14 +15,16 @@ class Room {
 			this.prevRoom = Startpage
 		}
 
+		// TODO make static
 		this.background = undefined;
-		this.objlist = [];
+
+		this.objects = [];
 	}
 
 	step() {
 		//do nothing
-		// console.log(this.objlist.length);
 	}
+
 	draw() {
 		if (Settings.debug) {
 			ctx.font = Math.round(16 * ((xScalar + yScalar) / 2)) + "px fnt_Comforta_Bold";
@@ -37,10 +40,24 @@ class Room {
 			// ctx.fillText("view " + view.getWidht() + ", " + view.getHeight(), 16, 112);
 		}
 	}
-	addToObjList(obj) {
-		var stelle = this.objlist.length;
-		this.objlist[stelle] = obj;
+
+	addObject(obj) {
+		var pos = this.objects.length;
+		this.objects[pos] = obj;
 
 		return obj;
+	}
+
+	destroyObject(obj) {
+		for (var i = 0; i < room.objects.length; i++) {
+			if(room.objects[i] === obj) {
+				room.objects.splice(i, 1);
+				obj.destroy();
+				return true;
+			}
+		}
+
+		console.error("Attempted to deleted object that is not in room.objects");
+		return false;
 	}
 }

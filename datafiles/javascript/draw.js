@@ -8,9 +8,9 @@ function draw() {
 	// }
 
 	// draw of all `Object`
-	for(var i = 0; i < room.objlist.length; i++){
-		if(room.objlist[i] !== undefined){
-			room.objlist[i].draw();
+	for(var i = 0; i < room.objects.length; i++){
+		if(room.objects[i] !== undefined){
+			room.objects[i].draw();
 		}
 	}
 
@@ -18,6 +18,36 @@ function draw() {
 	// mouse.draw();
 	input.draw()
 	room.draw();
+
+	if (Settings.debug && !msgs.isEmpty()) {
+		ctx.fillStyle = "white";
+		ctx.textAlign = "right";
+		ctx.font = Math.round(16 * ((xScalar + yScalar) / 2)) + "px fnt_Comforta_Bold";
+
+		// if (stepCount % 200 == 0) {
+		// 	msgs.removeFirst()
+		// }
+
+		// FIXME
+		// for (let i = msgs.length-1; i >= 0; i--) {
+		for (let i = msgs.head; i != undefined; i = i.next) {
+			msg = i.val;
+			// console.log(msg)
+			let textDim = ctx.measureText(msg);
+			// let tx = Math.round((roomWidth - textDim.width) * xScalar);
+			let tx = Math.round(roomWidth * xScalar)
+			let ty = Math.round((18*i + 8) * yScalar);
+			// console.log(textDim)
+			ctx.fillText(msg,
+				tx,
+				ty);
+		}
+		// console.log("----")
+		ctx.textAlign = "center";
+
+		// let w = Math.round(roomWidth*xScalar);
+		// ctx.fillRect(w-10, 0, w, roomHeight)
+	}
 
 	text = "Excepturi non voluptate autem error consequuntur et ipsam. In atque aliquam quia mollitia. Excepturi non voluptate autem error consequuntur et ipsam. In atque aliquam quia mollitia. Excepturi non voluptate autem error consequuntur et ipsam.";
 	// drawInfoWindow(text, ["test0, test1"], ["f0", "f1"]); // TODO implement
