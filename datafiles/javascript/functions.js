@@ -25,8 +25,8 @@ function deactivateFullscreen() {
 	xScalar = 1;
 	yScalar = 1;
 
-	for(let i = 0; i < room.objlist.length; i++)
-		room.objlist[i].resize();
+	for(let i = 0; i < room.objects.length; i++)
+		room.objects[i].resize();
 }
 
 function toggleFullscreen() {
@@ -119,8 +119,8 @@ function resizeCanvas() {
 	}
 
 	// Reposition objects
-	for(let i = 0; i < room.objlist.length; i++)
-		room.objlist[i].resize();
+	for(let i = 0; i < room.objects.length; i++)
+		room.objects[i].resize();
 }
 
 // Receives room class, instantiates it and changes room to it
@@ -157,19 +157,6 @@ function object_create(cls, px, py, parameter){ // Erstellen, Eintragem, obj (in
 		obj.y = py;
 	}
 	return obj;
-}
-
-
-function object_destroy(obj) {
-	for(var i = 0; i < room.objlist.length; i++) {
-		if(room.objlist[i] === obj) {
-			// room.objlist[i] = undefined;
-			room.objlist.splice(i, 1);
-			return true;
-		}
-	}
-	console.log("FEHLER: function object_destroy, obj konnte nicht in room.objlist gefunden werden. Es wurde nichts gelöscht.");
-	return false;
 }
 
 function radtodeg(rad) {
@@ -221,8 +208,8 @@ function collision_point(x, y, cls) { // return obj oder undefined
 	/* Prüft, ob Punkt mit einem Objekt der Klasse cls kollidiert.
 	* Nur unpräzise Prüfung (point_in_rectangle).
 	*/
-	for(var i = 0; i < room.objlist.length; i++) {
-		var obj = room.objlist[i];
+	for(var i = 0; i < room.objects.length; i++) {
+		var obj = room.objects[i];
 		if(obj instanceof cls){
 			var x1 = obj.x - obj.ox
 			var y1 = obj.y - obj.oy
@@ -287,9 +274,9 @@ function draw_roundrect(ctx, x, y, width, height, radius, fill, stroke) {
 
 // Checks if team has already lost
 function checkIfLost(team) {
-	for(var i = 0; i < room.objlist.length; i++) {
-		if(room.objlist[i] instanceof Jelly || room.objlist[i] instanceof Bubble) {
-			if(room.objlist[i].team === team) {
+	for(var i = 0; i < room.objects.length; i++) {
+		if(room.objects[i] instanceof Jelly || room.objects[i] instanceof Bubble) {
+			if(room.objects[i].team === team) {
 				return false;
 			}
 		}

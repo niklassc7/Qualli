@@ -26,6 +26,11 @@ class Object extends IObjlistentry {
 		// this.resize();
 	}
 
+	// Called when object is destroyed
+	destroy() {
+
+	}
+
 	resize() {
 		this.xD = this.x * xScalar;
 		this.yD = this.y * yScalar;

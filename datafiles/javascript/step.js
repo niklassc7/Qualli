@@ -4,8 +4,8 @@ function step(){
 	}
 
 	// step of all `Object`
-	for(var i = 0; i < room.objlist.length; i++){
-		room.objlist[i].step();
+	for(var i = 0; i < room.objects.length; i++){
+		room.objects[i].step();
 	}
 
 	room.step();

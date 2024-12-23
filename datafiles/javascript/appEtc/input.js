@@ -78,6 +78,7 @@ class cls_input {
 	// ⚠ `this` does not refer to this class in this event handler, use global `input`
 	touchend(event) {
 		event.preventDefault(); // Prevent mouse events to fire as well
+		// TODO observer pattern
 		// Button clicking
 		let overButton = collision_point(input.x, input.y, Button)
 		if (typeof overButton !== "undefined") {
