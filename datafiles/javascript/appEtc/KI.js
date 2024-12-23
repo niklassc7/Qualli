@@ -99,7 +99,7 @@ class KI extends IObjlistentry {
 			}
 
 			// KI löschen, wenn weder eigene Planeten, noch Raumschiffe da sind.
-			object_destroy(this);
+			room.destroyObject(this);
 			// Prüfen, ob noch eine KI da ist, sonst gewonnen.
 			if(this.pruefe_ob_gewonnen()){
 				showEndgame(true)
