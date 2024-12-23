@@ -141,24 +141,6 @@ function room_goto(newRoom){
 	}
 }
 
-function object_create(cls, px, py) {
-	object_create(cls, px, py, [])
-}
-
-function object_create(cls, px, py, parameter){ // Erstellen, Eintragem, obj (inst) wiedergeben // OBSOLETE USE ADDTOOBJLIST AFTER CREATING
-	// Create object
-	var obj = new cls([]);
-	// Register object to game loop
-	room.addObject(obj);
-
-	// Set coordinates, if given
-	if(px !== undefined && py !== undefined) {
-		obj.x = px;
-		obj.y = py;
-	}
-	return obj;
-}
-
 function radtodeg(rad) {
 	return rad * (180 / Math.PI);
 }
