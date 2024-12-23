@@ -149,7 +149,7 @@ function object_create(cls, px, py, parameter){ // Erstellen, Eintragem, obj (in
 	// Create object
 	var obj = new cls([]);
 	// Register object to game loop
-	room.addToObjList(obj);
+	room.addObject(obj);
 
 	// Set coordinates, if given
 	if(px !== undefined && py !== undefined) {

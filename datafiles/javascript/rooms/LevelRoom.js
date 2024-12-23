@@ -19,7 +19,7 @@ class LevelRoom extends Room {
 		this.alarm[0] = 10;
 
 		// Pause button
-		let pauseButton = this.addToObjList(new Button(
+		let pauseButton = this.addObject(new Button(
 			"⏸",
 			roomWidth - 50,
 			10,

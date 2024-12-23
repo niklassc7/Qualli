@@ -2,7 +2,7 @@ class Jelly extends Object {
 	constructor(x, y, team, ziel) {
 		super();
 
-		room.addToObjList(this); // Move to Superclass
+		room.addObject(this); // Move to Superclass
 
 		this.x = x;
 		this.y = y;
@@ -16,7 +16,7 @@ class Jelly extends Object {
 				super();
 				this.parent = parent;
 				this.targetSpeed = targetSpeed;
-				room.addToObjList(this);
+				room.addObject(this);
 			}
 
 			draw() {}
