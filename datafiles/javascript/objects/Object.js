@@ -22,13 +22,8 @@ class Object extends IObjlistentry {
 		// Set whether objects leaving the room should jump to the other side of
 		// the room:
 		// 0: off, 1: horizontal, vertical, both
+		// TODO camelCase, remove prefix
 		this.opt_swapScreen = 0;
-		// this.resize();
-	}
-
-	// Called when object is destroyed
-	destroy() {
-
 	}
 
 	resize() {

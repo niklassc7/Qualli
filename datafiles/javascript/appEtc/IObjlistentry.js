@@ -7,4 +7,5 @@ class IObjlistentry {
 	step() {}
 	draw() {}
 	resize() {}
+	destroy() {} // Called when object is destroyed
 }
