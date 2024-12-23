@@ -59,6 +59,14 @@ class LevelRoom extends Room {
 		Settings.unpause()
 	}
 
+	restart(prompt=false) {
+		if (prompt && !confirm("Do you really want to give up?")) {
+				return
+		}
+
+		room_goto(this.constructor)
+	}
+
 	alarmieren(nr) {
 		switch(nr) {
 			case 0:
