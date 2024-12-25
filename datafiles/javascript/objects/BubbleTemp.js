@@ -17,7 +17,7 @@ class BubbleTemp extends Bubble {
 
 		// Delete if ttl over
 		if (this.ttl <= 0) {
-			room.destroyObject(this);
+			this.destroy();
 		}
 	}
 

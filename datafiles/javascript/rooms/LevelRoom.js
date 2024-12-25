@@ -12,7 +12,7 @@ class LevelRoom extends Room {
 		}
 
 		this.bubbles = [];
-		this.KIlist = [];
+		this.ais = [];
 
 		this.background = undefined;
 		this.alarm = [];
@@ -50,12 +50,22 @@ class LevelRoom extends Room {
 		//do nothing
 	}
 
+	// TODO
 	addBubble() {
 		
 	}
 
-	removeBubble() {
-		// TODO
+	removeBubble(bubble) {
+		// TODO datastructure
+		for (var i = 0; i < room.bubbles.length; i++) {
+			if(room.bubbles[i] === bubble) {
+				room.bubbles.splice(i, 1);
+				return true;
+			}
+		}
+
+		console.error("Attempted to deleted bubble that is not in room.bubbles", bubble);
+		return false;
 	}
 
 	surrender() {

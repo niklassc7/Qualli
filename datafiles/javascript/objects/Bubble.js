@@ -73,11 +73,11 @@ class Bubble extends Object {
 		}
 	}
 
-	// destroy() {
-	// 	super.destroy();
+	destroy() {
+		super.destroy();
 
-	// 	room.removeBubble();
-	// }
+		room.removeBubble(this);
+	}
 
 	// Attack bubble other
 	// TODO obsolete?

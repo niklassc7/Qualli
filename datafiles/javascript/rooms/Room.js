@@ -48,11 +48,12 @@ class Room {
 		return obj;
 	}
 
+	// TODO remove → should be replaced by objects destroy method
 	destroyObject(obj) {
 		for (var i = 0; i < room.objects.length; i++) {
 			if(room.objects[i] === obj) {
 				room.objects.splice(i, 1);
-				obj.destroy();
+				// obj.destroy();
 				return true;
 			}
 		}
