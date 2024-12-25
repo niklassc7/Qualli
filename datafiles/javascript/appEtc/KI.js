@@ -98,8 +98,9 @@ class KI extends IObjlistentry {
 				return;
 			}
 
-			// KI löschen, wenn weder eigene Planeten, noch Raumschiffe da sind.
-			room.destroyObject(this);
+			// Delete AI if it owns neither bubbles nor jellies
+			this.destroy(); // TODO remove from room.ais
+
 			// Prüfen, ob noch eine KI da ist, sonst gewonnen.
 			if(this.pruefe_ob_gewonnen()){
 				showEndgame(true)

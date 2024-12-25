@@ -46,7 +46,7 @@ class Jelly extends Object {
 				if(Math.abs(zDir - this.parent.direction) <= turnSpeed && Math.abs(this.parent.speed - this.targetSpeed) <= acceleration) {
 					this.parent.setSpeed(this.targetSpeed);
 					this.parent.setDirection(zDir);
-					room.destroyObject(this);
+					this.destroy();
 				}
 			}
 		}
@@ -78,7 +78,7 @@ class Jelly extends Object {
 			this.ziel.x + (this.ziel.width/2),
 			this.ziel.y + (this.ziel.height/2)
 		)){
-			room.destroyObject(this);
+			this.destroy();
 			if (this.ziel.team !== this.team) {
 				this.ziel.einheiten--;
 				if (this.ziel.einheiten <= 0)
