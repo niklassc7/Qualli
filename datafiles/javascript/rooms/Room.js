@@ -48,11 +48,12 @@ class Room {
 		return obj;
 	}
 
-	destroyObject(obj) {
+	// Simply removes the object `obj` from room.objects and thus from the
+	// game loop.
+	removeObject(obj) {
 		for (var i = 0; i < room.objects.length; i++) {
 			if(room.objects[i] === obj) {
 				room.objects.splice(i, 1);
-				obj.destroy();
 				return true;
 			}
 		}

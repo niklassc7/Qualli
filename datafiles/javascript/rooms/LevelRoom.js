@@ -11,8 +11,8 @@ class LevelRoom extends Room {
 			throw new Error("Abstract classes can't be instantiated.");
 		}
 
-		this.planetlist = [];
-		this.KIlist = [];
+		this.bubbles = [];
+		this.ais = [];
 
 		this.background = undefined;
 		this.alarm = [];
@@ -48,6 +48,24 @@ class LevelRoom extends Room {
 
 	draw(){
 		//do nothing
+	}
+
+	// TODO
+	addBubble() {
+		
+	}
+
+	removeBubble(bubble) {
+		// TODO datastructure
+		for (var i = 0; i < room.bubbles.length; i++) {
+			if(room.bubbles[i] === bubble) {
+				room.bubbles.splice(i, 1);
+				return true;
+			}
+		}
+
+		console.error("Attempted to deleted bubble that is not in room.bubbles", bubble);
+		return false;
 	}
 
 	surrender() {
