@@ -8,6 +8,6 @@ class IObjlistentry {
 	draw() {}
 	resize() {}
 	destroy() {
-		room.destroyObject(this);
+		room.removeObject(this);
 	}
 }
