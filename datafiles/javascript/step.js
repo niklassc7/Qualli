@@ -3,7 +3,7 @@ function step(){
 		return;
 	}
 
-	// step of all `Object`
+	// step of all objects
 	for(var i = 0; i < room.objects.length; i++){
 		room.objects[i].step();
 	}
