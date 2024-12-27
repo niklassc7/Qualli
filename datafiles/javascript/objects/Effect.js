@@ -1,8 +1,6 @@
-// TODO extend from sprite-less object
-
 class Effect extends Object {
 	constructor(x, y, ttl) {
-		super(x, y, 0, 0, undefined);
+		super(x, y, 0, 0);
 		this.totalTtl = ttl;
 		this.ttl = ttl;
 		// this.x;

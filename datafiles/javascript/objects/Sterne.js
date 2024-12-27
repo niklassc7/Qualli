@@ -1,4 +1,5 @@
-class cls_Sterne extends Object {
+// TODO remove?
+class cls_Sterne extends SpriteObject {
 	constructor(x, y){
 		super();
 		this.x = x;

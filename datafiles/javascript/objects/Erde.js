@@ -1,6 +1,6 @@
 // TODO remove
 
-class cls_Erde extends Object {
+class cls_Erde extends SpriteObject {
 	constructor() {
 		super();
 		this.width = 512;

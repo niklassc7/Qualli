@@ -1,4 +1,4 @@
-class Jelly extends Object {
+class Jelly extends SpriteObject {
 	constructor(x, y, team, ziel) {
 		super();
 

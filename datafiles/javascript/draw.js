@@ -7,7 +7,7 @@ function draw() {
 	// 	ctx.drawImage(room.background, 0, 0, canvas.width, canvas.height);
 	// }
 
-	// draw of all `Object`
+	// draw of all objects
 	for(var i = 0; i < room.objects.length; i++){
 		if(room.objects[i] !== undefined){
 			room.objects[i].draw();
