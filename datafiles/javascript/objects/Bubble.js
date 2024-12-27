@@ -31,19 +31,20 @@ class Bubble extends Object {
 	}
 
 	draw() {
-		// TODO sinus curve
-		let animationN = 32
-		// let animationSpeed = 0.3
-		let fill = stepCount * this.animationSpeed % animationN
-		fill = Math.abs(fill - animationN / 2)
-		// Normalize
-		fill = fill / (animationN/2)
-		//  Scale 
-		fill = fill * 0.1
+		// TODO fix or remove animation
+		// // TODO sinus curve
+		// let animationN = 32
+		// // let animationSpeed = 0.3
+		// let fill = stepCount * this.animationSpeed % animationN
+		// fill = Math.abs(fill - animationN / 2)
+		// // Normalize
+		// fill = fill / (animationN/2)
+		// //  Scale 
+		// fill = fill * 0.1
 
-		ctx.fillStyle = `rgba(200, 200, 255, ${fill})`;
-		ctx.lineWidth = Math.round(8 * xScalar);
-		draw_circle(this.xD, this.yD, this.widthD / 2 * 0.7, false);
+		// ctx.fillStyle = `rgba(200, 200, 255, ${fill})`;
+		// ctx.lineWidth = Math.round(8 * xScalar);
+		// draw_circle(this.xD, this.yD, this.widthD / 2 * 0.7, false);
 
 
 		// Team colour
