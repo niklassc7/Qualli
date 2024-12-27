@@ -1,4 +1,4 @@
-class Bubble extends Object {
+class Bubble extends SpriteObject {
 	// TODO use default parameters
 	constructor(x, y, team, groesse, einheiten) {
 		super(x, y);

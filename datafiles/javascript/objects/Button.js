@@ -1,4 +1,5 @@
-class Button extends Object {
+// TODO extend from Object instead of SpriteObject
+class Button extends SpriteObject {
 	constructor(text, x, y, width, height, onClick, disabled) {
 		super(x, y, width, height, sprLock);
 		this.text = text;
