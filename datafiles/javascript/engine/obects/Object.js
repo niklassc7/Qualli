@@ -1,5 +1,5 @@
 class Object extends IObjlistentry {
-	constructor(x, y, width, height, sprite) {
+	constructor(x, y, width, height) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -13,7 +13,6 @@ class Object extends IObjlistentry {
 		this.vspeed = 0;
 		this.direction = 0;
 		this.speed = 0;
-		this.sprite = sprite;
 		this.width = (width === undefined) ? 0 : width;
 		this.height = (height === undefined) ? 0 : height;;
 		this.widthD = this.width * xScalar;
@@ -44,86 +43,72 @@ class Object extends IObjlistentry {
 	}
 
 	setDirectionSpeed(direction, speed) {
-		// console.log(direction);
 		this.direction = direction;
 		this.speed = speed;
-		// Calc speeds
+
+		// Calc horizontal and vertical speeds
 		let radDeg = degtorad(direction);
-		// console.log(radDeg);
 		this.vspeed = Math.sin(radDeg) * speed;
 		this.hspeed = Math.cos(radDeg) * speed;
-		// console.log(this.hspeed, this.vspeed);
 	}
 
 	setHspeed(hspeed) {
 		this.setSpeeds(hspeed, this.vspeed);
 	}
+
 	setVspeed(vspeed) {
 		this.setSpeeds(this.hspeed, vspeed);
 	}
+
 	setSpeeds(hspeed, vspeed) {
 		this.hspeed = hspeed;
 		this.vspeed = vspeed;
 
 		this.direction = radtodeg(Math.atan2(this.vspeed, this.hspeed));
 
-		// Calc speed
+		// Calc total speed from horizontal and vertical speed
 		this.speed = Math.sqrt(this.hspeed * this.hspeed + this.vspeed * this.vspeed);
 	}
 
 	step() {
 		this.x += this.hspeed;
 		this.y += this.vspeed;
-		if(this.opt_swapScreen != 0)
+		if(this.opt_swapScreen != 0) {
 			this.swapScreen();
-		// if(this.opt_turn_calculate_direction){
-		//	 //this.direction = point_direction(this.x, this.y, this.x + this.hspeed, this.y + this.vspeed);
-		//	 this.direction = radtodeg(Math.atan2(this.vspeed, this.hspeed));
-		// }
+		}
 	}
 
 	draw() {
 		this.resize(); // TODO optimise somehow?
-
-		// The object draws its sprite at its coordinates
-		if(this.sprite !== undefined) {
-			if(this.direction !== 0){
-				//Gedreht
-				ctx.save();
-				ctx.translate(this.xD, this.yD);
-				ctx.rotate(degtorad(this.direction));//Math.PI/180 is to Radians
-				ctx.drawImage(this.sprite, -this.oxD, -this.oyD, this.widthD, this.heightD);
-				ctx.restore();
-			}else{
-				ctx.drawImage(this.sprite, this.xD - this.oxD, this.yD - this.oyD, this.widthD, this.heightD);
-			}
-			//console.log(this.spr);
-		}else{
-			console.log("Error: draw-method of an `Object` called which has no sprite.");
-		}
-
 		// this.drawBorder(true)
 	}
 
-	isOutsideRoom_vert() {//obolsete (ORIGIN)
+	// TODO obolsete (ORIGIN)
+	isOutsideRoom_vert() {
 		if( (this.x > canvas_width) || (this.width + this.x < 0) ) {
 			return true;
 		}
 		return false;
 	}
-	isOutsideRoom_horz() {//obolsete (ORIGIN)
+
+	// TODO obolsete (ORIGIN)
+	isOutsideRoom_horz() {
 		if( (this.y > canvas_height) || (this.height + this.y < 0) ) {
 			return true;
 		}
 		return false;
 	}
-	isOutsideRoom() {//obolsete (ORIGIN)
+
+	// TODO obolsete (ORIGIN)
+	isOutsideRoom() {
 		if(this.isOutsideRoom_vert() || this.isOutsideRoom_horz()){
 		 return true;
 	 }
 		return false;
 	}
-	swapScreen() { //TODO
+
+	// TODO
+	swapScreen() {
 		if(this.opt_swapScreen >= 2){
 			if(this.y > canvas_height + (this.height/2)) this.y = -(this.height/2);
 			if((this.height/2) + this.y < 0) this.y = canvas_height + (this.height/2);
@@ -133,15 +118,8 @@ class Object extends IObjlistentry {
 		if((this.width/2) + this.x < 0) this.x = canvas_width + (this.width/2);
 	}
 
+	// Sets hspeed and vspeed to move towards (x,y) with speed v
 	moveTowardsPoint(x, y, v){
-		/* Setzt hspeed und vspeed passend.
-		 */
-		// var dx = x - this.x;
-		// var dy = y - this.y;
-		// var dis = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
-		// var skalierung = v / dis;
-		// this.setSpeeds(dx * skalierung, dy * skalierung);
-
 		let dir = pointDirection(this.x, this.y, x, y);
 
 		if(v === undefined)
@@ -149,10 +127,9 @@ class Object extends IObjlistentry {
 		else {
 			this.setDirectionSpeed(dir, v);
 		}
-
 	}
 
-	// For Debugging, draws border around sprite
+	// For Debugging, draws border around object
 	// Set `hover` to also show when the object is hovered
 	drawBorder(hover=false) {
 		if (hover) {
