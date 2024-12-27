@@ -15,7 +15,6 @@ class BubbleTemp extends Bubble {
 		super.step();
 		this.ttl--;
 
-		// Delete if ttl over
 		if (this.ttl <= 0) {
 			this.destroy();
 		}

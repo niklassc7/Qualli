@@ -203,6 +203,7 @@ function collision_point(x, y, cls) { // return obj oder undefined
 	return undefined;
 }
 
+// TODO camelCase
 function draw_line(x1, y1, x2, y2) {
 	ctx.beginPath();
 	ctx.moveTo(x1, y1);
@@ -210,6 +211,8 @@ function draw_line(x1, y1, x2, y2) {
 	ctx.stroke();
 }
 
+// TODO fillCircle and strokeCircle
+// TODO camelCase
 function draw_circle(x, y, r, outline) {
 	ctx.beginPath();
 	ctx.arc(x, y, r, 0, 2 * Math.PI, false);
@@ -217,9 +220,9 @@ function draw_circle(x, y, r, outline) {
 		ctx.stroke();
 	else
 		ctx.fill();
-
 }
 
+// TODO camelCase
 function draw_roundrect(ctx, x, y, width, height, radius, fill, stroke) {
 	if (typeof stroke == 'undefined') {
 		stroke = true;

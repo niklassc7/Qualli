@@ -15,6 +15,11 @@ class Color {
 	}
 
 	// CSS string
+	cRgb() {
+		return `rgba(${this.r}, ${this.g}, ${this.b})`;
+	}
+
+	// CSS string
 	cRgba() {
 		return `rgba(${this.r}, ${this.g}, ${this.b},${this.a})`;
 	}

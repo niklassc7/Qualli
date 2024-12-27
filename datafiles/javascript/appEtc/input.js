@@ -93,6 +93,7 @@ class cls_input {
 					input.selectedTouch = overBubble
 				} else {
 					input.selectedTouch.attack(overBubble)
+					// room.addObject(new RadarEffect(input.x, input.y, 30, Colors.team[1].cRgb()));
 					input.selectedTouch = undefined
 				}
 
@@ -138,6 +139,7 @@ class cls_input {
 					input.selected = overBubble
 				} else {
 					input.selected.attack(overBubble)
+					// room.addObject(new RadarEffect(input.xD, input.yD, 30, Colors.team[1].cRgb()));
 					input.selected = undefined
 				}
 
