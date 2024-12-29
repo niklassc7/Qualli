@@ -111,7 +111,8 @@ function resizeCanvas() {
 	// ctx.scale(scale, scale)
 
 	// TODO check
-	try { room;
+	try {
+		room;
 	} catch(e) {
 		if (e.name == "ReferenceError") {
 			return;
@@ -124,8 +125,7 @@ function resizeCanvas() {
 }
 
 // Receives room class, instantiates it and changes room to it
-// TODO camelCase
-function room_goto(newRoom){
+function gotoRoom(newRoom){
 	console.log("Going to room", newRoom.name)
 	// Set new room
 	room = new newRoom(room);
@@ -137,6 +137,7 @@ function room_goto(newRoom){
 		document.body.style.backgroundSize = "cover"
 	} else {
 		document.body.style.background= "url(datafiles/sprites/bg5FullHd.png)"
+		// document.body.style.background= "url(datafiles/sprites/bg5-wave-dark.png)"
 		document.body.style.backgroundSize = "cover"
 	}
 }

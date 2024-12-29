@@ -11,7 +11,7 @@ class Startpage extends Room {
 		var buttonHeight = 192;
 		var buttonMargin = 128;
 
-		this.addObject(new Button("Start", roomWidth / 2 - buttonMargin - (3/2) * buttonWidth, roomHeight / 2 - buttonHeight / 2, buttonWidth, buttonHeight, () => { room_goto(MenuOverview) }  )).borderColour = "yellow";
+		this.addObject(new Button("Start", roomWidth / 2 - buttonMargin - (3/2) * buttonWidth, roomHeight / 2 - buttonHeight / 2, buttonWidth, buttonHeight, () => { gotoRoom(MenuOverview) }  )).borderColour = "yellow";
 		this.addObject(new Button("Vollbild", roomWidth / 2 - buttonWidth / 2, roomHeight / 2 - buttonHeight / 2, buttonWidth, buttonHeight, toggleFullscreen ));
 		this.addObject(new Button("Settings", roomWidth / 2 + buttonMargin + buttonWidth / 2, roomHeight / 2 - buttonHeight / 2, buttonWidth, buttonHeight, Settings.show));
 	}
@@ -20,7 +20,8 @@ class Startpage extends Room {
 		super.draw();
 		//Überschrift
 		ctx.strokeStyle = "#ffffff";
-		ctx.font = Math.round(175 * ((xScalar + yScalar) / 2)) + "px fnt_Comforta_Bold";
+		// ctx.font = Math.round(175 * ((xScalar + yScalar) / 2)) + "px fnt_Comforta_Bold";
+		ctx.font = Math.round(175 * ((xScalar + yScalar) / 2)) + "px fnt_Comforta_Light";
 		// TODO
 		// ctx.font = 175 + "px fnt_Comforta_Bold";
 		ctx.textAlign = "center";
@@ -53,6 +54,9 @@ class Startpage extends Room {
 		// Gradient
 		// const grad = ctx.createLinearGradient(300, 0, roomWidth-300, roomHeight + blur*100);
 		const grad = ctx.createLinearGradient(300*xScalar, 0, (roomWidth-300) * xScalar, (500 + blur*100)*yScalar);
+		// grad.addColorStop(0, "#b8f0ec");
+		// grad.addColorStop(1, "#139964");
+
 		grad.addColorStop(0, "#b8f0ec");
 		grad.addColorStop(1, "#139964");
 

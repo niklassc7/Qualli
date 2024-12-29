@@ -73,7 +73,7 @@ class LevelRoom extends Room {
 			return
 		}
 
-		room_goto(this.prevRoom)
+		gotoRoom(this.prevRoom)
 		Settings.unpause()
 	}
 
@@ -82,7 +82,7 @@ class LevelRoom extends Room {
 				return
 		}
 
-		room_goto(this.constructor)
+		gotoRoom(this.constructor)
 	}
 
 	alarmieren(nr) {

@@ -5,7 +5,7 @@ class MenuOverview extends Room{
 		super();
 		this.background = spr_bgMenu;
 
-		this.addObject(new Button("←", 42, roomHeight - 128, 90, 90, function(){ room_goto(Startpage); } )).setFontSize(24) ;
+		this.addObject(new Button("←", 42, roomHeight - 128, 90, 90, () => { gotoRoom(Startpage); } )).setFontSize(24) ;
 
 
 		let buttonWidth = 256;
@@ -40,7 +40,7 @@ class MenuOverview extends Room{
 					marginTop + i * (buttonHeight + buttonMargin),
 					buttonWidth,
 					buttonHeight,
-					function() { room_goto(options[i*itemsInRow + j][0]) },
+					() => { gotoRoom(options[i*itemsInRow + j][0]) },
 					false
 				)).setFontSize(36);
 			}

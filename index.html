@@ -83,6 +83,8 @@
 		<script src="datafiles/javascript/rooms/room26.js"></script>
 		<script src="datafiles/javascript/rooms/room27.js"></script>
 		<script src="datafiles/javascript/rooms/room28.js"></script>
+		<script src="datafiles/javascript/rooms/room29.js"></script>
+		<script src="datafiles/javascript/rooms/room30.js"></script>
 
 		<script src="datafiles/javascript/main.js"></script>
 		<script src="datafiles/javascript/step.js"></script>
@@ -129,7 +131,7 @@
 				<br>
 				<div>
 					<input id="egRestart" type="button" value="Restart" onClick="room.restart(); hideEndgame();" />
-					<input id="egExit" type="button" value="Exit" onClick="room_goto(room.prevRoom); hideEndgame()" />
+					<input id="egExit" type="button" value="Exit" onClick="gotoRoom(room.prevRoom); hideEndgame()" />
 				</div>
 			</div>
 		</div>

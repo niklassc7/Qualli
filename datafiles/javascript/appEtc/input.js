@@ -149,14 +149,15 @@ class cls_input {
 		}
 	}
 
-	// 
+	// Draw circle indicator arround selectedBubble and arrow
 	selectedDrawing(selectedBubble) {
 		if(selectedBubble !== undefined) {
 			// Cancel if selected bubble has been captured in the meantime
 			if(selectedBubble.team !== 1) {
 				selectedBubble = undefined; return;
 			}
-			// Pfeil malen
+
+			// Draw arrow from selected to cursor
 			ctx.strokeStyle = "white";
 			ctx.lineWidth = 2;
 			draw_line(selectedBubble.xD, selectedBubble.yD, this.xD, this.yD);
@@ -182,6 +183,5 @@ class cls_input {
 		// // TODO remove
 		// ctx.fillStyle = "white"
 		// draw_circle(this.xD, this.yD, 16, false)
-
 	}
 }
