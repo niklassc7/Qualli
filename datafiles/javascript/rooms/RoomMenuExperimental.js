@@ -5,7 +5,7 @@ class RoomMenuExperimental extends Room{
 
 		this.n_step = 0;
 
-		this.addObject(new Button("←", 42, roomHeight - 128, 90, 90, function(){ room_goto(MenuOverview); } )).setFontSize(24) ;
+		this.addObject(new Button("←", 42, roomHeight - 128, 90, 90, () => { gotoRoom(MenuOverview); } )).setFontSize(24) ;
 
 		let buttonWidth = 128;
 		let buttonHeight = 128;
@@ -20,6 +20,8 @@ class RoomMenuExperimental extends Room{
 			room26,
 			room27,
 			room28,
+			room29,
+			room30,
 		]
 
 		//  let itemsInRow = 12;
