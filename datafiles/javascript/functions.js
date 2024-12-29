@@ -133,12 +133,12 @@ function gotoRoom(newRoom){
 	
 	// TODO remove this workaround once rooms set their background correctly
 	if (newRoom.prototype instanceof LevelRoom) {
-		document.body.style.background= "url(datafiles/sprites/bg8FullHd.png)"
-		document.body.style.backgroundSize = "cover"
+		document.body.style.background = "url(datafiles/sprites/bg8FullHd.png)";
+		document.body.style.backgroundSize = "cover";
 	} else {
-		document.body.style.background= "url(datafiles/sprites/bg5FullHd.png)"
-		// document.body.style.background= "url(datafiles/sprites/bg5-wave-dark.png)"
-		document.body.style.backgroundSize = "cover"
+		document.body.style.background = "url(datafiles/sprites/bg5FullHd.png)";
+		// document.body.style.background= "url(datafiles/sprites/bg5-wave-dark.png)";
+		document.body.style.backgroundSize = "cover";
 	}
 }
 
