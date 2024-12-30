@@ -48,8 +48,8 @@ class Startpage extends Room {
 
 
 		// Shadow
-		ctx.strokeStyle = `rgba(100, 100, 100, ${fill})`;
-		ctx.strokeText("Qualli", (roomWidth/2 + 4) * xScalar, (148 + 4) * yScalar);
+		ctx.fillStyle = `rgba(100, 100, 100, ${fill})`;
+		ctx.fillText("Qualli", (roomWidth/2 + 4) * xScalar, (148 + 4) * yScalar);
 
 		// Gradient
 		// const grad = ctx.createLinearGradient(300, 0, roomWidth-300, roomHeight + blur*100);
@@ -63,8 +63,8 @@ class Startpage extends Room {
 		// Main text
 		// ctx.strokeStyle = `rgba(210, 230, 255, ${fill})`;
 		// ctx.strokeStyle = "white";
-		ctx.strokeStyle = grad;
-		ctx.strokeText("Qualli", roomWidth/2 * xScalar, 148 * yScalar);
+		ctx.fillStyle = grad;
+		ctx.fillText("Qualli", roomWidth/2 * xScalar, 148 * yScalar);
 		// ctx.fillText("Qualli", roomWidth/2 * xScalar, 148 * yScalar);
 
 		this.n_step++;
