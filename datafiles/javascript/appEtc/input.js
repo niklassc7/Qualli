@@ -37,34 +37,46 @@ class cls_input {
 		this.selectedTouch = undefined;
 	}
 
-	updateCooordinates(event) {
-		let rect = canvas.getBoundingClientRect()
+	// Checks if selected bubbles are still owned, otherwise clears
+	ensureOwner() {
+		if (this.selected !== undefined && this.selected.team !== 1) {
+			this.selected = undefined;
+		}
 
-		input.setX(xScreenToInternal(event.clientX - rect.left))
-		input.setY(yScreenToInternal(event.clientY - rect.top))
+		if (this.selectedTouch !== undefined && this.selectedTouch.team !== 1) {
+			this.selected = undefined;
+		}
+	}
+
+	updateCooordinates(event) {
+		let rect = canvas.getBoundingClientRect();
+
+		input.setX(xScreenToInternal(event.clientX - rect.left));
+		input.setY(yScreenToInternal(event.clientY - rect.top));
 	}
 
 	setX(x) {
-		this.x = x
+		this.x = x;
 		this.xD = x * xScalar; // x it should be drawn at
 	}
 
 	setY(y) {
-		this.y = y
+		this.y = y;
 		this.yD = y * yScalar; // y it should be drawn at
 	}
 
 	// ⚠ `this` does not refer to this class in this event handler, use global `input`
 	touchstart(event) {
 		event.preventDefault(); // Prevent mouse events to fire as well
+		input.ensureOwner();
 		input.updateCooordinates(event.touches[0]);
 
 		// Planet selection
 		if (typeof input.selectedTouch === "undefined") {
-			let overBubble = collision_point(input.x, input.y, Bubble)
+			let overBubble = collision_point(input.x, input.y, Bubble);
 			if (typeof overBubble !== "undefined") {
 				// Start drag method
-				input.selectedTouch = overBubble
+				input.selectedTouch = overBubble;
 			}
 		}
 	}
@@ -72,12 +84,14 @@ class cls_input {
 	// ⚠ `this` does not refer to this class in this event handler, use global `input`
 	touchmove(event) {
 		event.preventDefault(); // Prevent mouse events to fire as well
-		input.updateCooordinates(event.touches[0])
+		// input.ensureOwner(); // TODO check if necessary on move → is executed a lot
+		input.updateCooordinates(event.touches[0]);
 	}
 
 	// ⚠ `this` does not refer to this class in this event handler, use global `input`
 	touchend(event) {
 		event.preventDefault(); // Prevent mouse events to fire as well
+		input.ensureOwner();
 		// TODO observer pattern
 		// Button clicking
 		let overButton = collision_point(input.x, input.y, Button)
@@ -90,29 +104,30 @@ class cls_input {
 		if (typeof overBubble !== "undefined") {
 			if (typeof input.selectedTouch !== "undefined") {
 				if (overBubble === input.selectedTouch) {
-					input.selectedTouch = overBubble
+					input.selectedTouch = overBubble;
 				} else {
-					input.selectedTouch.attack(overBubble)
+					input.selectedTouch.attack(overBubble);
 					// room.addObject(new RadarEffect(input.x, input.y, 30, Colors.team[1].cRgb()));
-					input.selectedTouch = undefined
+					input.selectedTouch = undefined;
 				}
 
 			}
 		} else {
-			input.selectedTouch = undefined
+			input.selectedTouch = undefined;
 		}
 	}
 
 	// ⚠ `this` does not refer to this class in this event handler, use global `input`
 	mousedown(event) {
-		input.updateCooordinates(event)
+		input.updateCooordinates(event);
+		input.ensureOwner();
 
 		// Planet selection
 		if (typeof input.selected === "undefined") {
-			let overBubble = collision_point(input.x, input.y, Bubble)
+			let overBubble = collision_point(input.x, input.y, Bubble);
 			if (typeof overBubble !== "undefined") {
 				// Start drag method
-				input.selected = overBubble
+				input.selected = overBubble;
 			}
 		}
 	}
@@ -120,11 +135,13 @@ class cls_input {
 	// ⚠ `this` does not refer to this class in this event handler, use global `input`
 	mousemove(event) {
 		input.updateCooordinates(event)
+		// input.ensureOwner(); // TODO check if necessary on move → is executed a lot
 	}
 
 	// ⚠ `this` does not refer to this class in this event handler, use global `input`
 	mouseup(event) {
 		input.updateCooordinates(event)
+		input.ensureOwner();
 
 		// Button clicking
 		let overButton = collision_point(input.x, input.y, Button)
@@ -136,16 +153,16 @@ class cls_input {
 		if (typeof overBubble !== "undefined") {
 			if (typeof input.selected !== "undefined") {
 				if (overBubble === input.selected) {
-					input.selected = overBubble
+					input.selected = overBubble;
 				} else {
-					input.selected.attack(overBubble)
+					input.selected.attack(overBubble);
 					// room.addObject(new RadarEffect(input.xD, input.yD, 30, Colors.team[1].cRgb()));
-					input.selected = undefined
+					input.selected = undefined;
 				}
 
 			}
 		} else {
-			input.selected = undefined
+			input.selected = undefined;
 		}
 	}
 
@@ -177,8 +194,8 @@ class cls_input {
 	}
 
 	draw() {
-		this.selectedDrawing(this.selected)
-		this.selectedDrawing(this.selectedTouch)
+		this.selectedDrawing(this.selected);
+		this.selectedDrawing(this.selectedTouch);
 
 		// // TODO remove
 		// ctx.fillStyle = "white"
