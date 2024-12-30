@@ -16,15 +16,15 @@ class room23 extends LevelRoom {
 
 		let jellyAmount = 750
 
-		for(let i = 0; i < 3; i++)
+		for(let i = 0; i < 3; i++) {
 			for(let j = 0; j < itemsInRow; j++) {
 				let newTeam = 1
 				// TODO const
-				let newP = this.addObject(new Bubble(startMargin + j * planetDistance, 200 + i * planetDistance, newTeam));
-				newP.groesse = (i == 1) ? 2 : 1;
-				newP.einheiten = jellyAmount;
-				this.bubbles[i * itemsInRow + j] = newP;
+				let newSize = (i == 1) ? 2 : 1;
+				let newB = this.addObject(new Bubble(startMargin + j * planetDistance, 200 + i * planetDistance, newTeam, newSize, jellyAmount));
+				this.bubbles[i * itemsInRow + j] = newB;
 			}
+		}
 
 		let pushOut = 70
 		jellyAmount = Math.ceil((jellyAmount * 14 / 4) * 1.05)

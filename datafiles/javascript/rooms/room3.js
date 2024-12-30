@@ -15,11 +15,11 @@ class room3 extends LevelRoom {
 		let rowWidth = (itemsInRow-1) * planetDistance;
 		let startMargin = (roomWidth - rowWidth) / 2;
 
-		for(let i = 0; i < 3; i++)
+		for(let i = 0; i < 3; i++) {
 			for(let j = 0; j < itemsInRow; j++) {
-				let newP = this.addObject(new Bubble(startMargin + j * planetDistance, 160 + i * planetDistance, (i*3+j) % 5 ));
-				newP.groesse = 1;
-				this.bubbles[i * itemsInRow + j] = newP;
+				let newB = this.addObject(new Bubble(startMargin + j * planetDistance, 160 + i * planetDistance, (i*3+j) % 5, 1));
+				this.bubbles[i * itemsInRow + j] = newB;
 			}
+		}
 	}
 }

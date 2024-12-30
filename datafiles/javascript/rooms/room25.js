@@ -3,10 +3,7 @@ class room25 extends LevelRoom {
 		super();
 
 		this.background = spr_bg_0;
-
 		this.addObject(new KI2(2));
-
-		// 40
 
 		let planetDistance = 200; // centre to cenre
 		let itemsInRow = 6;
@@ -16,23 +13,20 @@ class room25 extends LevelRoom {
 		let startMargin = (roomWidth - rowWidth) / 2;
 
 		let amount = 10
-		for(let i = 0; i < 3; i++)
+		for(let i = 0; i < 3; i++) {
 			for(let j = 0; j < itemsInRow; j++) {
 				if (j > 2) {
 					continue;
 				}
 
 				let newTeam = 2
-				let newP = this.addObject(new Bubble(startMargin + j * planetDistance, 160 + i * planetDistance, newTeam));
-				// newP.groesse = (i == 1) ? 2 : 1;
-				newP.groesse = 1;
-				newP.einheiten = amount;
-				this.bubbles.push(newP)
+				let newB = this.addObject(new Bubble(startMargin + j * planetDistance, 160 + i * planetDistance, newTeam, 1, amount));
+				this.bubbles.push(newB)
 			}
+		}
 
-		let newP = this.addObject(new Bubble(startMargin + 4 * planetDistance, 160 + 1 * planetDistance, 1));
-		newP.einheiten = 9.5 * amount;
-		newP.groesse = 7;
-		this.bubbles.push(newP);
+		let newUnits = 9.5 * amount;
+		let newB = this.addObject(new Bubble(startMargin + 4 * planetDistance, 160 + 1 * planetDistance, 1, 7, newUnits));
+		this.bubbles.push(newB);
 	}
 }

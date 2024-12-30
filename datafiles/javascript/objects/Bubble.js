@@ -1,12 +1,12 @@
 class Bubble extends SpriteObject {
-	// TODO use default parameters
-	constructor(x, y, team, groesse, einheiten) {
+	// TODO rename einheiten
+	// TODO rename groesse
+	constructor(x, y, team=0, size=1, einheiten=25) {
 		super(x, y);
 
-		this.groesse = (groesse === undefined) ? Math.floor(Math.random() * 3) + 1 : groesse; // TODO width and height in constructor
-		// this.einheiten = (einheiten === undefined) ? Math.round(Math.random() * 50) : 25;
+		this.size = size; // TODO width and height in constructor
 		this.einheiten = (einheiten === undefined) ? 25 : einheiten; // TODO rename
-		this.team = (team === undefined) ? 0 : team;
+		this.team = team;
 
 		this.sprite = spr_Planet;
 
@@ -17,15 +17,15 @@ class Bubble extends SpriteObject {
 	step() {
 		super.step();
 		if (this.team !== 0)
-			this.einheiten += this.groesse / 60;
+			this.einheiten += this.size / 60;
 
 		if (!this.createQueue.isEmpty()) {
 			let parameter = this.createQueue.removeFirst();
 			new Jelly(parameter[0], parameter[1], parameter[2], parameter[3]);
 		}
 
-		this.width = 80 * (1 + (this.groesse / 3));
-		this.height = 80 * (1 + (this.groesse / 3));
+		this.width = 80 * (1 + (this.size / 3));
+		this.height = 80 * (1 + (this.size / 3));
 		this.ox = this.width / 2;
 		this.oy = this.height / 2;
 	}

@@ -31,7 +31,7 @@ class KI2 extends KI {
 				let bestTarget;
 				let bestTargetValue = Number.MAX_VALUE;
 				for(let i = 0; i < attackList.length; i++) {
-					let currBubbleVal = attackList[i].einheiten / attackList[i].groesse;
+					let currBubbleVal = attackList[i].einheiten / attackList[i].size;
 					if(currBubbleVal < bestTargetValue) {
 						bestTarget = attackList[i];
 						bestTargetValue = currBubbleVal;
