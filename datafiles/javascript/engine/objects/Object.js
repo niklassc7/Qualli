@@ -1,4 +1,5 @@
 class Object extends IObjlistentry {
+	// TODO default values
 	constructor(x, y, width, height) {
 		super();
 		this.x = x;
