@@ -15,11 +15,19 @@ class KI extends IObjlistentry {
 		}
 	}
 
+	// TODO Room should draw symbols
 	draw() {
 		ctx.fillStyle = Colors.team[this.team].cRgba();
-		ctx.strokeStyle = "#aa0000";
-		ctx.lineWidth = 2;
-		draw_circle((32 + (this.team - 2) * 48) * xScalar, 32 * yScalar, 16 * ((xScalar + yScalar) / 2), false);
+		ctx.strokeStyle = "rgba(50, 50, 50, 0.6)";
+		ctx.lineWidth = 2 * xScalar;
+		let symbolx = (32 + (this.team - 2) * 48) * xScalar
+		let symboly = 32 * yScalar;
+		let r = 16 * ((xScalar + yScalar) / 2);
+		draw_circle(symbolx, symboly, r, false);
+		draw_circle(symbolx, symboly, r, true);
+
+		ctx.fillStyle = "rgba(50, 50, 50, 0.9)";
+		ctx.fillText(this.constructor.name, symbolx, symboly);
 	}
 
 	pruefe_ob_eigene_Raumschiffe_im_Spiel() {
