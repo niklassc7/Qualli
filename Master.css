@@ -42,6 +42,7 @@ body {
 
 	color: rgba(210, 230, 255, 0.8);
 	font-size: 1.2em;
+	user-select: none;
 }
 
 .overlayContent {
