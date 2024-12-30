@@ -15,14 +15,10 @@ class room27 extends LevelRoom {
 		let marginVert = 30;
 		let marginHorz = 30;
 
-		let newP=this.addObject(new Bubble(marginVert + 0 * planetDistance, 160 + 0 * planetDistance, 1));
-		newP.groesse = 1;
-		newP.einheiten = 5000;
-		this.bubbles.push(newP)
+		let newB = this.addObject(new Bubble(marginVert + 0 * planetDistance, 160 + 0 * planetDistance, 1, 1, 5000));
+		this.bubbles.push(newB);
 
-		newP=this.addObject(new Bubble(marginVert + 4 * planetDistance, 160 + 1 * planetDistance, 2));
-		newP.groesse = 10;
-		newP.einheiten = 5000;
-		this.bubbles.push(newP)
+		newB = this.addObject(new Bubble(marginVert + 4 * planetDistance, 160 + 1 * planetDistance, 2, 10, 5000));
+		this.bubbles.push(newB);
 	}
 }

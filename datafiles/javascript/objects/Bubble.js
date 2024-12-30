@@ -1,12 +1,10 @@
 class Bubble extends SpriteObject {
-	// TODO use default parameters
-	constructor(x, y, team, groesse, einheiten) {
+	constructor(x, y, team=0, size=1, units=25) {
 		super(x, y);
 
-		this.groesse = (groesse === undefined) ? Math.floor(Math.random() * 3) + 1 : groesse; // TODO width and height in constructor
-		// this.einheiten = (einheiten === undefined) ? Math.round(Math.random() * 50) : 25;
-		this.einheiten = (einheiten === undefined) ? 25 : einheiten;
-		this.team = (team === undefined) ? 0 : team;
+		this.size = size; // TODO width and height in constructor
+		this.units = units;
+		this.team = team;
 
 		this.sprite = spr_Planet;
 
@@ -17,15 +15,15 @@ class Bubble extends SpriteObject {
 	step() {
 		super.step();
 		if (this.team !== 0)
-			this.einheiten += this.groesse / 60;
+			this.units += this.size / 60;
 
 		if (!this.createQueue.isEmpty()) {
 			let parameter = this.createQueue.removeFirst();
 			new Jelly(parameter[0], parameter[1], parameter[2], parameter[3]);
 		}
 
-		this.width = 80 * (1 + (this.groesse / 3));
-		this.height = 80 * (1 + (this.groesse / 3));
+		this.width = 80 * (1 + (this.size / 3));
+		this.height = 80 * (1 + (this.size / 3));
 		this.ox = this.width / 2;
 		this.oy = this.height / 2;
 	}
@@ -62,7 +60,7 @@ class Bubble extends SpriteObject {
 		ctx.font = Math.round(36 * xScalar) + "px fnt_Comforta_Bold";
 		ctx.textBaseline = "middle";
 		ctx.textAlign = "center";
-		ctx.fillText(Math.floor(this.einheiten), this.xD, this.yD);
+		ctx.fillText(Math.floor(this.units), this.xD, this.yD);
 
 		// Queue
 		if (!this.createQueue.isEmpty()) {
@@ -83,7 +81,7 @@ class Bubble extends SpriteObject {
 	// Attack bubble other
 	// TODO obsolete?
 	attack(other) {
-		let amount = Math.floor(this.einheiten / 2)
+		let amount = Math.floor(this.units / 2)
 
 		this.attackN(other, amount)
 	}
@@ -92,17 +90,43 @@ class Bubble extends SpriteObject {
 	attackN(other, amount) {
 		// throw new Error("Cannot attack with more units than bubble has.")
 
-		if (amount > this.einheiten) {
+		if (amount > this.units) {
 			console.warn("Tried attacking with more units than bubble has.")
-			amount = this.einheiten
+			amount = this.units
 		}
-		// amount = Math.min(this.einheiten, amount)
+		// amount = Math.min(this.units, amount)
 
-		this.einheiten -= amount
+		this.units -= amount
 
 		for (let i = 0; i < amount; i++) {
 			// let newJelly = new Jelly(this.x, this.y, this.team, other)
 			this.createQueue.addLast([this.x, this.y, this.team, other])
+		}
+	}
+
+	// Gets called to attack this bubble with n units by team `team`
+	#getAttacked(n, team) {
+		// Don't capture
+		if (n < this.units) {
+			this.units -= n;
+			return;
+		}
+
+		// Capture
+		this.units = n - this.units;
+		this.team = team;
+	}
+
+	// TODO make more efficient → test if it was faster before this commit
+	// Gets called when `n` jellies of team `team`.
+	// If bubble is owned by `team`, the units will be added, otherwise
+	// substracted. If n >= this.units, then bubble is captured and the
+	// amount of `n` that is left is added to the bubble.
+	receiveJellies(n, team) {
+		if (this.team === team) {
+			this.units += n;
+		} else {
+			this.#getAttacked(n, team);
 		}
 	}
 }

@@ -12,29 +12,19 @@ class room6 extends LevelRoom {
 		let hMargin = 200;
 		let vMargin = 150;
 
-		let newP = this.addObject(new Bubble(hMargin, vMargin, 2));
-		newP.groesse = 3;
-		newP.einheiten = 30;
-		this.bubbles[0] = newP;
+		let newB = this.addObject(new Bubble(hMargin, vMargin, 2, 3, 30));
+		this.bubbles[0] = newB;
 
-		newP = this.addObject(new Bubble(hMargin, roomHeight - vMargin, 1));
-		newP.groesse = 3;
-		newP.einheiten = 30;
-		this.bubbles[1] = newP;
+		newB = this.addObject(new Bubble(hMargin, roomHeight - vMargin, 1, 3, 30));
+		this.bubbles[1] = newB;
 
-		newP = this.addObject(new Bubble(roomWidth - hMargin, roomHeight - vMargin, 3));
-		newP.groesse = 3;
-		newP.einheiten = 30;
-		this.bubbles[2] = newP;
+		newB = this.addObject(new Bubble(roomWidth - hMargin, roomHeight - vMargin, 3, 3, 30));
+		this.bubbles[2] = newB;
 
-		newP = this.addObject(new Bubble(roomWidth - hMargin, vMargin, 4));
-		newP.groesse = 3;
-		newP.einheiten = 30;
-		this.bubbles[3] = newP;
+		newB = this.addObject(new Bubble(roomWidth - hMargin, vMargin, 4, 3, 30));
+		this.bubbles[3] = newB;
 
-		newP = this.addObject(new Bubble(roomWidth / 2, roomHeight / 2, 0));
-		newP.groesse = 1;
-		newP.einheiten = 20;
-		this.bubbles[4] = newP;
+		newB = this.addObject(new Bubble(roomWidth / 2, roomHeight / 2, 0, 1, 20));
+		this.bubbles[4] = newB;
 	}
 }

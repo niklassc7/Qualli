@@ -1,3 +1,7 @@
+// TODO move to engine
+// TODO iterator
+// TODO return node or val? → iterator needs nodes
+
 class LinkedListNode {
 	constructor(val) {
 		this.val = val;
@@ -13,21 +17,33 @@ class LinkedList {
 		this.size = 0;
 	}
 
+	// Adds node with value `val` at the end of the list
 	add(val) {
 		let newNode = new LinkedListNode(val);
 		newNode.prev = this.tail;
 
-		if(this.size == 0)
+		if (this.size == 0) {
 			this.head = newNode;
-		else
+		} else {
 			this.tail.next = newNode;
+		}
 
 		this.tail = newNode;
 		this.size++;
 	}
 
 	addFirst(val) {
-		// TODO
+		let newNode = new LinkedListNode(val);
+		newNode.next = this.head;
+
+		if (this.head != undefined) {
+			this.head.prev = newNode;
+		} else {
+			this.tail = newNode;
+		}
+
+		this.head = newNode;
+		this.size++;
 	}
 
 	addLast(val) {

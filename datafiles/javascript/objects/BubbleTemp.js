@@ -1,6 +1,6 @@
 class BubbleTemp extends Bubble {
-	constructor(x, y, team, groesse, einheiten, ttl) {
-		super(x, y, team, groesse, einheiten);
+	constructor(x, y, team, size, units, ttl) {
+		super(x, y, team, size, units);
 
 		// TODO dont randomize by default
 		if (ttl == undefined) {
