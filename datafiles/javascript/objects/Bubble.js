@@ -5,7 +5,7 @@ class Bubble extends SpriteObject {
 
 		this.groesse = (groesse === undefined) ? Math.floor(Math.random() * 3) + 1 : groesse; // TODO width and height in constructor
 		// this.einheiten = (einheiten === undefined) ? Math.round(Math.random() * 50) : 25;
-		this.einheiten = (einheiten === undefined) ? 25 : einheiten;
+		this.einheiten = (einheiten === undefined) ? 25 : einheiten; // TODO rename
 		this.team = (team === undefined) ? 0 : team;
 
 		this.sprite = spr_Planet;
@@ -103,6 +103,32 @@ class Bubble extends SpriteObject {
 		for (let i = 0; i < amount; i++) {
 			// let newJelly = new Jelly(this.x, this.y, this.team, other)
 			this.createQueue.addLast([this.x, this.y, this.team, other])
+		}
+	}
+
+	// Gets called to attack this bubble with n units by team `team`
+	#getAttacked(n, team) {
+		// Don't capture
+		if (n < this.einheiten) {
+			this.einheiten -= n;
+			return;
+		}
+
+		// Capture
+		this.einheiten = n - this.einheiten;
+		this.team = team;
+	}
+
+	// TODO make more efficient → test if it was faster before this commit
+	// Gets called when `n` jellies of team `team`.
+	// If bubble is owned by `team`, the units will be added, otherwise
+	// substracted. If n >= this.einheiten, then bubble is captured and the
+	// amount of `n` that is left is added to the bubble.
+	receiveJellies(n, team) {
+		if (this.team === team) {
+			this.einheiten += n;
+		} else {
+			this.#getAttacked(n, team);
 		}
 	}
 }

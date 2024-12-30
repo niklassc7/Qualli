@@ -1,13 +1,22 @@
 class Jelly extends SpriteObject {
-	constructor(x, y, team, ziel) {
-		super();
+	constructor(x, y, team, ziel, size=1) {
+		super(x, y, 32, 21, spr_Raumschiff[team]);
 
 		room.addObject(this); // Move to Superclass
 
-		this.x = x;
-		this.y = y;
+		this.team = team;
 		this.ziel = ziel; // TODO rename
+		this.size = size;
+		this.width *= size;
+		this.height *= size;
 
+		// Point that jelly is moving to initially when created, will adapt
+		// direction gradually
+		this.startX = x + (128 - Math.floor(Math.random() * 256));
+		this.startY = y + (128 - Math.floor(Math.random() * 256));
+		this.moveTowardsPoint(this.startX, this.startY, 2);
+
+		// TODO dont nest
 		// TODO rename? → express intent, what it does (accelerator or something)
 		// increases speed and corrects direction until it is done and then deletes itself
 		// this reduces operations after getting to the targetSpeed and right direction
@@ -51,17 +60,7 @@ class Jelly extends SpriteObject {
 			}
 		}
 
-		this.width = 32;
-		this.height = 21;
-		this.team = team;
-		this.sprite = spr_Raumschiff[this.team];
-
-
-		this.startX = x + (128 - Math.floor(Math.random() * 256));
-		this.startY = y + (128 - Math.floor(Math.random() * 256));
-		this.moveTowardsPoint(this.startX, this.startY, 2);
 		new StartHelper(this, 5);
-
 	}
 
 	step(){
@@ -79,13 +78,8 @@ class Jelly extends SpriteObject {
 			this.ziel.y + (this.ziel.height/2)
 		)){
 			this.destroy();
-			if (this.ziel.team !== this.team) {
-				this.ziel.einheiten--;
-				if (this.ziel.einheiten <= 0)
-					this.ziel.team = this.team;
-			} else {
-				this.ziel.einheiten++;
-			}
+
+			this.ziel.receiveJellies(this.size, this.team);
 		}
 	}
 }
