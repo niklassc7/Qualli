@@ -44,7 +44,7 @@ class cls_input {
 		}
 
 		if (this.selectedTouch !== undefined && this.selectedTouch.team !== 1) {
-			this.selected = undefined;
+			this.selectedTouch = undefined;
 		}
 	}
 
