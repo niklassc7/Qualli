@@ -5,11 +5,11 @@ class KI0 extends KI {
 
 	getEinnehmlist() {
 		var einnehmlist = [];
-		var strongestPlanet = this.getStrongestPlanet();
+		var strongestPlanet = this.getStrongestPlanet(); // TODO rename
 		if(strongestPlanet === undefined)
 			return [];
 		for(var i = 0; i < room.bubbles.length; i++) {
-			if(room.bubbles[i].team !== this.team && Math.floor(strongestPlanet.einheiten / 2) > room.bubbles[i].einheiten) {
+			if(room.bubbles[i].team !== this.team && Math.floor(strongestPlanet.units / 2) > room.bubbles[i].units) {
 				einnehmlist[einnehmlist.length] = room.bubbles[i];
 			}
 		}

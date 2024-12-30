@@ -31,7 +31,7 @@ class room23 extends LevelRoom {
 
 		for (const i of [0, 5, 12, 17]) {
 			this.bubbles[i].team = 2
-			this.bubbles[i].einheiten = jellyAmount
+			this.bubbles[i].units = jellyAmount
 		}
 		this.bubbles[0].x -= pushOut
 		this.bubbles[0].y -= pushOut

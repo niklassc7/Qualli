@@ -27,7 +27,7 @@ class room26 extends LevelRoom {
 			}
 		
 		this.bubbles[3].team = 1;
-		this.bubbles[3].einheiten = 300;
+		this.bubbles[3].units = 300;
 		
 		let newUnits = 9.5 * amount;
 		let newB = this.addObject(new Bubble(startMargin + 4 * planetDistance, 160 + 0 * planetDistance, 2, 7, newUnits));

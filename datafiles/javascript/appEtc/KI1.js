@@ -18,11 +18,11 @@ class KI1 extends KI {
 				let fromBubblesExceptStrongest = 0;
 				for (let i = 0; i < bubbles.length; i++)
 					if(bubbles[i] !== strongest)
-						fromBubblesExceptStrongest += bubbles[i].einheiten * 0.5;
+						fromBubblesExceptStrongest += bubbles[i].units * 0.5;
 
 				// console.log(available);
 				// Get list of enemy bubbles that are weaker than then available jellies
-				let attackList = this.getEnemyBubblesWeakerThan((fromBubblesExceptStrongest + strongest.einheiten) * 0.7);
+				let attackList = this.getEnemyBubblesWeakerThan((fromBubblesExceptStrongest + strongest.units) * 0.7);
 
 				if (attackList.length === 0) {
 					this.alarm[0] = 100 + Math.round(Math.random() * 100);
@@ -47,7 +47,7 @@ class KI1 extends KI {
 				// this.angriff(this.a, this.b);
 
 				// Search best bubble to attack and then attack
-				let attackListN = this.getEnemyBubblesWeakerThan(this.a.einheiten * 0.73);
+				let attackListN = this.getEnemyBubblesWeakerThan(this.a.units * 0.73);
 				if(attackListN.length === 0) {
 					this.alarm[0] = 50 + Math.round(Math.random() * 50);
 					return;
@@ -55,7 +55,7 @@ class KI1 extends KI {
 				let bestTarget;
 				let bestTargetValue = Number.MAX_VALUE;
 				for(let i = 0; i < attackListN.length; i++) {
-					let currBubbleVal = attackListN[i].einheiten / attackListN[i].size;
+					let currBubbleVal = attackListN[i].units / attackListN[i].size;
 					if(currBubbleVal < bestTargetValue) {
 						bestTarget = attackListN[i];
 						bestTargetValue = currBubbleVal;

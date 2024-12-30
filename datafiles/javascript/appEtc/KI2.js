@@ -17,7 +17,7 @@ class KI2 extends KI {
 					return;
 				let avail = 0;
 				for (let i = 0; i < bubbles.length; i++)
-					avail += bubbles[i].einheiten * 0.75;
+					avail += bubbles[i].units * 0.75;
 
 				// Get list of enemy bubbles that are weaker than then available jellies
 				let attackList = this.getEnemyBubblesWeakerThan(avail);
@@ -31,7 +31,7 @@ class KI2 extends KI {
 				let bestTarget;
 				let bestTargetValue = Number.MAX_VALUE;
 				for(let i = 0; i < attackList.length; i++) {
-					let currBubbleVal = attackList[i].einheiten / attackList[i].size;
+					let currBubbleVal = attackList[i].units / attackList[i].size;
 					if(currBubbleVal < bestTargetValue) {
 						bestTarget = attackList[i];
 						bestTargetValue = currBubbleVal;

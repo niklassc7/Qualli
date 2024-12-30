@@ -55,7 +55,7 @@ class KI extends IObjlistentry {
 		var strongest_index = 0;
 			// Suche stärksten Planeten aus eigener bubbles aus.
 			for(var i = 0; i < bubbles.length; i++) {
-				if(bubbles[i].einheiten > bubbles[strongest_index].einheiten) {
+				if(bubbles[i].units > bubbles[strongest_index].units) {
 					strongest_index = i;
 				}
 			}
@@ -65,7 +65,7 @@ class KI extends IObjlistentry {
 	getEnemyBubblesWeakerThan(n) {
 		var enemyList = [];
 		for(var i = 0; i < room.bubbles.length; i++) {
-			if(room.bubbles[i].team !== this.team && n > room.bubbles[i].einheiten) {
+			if(room.bubbles[i].team !== this.team && n > room.bubbles[i].units) {
 				enemyList[enemyList.length] = room.bubbles[i];
 			}
 		}
@@ -74,14 +74,14 @@ class KI extends IObjlistentry {
 
 	// TODO rename
 	angriff(planet_start, planet_ziel){
-		for(var i = 0; i < Math.floor(planet_start.einheiten / 2); i++) {
+		for(var i = 0; i < Math.floor(planet_start.units / 2); i++) {
 			let nx = planet_start.x;
 			let ny = planet_start.y;
 
 			planet_start.createQueue.addLast([nx, ny, this.team, planet_ziel]);
 
 		}
-		planet_start.einheiten -= Math.floor(planet_start.einheiten/2)
+		planet_start.units -= Math.floor(planet_start.units/2)
 	}
 
 	// TODO do this in room
