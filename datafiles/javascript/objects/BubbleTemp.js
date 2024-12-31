@@ -16,6 +16,8 @@ class BubbleTemp extends Bubble {
 		this.ttl--;
 
 		if (this.ttl <= 0) {
+			let futureBubble = new BubbleTemp(this.x, this.y, 0, this.size, 0, undefined);
+			room.addObject(new BubbleSeed(1000, futureBubble));
 			this.destroy();
 		}
 	}

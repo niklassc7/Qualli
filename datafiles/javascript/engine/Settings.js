@@ -40,7 +40,6 @@ class Settings {
 
 	static pause() {
 		Settings.paused = true;
-		console.log(Settings.paused)
 		document.getElementById("pausedOverlay").classList.remove("hidden");
 	}
 
