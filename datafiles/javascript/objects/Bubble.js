@@ -6,6 +6,11 @@ class Bubble extends SpriteObject {
 		this.units = units;
 		this.team = team;
 
+		this.width = 80 * (1 + (this.size / 3));
+		this.height = 80 * (1 + (this.size / 3));
+		this.ox = this.width / 2;
+		this.oy = this.height / 2;
+
 		this.sprite = spr_Planet;
 
 		this.createQueue = new LinkedList();
@@ -21,11 +26,6 @@ class Bubble extends SpriteObject {
 			let parameter = this.createQueue.removeFirst();
 			new Jelly(parameter[0], parameter[1], parameter[2], parameter[3]);
 		}
-
-		this.width = 80 * (1 + (this.size / 3));
-		this.height = 80 * (1 + (this.size / 3));
-		this.ox = this.width / 2;
-		this.oy = this.height / 2;
 	}
 
 	draw() {

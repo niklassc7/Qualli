@@ -1,4 +1,34 @@
+var msgs;
+var roomWidth;
+var roomHeight;
+var canvas_width;
+var canvas_height;
+var stepCount;
+var canvas;
+var ctx;
+var xScalar;
+var yScalar;
+var fullscreen;
+var spr_Linsenreflex;
+var spr_Linsenreflex;
+var spr_bg_0;
+var spr_bgMenu;
+var bgMenuDark;
+var spr_Erde;
+var spr_Sterne;
+var spr_Planet;
+var spr_Raumschiff;
+var sprMedalGold;
+var sprMedalSilver;
+var sprMedalBronze;
+var sprLock;
+var input;
+var storage;
+var room;
+
 function main(){
+	"use strict";
+
 	msgs = new LinkedList();
 	msgs.addFirst("Test");
 	msgs.addFirst("Test2");
@@ -42,12 +72,13 @@ function main(){
 
 	sprLock = document.getElementById("lock");
 
-	// TODO check
-	toggleFullscreen();
 
 	input = new cls_input();
 	storage = new Storage("localStorage");
 	room = new Startpage();
+
+	// TODO check
+	toggleFullscreen();
 
 	setInterval(step, 1000/60); // 60 FPS
 }
