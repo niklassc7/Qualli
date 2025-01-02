@@ -1,4 +1,4 @@
-class RoomMenuExperimental extends Room{
+class RoomMenuArchive extends Room{
 	constructor(){
 		super();
 		this.background = bgMenuDark;
@@ -12,16 +12,7 @@ class RoomMenuExperimental extends Room{
 		let buttonMargin = 16;
 
 		let rooms = [
-			room17,
-			room18,
-			room19,
-			room24,
-			room25,
-			room27,
-			room28,
-			room29,
-			room30,
-			room31,
+			room26,
 		];
 
 		let itemsInRow = 4;

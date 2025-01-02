@@ -8,8 +8,8 @@ class MenuOverview extends Room{
 		this.addObject(new Button("←", 42, roomHeight - 128, 90, 90, () => { gotoRoom(Startpage); } )).setFontSize(24) ;
 
 
-		let buttonWidth = 256;
-		let buttonHeight = 128;
+		let buttonWidth = 300;
+		let buttonHeight = 150;
 		let buttonMargin = 16;
 
 		let options = [
@@ -19,9 +19,10 @@ class MenuOverview extends Room{
 
 		if (Settings.experimental) {
 			options.push([RoomMenuExperimental, "Experimental"])
+			options.push([RoomMenuArchive, "Archive"])
 		}
 
-		let itemsInRow = Math.min(3, options.length);
+		let itemsInRow = Math.min(2, options.length);
 		let itemsinColumn = Math.ceil(options.length / itemsInRow)
 
 
@@ -54,6 +55,6 @@ class MenuOverview extends Room{
 		ctx.font = Math.round(125 * ((xScalar + yScalar) / 2)) + "px fnt_Comforta_Light";
 		ctx.strokeStyle = "white"
 		ctx.textAlign = "center";
-		ctx.strokeText("Overview", roomWidth/2 * xScalar, 140 * yScalar)
+		ctx.strokeText("Overview", roomWidth/2 * xScalar, 100 * yScalar)
 	}
 }
