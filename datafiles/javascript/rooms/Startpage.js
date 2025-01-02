@@ -57,8 +57,11 @@ class Startpage extends Room {
 		// grad.addColorStop(0, "#b8f0ec");
 		// grad.addColorStop(1, "#139964");
 
-		grad.addColorStop(0, "#b8f0ec");
-		grad.addColorStop(1, "#139964");
+		// grad.addColorStop(0, "#b8f0ec");
+		// grad.addColorStop(1, "#139964");
+
+		grad.addColorStop(0, "#7CE0F3");
+		grad.addColorStop(1, "#125B9D");
 
 		// Main text
 		// ctx.strokeStyle = `rgba(210, 230, 255, ${fill})`;
