@@ -176,15 +176,15 @@ class cls_input {
 
 			// Draw arrow from selected to cursor
 			ctx.strokeStyle = "white";
-			ctx.lineWidth = 2;
+			ctx.lineWidth = 2 * xScalar;
 			draw_line(selectedBubble.xD, selectedBubble.yD, this.xD, this.yD);
 
-			// Highlight selected Planet
-			ctx.lineWidth = 2;
+			// Highlight selected bubble
+			ctx.lineWidth = 2 * xScalar;
 			for(let i = 0; i < 5 + Math.abs(this.circleCounter - this.circleCounterMax/2); i+=3) {
 				draw_circle(selectedBubble.xD,
 							selectedBubble.yD,
-							selectedBubble.widthD / 2 + i,
+							selectedBubble.widthD / 2 + (i*xScalar),
 							true);
 			}
 
