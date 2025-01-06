@@ -134,10 +134,11 @@ function gotoRoom(newRoom){
 	input.reset();
 
 	// TODO do this better
-	if (!(room instanceof LevelRoom) && !(newRoom.prototype instanceof LevelRoom)) {
-		console.log(SimBubble.all)
-		room.objects.push.apply(room.objects, SimBubble.all);
-	}
+	// if (!(room instanceof LevelRoom) && !(newRoom.prototype instanceof LevelRoom)) {
+	// 	console.log(SimBubble.all)
+	// 	room.objects.push.apply(room.objects, SimBubble.all);
+	// }
+	room.objects.push.apply(room.objects, SimBubble.all);
 	
 	document.body.style.background = `url(${newRoom.background})`;
 	document.body.style.backgroundSize = "cover";
