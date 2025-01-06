@@ -26,16 +26,22 @@ class BubbleSeed extends Object {
 
 		// animation
 		// TODO scale to size of seed
+		// ctx.lineWidth = 5 * xScalar * ((1+this.futureBubble.size)/2);
+		// let scale = this.futureBubble.size;
 		ctx.lineWidth = 5 * xScalar;
+		let lineCount = 5;
+
+
+
 		ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
 		// ctx.fillStyle = "white";
 		let shiftedStepCount = stepCount + this.created; // Shift counter by creation time because otherwise all seed instances show exactly the same
-		for(var i = 0; i < 5; i++){
+		for(var i = 0; i < lineCount; i++){
 			ctx.beginPath();
 			ctx.arc(this.xD, this.yD, i * ((ctx.lineWidth-1)*2), (shiftedStepCount* (i*0.01+0.1)) + 1.25 * Math.PI, (shiftedStepCount*(i*0.01+0.1)) + 1.75 * Math.PI, false);
 			ctx.stroke();
 			ctx.beginPath();
-			ctx.arc(this.xD, this.yD, ctx.lineWidth+i * ((ctx.lineWidth-1)*2), -(shiftedStepCount* (i*0.01+0.1)) + 1.25 * Math.PI, -(shiftedStepCount*(i*0.01+0.1)) + 1.75 * Math.PI, false);
+			ctx.arc(this.xD, this.yD, ctx.lineWidth + i * ((ctx.lineWidth-1)*2), -(shiftedStepCount* (i*0.01+0.1)) + 1.25 * Math.PI, -(shiftedStepCount*(i*0.01+0.1)) + 1.75 * Math.PI, false);
 			ctx.stroke();
 		}
 
@@ -51,7 +57,7 @@ class BubbleSeed extends Object {
 		draw_circle(this.xD, this.yD, circleRadius, true);
 		
 
-		// Draw circle-indicator of time left
+		// Draw progress bar of time left
 		ctx.lineWidth = 3 * xScalar;
 		ctx.strokeStyle = 'white';
 		ctx.beginPath();
