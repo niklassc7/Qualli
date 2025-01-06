@@ -1,9 +1,11 @@
 class RoomMenuAdvanced extends Room{
 	constructor(){
 		super();
-		this.background = bgMenuDark;
+		// this.background = bgMenuDark; // TODO use static var
 
-		this.n_step = 0;
+		this.addObject(new SimBubbleEmitter([255, 120, 120]));
+
+		this.n_step = 0; // TODO replace with stepCount
 
 		this.addObject(new Button("←", 42, roomHeight - 128, 90, 90, () => { gotoRoom(MenuOverview); } )).setFontSize(24) ;
 

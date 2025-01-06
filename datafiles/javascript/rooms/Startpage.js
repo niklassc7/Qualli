@@ -1,11 +1,12 @@
 class Startpage extends Room {
 	constructor(){
 		super();
-		this.background = spr_bgMenu;
-		document.body.style.backgroundImage = spr_bgMenu
+		// this.background = spr_bgMenu; // TODO static var
+		// document.body.style.backgroundImage = spr_bgMenu 
 
+		this.addObject(new SimBubbleEmitter());
 
-		this.n_step = 0; // TODO is this needed
+		this.n_step = 0; // TODO is this needed → use stepCount
 
 		var buttonWidth = 256;
 		var buttonHeight = 192;

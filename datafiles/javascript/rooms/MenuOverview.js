@@ -3,7 +3,9 @@
 class MenuOverview extends Room{
 	constructor(){
 		super();
-		this.background = spr_bgMenu;
+		// this.background = spr_bgMenu; // TODO use static var
+
+		this.addObject(new SimBubbleEmitter());
 
 		this.addObject(new Button("←", 42, roomHeight - 128, 90, 90, () => { gotoRoom(Startpage); } )).setFontSize(24) ;
 

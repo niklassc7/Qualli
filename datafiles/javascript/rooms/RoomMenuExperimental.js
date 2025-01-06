@@ -1,9 +1,11 @@
 class RoomMenuExperimental extends Room{
 	constructor(){
 		super();
-		this.background = bgMenuDark;
+		// this.background = bgMenuDark; // TODO use static var
 
-		this.n_step = 0;
+		this.addObject(new SimBubbleEmitter([255, 120, 210]));
+
+		this.n_step = 0; // TODO replace with stepCount
 
 		this.addObject(new Button("←", 42, roomHeight - 128, 90, 90, () => { gotoRoom(MenuOverview); } )).setFontSize(24) ;
 
@@ -22,6 +24,7 @@ class RoomMenuExperimental extends Room{
 			room29,
 			room30,
 			room31,
+			room32,
 		];
 
 		let itemsInRow = 4;

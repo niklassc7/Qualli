@@ -1,7 +1,9 @@
 class RoomMenuMain extends Room{
 	constructor(){
 		super();
-		this.background = spr_bgMenu;
+		// this.background = spr_bgMenu; // TODO static
+
+		this.addObject(new SimBubbleEmitter([120, 255, 120]));
 
 		this.n_step = 0;
 
