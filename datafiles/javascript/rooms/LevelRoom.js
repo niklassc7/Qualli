@@ -2,6 +2,8 @@
 // All levels should extend from this
 
 class LevelRoom extends Room {
+	static background = "datafiles/sprites/bg8FullHd.png";
+
 	constructor(prevRoom){
 		super(prevRoom);
 
