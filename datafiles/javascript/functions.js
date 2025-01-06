@@ -127,19 +127,20 @@ function resizeCanvas() {
 // Receives room class, instantiates it and changes room to it
 function gotoRoom(newRoom){
 	console.log("Going to room", newRoom.name)
+
+
 	// Set new room
 	room = new newRoom(room);
 	input.reset();
-	
-	// TODO remove this workaround once rooms set their background correctly
-	if (newRoom.prototype instanceof LevelRoom) {
-		document.body.style.background = "url(datafiles/sprites/bg8FullHd.png)";
-		document.body.style.backgroundSize = "cover";
-	} else {
-		document.body.style.background = "url(datafiles/sprites/bg5FullHd.png)";
-		// document.body.style.background= "url(datafiles/sprites/bg5-wave-dark.png)";
-		document.body.style.backgroundSize = "cover";
+
+	// TODO do this better
+	if (!(room instanceof LevelRoom) && !(newRoom.prototype instanceof LevelRoom)) {
+		console.log(SimBubble.all)
+		room.objects.push.apply(room.objects, SimBubble.all);
 	}
+	
+	document.body.style.background = `url(${newRoom.background})`;
+	document.body.style.backgroundSize = "cover";
 }
 
 function radtodeg(rad) {
@@ -165,6 +166,33 @@ function rectangle_in_rectangle(a_x1, a_y1, a_x2, a_y2, b_x1, b_y1, b_x2, b_y2) 
 		if(b_y2 >= a_y1) return true;
 	}
 	return false;
+}
+
+// TODO implement
+// Checks if point (x,y) is in circle at (cx,cy) with radius r
+function pointInCircle(x, y, cx, cy, r) {
+	// console.log(x, y, cx, cy, r);
+
+	let dx = Math.abs(x - cx);
+	let dy = Math.abs(y - cy);
+	// let dist = Math.sqrt(dx^2 + dy^2);
+
+	// console.log(dist, r);
+	// console.log();
+
+	// return dist < r;
+
+	return dx <= r && dy <= r;
+}
+
+// TODO implement
+function circleInCircle(x1, y1, r1, x2, y2, r2) {
+	let dx = Math.abs(x1 - x2);
+	let dy = Math.abs(y1 - y2);
+	
+	// Total radius
+	rt = r1 + r2;
+	return dx <= rt && dy <= rt;
 }
 
 function pointDirection(x1, y1, x2, y2){ // Nicht getestet! FEHLERHAFT TODO
@@ -214,6 +242,7 @@ function draw_line(x1, y1, x2, y2) {
 
 // TODO fillCircle and strokeCircle
 // TODO camelCase
+// Put in static method of a graphics class
 function draw_circle(x, y, r, outline) {
 	ctx.beginPath();
 	ctx.arc(x, y, r, 0, 2 * Math.PI, false);

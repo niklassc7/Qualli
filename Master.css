@@ -1,7 +1,7 @@
 body {
 	/* background: #333333; */
-	/* background: url(datafiles/sprites/bg5FullHd.png) 100% 100%; */
-	background: url(datafiles/sprites/bg5FullHd.png);
+	/* background: url(datafiles/sprites/bg5FullHd.png); */
+	background: url(datafiles/backgrounds/background2-g1.png);
 	background-size: cover;
 	margin: 0px;
 	padding: 0px;

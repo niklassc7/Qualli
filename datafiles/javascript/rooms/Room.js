@@ -1,6 +1,8 @@
 // Abstract Class
 
 class Room {
+	static background = "assets-wip/background2-g1.png";
+
 	constructor(prevRoom) {
 		// TODO check
 		this.roomEntered = Date.now()
@@ -14,9 +16,6 @@ class Room {
 		} else {
 			this.prevRoom = Startpage
 		}
-
-		// TODO make static
-		this.background = undefined;
 
 		this.objects = [];
 	}
