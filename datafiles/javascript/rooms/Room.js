@@ -1,7 +1,7 @@
 // Abstract Class
 
 class Room {
-	static background = "assets-wip/background2-g1.png";
+	static background = "datafiles/backgrounds/background2-g1.png";
 
 	constructor(prevRoom) {
 		// TODO check
