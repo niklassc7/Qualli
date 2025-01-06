@@ -29,6 +29,7 @@ var room;
 function main(){
 	"use strict";
 
+	// TODO implement or remove
 	msgs = new LinkedList();
 	msgs.addFirst("Test");
 	msgs.addFirst("Test2");
@@ -59,7 +60,7 @@ function main(){
 	// spr_Linsenreflex_schwach = document.getElementById("img_Linsenreflex_schwach");
 	spr_Erde = document.getElementById("img_Erde");
 	spr_Sterne = document.getElementById("img_Sterne");
-	spr_Planet = document.getElementById("bubble");
+	spr_Planet = document.getElementById("bubble"); // TODO rename
 	spr_Raumschiff = [];
 	spr_Raumschiff[1] = document.getElementById("qualleRed");
 	spr_Raumschiff[2] = document.getElementById("qualleBlue");
