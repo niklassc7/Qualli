@@ -12,9 +12,15 @@ class Jelly extends SpriteObject {
 
 		// Point that jelly is moving to initially when created, will adapt
 		// direction gradually
-		this.startX = x + (128 - Math.floor(Math.random() * 256));
-		this.startY = y + (128 - Math.floor(Math.random() * 256));
+		this.startX = x + (128 - Math.floor(Math.random() * 256)); // TODO rename
+		this.startY = y + (128 - Math.floor(Math.random() * 256)); // TODO rename
 		this.moveTowardsPoint(this.startX, this.startY, 2);
+
+		this.targetX = this.ziel.x - this.ziel.ox + Math.random()*this.ziel.width;
+		this.targetY = this.ziel.y - this.ziel.oy + Math.random()*this.ziel.height;
+
+		// this.opt_swapScreen = 3; // TODO remove
+
 
 		// TODO dont nest
 		// TODO rename? → express intent, what it does (accelerator or something)
@@ -31,14 +37,15 @@ class Jelly extends SpriteObject {
 			draw() {}
 
 			step() {
-				let acceleration = 0.05;
+				let acceleration = 0.03 + 0.4*Math.random();
 
 				if(this.parent.speed < this.targetSpeed)
 					this.parent.setSpeed(this.parent.speed + acceleration);
 
-				let zDir = pointDirection(this.parent.x, this.parent.y, this.parent.ziel.x, this.parent.ziel.y);
+				let zDir = pointDirection(this.parent.x, this.parent.y, this.parent.targetX, this.parent.targetY);
 
-				let turnSpeed = 4;
+				// TODO increase when large amounts are spawned
+				let turnSpeed = 2 + 4*Math.random();
 
 				let positiveTurnDistance = mMod(zDir - this.parent.direction, 360); // clockwise
 				let negativeTurnDistance = mMod(this.parent.direction - zDir, 360); // anticlockwise
@@ -60,7 +67,7 @@ class Jelly extends SpriteObject {
 			}
 		}
 
-		new StartHelper(this, 5);
+		new StartHelper(this, 4 + 2 * Math.random());
 	}
 
 	step(){
@@ -81,5 +88,40 @@ class Jelly extends SpriteObject {
 
 			this.ziel.receiveJellies(this.size, this.team);
 		}
+
+		// Check if jelly collided with target
+		// TODO check whole jelly width not just center
+		// console.log(this.x, this.ox, this.y, this.oy);
+		// console.log(this.ziel.x, this.ziel.ox, this.ziel.);
+
+
+		// // TODO fix
+		// if (pointInCircle(
+		// 	this.x + this.ox,
+		// 	this.y + this.oy,
+		// 	this.ziel.x + this.ziel.ox,
+		// 	this.ziel.y + this.ziel.oy,
+		// 	this.ziel.width / 2
+		// )){
+		// 	this.destroy();
+
+		// 	this.ziel.receiveJellies(this.size, this.team);
+		// }
+	}
+
+	draw() {
+		// TODO fix this
+		// TODO rotation
+		// TODO origin
+		// TODO ellipsis
+		let c = Colors.team[this.team];
+		ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, 0.025`;
+		let maxr = Math.max(this.width, this.height);
+
+		draw_circle(this.xD, this.yD, maxr * 2.7, false);
+		draw_circle(this.xD, this.yD, maxr * 2.0, false);
+		// draw_circle(this.xD, this.yD, maxr, false);
+
+		super.draw();
 	}
 }
