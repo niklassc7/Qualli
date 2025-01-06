@@ -19,9 +19,26 @@ class BubbleTemp extends Bubble {
 			let futureBubble = new BubbleTemp(this.x, this.y, 0, this.size, 0, undefined);
 			room.addObject(new BubbleSeed(1000, futureBubble));
 
-			let lostJellies = this.units + this.createQueue.size;
+			// Create FloatSign indicating lost jellies
+			let lostJellies = Math.floor((this.units + this.createQueue.size));
+			let lostMsg = "-" + lostJellies;
 			let signColor = Colors.team[this.team].cRgb();
-			room.addObject(new FloatSign(-Math.floor(lostJellies), this.x, this.y, signColor, 20));
+			let signTtl = 30;
+			let signFontSize = 30;
+
+			if (lostJellies >= 100) {
+				lostMsg += " !"
+				signTtl += 10;
+				signFontSize += 10;
+			}
+
+			if (lostJellies >= 200) {
+				lostMsg += "!!"
+				signTtl += 20;
+				signFontSize += 10;
+			}
+
+			room.addObject(new FloatSign(lostMsg, this.x, this.y, signColor, signFontSize));
 
 			this.destroy();
 		}
