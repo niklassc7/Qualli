@@ -1,7 +1,12 @@
 class Object extends IObjlistentry {
+	// static all = [];
+
 	// TODO default values
 	constructor(x, y, width, height) {
 		super();
+
+		// Object.all.push(this);
+
 		this.x = x;
 		this.y = y;
 		this.xD = x * xScalar; // x it should be drawn at
@@ -12,7 +17,7 @@ class Object extends IObjlistentry {
 		this.oyD = 0;
 		this.hspeed = 0;
 		this.vspeed = 0;
-		this.direction = 0;
+		this.direction = 0; // TODO document starting angle, deg/rad
 		this.speed = 0;
 		this.width = (width === undefined) ? 0 : width;
 		this.height = (height === undefined) ? 0 : height;;
@@ -108,7 +113,7 @@ class Object extends IObjlistentry {
 		return false;
 	}
 
-	// TODO
+	// TODO comment
 	swapScreen() {
 		if(this.opt_swapScreen >= 2){
 			if(this.y > canvas_height + (this.height/2)) this.y = -(this.height/2);
