@@ -4,14 +4,22 @@ class KI extends IObjlistentry {
 		this.team = team;
 		this.alarm = [];
 		this.alarm[0] = 20;
+
+		this.modules = [];
 	}
 
 	step() {
-		for(var i = 0; i < this.alarm.length; i++) {
+		// Timers
+		for(let i = 0; i < this.alarm.length; i++) {
 			if(this.alarm[i] > 0) {
 				this.alarm[i]--;
 				if(this.alarm[i] === 0) this.alarmieren(i);
 			}
+		}
+
+		// Modules
+		for (let i = 0; i < this.modules.length; i++) {
+			this.modules[i].modStep(this);
 		}
 	}
 
@@ -19,15 +27,30 @@ class KI extends IObjlistentry {
 	draw() {
 		ctx.fillStyle = Colors.team[this.team].cRgba();
 		ctx.strokeStyle = "rgba(50, 50, 50, 0.6)";
-		ctx.lineWidth = 2 * xScalar;
-		let symbolx = (32 + (this.team - 2) * 48) * xScalar
-		let symboly = 32 * yScalar;
-		let r = 16 * ((xScalar + yScalar) / 2);
-		draw_circle(symbolx, symboly, r, false);
-		draw_circle(symbolx, symboly, r, true);
+		let linew = 2;
+		ctx.lineWidth = linew * xScalar;
+		let symbolx = (32 + (this.team - 2) * 48);
+		let symboly = 32;
+		let r = 16;
+		let symbolxD = (32 + (this.team - 2) * 48) * xScalar;
+		let symbolyD = 32 * xScalar;
+		let rD = 16 * xScalar;
+		draw_circle(symbolxD, symbolyD, rD, false);
+		draw_circle(symbolxD, symbolyD, rD, true);
 
 		ctx.fillStyle = "rgba(50, 50, 50, 0.9)";
-		ctx.fillText(this.constructor.name, symbolx, symboly);
+		ctx.fillText(this.constructor.name, symbolxD, symbolyD);
+
+		// Modules
+		for (let i = 0; i < this.modules.length; i++) {
+			let mr = 8;
+			let mx = symbolx;
+			let my = symboly + r + mr + 2*linew;
+			let mod = this.modules[i];
+
+			mod.drawIcon(mx, my, mr);
+		}
+
 	}
 
 	pruefe_ob_eigene_Raumschiffe_im_Spiel() {
@@ -47,6 +70,25 @@ class KI extends IObjlistentry {
 			}
 		}
 		return bubbles;
+	}
+
+	// Returns a random own bubble that is not `excludeBubble`
+	getRandomBubbleOtherThan(excludeBubble) {
+		let bubbles = this.getBubbles();
+
+		if (bubbles.length < 2) {
+			return undefined;
+		}
+
+		while (true) {
+			let ri = Math.floor(Math.random() * bubbles.length);
+			let randomBubble = bubbles[ri];
+
+			if (randomBubble !== excludeBubble) {
+				return randomBubble;
+			}
+		}
+
 	}
 
 	getStrongestPlanet() {
@@ -110,8 +152,9 @@ class KI extends IObjlistentry {
 			this.destroy(); // TODO remove from room.ais
 
 			// Prüfen, ob noch eine KI da ist, sonst gewonnen.
-			if(this.pruefe_ob_gewonnen()){
+			if(room.status == "running" && this.pruefe_ob_gewonnen()){
 				showEndgame(true)
+				room.status = "won";
 
 				// TODO win/lose logic should be in LevelRoom
 				ProgressManager.updateLevelStats(room.constructor.name, true);

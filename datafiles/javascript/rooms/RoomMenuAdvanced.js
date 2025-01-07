@@ -49,6 +49,6 @@ class RoomMenuAdvanced extends Room{
 		ctx.fillStyle = "white"
 		ctx.textAlign = "center";
 		// ctx.strokeText("Advanced", roomWidth/2 * xScalar, 140 * yScalar)
-		ctx.fillText("Advanced", roomWidth/2 * xScalar, 32 * yScalar)
+		ctx.fillText("Advanced 🦈", roomWidth/2 * xScalar, 32 * yScalar)
 	}
 }

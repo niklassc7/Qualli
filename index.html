@@ -24,6 +24,9 @@
 		<script src="datafiles/javascript/appEtc/IObjlistentry.js"></script>
 		<script src="datafiles/javascript/appEtc/mouse.js"></script>
 		<script src="datafiles/javascript/appEtc/input.js"></script>
+		<script src="datafiles/javascript/appEtc/aiModules/AiModule.js"></script>
+		<script src="datafiles/javascript/appEtc/aiModules/ModFleeTemp.js"></script>
+		<script src="datafiles/javascript/appEtc/aiModules/ModDefend.js"></script>
 		<script src="datafiles/javascript/appEtc/KI.js"></script>
 		<script src="datafiles/javascript/appEtc/KI0.js"></script>
 		<script src="datafiles/javascript/appEtc/KI1.js"></script>
@@ -52,6 +55,7 @@
 
 		<script src="datafiles/javascript/objects/SimBubble/SimBubble.js"></script>
 		<script src="datafiles/javascript/objects/SimBubble/SimBubbleEmitter.js"></script>
+		<script src="datafiles/javascript/objects/SimJelly.js"></script>
 
 
 		<!-- Rooms -->
@@ -96,6 +100,11 @@
 		<script src="datafiles/javascript/rooms/room30.js"></script>
 		<script src="datafiles/javascript/rooms/room31.js"></script>
 		<script src="datafiles/javascript/rooms/room32.js"></script>
+		<script src="datafiles/javascript/rooms/room33.js"></script>
+		<script src="datafiles/javascript/rooms/room34.js"></script>
+		<script src="datafiles/javascript/rooms/room35.js"></script>
+		<script src="datafiles/javascript/rooms/room36.js"></script>
+		<script src="datafiles/javascript/rooms/room37.js"></script>
 
 		<script src="datafiles/javascript/main.js"></script>
 		<script src="datafiles/javascript/step.js"></script>
@@ -142,6 +151,7 @@
 				<br>
 				<div>
 					<input id="egRestart" type="button" value="Restart" onClick="room.restart(); hideEndgame();" />
+					<input id="egResume" type="button" value="Resume" onClick="hideEndgame();" />
 					<input id="egExit" type="button" value="Exit" onClick="gotoRoom(room.prevRoom); hideEndgame()" />
 				</div>
 			</div>

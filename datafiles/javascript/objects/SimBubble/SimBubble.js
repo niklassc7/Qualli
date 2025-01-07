@@ -10,9 +10,12 @@ class SimBubble extends Object {
 		this.basecolor = basecolor;
 
 
+
 		let speed = 1 + Math.random();
 		let directionDiff = 30; // Degrees in which direction is random
 		let direction = 270 - directionDiff + 2*(directionDiff*Math.random());
+
+		this.createQueue = new LinkedList();
 
 
 		// console.log(direction);
@@ -39,9 +42,29 @@ class SimBubble extends Object {
 
 		this.setVspeed(this.vspeed - this.ascendAcel);
 
+		if (room instanceof LevelRoom) {
+			this.setVspeed(this.vspeed - 40*this.ascendAcel);
+		}
+
 		if (this.isOutsideRoom()) {
 			this.destroy()
 		}
+
+		// Create jellies
+		if (!this.createQueue.isEmpty()) {
+			let parameter = this.createQueue.removeFirst();
+			let newJelly = new SimJelly(parameter[0], parameter[1], parameter[2], parameter[3]);
+			newJelly.setSpeeds(newJelly.hspeed + this.hspeed, newJelly.vspeed + this.vspeed);
+		}
+
+		// // Randomly start attack
+		// if (Math.random() < 0.0005) {
+		// 	let amount = Math.round(Math.random() * 50) + 3;
+		// 	let ri = Math.floor(SimBubble.all.length * Math.random());
+		// 	let target = SimBubble.all[ri];
+
+		// 	this.attack(target, amount);
+		// }
 
 
 		// Collision with cursor
@@ -137,4 +160,33 @@ class SimBubble extends Object {
 			draw_circle(this.xD, this.yD, this.widthD/2 + i*(lineWidth*2), true);
 		}
 	}
-}
+
+
+	// attack(other) {
+	// 	let amount = Math.floor(this.units / 2)
+
+	// 	this.attackN(other, amount)
+	// }
+
+	// Attack bubble other
+	attack(other, amount) {
+		// if (amount > this.units) {
+		// 	console.warn("Tried attacking with more units than bubble has.")
+		// 	amount = this.units
+		// }
+		// amount = Math.min(this.units, amount)
+
+		// this.units -= amount
+
+		for (let i = 0; i < amount; i++) {
+			// let newJelly = new Jelly(this.x, this.y, this.team, other)
+			// let team = 1; // TODO
+			// let team = Math.floor(Colors.team.length * Math.random());
+			// team = 1;
+			// TODO team object
+			let team = 1 + Math.floor(4 * Math.random());
+			console.log("Create with team", team);
+			this.createQueue.addLast([this.x, this.y, team, other])
+		}
+	}
+	}

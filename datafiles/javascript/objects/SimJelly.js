@@ -1,8 +1,12 @@
-class Jelly extends SpriteObject {
+class SimJelly extends SpriteObject {
+	// TODO Is this ever cleared? On room change?
+	static all = [];
+
 	constructor(x, y, team, ziel, size=1) {
 		super(x, y, 32, 21, spr_Raumschiff[team]);
+		SimJelly.all.push(this);
 
-		room.addObject(this); // Move to Superclass
+		room.addObject(this); // TODO Move to Superclass, or remove?
 
 		this.team = team;
 		this.ziel = ziel; // TODO rename
@@ -18,11 +22,6 @@ class Jelly extends SpriteObject {
 
 		this.targetX = this.ziel.x - this.ziel.ox + Math.random()*this.ziel.width;
 		this.targetY = this.ziel.y - this.ziel.oy + Math.random()*this.ziel.height;
-
-		this.ziel.arriving[this.team]++;
-
-		// this.opt_swapScreen = 3; // TODO remove
-
 
 		// TODO dont nest
 		// TODO rename? → express intent, what it does (accelerator or something)
@@ -64,6 +63,10 @@ class Jelly extends SpriteObject {
 				if(Math.abs(zDir - this.parent.direction) <= turnSpeed && Math.abs(this.parent.speed - this.targetSpeed) <= acceleration) {
 					this.parent.setSpeed(this.targetSpeed);
 					this.parent.setDirection(zDir);
+					// this.destroy();
+				}
+
+				if (this.parent.ziel.isOutsideRoom()) {
 					this.destroy();
 				}
 			}
@@ -74,6 +77,14 @@ class Jelly extends SpriteObject {
 
 	step(){
 		super.step();
+
+		if (this.isOutsideRoom()) {
+			this.destroy();
+		}
+		if (room instanceof LevelRoom) {
+			this.setSpeed(this.speed + 0.6);
+		}
+
 
 		// Check if jelly collided with target
 		if (rectangle_in_rectangle(
@@ -88,27 +99,8 @@ class Jelly extends SpriteObject {
 		)){
 			this.destroy();
 
-			this.ziel.receiveJellies(this.size, this.team);
+			// this.ziel.receiveJellies(this.size, this.team);
 		}
-
-		// Check if jelly collided with target
-		// TODO check whole jelly width not just center
-		// console.log(this.x, this.ox, this.y, this.oy);
-		// console.log(this.ziel.x, this.ziel.ox, this.ziel.);
-
-
-		// // TODO fix
-		// if (pointInCircle(
-		// 	this.x + this.ox,
-		// 	this.y + this.oy,
-		// 	this.ziel.x + this.ziel.ox,
-		// 	this.ziel.y + this.ziel.oy,
-		// 	this.ziel.width / 2
-		// )){
-		// 	this.destroy();
-
-		// 	this.ziel.receiveJellies(this.size, this.team);
-		// }
 	}
 
 	draw() {
@@ -124,12 +116,21 @@ class Jelly extends SpriteObject {
 		draw_circle(this.xD, this.yD, maxr * 2.0, false);
 		// draw_circle(this.xD, this.yD, maxr, false);
 
+		// console.log(this.sprite);
+		// console.log(this.sprite, -this.oxD, -this.oyD, this.widthD, this.heightD);
 		super.draw();
 	}
 
 	destroy() {
 		super.destroy();
 
-		this.ziel.arriving[this.team]--;
+		// Delete from SimJelly.all
+		for (let i = 0; i < SimJelly.all.length; i++) {
+			let other = SimJelly.all[i];
+			if (other === this) {
+				SimJelly.all.splice(i, 1);
+				break;
+			}
+		}
 	}
 }

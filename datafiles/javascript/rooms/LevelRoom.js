@@ -16,6 +16,7 @@ class LevelRoom extends Room {
 		this.bubbles = [];
 		this.ais = [];
 
+		this.status = "running"; // running, lost, won
 		this.background = undefined;
 		this.alarm = [];
 		this.alarm[0] = 10;
@@ -87,10 +88,12 @@ class LevelRoom extends Room {
 		gotoRoom(this.constructor)
 	}
 
+	// TODO rename → timer
 	alarmieren(nr) {
 		switch(nr) {
 			case 0:
-				if(checkIfLost(1)) {
+				if(this.status == "running" && checkIfLost(1)) {
+					this.status = "lost";
 					showEndgame(false)
 					ProgressManager.updateLevelStats(room.constructor.name, false);
 				}

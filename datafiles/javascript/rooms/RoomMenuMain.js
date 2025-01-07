@@ -67,6 +67,6 @@ class RoomMenuMain extends Room{
 		ctx.fillStyle = "white"
 		ctx.textAlign = "center";
 		// ctx.strokeText("Main", roomWidth/2 * xScalar, 140 * yScalar)
-		ctx.fillText("Main", roomWidth/2 * xScalar, 32 * yScalar)
+		ctx.fillText("Main 🐟", roomWidth/2 * xScalar, 32 * yScalar)
 	}
 }

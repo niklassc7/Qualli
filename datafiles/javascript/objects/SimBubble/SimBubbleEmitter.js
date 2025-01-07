@@ -24,7 +24,20 @@ class SimBubbleEmitter extends IObjlistentry {
 			// DEBUG
 			// y -= 2*r;
 
-			room.addObject(new SimBubble(x, y, r, this.basecolor));
+			let base = new Color(this.basecolor[0], this.basecolor[1], this.basecolor[2]);
+			let black = new Color(0, 0, 50);
+			let white = new Color(255, 255, 255);
+
+			let darker = base.getMix(black, 0.5);
+			let lighter = base.getMix(white, 0.5);
+
+			let c = [base, darker, lighter];
+			let ci = Math.floor(Math.random() * c.length);
+
+			let carr = [c[ci].r, c[ci].g, c[ci].b];
+
+			// room.addObject(new SimBubble(x, y, r, this.basecolor));
+			room.addObject(new SimBubble(x, y, r, carr));
 		}
 	}
 }

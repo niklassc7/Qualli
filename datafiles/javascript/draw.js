@@ -7,6 +7,8 @@ function draw() {
 	// 	ctx.drawImage(room.background, 0, 0, canvas.width, canvas.height);
 	// }
 
+	room.draw();
+
 	// draw of all objects
 	for(var i = 0; i < room.objects.length; i++){
 		if(room.objects[i] !== undefined){
@@ -17,7 +19,6 @@ function draw() {
 	// GUI
 	// mouse.draw();
 	input.draw()
-	room.draw();
 
 	if (Settings.debug && !msgs.isEmpty()) {
 		ctx.fillStyle = "white";

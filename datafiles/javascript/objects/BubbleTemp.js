@@ -11,14 +11,7 @@ class BubbleTemp extends Bubble {
 		this.ttl = this.totalTtl; // TODO use stepCount?
 	}
 
-	step() {
-		super.step();
-		this.ttl--;
-
-		if (this.ttl <= 0) {
-			let futureBubble = new BubbleTemp(this.x, this.y, 0, this.size, 0, undefined);
-			room.addObject(new BubbleSeed(1000, futureBubble));
-
+	createLostSign() {
 			// Create FloatSign indicating lost jellies
 			let lostJellies = Math.floor((this.units + this.createQueue.size));
 			let lostMsg = "-" + lostJellies;
@@ -39,6 +32,20 @@ class BubbleTemp extends Bubble {
 			}
 
 			room.addObject(new FloatSign(lostMsg, this.x, this.y, signColor, signFontSize));
+
+	}
+
+	step() {
+		super.step();
+		this.ttl--;
+
+		if (this.ttl <= 0) {
+			let futureBubble = new BubbleTemp(this.x, this.y, 0, this.size, 0, undefined);
+			room.addObject(new BubbleSeed(1000, futureBubble));
+
+			if (this.team !== 0) {
+				this.createLostSign();
+			}
 
 			this.destroy();
 		}

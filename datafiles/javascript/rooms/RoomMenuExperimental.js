@@ -25,6 +25,11 @@ class RoomMenuExperimental extends Room{
 			room30,
 			room31,
 			room32,
+			room33,
+			room34,
+			room35,
+			room36,
+			room37,
 		];
 
 		let itemsInRow = 4;
@@ -61,6 +66,6 @@ class RoomMenuExperimental extends Room{
 		ctx.fillStyle = "white"
 		ctx.textAlign = "center";
 		// ctx.strokeText("Advanced", roomWidth/2 * xScalar, 140 * yScalar)
-		ctx.fillText("Experimental", roomWidth/2 * xScalar, 32 * yScalar)
+		ctx.fillText("Experimental ⚛", roomWidth/2 * xScalar, 32 * yScalar)
 	}
 }

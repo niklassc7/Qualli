@@ -9,6 +9,13 @@ function onResize() {
 		activateFullscreen();
 }
 
+// Returns a random element from arr
+function chooseRandom(arr) {
+	let ri = Math.floor(arr.length * Math.random());
+	return arr[ri];
+
+}
+
 function activateFullscreen() {
 	document.getElementById("myCanvas").classList.add("fullscreen");
 	document.getElementById("myCanvas").requestFullscreen();
@@ -139,6 +146,11 @@ function gotoRoom(newRoom){
 	// 	room.objects.push.apply(room.objects, SimBubble.all);
 	// }
 	room.objects.push.apply(room.objects, SimBubble.all);
+	room.objects.push.apply(room.objects, SimJelly.all);
+
+	// for (let i = 0; i < SimJelly.all.length; i++) {
+	// 	SimJelly.all[i].setSpeed();
+	// }
 	
 	document.body.style.background = `url(${newRoom.background})`;
 	document.body.style.backgroundSize = "cover";

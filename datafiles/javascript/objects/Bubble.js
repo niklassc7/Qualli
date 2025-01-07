@@ -6,6 +6,13 @@ class Bubble extends SpriteObject {
 		this.units = units;
 		this.team = team;
 
+		// arriving[team] = #arrivingJellies
+		this.arriving = [];
+		// TODO team management
+		for (let i = 0; i < Colors.team.length; i++) {
+			this.arriving[i] = 0;
+		}
+
 		this.width = 80 * (1 + (this.size / 3));
 		this.height = 80 * (1 + (this.size / 3));
 		this.ox = this.width / 2;
@@ -45,15 +52,31 @@ class Bubble extends SpriteObject {
 		// draw_circle(this.xD, this.yD, this.widthD / 2 * 0.7, false);
 
 
-		// Team colour
-		if(this.team !== 0) {
-			ctx.fillStyle = Colors.team[this.team].cRgba();
-			ctx.strokeStyle = ctx.fillStyle;
-			ctx.lineWidth = Math.round(8 * xScalar);
-			draw_circle(this.xD, this.yD, this.widthD / 2, true);
-		}
-
 		super.draw();
+		// Team colour
+		// if(this.team !== 0) {
+			let c = Colors.team[this.team];
+			ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, 0.3`;
+			// ctx.strokeStyle = Colors.team[this.team].cRgba();
+			// ctx.strokeStyle = "rgba(0, 0, 0, 0.7)";
+			let black = new Color(0, 0, 0)
+			let darkBorderC = c.getMix(black, 0.9);
+			darkBorderC.a = 0.7;
+			// ctx.strokeStyle = "rgba(0, 0, 0, 0.7)";
+			ctx.strokeStyle = darkBorderC.cRgba();
+
+			if(this.team === 0) {
+				ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
+			} else {
+				// ctx.lineWidth = Math.round(2 * this.size * xScalar); // TODO
+				ctx.lineWidth = Math.round(2 * 2 * xScalar); // TODO
+				draw_circle(this.xD, this.yD, this.widthD / 2, false);
+			}
+
+			// ctx.lineWidth = Math.round(8 * xScalar);
+			draw_circle(this.xD, this.yD, this.widthD / 2, true);
+		// }
+
 
 		// Units
 		ctx.fillStyle = "#eceff1";
@@ -64,12 +87,22 @@ class Bubble extends SpriteObject {
 
 		// Queue
 		if (!this.createQueue.isEmpty()) {
-			ctx.fillStyle = "#fc9f91";
+			// ctx.fillStyle = "#fc9f91";
+			ctx.fillStyle = Colors.team[this.team].cRgb();
 			ctx.font = Math.round(18 * xScalar) + "px fnt_Comforta_Bold";
 			ctx.textBaseline = "middle";
 			ctx.textAlign = "center";
 			ctx.fillText(this.createQueue.size, this.xD, this.yD +32);
 		}
+
+
+		// // DEBUG display `arriving`
+		// ctx.fillStyle = "#fc9f91";
+		// // ctx.fillStyle = Colors.team[this.team].cRgb();
+		// ctx.font = Math.round(18 * xScalar) + "px fnt_Comforta_Bold";
+		// ctx.textBaseline = "middle";
+		// ctx.textAlign = "center";
+		// ctx.fillText(this.arriving, this.xD, this.yD + 48);
 	}
 
 	destroy() {
@@ -128,5 +161,17 @@ class Bubble extends SpriteObject {
 		} else {
 			this.#getAttacked(n, team);
 		}
+	}
+
+	// Gets total number of enemy jellies
+	getArrivingEnemy() {
+		let sum = 0;
+		for (let i = 0; i < this.arriving.length; i++) {
+			if (i === this.team)
+				continue;
+			sum += this.arriving[i];
+		}
+
+		return sum;
 	}
 }
