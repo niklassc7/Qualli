@@ -24,10 +24,10 @@ class LevelRoom extends Room {
 		// Pause button
 		let pauseButton = this.addObject(new Button(
 			"⏸",
-			roomWidth - 50,
+			roomWidth - 60,
 			10,
-			40,
-			40,
+			50,
+			50,
 			Settings.pause,
 			false
 		));
