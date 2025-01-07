@@ -3,7 +3,6 @@
 class MenuOverview extends Room{
 	constructor(){
 		super();
-		// this.background = spr_bgMenu; // TODO use static var
 
 		this.addObject(new SimBubbleEmitter());
 

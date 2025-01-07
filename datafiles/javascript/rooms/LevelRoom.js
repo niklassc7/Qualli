@@ -53,9 +53,12 @@ class LevelRoom extends Room {
 		//do nothing
 	}
 
-	// TODO
-	addBubble() {
-		
+	// Adds bubble to room
+	addBubble(bubble) {
+		this.bubbles.push(bubble);
+		this.addObject(bubble);
+
+		return bubble;
 	}
 
 	removeBubble(bubble) {

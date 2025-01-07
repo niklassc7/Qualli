@@ -2,11 +2,9 @@ class room23 extends LevelRoom {
 	constructor(){
 		super();
 
-		this.background = spr_bg_0;
-
 		this.addObject(new KI0(2));
 
-		let planetDistance = 160; // centre to cenre
+		let planetDistance = 160; // centre to centre
 		let itemsInRow = 6;
 
 		// Calculate start margin in order to center the items block
@@ -21,8 +19,7 @@ class room23 extends LevelRoom {
 				let newTeam = 1
 				// TODO const
 				let newSize = (i == 1) ? 2 : 1;
-				let newB = this.addObject(new Bubble(startMargin + j * planetDistance, 200 + i * planetDistance, newTeam, newSize, jellyAmount));
-				this.bubbles[i * itemsInRow + j] = newB;
+				this.addBubble(new Bubble(startMargin + j * planetDistance, 200 + i * planetDistance, newTeam, newSize, jellyAmount));
 			}
 		}
 

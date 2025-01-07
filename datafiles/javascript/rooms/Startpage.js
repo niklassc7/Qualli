@@ -1,8 +1,6 @@
 class Startpage extends Room {
 	constructor(){
 		super();
-		// this.background = spr_bgMenu; // TODO static var
-		// document.body.style.backgroundImage = spr_bgMenu 
 
 		this.addObject(new SimBubbleEmitter());
 

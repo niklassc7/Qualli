@@ -21,13 +21,11 @@ class room24 extends LevelRoom {
 				}
 
 				let newTeam = 1
-				let newB = this.addObject(new Bubble(startMargin + j * planetDistance, 160 + i * planetDistance, newTeam, 1, amount));
-				this.bubbles.push(newB)
+				this.addBubble(new Bubble(startMargin + j * planetDistance, 160 + i * planetDistance, newTeam, 1, amount));
 			}
 		}
 
 		let newUnits = 9.5 * amount;
-		let newB = this.addObject(new Bubble(startMargin + 4 * planetDistance, 160 + 1 * planetDistance, 2, 7, newUnits));
-		this.bubbles.push(newB);
+		this.addBubble(new Bubble(startMargin + 4 * planetDistance, 160 + 1 * planetDistance, 2, 7, newUnits));
 	}
 }
