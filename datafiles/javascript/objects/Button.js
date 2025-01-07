@@ -56,7 +56,7 @@ class Button extends SpriteObject {
 			this.yD,
 			this.widthD,
 			this.heightD,
-			10,
+			10 * xScalar,
 			true
 		);
 
