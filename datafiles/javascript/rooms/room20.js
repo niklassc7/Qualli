@@ -2,8 +2,6 @@ class room20 extends LevelRoom {
 	constructor(){
 		super();
 
-		this.background = spr_bg_0;
-
 		this.addObject(new KI0(2));
 
 		let planetDistance = 200; // centre to centre

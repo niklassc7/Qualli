@@ -17,7 +17,6 @@ class LevelRoom extends Room {
 		this.ais = [];
 
 		this.status = "running"; // running, lost, won
-		this.background = undefined;
 		this.alarm = [];
 		this.alarm[0] = 10;
 

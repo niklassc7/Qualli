@@ -2,7 +2,6 @@ class room24 extends LevelRoom {
 	constructor() {
 		super();
 
-		this.background = spr_bg_0;
 		this.addObject(new KI0(2));
 
 
