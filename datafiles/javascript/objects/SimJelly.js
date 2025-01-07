@@ -1,3 +1,5 @@
+// TODO remove?
+
 class SimJelly extends SpriteObject {
 	// TODO Is this ever cleared? On room change?
 	static all = [];
