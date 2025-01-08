@@ -1,4 +1,4 @@
-class FloatSign extends Object {
+export default class FloatSign extends Object {
 	constructor(text, x, y, color, fontSize=20, ttl=200) {
 		super(x, y, 0, 0);
 		this.text = text;

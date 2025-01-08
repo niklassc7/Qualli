@@ -1,4 +1,4 @@
-class ModDefend extends AiModule {
+export default class ModDefend extends AiModule {
 	constructor() {
 		super();
 	}

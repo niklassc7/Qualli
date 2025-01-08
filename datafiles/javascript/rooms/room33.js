@@ -1,9 +1,13 @@
-class room33 extends LevelRoom {
+import LevelRoom from "./LevelRoom.js";
+import BubbleTemp from "../objects/BubbleTemp.js";
+import KI0 from "../appEtc/KI0.js";
+
+export default class room33 extends LevelRoom {
 	constructor() {
 		super();
 
 		let ki0 = this.addObject(new KI0(2));
-		let ki1 = this.addObject(new KI0(3));
+		this.addObject(new KI0(3));
 
 		let modFleeTemp = new ModFleeTemp();
 		ki0.modules.push(modFleeTemp);

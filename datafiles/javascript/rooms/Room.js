@@ -1,16 +1,21 @@
+import Startpage from "./Startpage.js";
+import Settings from "../engine/Settings.js";
+import * as g from "../globals.js";
+
 // Abstract Class
 
-class Room {
+export default class Room {
 	static background = "datafiles/backgrounds/background2-g1.png";
 
 	constructor(prevRoom) {
 		// TODO check
 		this.roomEntered = Date.now()
 
-		if (this.constructor == LevelRoom) {
+		if (this.constructor == Room) {
 			throw new Error("Abstract classes can't be instantiated.");
 		}
 
+		// TODO fix
 		if (prevRoom instanceof Room) {
 			this.prevRoom = prevRoom
 		} else {
@@ -50,14 +55,14 @@ class Room {
 	// Simply removes the object `obj` from room.objects and thus from the
 	// game loop.
 	removeObject(obj) {
-		for (var i = 0; i < room.objects.length; i++) {
-			if(room.objects[i] === obj) {
-				room.objects.splice(i, 1);
+		for (var i = 0; i < g.room.objects.length; i++) {
+			if(g.room.objects[i] === obj) {
+				g.room.objects.splice(i, 1);
 				return true;
 			}
 		}
 
-		console.error("Attempted to deleted object that is not in room.objects");
+		console.error("Attempted to deleted object that is not in g.room.objects");
 		return false;
 	}
 }

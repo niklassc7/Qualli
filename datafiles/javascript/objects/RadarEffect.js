@@ -1,4 +1,4 @@
-class RadarEffect extends Effect {
+export default class RadarEffect extends Effect {
 	constructor(x, y, ttl, color) {
 		super(x, y, ttl);
 		this.color = color;

@@ -1,24 +1,26 @@
-function draw() {
+import * as g from "./globals.js";
+import Settings from "./engine/Settings.js";
+
+export default function draw() {
 	// Background
 	// ctx.fillStyle = "#000000";
 	// ctx.fillRect(0, 0, canvas_width, canvas_height);
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	g.ctx.clearRect(0, 0, g.canvas.width, g.canvas.height);
 	// if(room.background != undefined){
 	// 	ctx.drawImage(room.background, 0, 0, canvas.width, canvas.height);
 	// }
 
-	room.draw();
+	g.room.draw();
 
 	// draw of all objects
-	for(var i = 0; i < room.objects.length; i++){
-		if(room.objects[i] !== undefined){
-			room.objects[i].draw();
+	for(var i = 0; i < g.room.objects.length; i++){
+		if(g.room.objects[i] !== undefined){
+			g.room.objects[i].draw();
 		}
 	}
 
 	// GUI
-	// mouse.draw();
-	input.draw()
+	g.input.draw()
 
 	if (Settings.debug && !msgs.isEmpty()) {
 		ctx.fillStyle = "white";
@@ -49,14 +51,6 @@ function draw() {
 		// let w = Math.round(roomWidth*xScalar);
 		// ctx.fillRect(w-10, 0, w, roomHeight)
 	}
-
-	text = "Excepturi non voluptate autem error consequuntur et ipsam. In atque aliquam quia mollitia. Excepturi non voluptate autem error consequuntur et ipsam. In atque aliquam quia mollitia. Excepturi non voluptate autem error consequuntur et ipsam.";
-	// drawInfoWindow(text, ["test0, test1"], ["f0", "f1"]); // TODO implement
-
-
-	// mouse.left_pressed = false;
-	// mouse.middle_pressed = false;
-	// mouse.right_pressed = false;
 }
 
 

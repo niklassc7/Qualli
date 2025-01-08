@@ -1,6 +1,10 @@
-class LevelButton extends Button {
+import Button from "./Button.js";
+import * as g from "../globals.js";
+import ProgressManager from "../appEtc/ProgressManager.js";
+
+export default class LevelButton extends Button {
 	constructor(text, x, y, width, height, level) {
-		let onClick = () => gotoRoom(level);
+		let onClick = () => g.gotoRoom(level);
 		super(text, x, y, width, height, onClick, false);
 
 		this.level = level;

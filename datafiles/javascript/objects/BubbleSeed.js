@@ -1,5 +1,7 @@
+import Object from "../engine/objects/Object";
+
 // Creates a bubbles
-class BubbleSeed extends Object {
+export default class BubbleSeed extends Object {
 	constructor(delay, futureBubble) {
 		super(futureBubble.x, futureBubble.y, futureBubble.width, futureBubble.height);
 

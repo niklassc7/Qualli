@@ -1,4 +1,12 @@
-class Bubble extends SpriteObject {
+import SpriteObject from "../engine/objects/SpriteObject.js";
+import Colors from "../appEtc/color/Colors.js";
+import * as g from "../globals.js";
+import * as f from "../functions.js";
+import LinkedList from "../engine/LinkedList/LinkedList.js";
+import Jelly from "./Jelly.js";
+import Color from "../appEtc/color/Color.js";
+
+export default class Bubble extends SpriteObject {
 	constructor(x, y, team=0, size=1, units=25) {
 		super(x, y);
 
@@ -18,7 +26,7 @@ class Bubble extends SpriteObject {
 		this.ox = this.width / 2;
 		this.oy = this.height / 2;
 
-		this.sprite = spr_Planet;
+		this.sprite = g.spr_Planet;
 
 		this.createQueue = new LinkedList();
 		this.animationSpeed = 0.1 + Math.random() * 0.2
@@ -36,79 +44,51 @@ class Bubble extends SpriteObject {
 	}
 
 	draw() {
-		// TODO fix or remove animation
-		// // TODO sinus curve
-		// let animationN = 32
-		// // let animationSpeed = 0.3
-		// let fill = stepCount * this.animationSpeed % animationN
-		// fill = Math.abs(fill - animationN / 2)
-		// // Normalize
-		// fill = fill / (animationN/2)
-		// //  Scale 
-		// fill = fill * 0.1
-
-		// ctx.fillStyle = `rgba(200, 200, 255, ${fill})`;
-		// ctx.lineWidth = Math.round(8 * xScalar);
-		// draw_circle(this.xD, this.yD, this.widthD / 2 * 0.7, false);
-
-
 		super.draw();
 		// Team colour
 		// if(this.team !== 0) {
 			let c = Colors.team[this.team];
-			ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, 0.3`;
+			g.ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, 0.3`;
 			// ctx.strokeStyle = Colors.team[this.team].cRgba();
 			// ctx.strokeStyle = "rgba(0, 0, 0, 0.7)";
 			let black = new Color(0, 0, 0)
 			let darkBorderC = c.getMix(black, 0.9);
 			darkBorderC.a = 0.7;
 			// ctx.strokeStyle = "rgba(0, 0, 0, 0.7)";
-			ctx.strokeStyle = darkBorderC.cRgba();
+			g.ctx.strokeStyle = darkBorderC.cRgba();
 
 			if(this.team === 0) {
-				ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
+				g.ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
 			} else {
-				// ctx.lineWidth = Math.round(2 * this.size * xScalar); // TODO
-				ctx.lineWidth = Math.round(2 * 2 * xScalar); // TODO
-				draw_circle(this.xD, this.yD, this.widthD / 2, false);
+				g.ctx.lineWidth = Math.round(2 * 2 * g.xScalar); // TODO
+				f.draw_circle(this.xD, this.yD, this.widthD / 2, false);
 			}
 
-			// ctx.lineWidth = Math.round(8 * xScalar);
-			draw_circle(this.xD, this.yD, this.widthD / 2, true);
+			f.draw_circle(this.xD, this.yD, this.widthD / 2, true);
 		// }
 
 
 		// Units
-		ctx.fillStyle = "#eceff1";
-		ctx.font = Math.round(36 * xScalar) + "px fnt_Comforta_Bold";
-		ctx.textBaseline = "middle";
-		ctx.textAlign = "center";
-		ctx.fillText(Math.floor(this.units), this.xD, this.yD);
+		g.ctx.fillStyle = "#eceff1";
+		g.ctx.font = Math.round(36 * g.xScalar) + "px fnt_Comforta_Bold";
+		g.ctx.textBaseline = "middle";
+		g.ctx.textAlign = "center";
+		g.ctx.fillText(Math.floor(this.units), this.xD, this.yD);
 
 		// Queue
 		if (!this.createQueue.isEmpty()) {
-			// ctx.fillStyle = "#fc9f91";
-			ctx.fillStyle = Colors.team[this.team].cRgb();
-			ctx.font = Math.round(18 * xScalar) + "px fnt_Comforta_Bold";
-			ctx.textBaseline = "middle";
-			ctx.textAlign = "center";
-			ctx.fillText(this.createQueue.size, this.xD, this.yD +32);
+			g.ctx.fillStyle = Colors.team[this.team].cRgb();
+			g.ctx.font = Math.round(18 * g.xScalar) + "px fnt_Comforta_Bold";
+			g.ctx.textBaseline = "middle";
+			g.ctx.textAlign = "center";
+			g.ctx.fillText(this.createQueue.size, this.xD, this.yD +32);
 		}
-
-
-		// // DEBUG display `arriving`
-		// ctx.fillStyle = "#fc9f91";
-		// // ctx.fillStyle = Colors.team[this.team].cRgb();
-		// ctx.font = Math.round(18 * xScalar) + "px fnt_Comforta_Bold";
-		// ctx.textBaseline = "middle";
-		// ctx.textAlign = "center";
-		// ctx.fillText(this.arriving, this.xD, this.yD + 48);
 	}
 
 	destroy() {
 		super.destroy();
 
-		room.removeBubble(this);
+		g.room.removeBubble(this);
 	}
 
 	// Attack bubble other

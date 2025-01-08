@@ -1,4 +1,8 @@
-class room13 extends LevelRoom {
+import LevelRoom from "./LevelRoom.js";
+import Bubble from "../objects/Bubble.js";
+import KI1 from "../appEtc/KI1.js";
+
+export default class room13 extends LevelRoom {
 	constructor() {
 		super();
 

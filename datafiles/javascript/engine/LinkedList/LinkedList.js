@@ -1,16 +1,11 @@
+import LinkedListNode from "./LinkedListNode.js";
+
 // TODO move to engine
 // TODO iterator
 // TODO return node or val? → iterator needs nodes
 
-class LinkedListNode {
-	constructor(val) {
-		this.val = val;
-		this.next = null;
-		this.prev = null;
-	}
-}
 
-class LinkedList {
+export default class LinkedList {
 	constructor() {
 		this.head = undefined;
 		this.tail = undefined;

@@ -1,6 +1,9 @@
+import * as g from "../globals.js";
+import LevelStats from "./LevelStats.js";
+
 // This class manages storing statistics about games and which levels are unlocked
 
-class ProgressManager {
+export default class ProgressManager {
 	// Resets progress
 	static reset() {
 		let text = "Do you really want to reset your entire progress?";
@@ -9,13 +12,13 @@ class ProgressManager {
 		}
 
 		// TODO only clear progress (in case other things like settings are stored)
-		storage.clear();
+		g.storage.clear();
 
 		alert("Your progress has been reset.");
 	}
 
 	static updateLevelStats(levelName, won) {
-		let levelStats = storage.get(levelName);
+		let levelStats = g.storage.get(levelName);
 
 		if (levelStats == undefined) {
 			levelStats = new LevelStats(levelName, 0, 0);
@@ -29,12 +32,12 @@ class ProgressManager {
 			levelStats.lost++;
 		}
 
-		storage.set(levelName, JSON.stringify(levelStats));
+		g.storage.set(levelName, JSON.stringify(levelStats));
 	}
 
 	// Returns object of type LevelStats
 	static getLevelStats(levelName) {
-		let levelStats = storage.get(levelName);
+		let levelStats = g.storage.get(levelName);
 		
 		if (levelStats == undefined) {
 			return new LevelStats(levelName, 0, 0);

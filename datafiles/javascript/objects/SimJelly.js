@@ -1,11 +1,14 @@
+import SpriteObject from "../engine/objects/SpriteObject.js";
+import * as g from "../globals.js";
+
 // TODO remove?
 
-class SimJelly extends SpriteObject {
+export default class SimJelly extends SpriteObject {
 	// TODO Is this ever cleared? On room change?
 	static all = [];
 
 	constructor(x, y, team, ziel, size=1) {
-		super(x, y, 32, 21, spr_Raumschiff[team]);
+		super(x, y, 32, 21, g.spr_Raumschiff[team]);
 		SimJelly.all.push(this);
 
 		room.addObject(this); // TODO Move to Superclass, or remove?

@@ -1,4 +1,11 @@
-class KI extends IObjlistentry {
+import IObjlistentry from "./IObjlistentry.js";
+import * as g from "../globals.js";
+import * as f from "../functions.js";
+import Colors from "./color/Colors.js";
+import Jelly from "../objects/Jelly.js";
+import ProgressManager from "./ProgressManager.js";
+
+export default class KI extends IObjlistentry {
 	constructor(team) {
 		super();
 		this.team = team;
@@ -25,21 +32,21 @@ class KI extends IObjlistentry {
 
 	// TODO Room should draw symbols
 	draw() {
-		ctx.fillStyle = Colors.team[this.team].cRgba();
-		ctx.strokeStyle = "rgba(50, 50, 50, 0.6)";
+		g.ctx.fillStyle = Colors.team[this.team].cRgba();
+		g.ctx.strokeStyle = "rgba(50, 50, 50, 0.6)";
 		let linew = 2;
-		ctx.lineWidth = linew * xScalar;
+		g.ctx.lineWidth = linew * g.xScalar;
 		let symbolx = (32 + (this.team - 2) * 48);
 		let symboly = 32;
 		let r = 16;
-		let symbolxD = (32 + (this.team - 2) * 48) * xScalar;
-		let symbolyD = 32 * xScalar;
-		let rD = 16 * xScalar;
-		draw_circle(symbolxD, symbolyD, rD, false);
-		draw_circle(symbolxD, symbolyD, rD, true);
+		let symbolxD = (32 + (this.team - 2) * 48) * g.xScalar;
+		let symbolyD = 32 * g.xScalar;
+		let rD = 16 * g.xScalar;
+		f.draw_circle(symbolxD, symbolyD, rD, false);
+		f.draw_circle(symbolxD, symbolyD, rD, true);
 
-		ctx.fillStyle = "rgba(50, 50, 50, 0.9)";
-		ctx.fillText(this.constructor.name, symbolxD, symbolyD);
+		g.ctx.fillStyle = "rgba(50, 50, 50, 0.9)";
+		g.ctx.fillText(this.constructor.name, symbolxD, symbolyD);
 
 		// Modules
 		for (let i = 0; i < this.modules.length; i++) {
@@ -54,9 +61,9 @@ class KI extends IObjlistentry {
 	}
 
 	pruefe_ob_eigene_Raumschiffe_im_Spiel() {
-		for(var i = 0; i < room.objects.length; i++) {
-			if(room.objects[i] instanceof Jelly) {
-				if(room.objects[i].team === this.team) return true;
+		for(var i = 0; i < g.room.objects.length; i++) {
+			if(g.room.objects[i] instanceof Jelly) {
+				if(g.room.objects[i].team === this.team) return true;
 			}
 		}
 		return false;
@@ -64,9 +71,9 @@ class KI extends IObjlistentry {
 
 	getBubbles() {
 		var bubbles = [];
-		for(var i = 0; i < room.bubbles.length; i++) {
-			if(room.bubbles[i].team === this.team) {
-				bubbles[bubbles.length] = room.bubbles[i];
+		for(var i = 0; i < g.room.bubbles.length; i++) {
+			if(g.room.bubbles[i].team === this.team) {
+				bubbles[bubbles.length] = g.room.bubbles[i];
 			}
 		}
 		return bubbles;
@@ -106,9 +113,9 @@ class KI extends IObjlistentry {
 
 	getEnemyBubblesWeakerThan(n) {
 		var enemyList = [];
-		for(var i = 0; i < room.bubbles.length; i++) {
-			if(room.bubbles[i].team !== this.team && n > room.bubbles[i].units) {
-				enemyList[enemyList.length] = room.bubbles[i];
+		for(var i = 0; i < g.room.bubbles.length; i++) {
+			if(g.room.bubbles[i].team !== this.team && n > g.room.bubbles[i].units) {
+				enemyList[enemyList.length] = g.room.bubbles[i];
 			}
 		}
 		return enemyList;
@@ -128,8 +135,8 @@ class KI extends IObjlistentry {
 
 	// TODO do this in room
 	pruefe_ob_gewonnen() {
-		for(var i = 0; i < room.objects.length; i++) {
-			if(room.objects[i] instanceof KI) {
+		for(var i = 0; i < g.room.objects.length; i++) {
+			if(g.room.objects[i] instanceof KI) {
 				return false;
 			}
 		}
@@ -152,12 +159,12 @@ class KI extends IObjlistentry {
 			this.destroy(); // TODO remove from room.ais
 
 			// Prüfen, ob noch eine KI da ist, sonst gewonnen.
-			if(room.status == "running" && this.pruefe_ob_gewonnen()){
-				showEndgame(true)
-				room.status = "won";
+			if(g.room.status == "running" && this.pruefe_ob_gewonnen()){
+				f.showEndgame(true)
+				g.room.status = "won";
 
 				// TODO win/lose logic should be in LevelRoom
-				ProgressManager.updateLevelStats(room.constructor.name, true);
+				ProgressManager.updateLevelStats(g.room.constructor.name, true);
 			}
 			return true;
 		}

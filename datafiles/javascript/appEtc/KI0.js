@@ -1,4 +1,7 @@
-class KI0 extends KI {
+import KI from "./KI.js";
+import * as g from "../globals.js";
+
+export default class KI0 extends KI {
 	constructor(team) {
 		super(team);
 	}
@@ -8,9 +11,9 @@ class KI0 extends KI {
 		var strongestPlanet = this.getStrongestPlanet(); // TODO rename
 		if(strongestPlanet === undefined)
 			return [];
-		for(var i = 0; i < room.bubbles.length; i++) {
-			if(room.bubbles[i].team !== this.team && Math.floor(strongestPlanet.units / 2) > room.bubbles[i].units) {
-				einnehmlist[einnehmlist.length] = room.bubbles[i];
+		for(var i = 0; i < g.room.bubbles.length; i++) {
+			if(g.room.bubbles[i].team !== this.team && Math.floor(strongestPlanet.units / 2) > g.room.bubbles[i].units) {
+				einnehmlist[einnehmlist.length] = g.room.bubbles[i];
 			}
 		}
 		return einnehmlist;

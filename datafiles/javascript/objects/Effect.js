@@ -1,4 +1,4 @@
-class Effect extends Object {
+export default class Effect extends Object {
 	constructor(x, y, ttl) {
 		super(x, y, 0, 0);
 		this.totalTtl = ttl;

@@ -1,6 +1,6 @@
 // Handles storing persistent data, can use different storage backend
 // Supported backends: see switch in constructor
-class Storage {
+export default class Storage {
 	constructor(backend) {
 		// Set strategy for `get`, `put` and `delete`
 		switch (backend) {

@@ -1,4 +1,27 @@
-class RoomMenuMain extends Room{
+import Room from "./Room.js";
+import * as g from "../globals.js";
+import SimBubbleEmitter from "../objects/SimBubble/SimBubbleEmitter.js";
+import Button from "../objects/Button.js";
+import LevelButton from "../objects/LevelButton.js";
+import MenuOverview from "./MenuOverview.js";
+import room0 from "./room0.js";
+import room1 from "./room1.js";
+import room2 from "./room2.js";
+import room3 from "./room3.js";
+import room4 from "./room4.js";
+import room5 from "./room5.js";
+import room6 from "./room6.js";
+import room7 from "./room7.js";
+import room8 from "./room8.js";
+import room9 from "./room9.js";
+import room10 from "./room10.js";
+import room11 from "./room11.js";
+import room20 from "./room20.js";
+import room21 from "./room21.js";
+import room22 from "./room22.js";
+import room23 from "./room23.js";
+
+export default class RoomMenuMain extends Room {
 	constructor(){
 		super();
 
@@ -23,7 +46,7 @@ class RoomMenuMain extends Room{
                      room22,
                      room23];
 
-		this.addObject(new Button("←", 42, roomHeight - 128, 90, 90, () => { gotoRoom(MenuOverview); } )).setFontSize(24) ;
+		this.addObject(new Button("←", 42, g.roomHeight - 128, 90, 90, () => { g.gotoRoom(MenuOverview); } )).setFontSize(24) ;
 
 		let buttonWidth = 128;
 		let buttonHeight = 128;
@@ -39,10 +62,10 @@ class RoomMenuMain extends Room{
 
 		// Calculate start margin in order to center the items block
 		let rowWidth = ((itemsInRow-1) * buttonMargin + itemsInRow * buttonWidth);
-		let marginLeft = (roomWidth - rowWidth) / 2;
+		let marginLeft = (g.roomWidth - rowWidth) / 2;
 
 		let columnHeight = ((itemsinColumn-1) * buttonMargin + itemsinColumn * buttonHeight);
-		let marginTop = (roomHeight - columnHeight) / 2;
+		let marginTop = (g.roomHeight - columnHeight) / 2;
 
 		for(let i = 0; i < itemsinColumn; i++)
 			for(let j = 0; j < itemsInRow && i*itemsInRow + j < rooms.length; j++) {
@@ -61,11 +84,10 @@ class RoomMenuMain extends Room{
 	draw() {
 		super.draw()
 
-		ctx.lineWidth = 4 * ((xScalar + yScalar) / 2);
-		ctx.font = Math.round(42 * ((xScalar + yScalar) / 2)) + "px fnt_Comforta_Light";
-		ctx.fillStyle = "white"
-		ctx.textAlign = "center";
-		// ctx.strokeText("Main", roomWidth/2 * xScalar, 140 * yScalar)
-		ctx.fillText("Main 🐟", roomWidth/2 * xScalar, 32 * yScalar)
+		g.ctx.lineWidth = 4 * ((g.xScalar + g.yScalar) / 2);
+		g.ctx.font = Math.round(42 * ((g.xScalar + g.yScalar) / 2)) + "px fnt_Comforta_Light";
+		g.ctx.fillStyle = "white"
+		g.ctx.textAlign = "center";
+		g.ctx.fillText("Main 🐟", g.roomWidth/2 * g.xScalar, 32 * g.yScalar)
 	}
 }

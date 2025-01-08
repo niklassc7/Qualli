@@ -1,44 +1,48 @@
-function onResize() {
-	// if it was not in fullScreen and it gets smaller than roomSize put in fullScreen
+import * as g from "./globals.js";
+import Settings from "./engine/Settings.js";
+import Jelly from "./objects/Jelly.js";
+import Bubble from "./objects/Bubble.js";
 
-	// canvas.width = canvas_width;
-	// canvas.height = canvas_height;
-	if(fullscreen)
+// TODO put functions in approrpirate places
+
+export function onResize() {
+	// if it was not in fullScreen and it gets smaller than roomSize put in fullScreen
+	if(Settings.fullscreen)
 		resizeCanvas();
 	else if(window.innerWidth < roomWidth || window.innerHeight < roomHeight)
 		activateFullscreen();
 }
 
 // Returns a random element from arr
-function chooseRandom(arr) {
+export function chooseRandom(arr) {
 	let ri = Math.floor(arr.length * Math.random());
 	return arr[ri];
 
 }
 
-function activateFullscreen() {
+export function activateFullscreen() {
 	document.getElementById("myCanvas").classList.add("fullscreen");
 	document.getElementById("myCanvas").requestFullscreen();
-	fullscreen = true;
+	Settings.fullscreen = true;
 	resizeCanvas();
 }
 
-function deactivateFullscreen() {
+export function deactivateFullscreen() {
 	document.getElementById("myCanvas").classList.remove("fullscreen");
-	fullscreen = false;
+	Settings.fullscreen = false;
 
-	canvas.width = roomWidth;
-	canvas.height = roomHeight;
+	g.canvas.width = g.roomWidth;
+	g.canvas.height = g.roomHeight;
 	xScalar = 1;
 	yScalar = 1;
 
-	for(let i = 0; i < room.objects.length; i++)
-		room.objects[i].resize();
+	for(let i = 0; i < g.room.objects.length; i++)
+		g.room.objects[i].resize();
 }
 
-function toggleFullscreen() {
-	if(fullscreen)
-		if(window.innerWidth < roomWidth || window.innerHeight < roomHeight)
+export function toggleFullscreen() {
+	if(g.fullscreen)
+		if(window.innerWidth < g.roomWidth || window.innerHeight < g.roomHeight)
 			alert("Window too small for window mode");
 	else
 		deactivateFullscreen();
@@ -46,7 +50,7 @@ function toggleFullscreen() {
 		activateFullscreen();
 }
 
-function resizeCanvas() {
+export function resizeCanvas() {
 	let ratioW = 16
 	let ratioH = 9
 	// fp4
@@ -72,11 +76,11 @@ function resizeCanvas() {
 
 	// Aspect ratio
 	if(availWidth * (ratioH / ratioW) > availHeight) {
-		canvas.width = availHeight * (ratioW / ratioH);
-		canvas.height = availHeight;
+		g.canvas.width = availHeight * (ratioW / ratioH);
+		g.canvas.height = availHeight;
 	} else {
-		canvas.width = availWidth;
-		canvas.height = availWidth * (ratioH / ratioW);
+		g.canvas.width = availWidth;
+		g.canvas.height = availWidth * (ratioH / ratioW);
 	}
 
 	// canvas.width = window.innerWidth * scale;
@@ -85,28 +89,22 @@ function resizeCanvas() {
 
 	// Fit screen TODO combine with if-clause above
 	if(window.innerWidth * (ratioH / ratioW) > window.innerHeight) {
-		canvasStyleWidth = window.innerHeight * (ratioW / ratioH)
-		canvasStyleHeight = window.innerHeight
-		canvas.style.width = `${canvasStyleWidth}px`
-		canvas.style.height = `${canvasStyleHeight}px`
-
-		// xScalar = (window.innerHeight * (ratioW / ratioH)) / roomWidth;
-		// yScalar = window.innerHeight / roomHeight;
+		g.setCanvasStyleWidth(window.innerHeight * (ratioW / ratioH));
+		g.setCanvasStyleHeight(window.innerHeight);
+		g.canvas.style.width = `${g.canvasStyleWidth}px`
+		g.canvas.style.height = `${g.canvasStyleHeight}px`
 	} else {
-		canvasStyleWidth = window.innerWidth
-		canvasStyleHeight = window.innerWidth * (ratioH / ratioW)
-		canvas.style.width = `${canvasStyleWidth}px`
-		canvas.style.height = `${canvasStyleHeight}px`
-
-		// xScalar = window.innerWidth / roomWidth;
-		// yScalar = (window.innerWidth * (ratioH / ratioW)) / roomHeight;
+		g.setCanvasStyleWidth(window.innerWidth);
+		g.setCanvasStyleHeight(window.innerWidth * (ratioH / ratioW));
+		g.canvas.style.width = `${g.canvasStyleWidth}px`
+		g.canvas.style.height = `${g.canvasStyleHeight}px`
 	}
 	// canvas.style.width = `${window.innerWidth}px`;
 	// canvas.style.height = `${window.innerHeight}px`;
 
 	// TODO just one scaling?
-	xScalar = canvas.width / roomWidth;
-	yScalar = canvas.height / roomHeight;
+	g.setXScalar(g.canvas.width / g.roomWidth);
+	g.setYScalar(g.canvas.height / g.roomHeight);
 
 	// TODO
 	// xScalar = (xScalar + yScalar) / 2
@@ -119,7 +117,7 @@ function resizeCanvas() {
 
 	// TODO check
 	try {
-		room;
+		g.room;
 	} catch(e) {
 		if (e.name == "ReferenceError") {
 			return;
@@ -127,47 +125,22 @@ function resizeCanvas() {
 	}
 
 	// Reposition objects
-	for(let i = 0; i < room.objects.length; i++)
-		room.objects[i].resize();
+	for(let i = 0; i < g.room.objects.length; i++)
+		g.room.objects[i].resize();
 }
 
-// Receives room class, instantiates it and changes room to it
-function gotoRoom(newRoom){
-	console.log("Going to room", newRoom.name)
-
-
-	// Set new room
-	room = new newRoom(room);
-	input.reset();
-
-	// TODO do this better
-	// if (!(room instanceof LevelRoom) && !(newRoom.prototype instanceof LevelRoom)) {
-	// 	console.log(SimBubble.all)
-	// 	room.objects.push.apply(room.objects, SimBubble.all);
-	// }
-	room.objects.push.apply(room.objects, SimBubble.all);
-	room.objects.push.apply(room.objects, SimJelly.all);
-
-	// for (let i = 0; i < SimJelly.all.length; i++) {
-	// 	SimJelly.all[i].setSpeed();
-	// }
-	
-	document.body.style.background = `url(${newRoom.background})`;
-	document.body.style.backgroundSize = "cover";
-}
-
-function radtodeg(rad) {
+export function radtodeg(rad) {
 	return rad * (180 / Math.PI);
 }
-function degtorad(deg) {
+export function degtorad(deg) {
 	return deg * (Math.PI / 180);
 }
 
-function point_in_rectangle(px, py, x1, y1, x2, y2){
+export function point_in_rectangle(px, py, x1, y1, x2, y2){
 	if(px < x1 || py < y1 || px > x2 || py > y2) return false;
 	return true;
 }
-function rectangle_in_rectangle(a_x1, a_y1, a_x2, a_y2, b_x1, b_y1, b_x2, b_y2) {
+export function rectangle_in_rectangle(a_x1, a_y1, a_x2, a_y2, b_x1, b_y1, b_x2, b_y2) {
 	if(a_x1 <= b_x1){
 		if(a_x2 < b_x1) return false;
 	}else{
@@ -183,7 +156,7 @@ function rectangle_in_rectangle(a_x1, a_y1, a_x2, a_y2, b_x1, b_y1, b_x2, b_y2) 
 
 // TODO implement
 // Checks if point (x,y) is in circle at (cx,cy) with radius r
-function pointInCircle(x, y, cx, cy, r) {
+export function pointInCircle(x, y, cx, cy, r) {
 	// console.log(x, y, cx, cy, r);
 
 	let dx = Math.abs(x - cx);
@@ -199,7 +172,7 @@ function pointInCircle(x, y, cx, cy, r) {
 }
 
 // TODO implement
-function circleInCircle(x1, y1, r1, x2, y2, r2) {
+export function circleInCircle(x1, y1, r1, x2, y2, r2) {
 	let dx = Math.abs(x1 - x2);
 	let dy = Math.abs(y1 - y2);
 	
@@ -208,7 +181,7 @@ function circleInCircle(x1, y1, r1, x2, y2, r2) {
 	return dx <= rt && dy <= rt;
 }
 
-function pointDirection(x1, y1, x2, y2){ // Nicht getestet! FEHLERHAFT TODO
+export function pointDirection(x1, y1, x2, y2){ // Nicht getestet! FEHLERHAFT TODO
 	let dx = x2 - x1;
 	let dy = y2 - y1;
 
@@ -217,7 +190,7 @@ function pointDirection(x1, y1, x2, y2){ // Nicht getestet! FEHLERHAFT TODO
 }
 
 // Mathematical modulo
-function mMod(a, b) {
+export function mMod(a, b) {
 	return ((a % b + b) % b);
 }
 
@@ -228,12 +201,12 @@ function mMod(a, b) {
 // @param {number} - Y-coordinate
 // @param {Object} - Class
 // @return {(Object|undefined)} of type cls or undefined
-function collision_point(x, y, cls) { // return obj oder undefined
+export function collision_point(x, y, cls) { // return obj oder undefined
 	/* Prüft, ob Punkt mit einem Objekt der Klasse cls kollidiert.
 	* Nur unpräzise Prüfung (point_in_rectangle).
 	*/
-	for(var i = 0; i < room.objects.length; i++) {
-		var obj = room.objects[i];
+	for(var i = 0; i < g.room.objects.length; i++) {
+		var obj = g.room.objects[i];
 		if(obj instanceof cls){
 			var x1 = obj.x - obj.ox
 			var y1 = obj.y - obj.oy
@@ -246,27 +219,28 @@ function collision_point(x, y, cls) { // return obj oder undefined
 }
 
 // TODO camelCase
-function draw_line(x1, y1, x2, y2) {
-	ctx.beginPath();
-	ctx.moveTo(x1, y1);
-	ctx.lineTo(x2, y2);
-	ctx.stroke();
+export function draw_line(x1, y1, x2, y2) {
+	g.ctx.beginPath();
+	g.ctx.moveTo(x1, y1);
+	g.ctx.lineTo(x2, y2);
+	g.ctx.stroke();
 }
 
 // TODO fillCircle and strokeCircle
 // TODO camelCase
 // Put in static method of a graphics class
-function draw_circle(x, y, r, outline) {
-	ctx.beginPath();
-	ctx.arc(x, y, r, 0, 2 * Math.PI, false);
+export function draw_circle(x, y, r, outline) {
+	g.ctx.beginPath();
+	g.ctx.arc(x, y, r, 0, 2 * Math.PI, false);
 	if(outline)
-		ctx.stroke();
+		g.ctx.stroke();
 	else
-		ctx.fill();
+		g.ctx.fill();
 }
 
 // TODO camelCase
-function draw_roundrect(ctx, x, y, width, height, radius, fill, stroke) {
+// TODO ctx should be handled the same in any draw-function
+export function draw_roundrect(ctx, x, y, width, height, radius, fill, stroke) {
 	if (typeof stroke == 'undefined') {
 		stroke = true;
 	}
@@ -301,10 +275,10 @@ function draw_roundrect(ctx, x, y, width, height, radius, fill, stroke) {
 }
 
 // Checks if team has already lost
-function checkIfLost(team) {
-	for(var i = 0; i < room.objects.length; i++) {
-		if(room.objects[i] instanceof Jelly || room.objects[i] instanceof Bubble) {
-			if(room.objects[i].team === team) {
+export function checkIfLost(team) {
+	for(var i = 0; i < g.room.objects.length; i++) {
+		if(g.room.objects[i] instanceof Jelly || g.room.objects[i] instanceof Bubble) {
+			if(g.room.objects[i].team === team) {
 				return false;
 			}
 		}
@@ -312,26 +286,24 @@ function checkIfLost(team) {
 	return true;
 }
 
-function showEndgame(won) {
-	let levelTimeS = (Date.now() - room.roomEntered) / 1000
+export function showEndgame(won) {
+	let levelTimeS = (Date.now() - g.room.roomEntered) / 1000
 
 	document.getElementById("egWon").innerHTML = won ? "won 🥳" : "lost 🤬"
 	document.getElementById("egTime").innerHTML = `${levelTimeS} seconds`
 	document.getElementById("endgameOverlay").classList.remove("hidden")
 }
 
-function hideEndgame() {
+export function hideEndgame() {
 	document.getElementById("endgameOverlay").classList.add("hidden")
 }
 
 // Converts xD to x
-function xScreenToInternal(xD) {
-	// return xD / canvas.width * roomWidth
-	return xD / canvasStyleWidth * roomWidth
+export function xScreenToInternal(xD) {
+	return xD / g.canvasStyleWidth * g.roomWidth;
 }
 
 // Converts yD to y
-function yScreenToInternal(yD) {
-	// return yD / canvas.height * roomHeight
-	return yD / canvasStyleHeight * roomHeight
+export function yScreenToInternal(yD) {
+	return yD / g.canvasStyleHeight * g.roomHeight;
 }

@@ -1,7 +1,7 @@
 // When ttl of bubble is soon over, this module evacuates to a random own
 // bubble if available. Otherwise to random other bubble.
 
-class ModFleeTemp extends AiModule {
+export default class ModFleeTemp extends AiModule {
 	constructor() {
 		super();
 	}

@@ -1,4 +1,6 @@
-class BubbleTemp extends Bubble {
+import Bubble from "./Bubble.js";
+
+export default class BubbleTemp extends Bubble {
 	constructor(x, y, team, size, units, ttl) {
 		super(x, y, team, size, units);
 

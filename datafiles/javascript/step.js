@@ -1,16 +1,20 @@
-function step(){
+import draw from "./draw.js";
+import * as g from "./globals.js";
+import Settings from "./engine/Settings.js";
+
+export default function step(){
 	if (Settings.paused) {
 		return;
 	}
 
 	// step of all objects
-	for(var i = 0; i < room.objects.length; i++){
-		room.objects[i].step();
+	for(var i = 0; i < g.room.objects.length; i++){
+		g.room.objects[i].step();
 	}
 
-	room.step();
+	g.room.step();
 	// input.step()
 	draw();
 
-	stepCount++
+	g.incrStepCount();
 }

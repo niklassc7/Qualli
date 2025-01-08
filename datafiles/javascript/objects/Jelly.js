@@ -1,8 +1,14 @@
-class Jelly extends SpriteObject {
-	constructor(x, y, team, ziel, size=1) {
-		super(x, y, 32, 21, spr_Raumschiff[team]);
+import SpriteObject from "../engine/objects/SpriteObject.js";
+import * as g from "../globals.js";
+import * as f from "../functions.js";
+import IObjlistentry from "../appEtc/IObjlistentry.js";
+import Colors from "../appEtc/color/Colors.js";
 
-		room.addObject(this); // Move to Superclass
+export default class Jelly extends SpriteObject {
+	constructor(x, y, team, ziel, size=1) {
+		super(x, y, 32, 21, g.spr_Raumschiff[team]);
+
+		g.room.addObject(this); // Move to Superclass
 
 		this.team = team;
 		this.ziel = ziel; // TODO rename
@@ -33,7 +39,7 @@ class Jelly extends SpriteObject {
 				super();
 				this.parent = parent;
 				this.targetSpeed = targetSpeed;
-				room.addObject(this);
+				g.room.addObject(this);
 			}
 
 			draw() {}
@@ -44,13 +50,13 @@ class Jelly extends SpriteObject {
 				if(this.parent.speed < this.targetSpeed)
 					this.parent.setSpeed(this.parent.speed + acceleration);
 
-				let zDir = pointDirection(this.parent.x, this.parent.y, this.parent.targetX, this.parent.targetY);
+				let zDir = f.pointDirection(this.parent.x, this.parent.y, this.parent.targetX, this.parent.targetY);
 
 				// TODO increase when large amounts are spawned
 				let turnSpeed = 2 + 4*Math.random();
 
-				let positiveTurnDistance = mMod(zDir - this.parent.direction, 360); // clockwise
-				let negativeTurnDistance = mMod(this.parent.direction - zDir, 360); // anticlockwise
+				let positiveTurnDistance = f.mMod(zDir - this.parent.direction, 360); // clockwise
+				let negativeTurnDistance = f.mMod(this.parent.direction - zDir, 360); // anticlockwise
 
 				if(positiveTurnDistance <= turnSpeed || negativeTurnDistance <= turnSpeed)
 					this.parent.setDirection(zDir);
@@ -76,7 +82,7 @@ class Jelly extends SpriteObject {
 		super.step();
 
 		// Check if jelly collided with target
-		if (rectangle_in_rectangle(
+		if (f.rectangle_in_rectangle(
 			this.x - (this.width/2),
 			this.y - (this.height/2),
 			this.x + (this.width/2),
@@ -117,12 +123,11 @@ class Jelly extends SpriteObject {
 		// TODO origin
 		// TODO ellipsis
 		let c = Colors.team[this.team];
-		ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, 0.025`;
+		g.ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, 0.025`;
 		let maxr = Math.max(this.widthD, this.heightD);
 
-		draw_circle(this.xD, this.yD, maxr * 2.7, false);
-		draw_circle(this.xD, this.yD, maxr * 2.0, false);
-		// draw_circle(this.xD, this.yD, maxr, false);
+		f.draw_circle(this.xD, this.yD, maxr * 2.7, false);
+		f.draw_circle(this.xD, this.yD, maxr * 2.0, false);
 
 		super.draw();
 	}
