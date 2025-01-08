@@ -211,6 +211,9 @@ export function collision_point(x, y, cls) { // return obj oder undefined
 }
 
 // TODO camelCase
+/**
+ * Draws a line from point (x1,y1) to (x2,y2) on g.ctx
+ */
 export function draw_line(x1, y1, x2, y2) {
 	g.ctx.beginPath();
 	g.ctx.moveTo(x1, y1);
