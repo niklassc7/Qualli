@@ -1,5 +1,8 @@
+import Object from "../engine/objects/Object";
+import * as g from "../globals.js";
+
 // Creates a bubbles
-class BubbleSeed extends Object {
+export default class BubbleSeed extends Object {
 	constructor(delay, futureBubble) {
 		super(futureBubble.x, futureBubble.y, futureBubble.width, futureBubble.height);
 
@@ -26,47 +29,45 @@ class BubbleSeed extends Object {
 
 		// animation
 		// TODO scale to size of seed
-		// ctx.lineWidth = 5 * xScalar * ((1+this.futureBubble.size)/2);
 		// let scale = this.futureBubble.size;
-		ctx.lineWidth = 5 * xScalar;
+		g.ctx.lineWidth = 5 * g.xScalar;
 		let lineCount = 5;
 
 
 
-		ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
-		// ctx.fillStyle = "white";
+		g.ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
 		let shiftedStepCount = stepCount + this.created; // Shift counter by creation time because otherwise all seed instances show exactly the same
 		for(var i = 0; i < lineCount; i++){
-			ctx.beginPath();
-			ctx.arc(this.xD, this.yD, i * ((ctx.lineWidth-1)*2), (shiftedStepCount* (i*0.01+0.1)) + 1.25 * Math.PI, (shiftedStepCount*(i*0.01+0.1)) + 1.75 * Math.PI, false);
-			ctx.stroke();
-			ctx.beginPath();
-			ctx.arc(this.xD, this.yD, ctx.lineWidth + i * ((ctx.lineWidth-1)*2), -(shiftedStepCount* (i*0.01+0.1)) + 1.25 * Math.PI, -(shiftedStepCount*(i*0.01+0.1)) + 1.75 * Math.PI, false);
-			ctx.stroke();
+			g.ctx.beginPath();
+			g.ctx.arc(this.xD, this.yD, i * ((g.ctx.lineWidth-1)*2), (shiftedStepCount* (i*0.01+0.1)) + 1.25 * Math.PI, (shiftedStepCount*(i*0.01+0.1)) + 1.75 * Math.PI, false);
+			g.ctx.stroke();
+			g.ctx.beginPath();
+			g.ctx.arc(this.xD, this.yD, g.ctx.lineWidth + i * ((g.ctx.lineWidth-1)*2), -(shiftedStepCount* (i*0.01+0.1)) + 1.25 * Math.PI, -(shiftedStepCount*(i*0.01+0.1)) + 1.75 * Math.PI, false);
+			g.ctx.stroke();
 		}
 
 
 		// Background
-		ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+		g.ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
 		draw_circle(this.xD, this.yD, 0.9*this.widthD/2, false);
 
 		// Draw background of progress bar
 		let circleRadius = 1.1 * this.widthD / 2;
-		ctx.lineWidth = 3 * xScalar;
-		ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+		g.ctx.lineWidth = 3 * g.xScalar;
+		g.ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
 		draw_circle(this.xD, this.yD, circleRadius, true);
 		
 
 		// Draw progress bar of time left
-		ctx.lineWidth = 3 * xScalar;
-		ctx.strokeStyle = 'white';
-		ctx.beginPath();
-		ctx.arc(this.xD,
+		g.ctx.lineWidth = 3 * g.xScalar;
+		g.ctx.strokeStyle = 'white';
+		g.ctx.beginPath();
+		g.ctx.arc(this.xD,
 			this.yD,
 			circleRadius,
 			2.0 * Math.PI * (this.timeAlive/this.delay),
 			2.0 * Math.PI);
 
-		ctx.stroke();
+		g.ctx.stroke();
 	}
 }

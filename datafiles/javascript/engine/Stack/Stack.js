@@ -1,4 +1,6 @@
-class Stack {
+import StackNode from "./StackNode";
+
+export default class Stack {
 	constructor() {
 		this.top = undefined;
 	}
@@ -18,9 +20,3 @@ class Stack {
 	}
 }
 
-class StackNode {
-	constructor(val, pre) {
-		this.val = val;
-		this.pre = pre;
-	}
-};

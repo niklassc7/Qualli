@@ -1,7 +1,17 @@
+import Room from "./Room.js";
+import * as g from "../globals.js";
+import * as f from "../functions.js";
+import Button from "../objects/Button.js";
+import Settings from "../engine/Settings.js";
+import ProgressManager from "../appEtc/ProgressManager.js";
+
+
+// TODO Import these in the individual level rooms only when needed
+
 // Abstract Class LevelRoom
 // All levels should extend from this
 
-class LevelRoom extends Room {
+export default class LevelRoom extends Room {
 	static background = "datafiles/sprites/bg8FullHd.png";
 
 	constructor(prevRoom){
@@ -23,7 +33,7 @@ class LevelRoom extends Room {
 		// Pause button
 		let pauseButton = this.addObject(new Button(
 			"⏸",
-			roomWidth - 60,
+			g.roomWidth - 60,
 			10,
 			50,
 			50,
@@ -62,14 +72,14 @@ class LevelRoom extends Room {
 
 	removeBubble(bubble) {
 		// TODO datastructure
-		for (var i = 0; i < room.bubbles.length; i++) {
-			if(room.bubbles[i] === bubble) {
-				room.bubbles.splice(i, 1);
+		for (var i = 0; i < g.room.bubbles.length; i++) {
+			if(g.room.bubbles[i] === bubble) {
+				g.room.bubbles.splice(i, 1);
 				return true;
 			}
 		}
 
-		console.error("Attempted to deleted bubble that is not in room.bubbles", bubble);
+		console.error("Attempted to deleted bubble that is not in g.room.bubbles", bubble);
 		return false;
 	}
 
@@ -78,7 +88,7 @@ class LevelRoom extends Room {
 			return
 		}
 
-		gotoRoom(this.prevRoom)
+		g.gotoRoom(this.prevRoom)
 		Settings.unpause()
 	}
 
@@ -87,17 +97,17 @@ class LevelRoom extends Room {
 				return
 		}
 
-		gotoRoom(this.constructor)
+		g.gotoRoom(this.constructor)
 	}
 
 	// TODO rename → timer
 	alarmieren(nr) {
 		switch(nr) {
 			case 0:
-				if(this.status == "running" && checkIfLost(1)) {
+				if(this.status == "running" && f.checkIfLost(1)) {
 					this.status = "lost";
-					showEndgame(false)
-					ProgressManager.updateLevelStats(room.constructor.name, false);
+					f.showEndgame(false)
+					ProgressManager.updateLevelStats(g.room.constructor.name, false);
 				}
 				this.alarm[0] = 300;
 

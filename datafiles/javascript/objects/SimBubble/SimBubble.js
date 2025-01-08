@@ -1,4 +1,10 @@
-class SimBubble extends Object {
+import Object from "../../engine/objects/Object.js";
+import LevelRoom from "../../rooms/LevelRoom.js";
+import * as g from "../../globals.js";
+import * as f from "../../functions.js";
+import LinkedList from "../../engine/LinkedList/LinkedList.js";
+
+export default class SimBubble extends Object {
 	// TODO Is this ever cleared? On room change?
 	static all = [];
 
@@ -42,7 +48,7 @@ class SimBubble extends Object {
 
 		this.setVspeed(this.vspeed - this.ascendAcel);
 
-		if (room instanceof LevelRoom) {
+		if (g.room instanceof LevelRoom) {
 			this.setVspeed(this.vspeed - 40*this.ascendAcel);
 		}
 
@@ -73,15 +79,15 @@ class SimBubble extends Object {
 		let ax2 = this.x + this.width/2;
 		let ay2 = this.y + this.height/2
 
-		if (point_in_rectangle(input.x, input.y, ax1, ay1, ax2, ay2)) {
+		if (f.point_in_rectangle(g.input.x, g.input.y, ax1, ay1, ax2, ay2)) {
 			let a = 0.5;
-			if (this.x < input.x) {
+			if (this.x < g.input.x) {
 				this.setHspeed(this.hspeed - a);
 			} else {
 				this.setHspeed(this.hspeed + a);
 			}
 
-			if (this.y < input.y) {
+			if (this.y < g.input.y) {
 				this.setVspeed(this.vspeed - a);
 			} else {
 				this.setVspeed(this.vspeed + a);
@@ -108,7 +114,7 @@ class SimBubble extends Object {
 			let bx2 = other.x + other.width/2;
 			let by2 = other.y + other.height/2
 
-			if (rectangle_in_rectangle(ax1, ay1, ax2, ay2, bx1, by1, bx2, by2)) {
+			if (f.rectangle_in_rectangle(ax1, ay1, ax2, ay2, bx1, by1, bx2, by2)) {
 				// console.log("COLLLISION");
 				let aHoriz = 0.05;
 				if (this.x < other.x) {
@@ -134,30 +140,24 @@ class SimBubble extends Object {
 	draw() {
 		super.draw();
 
-		ctx.strokeStyle = "rgba(220, 220, 250, 0.6)";
-		// ctx.strokeStyle = `rgba(${this.basecolor[0]}, ${this.basecolor[1]}, ${this.basecolor[2]}, 0.6)`;
-		ctx.lineWidth = 4 * xScalar;
-		draw_circle(this.xD, this.yD, this.widthD/2, true);
+		g.ctx.strokeStyle = "rgba(220, 220, 250, 0.6)";
+		g.ctx.lineWidth = 4 * g.xScalar;
+		f.draw_circle(this.xD, this.yD, this.widthD/2, true);
 
 
-		ctx.fillStyle = "rgba(220, 220, 250, 0.1)";
-		// ctx.fillStyle = `rgba(${this.basecolor[0]}, ${this.basecolor[1]}, ${this.basecolor[2]}, 0.1)`;
-		draw_circle(this.xD, this.yD, this.widthD/2, false);
+		g.ctx.fillStyle = "rgba(220, 220, 250, 0.1)";
+		f.draw_circle(this.xD, this.yD, this.widthD/2, false);
 
 
-		// ctx.fillStyle = "rgba(220, 220, 250, 0.2)";
 		let lineNum = 5;
 		for (let i = 1; i < lineNum; i++) {
 			let alpha = 0.05 + 0.6 * (1 - i/lineNum)
 
-			// ctx.strokeStyle = "rgba(220, 220, 250, 0.1)";
-			// ctx.strokeStyle = "red";
-			// ctx.strokeStyle = `rgba(120, 210, 255, ${alpha})`;
-			ctx.strokeStyle = `rgba(${this.basecolor[0]}, ${this.basecolor[1]}, ${this.basecolor[2]}, ${alpha})`;
-			let lineWidth = 1 * xScalar;
-			ctx.lineWidth = lineWidth;
-			draw_circle(this.xD, this.yD, this.widthD/2 - i*(lineWidth*2), true);
-			draw_circle(this.xD, this.yD, this.widthD/2 + i*(lineWidth*2), true);
+			g.ctx.strokeStyle = `rgba(${this.basecolor[0]}, ${this.basecolor[1]}, ${this.basecolor[2]}, ${alpha})`;
+			let lineWidth = 1 * g.xScalar;
+			g.ctx.lineWidth = lineWidth;
+			f.draw_circle(this.xD, this.yD, this.widthD/2 - i*(lineWidth*2), true);
+			f.draw_circle(this.xD, this.yD, this.widthD/2 + i*(lineWidth*2), true);
 		}
 	}
 

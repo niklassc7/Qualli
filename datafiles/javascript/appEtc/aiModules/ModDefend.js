@@ -1,4 +1,8 @@
-class ModDefend extends AiModule {
+import * as g from "../../globals.js";
+import * as f from "../../functions.js";
+import AiModule from "./AiModule.js";
+
+export default class ModDefend extends AiModule {
 	constructor() {
 		super();
 	}
@@ -10,7 +14,7 @@ class ModDefend extends AiModule {
 			let bubble = bubbles[i];
 
 			if (bubble.getArrivingEnemy() >= bubble.units + bubble.arriving[bubble.team]) {
-				let randBubble = chooseRandom(bubbles);
+				let randBubble = f.chooseRandom(bubbles);
 
 				if (randBubble === bubble[i])
 					continue;
@@ -23,12 +27,12 @@ class ModDefend extends AiModule {
 	}
 
 	drawIcon(x, y, r) {
-		let xd = x * xScalar;
-		let yd = y * yScalar;
-		let rd = r * yScalar;
+		let xd = x * g.xScalar;
+		let yd = y * g.yScalar;
+		let rd = r * g.yScalar;
 
-		draw_circle(xd, yd, rd, true);
-		ctx.fillStyle = "#5fbf20";
-		draw_circle(xd, yd, rd, false);
+		f.draw_circle(xd, yd, rd, true);
+		g.ctx.fillStyle = "#5fbf20";
+		f.draw_circle(xd, yd, rd, false);
 	}
 }

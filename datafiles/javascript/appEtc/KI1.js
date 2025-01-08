@@ -1,4 +1,6 @@
-class KI1 extends KI {
+import KI from "./KI.js";
+
+export default class KI1 extends KI {
 	constructor(team) {
 		super(team);
 		this.a;

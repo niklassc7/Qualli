@@ -17,104 +17,14 @@
 		<title>Qualli</title>
 		<link rel = "Stylesheet"  type = "text/css" href = "Master.css"/>
 
-		<!-- Engine -->
-		<script src="datafiles/javascript/engine/Storage.js"></script>
-		<script src="datafiles/javascript/engine/Settings.js"></script>
-
-		<script src="datafiles/javascript/appEtc/IObjlistentry.js"></script>
-		<script src="datafiles/javascript/appEtc/mouse.js"></script>
-		<script src="datafiles/javascript/appEtc/input.js"></script>
-		<script src="datafiles/javascript/appEtc/aiModules/AiModule.js"></script>
-		<script src="datafiles/javascript/appEtc/aiModules/ModFleeTemp.js"></script>
-		<script src="datafiles/javascript/appEtc/aiModules/ModDefend.js"></script>
-		<script src="datafiles/javascript/appEtc/KI.js"></script>
-		<script src="datafiles/javascript/appEtc/KI0.js"></script>
-		<script src="datafiles/javascript/appEtc/KI1.js"></script>
-		<script src="datafiles/javascript/appEtc/KI2.js"></script>
-		<script src="datafiles/javascript/appEtc/Stack.js"></script>
-		<script src="datafiles/javascript/appEtc/LinkedList.js"></script>
-		<script src="datafiles/javascript/appEtc/ProgressManager.js"></script>
-		<script src="datafiles/javascript/appEtc/LevelStats.js"></script>
-		<script src="datafiles/javascript/appEtc/color/Color.js"></script>
-		<script src="datafiles/javascript/appEtc/color/Colors.js"></script>
-
-		<script src="datafiles/javascript/engine/objects/Object.js"></script>
-		<script src="datafiles/javascript/engine/objects/SpriteObject.js"></script>
-
-		<script src="datafiles/javascript/objects/Button.js"></script>
-		<script src="datafiles/javascript/objects/LevelButton.js"></script>
-		<script src="datafiles/javascript/objects/Sterne.js"></script> <!-- TODO remove -->
-		<script src="datafiles/javascript/objects/Erde.js"></script>
-		<script src="datafiles/javascript/objects/Bubble.js"></script>
-		<script src="datafiles/javascript/objects/BubbleTemp.js"></script>
-		<script src="datafiles/javascript/objects/BubbleSeed.js"></script>
-		<script src="datafiles/javascript/objects/Jelly.js"></script>
-		<script src="datafiles/javascript/objects/Effect.js"></script>
-		<script src="datafiles/javascript/objects/RadarEffect.js"></script>
-		<script src="datafiles/javascript/objects/FloatSign.js"></script>
-
-		<script src="datafiles/javascript/objects/SimBubble/SimBubble.js"></script>
-		<script src="datafiles/javascript/objects/SimBubble/SimBubbleEmitter.js"></script>
-		<script src="datafiles/javascript/objects/SimJelly.js"></script>
-
-
-		<!-- Rooms -->
-		<script src="datafiles/javascript/rooms/Room.js"></script>
-		<script src="datafiles/javascript/rooms/Startpage.js"></script>
-		<script src="datafiles/javascript/rooms/MenuOverview.js"></script>
-		<script src="datafiles/javascript/rooms/RoomMenuMain.js"></script>
-		<script src="datafiles/javascript/rooms/RoomMenuAdvanced.js"></script>
-		<script src="datafiles/javascript/rooms/RoomMenuExperimental.js"></script>
-		<script src="datafiles/javascript/rooms/RoomMenuArchive.js"></script>
-		<script src="datafiles/javascript/rooms/LevelRoom.js"></script>
-		<script src="datafiles/javascript/rooms/room0.js"></script>
-		<script src="datafiles/javascript/rooms/room1.js"></script>
-		<script src="datafiles/javascript/rooms/room2.js"></script>
-		<script src="datafiles/javascript/rooms/room3.js"></script>
-		<script src="datafiles/javascript/rooms/room4.js"></script>
-		<script src="datafiles/javascript/rooms/room5.js"></script>
-		<script src="datafiles/javascript/rooms/room6.js"></script>
-		<script src="datafiles/javascript/rooms/room7.js"></script>
-		<script src="datafiles/javascript/rooms/room8.js"></script>
-		<script src="datafiles/javascript/rooms/room9.js"></script>
-		<script src="datafiles/javascript/rooms/room10.js"></script>
-		<script src="datafiles/javascript/rooms/room11.js"></script>
-		<script src="datafiles/javascript/rooms/room12.js"></script>
-		<script src="datafiles/javascript/rooms/room13.js"></script>
-		<script src="datafiles/javascript/rooms/room14.js"></script>
-		<script src="datafiles/javascript/rooms/room15.js"></script>
-		<script src="datafiles/javascript/rooms/room16.js"></script>
-		<script src="datafiles/javascript/rooms/room17.js"></script>
-		<script src="datafiles/javascript/rooms/room18.js"></script>
-		<script src="datafiles/javascript/rooms/room19.js"></script>
-		<script src="datafiles/javascript/rooms/room20.js"></script>
-		<script src="datafiles/javascript/rooms/room21.js"></script>
-		<script src="datafiles/javascript/rooms/room22.js"></script>
-		<script src="datafiles/javascript/rooms/room23.js"></script>
-		<script src="datafiles/javascript/rooms/room24.js"></script>
-		<script src="datafiles/javascript/rooms/room25.js"></script>
-		<script src="datafiles/javascript/rooms/room26.js"></script>
-		<script src="datafiles/javascript/rooms/room27.js"></script>
-		<script src="datafiles/javascript/rooms/room28.js"></script>
-		<script src="datafiles/javascript/rooms/room29.js"></script>
-		<script src="datafiles/javascript/rooms/room30.js"></script>
-		<script src="datafiles/javascript/rooms/room31.js"></script>
-		<script src="datafiles/javascript/rooms/room32.js"></script>
-		<script src="datafiles/javascript/rooms/room33.js"></script>
-		<script src="datafiles/javascript/rooms/room34.js"></script>
-		<script src="datafiles/javascript/rooms/room35.js"></script>
-		<script src="datafiles/javascript/rooms/room36.js"></script>
-		<script src="datafiles/javascript/rooms/room37.js"></script>
-
-		<script src="datafiles/javascript/main.js"></script>
-		<script src="datafiles/javascript/step.js"></script>
-		<script src="datafiles/javascript/draw.js"></script>
-		<script src="datafiles/javascript/functions.js"></script>
-
-
+		<script type="module">
+			import main from "./datafiles/javascript/main.js";
+			main();
+		</script>
 	</head>
 
-	<body onLoad="main()" onresize="onResize()">
+	<!-- <body onLoad="main()" onresize="onResize()"> -->
+	<body onresize="onResize()">
 		<canvas id="myCanvas" width="1280" height="720" moz-opaque="true"></canvas>
 
 		<div id="ressources" style="visibility: collapse; position: fixed;">

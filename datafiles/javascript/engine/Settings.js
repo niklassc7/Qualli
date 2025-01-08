@@ -1,10 +1,11 @@
 // Static class that handles settings
 
-class Settings {
+export default class Settings {
 	static debug = false;
 	static experimental = true;
 	static scaling = true;
 	static paused = false;
+	static fullscreen = false; // TODO check / remove
 
 	// Initialized fields in overlay
 	static initOverlay() {

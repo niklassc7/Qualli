@@ -1,4 +1,8 @@
-class Object extends IObjlistentry {
+import IObjlistentry from "../../appEtc/IObjlistentry.js";
+import * as g from "../../globals.js";
+import * as f from "../../functions.js";
+
+export default class Object extends IObjlistentry {
 	// static all = [];
 
 	// TODO default values
@@ -9,8 +13,8 @@ class Object extends IObjlistentry {
 
 		this.x = x;
 		this.y = y;
-		this.xD = x * xScalar; // x it should be drawn at
-		this.yD = y * yScalar; // y it should be drawn at
+		this.xD = x * g.xScalar; // x it should be drawn at
+		this.yD = y * g.yScalar; // y it should be drawn at
 		this.ox = 0; //Origin
 		this.oy = 0;
 		this.oxD = 0;
@@ -21,8 +25,8 @@ class Object extends IObjlistentry {
 		this.speed = 0;
 		this.width = (width === undefined) ? 0 : width;
 		this.height = (height === undefined) ? 0 : height;;
-		this.widthD = this.width * xScalar;
-		this.heightD = this.height * yScalar;
+		this.widthD = this.width * g.xScalar;
+		this.heightD = this.height * g.yScalar;
 
 		// Set whether objects leaving the room should jump to the other side of
 		// the room:
@@ -32,12 +36,12 @@ class Object extends IObjlistentry {
 	}
 
 	resize() {
-		this.xD = this.x * xScalar;
-		this.yD = this.y * yScalar;
-		this.oxD = this.ox * xScalar;
-		this.oyD = this.oy * yScalar;
-		this.widthD = this.width * xScalar;
-		this.heightD = this.height * yScalar;
+		this.xD = this.x * g.xScalar;
+		this.yD = this.y * g.yScalar;
+		this.oxD = this.ox * g.xScalar;
+		this.oyD = this.oy * g.yScalar;
+		this.widthD = this.width * g.xScalar;
+		this.heightD = this.height * g.yScalar;
 	}
 
 	setDirection(direction) {
@@ -53,7 +57,7 @@ class Object extends IObjlistentry {
 		this.speed = speed;
 
 		// Calc horizontal and vertical speeds
-		let radDeg = degtorad(direction);
+		let radDeg = f.degtorad(direction);
 		this.vspeed = Math.sin(radDeg) * speed;
 		this.hspeed = Math.cos(radDeg) * speed;
 	}
@@ -70,7 +74,7 @@ class Object extends IObjlistentry {
 		this.hspeed = hspeed;
 		this.vspeed = vspeed;
 
-		this.direction = radtodeg(Math.atan2(this.vspeed, this.hspeed));
+		this.direction = f.radtodeg(Math.atan2(this.vspeed, this.hspeed));
 
 		// Calc total speed from horizontal and vertical speed
 		this.speed = Math.sqrt(this.hspeed * this.hspeed + this.vspeed * this.vspeed);
@@ -91,7 +95,7 @@ class Object extends IObjlistentry {
 
 	// TODO obolsete (ORIGIN)
 	isOutsideRoom_vert() {
-		if( (this.x > canvas_width) || (this.width + this.x < 0) ) {
+		if( (this.x > g.canvas_width) || (this.width + this.x < 0) ) {
 			return true;
 		}
 		return false;
@@ -99,7 +103,7 @@ class Object extends IObjlistentry {
 
 	// TODO obolsete (ORIGIN)
 	isOutsideRoom_horz() {
-		if( (this.y > canvas_height) || (this.height + this.y < 0) ) {
+		if( (this.y > g.canvas_height) || (this.height + this.y < 0) ) {
 			return true;
 		}
 		return false;
@@ -116,17 +120,17 @@ class Object extends IObjlistentry {
 	// TODO comment
 	swapScreen() {
 		if(this.opt_swapScreen >= 2){
-			if(this.y > canvas_height + (this.height/2)) this.y = -(this.height/2);
-			if((this.height/2) + this.y < 0) this.y = canvas_height + (this.height/2);
+			if(this.y > g.canvas_height + (this.height/2)) this.y = -(this.height/2);
+			if((this.height/2) + this.y < 0) this.y = g.canvas_height + (this.height/2);
 		}
 		if(this.opt_swapScreen === 2) return;
-		if(this.x > canvas_width + (this.width/2)) this.x = -(this.width/2);
-		if((this.width/2) + this.x < 0) this.x = canvas_width + (this.width/2);
+		if(this.x > g.canvas_width + (this.width/2)) this.x = -(this.width/2);
+		if((this.width/2) + this.x < 0) this.x = g.canvas_width + (this.width/2);
 	}
 
 	// Sets hspeed and vspeed to move towards (x,y) with speed v
 	moveTowardsPoint(x, y, v){
-		let dir = pointDirection(this.x, this.y, x, y);
+		let dir = f.pointDirection(this.x, this.y, x, y);
 
 		if(v === undefined)
 			this.setDirection(dir);
@@ -143,33 +147,33 @@ class Object extends IObjlistentry {
 			let y1 = this.y - this.oy
 			let x2 = x1 + this.width
 			let y2 = y1 + this.height
-			if (point_in_rectangle(input.x, input.y, x1, y1, x2, y2)) {
-				ctx.fillStyle = "rgba(255, 0, 0, 0.3)";
-				ctx.fillRect(this.xD - this.oxD, this.yD - this.oyD, this.widthD, this.heightD);
+			if (f.point_in_rectangle(input.x, input.y, x1, y1, x2, y2)) {
+				g.ctx.fillStyle = "rgba(255, 0, 0, 0.3)";
+				g.ctx.fillRect(this.xD - this.oxD, this.yD - this.oyD, this.widthD, this.heightD);
 			}
 		}
 
-		ctx.strokeStyle = "red";
-		ctx.lineWidth = 3;
-		ctx.setLineDash([6]);
-		ctx.strokeRect(this.xD - this.oxD, this.yD - this.oyD, this.widthD, this.heightD);
-		ctx.setLineDash([]);
+		g.ctx.strokeStyle = "red";
+		g.ctx.lineWidth = 3;
+		g.ctx.setLineDash([6]);
+		g.ctx.strokeRect(this.xD - this.oxD, this.yD - this.oyD, this.widthD, this.heightD);
+		g.ctx.setLineDash([]);
 
 	}
 	
 	// For Debugging, draws (x,y)
 	drawXY() {
-		ctx.strokeStyle = "red";
-		ctx.lineWidth = 3;
+		g.ctx.strokeStyle = "red";
+		g.ctx.lineWidth = 3;
 
-		ctx.beginPath();
-		ctx.moveTo(this.xD - 10 * xScalar, this.yD - 10 * yScalar);
-		ctx.lineTo(this.xD + 10 * xScalar, this.yD + 10 * yScalar);
-		ctx.stroke();
+		g.ctx.beginPath();
+		g.ctx.moveTo(this.xD - 10 * g.xScalar, this.yD - 10 * g.yScalar);
+		g.ctx.lineTo(this.xD + 10 * g.xScalar, this.yD + 10 * g.yScalar);
+		g.ctx.stroke();
 
-		ctx.beginPath();
-		ctx.moveTo(this.xD - 10 * xScalar, this.yD + 10 * yScalar);
-		ctx.lineTo(this.xD + 10 * xScalar, this.yD - 10 * yScalar);
-		ctx.stroke();
+		g.ctx.beginPath();
+		g.ctx.moveTo(this.xD - 10 * g.xScalar, this.yD + 10 * g.yScalar);
+		g.ctx.lineTo(this.xD + 10 * g.xScalar, this.yD - 10 * g.yScalar);
+		g.ctx.stroke();
 	}
 }

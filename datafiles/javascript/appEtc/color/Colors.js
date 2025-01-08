@@ -1,6 +1,8 @@
+import Color from "./Color.js";
+
 // Stores team colors
 
-class Colors {
+export default class Colors {
 	static team = [
 		new Color(255, 255, 255, 0.6),
 		new Color(211, 47, 47, 0.6),

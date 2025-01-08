@@ -1,11 +1,14 @@
+import SpriteObject from "../engine/objects/SpriteObject.js";
+import * as g from "../globals.js";
+
 // TODO remove?
 
-class SimJelly extends SpriteObject {
+export default class SimJelly extends SpriteObject {
 	// TODO Is this ever cleared? On room change?
 	static all = [];
 
 	constructor(x, y, team, ziel, size=1) {
-		super(x, y, 32, 21, spr_Raumschiff[team]);
+		super(x, y, 32, 21, g.spr_Raumschiff[team]);
 		SimJelly.all.push(this);
 
 		room.addObject(this); // TODO Move to Superclass, or remove?
@@ -111,15 +114,12 @@ class SimJelly extends SpriteObject {
 		// TODO origin
 		// TODO ellipsis
 		let c = Colors.team[this.team];
-		ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, 0.025`;
+		g.ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, 0.025`;
 		let maxr = Math.max(this.widthD, this.heightD);
 
 		draw_circle(this.xD, this.yD, maxr * 2.7, false);
 		draw_circle(this.xD, this.yD, maxr * 2.0, false);
-		// draw_circle(this.xD, this.yD, maxr, false);
 
-		// console.log(this.sprite);
-		// console.log(this.sprite, -this.oxD, -this.oyD, this.widthD, this.heightD);
 		super.draw();
 	}
 

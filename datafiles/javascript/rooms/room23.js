@@ -1,4 +1,9 @@
-class room23 extends LevelRoom {
+import LevelRoom from "./LevelRoom.js";
+import Bubble from "../objects/Bubble.js";
+import KI0 from "../appEtc/KI0.js";
+import * as g from "../globals.js";
+
+export default class room23 extends LevelRoom {
 	constructor(){
 		super();
 
@@ -9,7 +14,7 @@ class room23 extends LevelRoom {
 
 		// Calculate start margin in order to center the items block
 		let rowWidth = (itemsInRow-1) * planetDistance;
-		let startMargin = (roomWidth - rowWidth) / 2;
+		let startMargin = (g.roomWidth - rowWidth) / 2;
 
 
 		let jellyAmount = 750
@@ -50,8 +55,8 @@ class room23 extends LevelRoom {
 		// TODO move effect? → Mixin
 		if (Math.random() < 0.3 ) {
 			// Move
-			let source = room.bubbles[Math.floor(Math.random() * room.bubbles.length)];
-			let target = room.bubbles[Math.floor(Math.random() * room.bubbles.length)];
+			let source = g.room.bubbles[Math.floor(Math.random() * g.room.bubbles.length)];
+			let target = g.room.bubbles[Math.floor(Math.random() * g.room.bubbles.length)];
 
 			let amount = Math.round(Math.random() * 10)
 			source.attackN(target, amount)
