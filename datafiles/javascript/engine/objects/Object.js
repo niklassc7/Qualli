@@ -2,6 +2,7 @@ import IObjlistentry from "../../appEtc/IObjlistentry.js";
 import * as g from "../../globals.js";
 import * as f from "../../functions.js";
 
+// TOOD rename
 export default class Object extends IObjlistentry {
 	// static all = [];
 
