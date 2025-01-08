@@ -5,10 +5,13 @@ import * as f from "../functions.js";
 import Settings from "../engine/Settings.js";
 import SimBubbleEmitter from "../objects/SimBubble/SimBubbleEmitter.js";
 import MenuOverview from "../rooms/MenuOverview.js";
+import Sunshine from "../objects/Sunshine.js";
+
 
 export default class Startpage extends Room {
 	constructor(){
 		super();
+
 
 		this.addObject(new SimBubbleEmitter());
 
@@ -21,6 +24,8 @@ export default class Startpage extends Room {
 		this.addObject(new Button("Start", g.roomWidth / 2 - buttonMargin - (3/2) * buttonWidth, g.roomHeight / 2 - buttonHeight / 2, buttonWidth, buttonHeight, () => { g.gotoRoom(MenuOverview) }  )).borderColour = "yellow";
 		this.addObject(new Button("Vollbild", g.roomWidth / 2 - buttonWidth / 2, g.roomHeight / 2 - buttonHeight / 2, buttonWidth, buttonHeight, f.toggleFullscreen ));
 		this.addObject(new Button("Settings", g.roomWidth / 2 + buttonMargin + buttonWidth / 2, g.roomHeight / 2 - buttonHeight / 2, buttonWidth, buttonHeight, Settings.show));
+
+		this.addObject(new Sunshine(g.roomWidth / 2, -400));
 	}
 
 	draw(){
