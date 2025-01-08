@@ -59,7 +59,7 @@ export default class Button extends SpriteObject {
 			this.yD,
 			this.widthD,
 			this.heightD,
-			10 * g.xScalar,
+			6 * g.xScalar,
 			true
 		);
 
