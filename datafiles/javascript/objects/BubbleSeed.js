@@ -1,4 +1,5 @@
-import Object from "../engine/objects/Object";
+import Object from "../engine/objects/Object.js";
+import * as f from "../functions.js";
 import * as g from "../globals.js";
 
 // Creates a bubbles
@@ -10,7 +11,7 @@ export default class BubbleSeed extends Object {
 		this.delay = delay;
 		this.timeAlive = 0;
 
-		this.created = stepCount;
+		this.created = g.stepCount;
 	}
 
 	step() {
@@ -18,8 +19,8 @@ export default class BubbleSeed extends Object {
 		this.timeAlive++;
 
 		if (this.timeAlive >= this.delay) {
-			room.addObject(this.futureBubble);
-			room.bubbles.push(this.futureBubble); // TODO use addBubble method when implemented
+			g.room.addObject(this.futureBubble);
+			g.room.bubbles.push(this.futureBubble); // TODO use addBubble method when implemented
 			this.destroy();
 		}
 	}
@@ -36,7 +37,7 @@ export default class BubbleSeed extends Object {
 
 
 		g.ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
-		let shiftedStepCount = stepCount + this.created; // Shift counter by creation time because otherwise all seed instances show exactly the same
+		let shiftedStepCount = g.stepCount + this.created; // Shift counter by creation time because otherwise all seed instances show exactly the same
 		for(var i = 0; i < lineCount; i++){
 			g.ctx.beginPath();
 			g.ctx.arc(this.xD, this.yD, i * ((g.ctx.lineWidth-1)*2), (shiftedStepCount* (i*0.01+0.1)) + 1.25 * Math.PI, (shiftedStepCount*(i*0.01+0.1)) + 1.75 * Math.PI, false);
@@ -49,13 +50,13 @@ export default class BubbleSeed extends Object {
 
 		// Background
 		g.ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
-		draw_circle(this.xD, this.yD, 0.9*this.widthD/2, false);
+		f.draw_circle(this.xD, this.yD, 0.9*this.widthD/2, false);
 
 		// Draw background of progress bar
 		let circleRadius = 1.1 * this.widthD / 2;
 		g.ctx.lineWidth = 3 * g.xScalar;
 		g.ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
-		draw_circle(this.xD, this.yD, circleRadius, true);
+		f.draw_circle(this.xD, this.yD, circleRadius, true);
 		
 
 		// Draw progress bar of time left
