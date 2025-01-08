@@ -3,6 +3,7 @@ import * as g from "../globals.js";
 import * as f from "../functions.js";
 import Button from "../objects/Button.js";
 import Settings from "../engine/Settings.js";
+import ProgressManager from "../appEtc/ProgressManager.js";
 
 
 // TODO Import these in the individual level rooms only when needed

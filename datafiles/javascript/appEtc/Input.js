@@ -77,7 +77,7 @@ export default class Input {
 
 		// Planet selection
 		if (typeof g.input.selectedTouch === "undefined") {
-			let overBubble = collision_point(g.input.x, g.input.y, Bubble);
+			let overBubble = f.collision_point(g.input.x, g.input.y, Bubble);
 			if (typeof overBubble !== "undefined") {
 				// Start drag method
 				g.input.selectedTouch = overBubble;
@@ -98,13 +98,13 @@ export default class Input {
 		g.input.ensureOwner();
 		// TODO observer pattern
 		// Button clicking
-		let overButton = collision_point(g.input.x, g.input.y, Button)
+		let overButton = f.collision_point(g.input.x, g.input.y, Button)
 		if (typeof overButton !== "undefined") {
 			overButton.onClick()
 		}
 
 
-		let overBubble = collision_point(g.input.x, g.input.y, Bubble)
+		let overBubble = f.collision_point(g.input.x, g.input.y, Bubble)
 		if (typeof overBubble !== "undefined") {
 			if (typeof g.input.selectedTouch !== "undefined") {
 				if (overBubble === g.input.selectedTouch) {
