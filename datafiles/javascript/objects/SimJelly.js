@@ -114,15 +114,12 @@ export default class SimJelly extends SpriteObject {
 		// TODO origin
 		// TODO ellipsis
 		let c = Colors.team[this.team];
-		ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, 0.025`;
+		g.ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, 0.025`;
 		let maxr = Math.max(this.widthD, this.heightD);
 
 		draw_circle(this.xD, this.yD, maxr * 2.7, false);
 		draw_circle(this.xD, this.yD, maxr * 2.0, false);
-		// draw_circle(this.xD, this.yD, maxr, false);
 
-		// console.log(this.sprite);
-		// console.log(this.sprite, -this.oxD, -this.oyD, this.widthD, this.heightD);
 		super.draw();
 	}
 

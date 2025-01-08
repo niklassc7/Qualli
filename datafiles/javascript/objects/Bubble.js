@@ -49,8 +49,6 @@ export default class Bubble extends SpriteObject {
 		// if(this.team !== 0) {
 			let c = Colors.team[this.team];
 			g.ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, 0.3`;
-			// ctx.strokeStyle = Colors.team[this.team].cRgba();
-			// ctx.strokeStyle = "rgba(0, 0, 0, 0.7)";
 			let black = new Color(0, 0, 0)
 			let darkBorderC = c.getMix(black, 0.9);
 			darkBorderC.a = 0.7;

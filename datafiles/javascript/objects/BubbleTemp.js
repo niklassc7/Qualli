@@ -1,4 +1,5 @@
 import Bubble from "./Bubble.js";
+import * as g from "../globals.js";
 
 export default class BubbleTemp extends Bubble {
 	constructor(x, y, team, size, units, ttl) {
@@ -57,15 +58,15 @@ export default class BubbleTemp extends Bubble {
 		super.draw();
 
 		// Draw circle-indicator of left ttl
-		ctx.lineWidth = 3 * xScalar;
-		ctx.strokeStyle = 'black';
-		ctx.beginPath();
-		ctx.arc(this.xD,
+		g.ctx.lineWidth = 3 * g.xScalar;
+		g.ctx.strokeStyle = 'black';
+		g.ctx.beginPath();
+		g.ctx.arc(this.xD,
 			this.yD,
 			1.1 * this.widthD / 2,
 			2.0 * Math.PI * ((this.totalTtl-this.ttl)/this.totalTtl),
 			2.0 * Math.PI);
 
-		ctx.stroke();
+		g.ctx.stroke();
 	}
 }

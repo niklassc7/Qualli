@@ -33,6 +33,7 @@ export function deactivateFullscreen() {
 
 	g.canvas.width = g.roomWidth;
 	g.canvas.height = g.roomHeight;
+	// TODO fix
 	xScalar = 1;
 	yScalar = 1;
 
@@ -105,15 +106,6 @@ export function resizeCanvas() {
 	// TODO just one scaling?
 	g.setXScalar(g.canvas.width / g.roomWidth);
 	g.setYScalar(g.canvas.height / g.roomHeight);
-
-	// TODO
-	// xScalar = (xScalar + yScalar) / 2
-	// xScalar = Math.min(xScalar, yScalar)
-	// yScalar = xScalar
-
-
-	// Scale context
-	// ctx.scale(scale, scale)
 
 	// TODO check
 	try {

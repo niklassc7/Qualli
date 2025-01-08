@@ -1,3 +1,5 @@
+import * as g from "../globals.js";
+
 export default class FloatSign extends Object {
 	constructor(text, x, y, color, fontSize=20, ttl=200) {
 		super(x, y, 0, 0);
@@ -21,7 +23,7 @@ export default class FloatSign extends Object {
 
 	resize() {
 		super.resize();
-		this.font =	Math.round(this.fontSize * ((xScalar + yScalar) / 2)) + "px fnt_Comforta_Bold";
+		this.font =	Math.round(this.fontSize * ((g.xScalar + g.yScalar) / 2)) + "px fnt_Comforta_Bold";
 	}
 
 	step() {
@@ -37,7 +39,7 @@ export default class FloatSign extends Object {
 	draw() {
 		this.resize();
 
-		ctx.font = this.font;
+		g.ctx.font = this.font;
 
 		// TODO implement → maybe subclass
 		// // Background
@@ -58,16 +60,16 @@ export default class FloatSign extends Object {
 
 
 		// Text
-		ctx.lineWidth = 4 * xScalar;
-		ctx.fillStyle = this.color;
-		ctx.strokeStyle = this.background;
+		g.ctx.lineWidth = 4 * g.xScalar;
+		g.ctx.fillStyle = this.color;
+		g.ctx.strokeStyle = this.background;
 
-		ctx.globalAlpha = this.ttl / this.startTtl;
+		g.ctx.globalAlpha = this.ttl / this.startTtl;
 		
-		ctx.strokeText(this.text, this.xD, this.yD);
-		ctx.fillText(this.text, this.xD, this.yD);
+		g.ctx.strokeText(this.text, this.xD, this.yD);
+		g.ctx.fillText(this.text, this.xD, this.yD);
 
-		ctx.globalAlpha = 1;
+		g.ctx.globalAlpha = 1;
 	}
 }
 

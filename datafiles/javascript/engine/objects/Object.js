@@ -148,32 +148,32 @@ export default class Object extends IObjlistentry {
 			let x2 = x1 + this.width
 			let y2 = y1 + this.height
 			if (f.point_in_rectangle(input.x, input.y, x1, y1, x2, y2)) {
-				ctx.fillStyle = "rgba(255, 0, 0, 0.3)";
-				ctx.fillRect(this.xD - this.oxD, this.yD - this.oyD, this.widthD, this.heightD);
+				g.ctx.fillStyle = "rgba(255, 0, 0, 0.3)";
+				g.ctx.fillRect(this.xD - this.oxD, this.yD - this.oyD, this.widthD, this.heightD);
 			}
 		}
 
-		ctx.strokeStyle = "red";
-		ctx.lineWidth = 3;
-		ctx.setLineDash([6]);
-		ctx.strokeRect(this.xD - this.oxD, this.yD - this.oyD, this.widthD, this.heightD);
-		ctx.setLineDash([]);
+		g.ctx.strokeStyle = "red";
+		g.ctx.lineWidth = 3;
+		g.ctx.setLineDash([6]);
+		g.ctx.strokeRect(this.xD - this.oxD, this.yD - this.oyD, this.widthD, this.heightD);
+		g.ctx.setLineDash([]);
 
 	}
 	
 	// For Debugging, draws (x,y)
 	drawXY() {
-		ctx.strokeStyle = "red";
-		ctx.lineWidth = 3;
+		g.ctx.strokeStyle = "red";
+		g.ctx.lineWidth = 3;
 
-		ctx.beginPath();
-		ctx.moveTo(this.xD - 10 * xScalar, this.yD - 10 * yScalar);
-		ctx.lineTo(this.xD + 10 * xScalar, this.yD + 10 * yScalar);
-		ctx.stroke();
+		g.ctx.beginPath();
+		g.ctx.moveTo(this.xD - 10 * g.xScalar, this.yD - 10 * g.yScalar);
+		g.ctx.lineTo(this.xD + 10 * g.xScalar, this.yD + 10 * g.yScalar);
+		g.ctx.stroke();
 
-		ctx.beginPath();
-		ctx.moveTo(this.xD - 10 * xScalar, this.yD + 10 * yScalar);
-		ctx.lineTo(this.xD + 10 * xScalar, this.yD - 10 * yScalar);
-		ctx.stroke();
+		g.ctx.beginPath();
+		g.ctx.moveTo(this.xD - 10 * g.xScalar, this.yD + 10 * g.yScalar);
+		g.ctx.lineTo(this.xD + 10 * g.xScalar, this.yD - 10 * g.yScalar);
+		g.ctx.stroke();
 	}
 }

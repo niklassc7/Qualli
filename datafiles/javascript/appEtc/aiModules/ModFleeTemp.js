@@ -1,3 +1,8 @@
+import * as g from "../../globals.js";
+import * as f from "../../functions.js";
+import AiModule from "./AiModule.js";
+import BubbleTemp from "../../objects/BubbleTemp.js";
+
 // When ttl of bubble is soon over, this module evacuates to a random own
 // bubble if available. Otherwise to random other bubble.
 
@@ -40,12 +45,12 @@ export default class ModFleeTemp extends AiModule {
 	}
 
 	drawIcon(x, y, r) {
-		let xd = x * xScalar;
-		let yd = y * yScalar;
-		let rd = r * yScalar;
+		let xd = x * g.xScalar;
+		let yd = y * g.yScalar;
+		let rd = r * g.yScalar;
 
-		draw_circle(xd, yd, rd, true);
-		ctx.fillStyle = "#ffdf20";
-		draw_circle(xd, yd, rd, false);
+		f.draw_circle(xd, yd, rd, true);
+		g.ctx.fillStyle = "#ffdf20";
+		f.draw_circle(xd, yd, rd, false);
 	}
 }

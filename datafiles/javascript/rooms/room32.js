@@ -2,6 +2,7 @@ import LevelRoom from "./LevelRoom.js";
 import Bubble from "../objects/Bubble.js";
 import BubbleTemp from "../objects/BubbleTemp.js";
 import KI2 from "../appEtc/KI2.js";
+import * as g from "../globals.js";
 
 export default class room32 extends LevelRoom {
 	constructor() {
@@ -15,7 +16,7 @@ export default class room32 extends LevelRoom {
 
 		// Calculate start margin in order to center the items block
 		let rowWidth = (itemsInRow-1) * planetDistance;
-		let startMargin = (roomWidth - rowWidth) / 2;
+		let startMargin = (g.roomWidth - rowWidth) / 2;
 
 		let amount = 10
 		for(let i = 0; i < 3; i++)
