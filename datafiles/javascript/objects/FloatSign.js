@@ -1,3 +1,4 @@
+import Object from "../engine/objects/Object.js";
 import * as g from "../globals.js";
 
 export default class FloatSign extends Object {
