@@ -18,8 +18,7 @@ class room37 extends LevelRoom {
 
 		for (let i = 0; i < 3; i++) {
 			for (let j = 0; j < itemsInRow; j++) {
-				let newB = this.addObject(new Bubble(startMargin + j * planetDistance, 160 + i * planetDistance, (i*3+j) % 5, 1));
-				this.bubbles[i * itemsInRow + j] = newB;
+				this.addBubble(new Bubble(startMargin + j * planetDistance, 160 + i * planetDistance, (i*3+j) % 5, 1));
 			}
 		}
 	}

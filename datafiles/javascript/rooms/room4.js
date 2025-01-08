@@ -2,8 +2,6 @@ class room4 extends LevelRoom {
 	constructor() {
 		super();
 
-		this.background = spr_bg_0;
-
 		this.addObject(new KI0(2));
 		this.addObject(new KI0(3));
 
@@ -19,8 +17,7 @@ class room4 extends LevelRoom {
 				let newTeam = (j < itemsInRow / 3) ? 1 : (j < 2 * (itemsInRow / 3) ? 2 : 3);
 				let newSize = (i == 1) ? 2 : 1;
 				let newUnits = (newTeam == 1) ? 40 : 70;
-				let newB = this.addObject(new Bubble(startMargin + j * planetDistance, 160 + i * planetDistance, newTeam, newSize, newUnits));
-				this.bubbles[i * itemsInRow + j] = newB;
+				this.addBubble(new Bubble(startMargin + j * planetDistance, 160 + i * planetDistance, newTeam, newSize, newUnits));
 			}
 		}
 	}

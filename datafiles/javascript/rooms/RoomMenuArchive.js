@@ -1,7 +1,6 @@
 class RoomMenuArchive extends Room{
 	constructor(){
 		super();
-		// this.background = bgMenuDark; // TODO use static var
 
 		this.addObject(new SimBubbleEmitter([210, 170, 100]));
 

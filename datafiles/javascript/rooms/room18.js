@@ -2,11 +2,7 @@ class room18 extends LevelRoom {
 	constructor(){
 		super();
 
-		this.background = spr_bg_0;
-
 		this.addObject(new KI1(2));
-
-		// 40
 
 		let planetDistance = 200; // centre to cenre
 		let itemsInRow = 6;
@@ -19,8 +15,7 @@ class room18 extends LevelRoom {
 			for(let j = 0; j < itemsInRow; j++) {
 				let newTeam = (j < itemsInRow / 2) ? 1 : 2;
 				let newSize = (i == 1) ? 2 : 1;
-				let newB = this.addObject(new Bubble(startMargin + j * planetDistance, 160 + i * planetDistance, newTeam, newSize, 10000));
-				this.bubbles[i * itemsInRow + j] = newB;
+				this.addBubble(new Bubble(startMargin + j * planetDistance, 160 + i * planetDistance, newTeam, newSize, 10000));
 			}
 		}
 	}

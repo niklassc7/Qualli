@@ -17,7 +17,6 @@ class LevelRoom extends Room {
 		this.ais = [];
 
 		this.status = "running"; // running, lost, won
-		this.background = undefined;
 		this.alarm = [];
 		this.alarm[0] = 10;
 
@@ -53,9 +52,12 @@ class LevelRoom extends Room {
 		//do nothing
 	}
 
-	// TODO
-	addBubble() {
-		
+	// Adds bubble to room
+	addBubble(bubble) {
+		this.bubbles.push(bubble);
+		this.addObject(bubble);
+
+		return bubble;
 	}
 
 	removeBubble(bubble) {
