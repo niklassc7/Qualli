@@ -72,14 +72,14 @@ export default class LevelRoom extends Room {
 
 	removeBubble(bubble) {
 		// TODO datastructure
-		for (var i = 0; i < room.bubbles.length; i++) {
-			if(room.bubbles[i] === bubble) {
-				room.bubbles.splice(i, 1);
+		for (var i = 0; i < g.room.bubbles.length; i++) {
+			if(g.room.bubbles[i] === bubble) {
+				g.room.bubbles.splice(i, 1);
 				return true;
 			}
 		}
 
-		console.error("Attempted to deleted bubble that is not in room.bubbles", bubble);
+		console.error("Attempted to deleted bubble that is not in g.room.bubbles", bubble);
 		return false;
 	}
 
