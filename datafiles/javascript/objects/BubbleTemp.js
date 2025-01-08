@@ -1,5 +1,8 @@
 import Bubble from "./Bubble.js";
 import * as g from "../globals.js";
+import BubbleSeed from "./BubbleSeed.js";
+import Colors from "../appEtc/color/Colors.js";
+import FloatSign from "./FloatSign.js";
 
 export default class BubbleTemp extends Bubble {
 	constructor(x, y, team, size, units, ttl) {
@@ -34,7 +37,7 @@ export default class BubbleTemp extends Bubble {
 				signFontSize += 10;
 			}
 
-			room.addObject(new FloatSign(lostMsg, this.x, this.y, signColor, signFontSize));
+			g.room.addObject(new FloatSign(lostMsg, this.x, this.y, signColor, signFontSize));
 
 	}
 
@@ -44,7 +47,7 @@ export default class BubbleTemp extends Bubble {
 
 		if (this.ttl <= 0) {
 			let futureBubble = new BubbleTemp(this.x, this.y, 0, this.size, 0, undefined);
-			room.addObject(new BubbleSeed(1000, futureBubble));
+			g.room.addObject(new BubbleSeed(1000, futureBubble));
 
 			if (this.team !== 0) {
 				this.createLostSign();
