@@ -35,8 +35,8 @@ export default class Room {
 			g.ctx.textAlign = "left";
 			g.ctx.fillStyle = "white";
 			g.ctx.fillText("window.innner " + window.innerWidth + ", " + window.innerHeight, 16 * g.xScalar, (16 + 32*0) * g.yScalar)
-			g.ctx.fillText("canvas. " + canvas.width + ", " + canvas.height, 16 * g.xScalar, (16 + 32*1) * g.yScalar)
-			g.ctx.fillText("canvas_ " + canvas_width + ", " + canvas_height, 16 * g.xScalar, (16 + 32*2) * g.yScalar)
+			g.ctx.fillText("g.canvas. " + g.canvas.width + ", " + g.canvas.height, 16 * g.xScalar, (16 + 32*1) * g.yScalar)
+			g.ctx.fillText("g.canvas_ " + g.canvas_width + ", " + g.canvas_height, 16 * g.xScalar, (16 + 32*2) * g.yScalar)
 			g.ctx.fillText(`window.devicePixelRatio: ${window.devicePixelRatio}`, 16 * g.xScalar, (16 + 32*3) * g.yScalar)
 			g.ctx.fillText(`scaling: ${Settings.scaling}`, 16 * g.xScalar, (16 + 32*4) * g.yScalar)
 			g.ctx.fillText(`scaled window-inner: ${window.innerWidth * window.devicePixelRatio}, ${window.innerHeight * window.devicePixelRatio}`, 16 * g.xScalar, (16 + 32*5) * g.yScalar)
