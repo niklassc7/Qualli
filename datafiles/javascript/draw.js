@@ -19,22 +19,18 @@ export default function draw() {
 	// GUI
 	g.input.draw()
 
-	if (Settings.debug && !msgs.isEmpty()) {
+	// TODO implement or remove
+	if (Settings.debug && !g.msgs.isEmpty()) {
 		g.ctx.fillStyle = "white";
 		g.ctx.textAlign = "right";
 		g.ctx.font = Math.round(16 * ((g.xScalar + g.yScalar) / 2)) + "px fnt_Comforta_Bold";
 
-		// if (stepCount % 200 == 0) {
-		// 	msgs.removeFirst()
-		// }
-
 		// FIXME
-		// for (let i = msgs.length-1; i >= 0; i--) {
-		for (let i = msgs.head; i != undefined; i = i.next) {
-			msg = i.val;
+		for (let i = g.msgs.head; i != undefined; i = i.next) {
+			let msg = i.val;
 			// console.log(msg)
 			let textDim = g.ctx.measureText(msg);
-			let tx = Math.round(roomWidth * g.xScalar)
+			let tx = Math.round(g.roomWidth * g.xScalar)
 			let ty = Math.round((18*i + 8) * g.yScalar);
 			// console.log(textDim)
 			g.ctx.fillText(msg,
