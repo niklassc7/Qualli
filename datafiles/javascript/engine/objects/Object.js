@@ -16,7 +16,7 @@ export default class Object extends IObjlistentry {
 		this.y = y;
 		this.xD = x * g.xScalar; // x it should be drawn at
 		this.yD = y * g.yScalar; // y it should be drawn at
-		this.ox = 0; //Origin
+		this.ox = 0; // Origin
 		this.oy = 0;
 		this.oxD = 0;
 		this.oyD = 0;
