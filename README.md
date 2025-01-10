@@ -13,6 +13,7 @@ for its licensing information.
 
 ### Web
 
+<!-- TODO modules -->
 Open `index.html` in a browser.
 
 ### Electron
