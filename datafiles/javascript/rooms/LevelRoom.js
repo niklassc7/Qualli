@@ -23,6 +23,10 @@ export default class LevelRoom extends Room {
 			throw new Error("Abstract classes can't be instantiated.");
 		}
 
+		/**
+		 * List of active bubbles in the level
+		 * @type {Bubble}
+		 */
 		this.bubbles = [];
 		this.ais = [];
 
