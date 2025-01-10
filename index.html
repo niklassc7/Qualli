@@ -71,9 +71,9 @@
 				<div id="egTime"></div>
 				<br>
 				<div>
-					<input id="egRestart" type="button" value="Restart" onClick="g.room.restart(); f.hideEndgame();" />
-					<input id="egResume" type="button" value="Resume" onClick="f.hideEndgame();" />
-					<input id="egExit" type="button" value="Exit" onClick="g.gotoRoom(g.room.prevRoom); f.hideEndgame()" />
+					<input id="egRestart" type="button" value="Restart ♻" onClick="g.room.restart(); f.hideEndgame();" />
+					<input id="egResume" type="button" value="Resume ▶" onClick="f.hideEndgame();" />
+					<input id="egExit" type="button" value="Exit 🚪" onClick="g.gotoRoom(g.room.prevRoom); f.hideEndgame()" />
 				</div>
 			</div>
 		</div>
@@ -82,14 +82,14 @@
 			<div id="pausedContent" class="overlayContent">
 				<h1>Paused</h1>
 				<div>
-					<input id="pResume" type="button" value="Resume" onClick="Settings.unpause()" />
-					<input id="pSettings" type="button" value="Settings" onClick="Settings.show()" />
+					<input id="pResume" type="button" value="Resume ▶" onClick="Settings.unpause()" />
+					<input id="pSettings" type="button" value="Settings ⚙" onClick="Settings.show()" />
 				</div>
 				<br>
 				<br>
 				<div>
-					<input id="pRestart" type="button" value="Restart" onClick="g.room.restart(true); Settings.unpause()" />
-					<input id="pExit" type="button" value="Exit" onClick="g.room.surrender()" />
+					<input id="pRestart" type="button" value="Restart ♻" onClick="if(g.room.restart(true) != false) { Settings.unpause() }" />
+					<input id="pExit" type="button" value="Exit 🏳" onClick="g.room.surrender()" />
 				</div>
 			</div>
 		</div>
@@ -112,8 +112,8 @@
 				<br>
 
 				<div>
-					<input id="sReset" type="button" value="Reset Progress" onClick="ProgressManager.reset()" />
-					<input id="sClose" type="button" value="Close Settings" onClick="Settings.hide()" />
+					<input id="sReset" type="button" value="Reset Progress ♻" onClick="ProgressManager.reset()" />
+					<input id="sClose" type="button" value="Close Settings ❌" onClick="Settings.hide()" />
 				</div>
 			</div>
 		</div>
