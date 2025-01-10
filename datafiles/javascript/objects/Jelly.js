@@ -5,16 +5,30 @@ import IObjlistentry from "../appEtc/IObjlistentry.js";
 import Colors from "../appEtc/color/Colors.js";
 
 export default class Jelly extends SpriteObject {
+	/**
+	 * [TODO:description]
+	 *
+	 * @param {number} x - [TODO:description]
+	 * @param {number} y - [TODO:description]
+	 * @param {number} team - [TODO:description]
+	 * @param {Bubble} ziel - [TODO:description]
+	 * @param {number} [size] - [TODO:description]
+	 */
 	constructor(x, y, team, ziel, size=1) {
-		super(x, y, 32, 21, g.spr_Raumschiff[team]);
+		// super(x, y, 32, 21, g.spr_Raumschiff[team]);
+		super(x, y, 1, 1, g.spr_Raumschiff[team]);
 
 		g.room.addObject(this); // Move to Superclass
 
 		this.team = team;
 		this.ziel = ziel; // TODO rename
-		this.size = size;
-		this.width *= size;
-		this.height *= size;
+		this.size = size; // TODO separate damage and size → default damage can be size
+		// this.width *= size;
+		// this.height *= size;
+
+		this.widthShould = 32;
+		this.heightShould = 21;
+		console.log(this.widthShould, this.heightShould);
 
 		// Point that jelly is moving to initially when created, will adapt
 		// direction gradually
@@ -45,6 +59,14 @@ export default class Jelly extends SpriteObject {
 			draw() {}
 
 			step() {
+				// this.parent.sizeScalar = Math.min(1, this.parent.sizeScalar + 0.01);
+				// this.parent.size = Math.min(this.parent.sizeShould, this.parent.size + 0.01);
+
+				// TODO sometimes deleted before full size is reached
+				this.parent.width = Math.min(this.parent.widthShould, this.parent.width + 2.5);
+				// this.parent.height = Math.min(this.parent.heightShould, this.parent.height + 0.01); // TODO scale correctly
+				this.parent.height = this.parent.width * this.parent.heightShould / this.parent.widthShould
+
 				let acceleration = 0.03 + 0.4*Math.random();
 
 				if(this.parent.speed < this.targetSpeed)
