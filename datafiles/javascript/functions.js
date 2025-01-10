@@ -226,6 +226,7 @@ export function draw_line(x1, y1, x2, y2) {
 	g.ctx.stroke();
 }
 
+// TODO ctx as default value?
 export function drawCircle(ctx, x, y, r, outline) {
 	ctx.beginPath();
 	ctx.arc(x, y, r, 0, 2 * Math.PI, false);
