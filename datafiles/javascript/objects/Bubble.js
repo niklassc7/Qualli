@@ -39,7 +39,15 @@ export default class Bubble extends SpriteObject {
 
 		if (!this.createQueue.isEmpty()) {
 			let parameter = this.createQueue.removeFirst();
-			new Jelly(parameter[0], parameter[1], parameter[2], parameter[3]);
+			// TODO do this differently → e.g. store Jelly in queue, or just amount
+			// TODO Jedes Team hat eine Queue
+			// TODO Queue speichert Auftrag
+			// TODO Auftrag ist (Klasse, Anzahl)
+			// new Jelly(parameter[0], parameter[1], parameter[2], parameter[3]);
+
+			let nx = this.x - this.ox + Math.random()*this.width;
+			let ny = this.y - this.oy + Math.random()*this.height;
+			new Jelly(nx, ny, parameter[2], parameter[3]);
 		}
 	}
 
@@ -56,11 +64,11 @@ export default class Bubble extends SpriteObject {
 			g.ctx.strokeStyle = darkBorderC.cRgba();
 
 			if(this.team === 0) {
-				g.ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
+				// g.ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
 			} else {
+			}
 				g.ctx.lineWidth = Math.round(2 * 2 * g.xScalar); // TODO
 				f.draw_circle(this.xD, this.yD, this.widthD / 2, false);
-			}
 
 			f.draw_circle(this.xD, this.yD, this.widthD / 2, true);
 		// }
