@@ -2,6 +2,7 @@ import LevelRoom from "./LevelRoom.js";
 import Bubble from "../objects/Bubble.js";
 import KI0 from "../appEtc/KI0.js";
 import * as g from "../globals.js";
+import Jelly from "../objects/Jelly.js";
 
 export default class room20 extends LevelRoom {
 	constructor(){
