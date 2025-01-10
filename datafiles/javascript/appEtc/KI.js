@@ -60,6 +60,7 @@ export default class KI extends IObjlistentry {
 
 	}
 
+	// TODO rename
 	pruefe_ob_eigene_Raumschiffe_im_Spiel() {
 		for(var i = 0; i < g.room.objects.length; i++) {
 			if(g.room.objects[i] instanceof Jelly) {
@@ -69,6 +70,11 @@ export default class KI extends IObjlistentry {
 		return false;
 	}
 
+	/**
+	 * Returns own bubbles
+	 *
+	 * @returns {Array.<Bubble>} Array of own bubbles
+	 */
 	getBubbles() {
 		var bubbles = [];
 		for(var i = 0; i < g.room.bubbles.length; i++) {
@@ -95,7 +101,6 @@ export default class KI extends IObjlistentry {
 				return randomBubble;
 			}
 		}
-
 	}
 
 	getStrongestPlanet() {
@@ -121,19 +126,27 @@ export default class KI extends IObjlistentry {
 		return enemyList;
 	}
 
-	// TODO rename
-	angriff(planet_start, planet_ziel){
-		for(var i = 0; i < Math.floor(planet_start.units / 2); i++) {
-			let nx = planet_start.x;
-			let ny = planet_start.y;
 
-			planet_start.createQueue.addLast([nx, ny, this.team, planet_ziel]);
+	// TODO rename
+	angriffN(bubbleStart, bubbleTarget, n) {
+		// TODO move to bubble class
+		for(var i = 0; i < n; i++) {
+			let nx = bubbleStart.x;
+			let ny = bubbleStart.y;
+
+			bubbleStart.createQueue.addLast([nx, ny, this.team, bubbleTarget]);
 
 		}
-		planet_start.units -= Math.floor(planet_start.units/2)
+		bubbleStart.units -= n;
+	}
+
+	// TODO rename
+	angriff(planet_start, planet_ziel){
+		this.angriffN(planet_start, planet_ziel, Math.floor(planet_start.units / 2));
 	}
 
 	// TODO do this in room
+	// TODO rename
 	pruefe_ob_gewonnen() {
 		for(var i = 0; i < g.room.objects.length; i++) {
 			if(g.room.objects[i] instanceof KI) {
