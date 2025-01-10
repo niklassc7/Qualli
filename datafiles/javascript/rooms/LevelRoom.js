@@ -94,10 +94,11 @@ export default class LevelRoom extends Room {
 
 	restart(prompt=false) {
 		if (prompt && !confirm("Do you really want to give up?")) {
-				return
+				return false;
 		}
 
 		g.gotoRoom(this.constructor)
+		return false;
 	}
 
 	// TODO rename → timer
