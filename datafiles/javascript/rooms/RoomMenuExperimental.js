@@ -4,9 +4,6 @@ import SimBubbleEmitter from "../objects/SimBubble/SimBubbleEmitter.js";
 import Button from "../objects/Button.js";
 import LevelButton from "../objects/LevelButton.js";
 import MenuOverview from "./MenuOverview.js";
-import room17 from "./room17.js";
-import room18 from "./room18.js";
-import room19 from "./room19.js";
 import room24 from "./room24.js";
 import room25 from "./room25.js";
 import room27 from "./room27.js";
@@ -20,6 +17,9 @@ import room34 from "./room34.js";
 import room35 from "./room35.js";
 import room36 from "./room36.js";
 import room37 from "./room37.js";
+import room38 from "./room38.js";
+import room39 from "./room39.js";
+import room40 from "./room40.js";
 
 export default class RoomMenuExperimental extends Room {
 	constructor() {
@@ -36,9 +36,6 @@ export default class RoomMenuExperimental extends Room {
 		let buttonMargin = 16;
 
 		let rooms = [
-			room17,
-			room18,
-			room19,
 			room24,
 			room25,
 			room27,
@@ -52,6 +49,9 @@ export default class RoomMenuExperimental extends Room {
 			room35,
 			room36,
 			room37,
+			room38,
+			room39,
+			room40,
 		];
 
 		let itemsInRow = 4;

@@ -3,6 +3,9 @@ import * as g from "../globals.js";
 import SimBubbleEmitter from "../objects/SimBubble/SimBubbleEmitter.js";
 import Button from "../objects/Button.js";
 import LevelButton from "../objects/LevelButton.js";
+import room17 from "./room17.js";
+import room18 from "./room18.js";
+import room19 from "./room19.js";
 import room26 from "./room26.js";
 import MenuOverview from "./MenuOverview.js";
 
@@ -21,6 +24,9 @@ export default class RoomMenuArchive extends Room {
 		let buttonMargin = 16;
 
 		let rooms = [
+			room17,
+			room18,
+			room19,
 			room26,
 		];
 
