@@ -13,7 +13,12 @@ export function onResize() {
 		activateFullscreen();
 }
 
-// Returns a random element from arr
+/**
+ * Returns a random element
+ *
+ * @param {Array.<T>} arr - Input array to choose element from
+ * @returns {T} The random element from `arr`
+ */
 export function chooseRandom(arr) {
 	let ri = Math.floor(arr.length * Math.random());
 	return arr[ri];
@@ -52,21 +57,21 @@ export function toggleFullscreen() {
 }
 
 export function resizeCanvas() {
-	let ratioW = 16
-	let ratioH = 9
+	let ratioW = 16;
+	let ratioH = 9;
 	// fp4
 	// let ratioW = 913
 	// let ratioH = 437
 
-	let scale
+	let scale;
 	if (Settings.scaling) {
 		scale = window.devicePixelRatio;
 	} else {
 		scale = 1.0;
 	}
 
-	let availWidth = window.innerWidth * scale
-	let availHeight = window.innerHeight * scale
+	let availWidth = window.innerWidth * scale;
+	let availHeight = window.innerHeight * scale;
 	// let availWidth = window.innerWidth
 	// let availHeight = window.innerHeight
 
@@ -221,16 +226,20 @@ export function draw_line(x1, y1, x2, y2) {
 	g.ctx.stroke();
 }
 
+export function drawCircle(ctx, x, y, r, outline) {
+	ctx.beginPath();
+	ctx.arc(x, y, r, 0, 2 * Math.PI, false);
+	if(outline)
+		ctx.stroke();
+	else
+		ctx.fill();
+}
+
 // TODO fillCircle and strokeCircle
 // TODO camelCase
 // Put in static method of a graphics class
 export function draw_circle(x, y, r, outline) {
-	g.ctx.beginPath();
-	g.ctx.arc(x, y, r, 0, 2 * Math.PI, false);
-	if(outline)
-		g.ctx.stroke();
-	else
-		g.ctx.fill();
+	drawCircle(g.ctx, x, y, r, outline);
 }
 
 // TODO camelCase
