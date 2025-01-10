@@ -28,6 +28,7 @@ export default class Input {
 		g.canvas.addEventListener('touchstart', this.touchstart, false);
 		g.canvas.addEventListener('touchmove', this.touchmove, false);
 		g.canvas.addEventListener('touchend', this.touchend, false);
+
 	}
 
 	// Resets input state
@@ -180,7 +181,7 @@ export default class Input {
 
 			// Draw arrow from selected to cursor
 			g.ctx.strokeStyle = "white";
-			g.ctx.lineWidth = 2 * g.xScalar;
+			g.ctx.lineWidth = 3 * g.xScalar;
 			f.draw_line(selectedBubble.xD, selectedBubble.yD, this.xD, this.yD);
 
 			// Highlight selected bubble
