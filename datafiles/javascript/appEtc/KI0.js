@@ -19,6 +19,7 @@ export default class KI0 extends KI {
 		return einnehmlist;
 	}
 
+	// TODO move to super
 	alarmieren(nr) {
 		switch(nr) {
 			case 0:
