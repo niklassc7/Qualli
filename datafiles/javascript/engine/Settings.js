@@ -36,7 +36,7 @@ export default class Settings {
 	static toggleScaling() {
 		Settings.scaling = !Settings.scaling;
 		document.getElementById("sScaling").checked = Settings.scaling;
-		resizeCanvas();
+		f.resizeCanvas();
 	}
 
 	static pause() {
