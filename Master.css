@@ -40,6 +40,7 @@ body {
 	background: rgba(40, 40, 130, 0.3);
 	backdrop-filter: blur(20px);
 
+
 	color: rgba(210, 230, 255, 0.8);
 	font-size: 1.2em;
 	user-select: none;
@@ -49,8 +50,14 @@ body {
 	/* background: red; */
 	display: grid;
 	width: 80%;
+	height: 100%;
 	max-width: 512px;
 	margin: 0 auto;
+
+	overflow-x: hidden;
+	overflow-y: auto;
+	scrollbar-color: #5566ee transparent;
+	scrollbar-width: thin;
 }
 
 .overlayContent input {
