@@ -180,12 +180,25 @@ export default class Input {
 			}
 
 			// Draw arrow from selected to cursor
-			g.ctx.strokeStyle = "white";
-			g.ctx.lineWidth = 3 * g.xScalar;
-			f.draw_line(selectedBubble.xD, selectedBubble.yD, this.xD, this.yD);
+			let r = selectedBubble.width / 2;
+			if (!f.pointInCircle(this.x, this.y, selectedBubble.x, selectedBubble.y, r)) {
+				let dx = this.x - selectedBubble.x;
+				let dy = this.y - selectedBubble.y;
+				let dist = Math.sqrt(dx**2 + dy**2);
+				let ndx = dx / dist;
+				let ndy = dy / dist;
+				let startx = selectedBubble.x + ndx*r;
+				let starty = selectedBubble.y + ndy*r;
+				startx *= g.xScalar;
+				starty *= g.yScalar;
+				g.ctx.strokeStyle = "white";
+				g.ctx.lineWidth = 3 * g.xScalar;
+				f.draw_line(startx, starty, this.xD, this.yD);
+			}
 
 			// Highlight selected bubble
 			g.ctx.lineWidth = 2 * g.xScalar;
+			g.ctx.strokeStyle = "white";
 			for(let i = 0; i < 5 + Math.abs(this.circleCounter - this.circleCounterMax/2); i+=3) {
 				f.draw_circle(selectedBubble.xD,
 							selectedBubble.yD,
