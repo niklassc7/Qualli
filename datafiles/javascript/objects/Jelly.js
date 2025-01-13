@@ -3,8 +3,12 @@ import * as g from "../globals.js";
 import * as f from "../functions.js";
 import IObjlistentry from "../appEtc/IObjlistentry.js";
 import Colors from "../appEtc/color/Colors.js";
+import Settings from "../engine/Settings.js";
 
 export default class Jelly extends SpriteObject {
+	// static audio = new Audio("../../sounds/2025_01_11_12_29_30.flac");
+	// static audio = new Audio("2025_01_11_12_29_30.flac");
+
 	/**
 	 * [TODO:description]
 	 *
@@ -17,6 +21,9 @@ export default class Jelly extends SpriteObject {
 	constructor(x, y, team, ziel, size=1) {
 		// super(x, y, 32, 21, g.spr_Raumschiff[team]);
 		super(x, y, 1, 1, g.spr_Raumschiff[team]);
+
+		// let audio = new Audio("datafiles/sounds/2025_01_11_12_29_30.flac");
+		// audio.play();
 
 		g.room.addObject(this); // Move to Superclass
 
@@ -144,12 +151,15 @@ export default class Jelly extends SpriteObject {
 		// TODO rotation
 		// TODO origin
 		// TODO ellipsis
-		let c = Colors.team[this.team];
-		g.ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, 0.025`;
-		let maxr = Math.max(this.widthD, this.heightD);
+		// Jelly glow
+		if (Settings.getJellyGlow()) {
+			let c = Colors.team[this.team];
+			g.ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, 0.025`;
+			let maxr = Math.max(this.widthD, this.heightD);
 
-		f.draw_circle(this.xD, this.yD, maxr * 2.7, false);
-		f.draw_circle(this.xD, this.yD, maxr * 2.0, false);
+			f.draw_circle(this.xD, this.yD, maxr * 2.7, false);
+			f.draw_circle(this.xD, this.yD, maxr * 2.0, false);
+		}
 
 		super.draw();
 	}

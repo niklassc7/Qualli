@@ -7,6 +7,12 @@ export default class Settings {
 	static paused = false;
 	static fullscreen = false; // TODO check / remove
 
+	/**
+	 * Whether jellies glow
+	 * @type {Bool}
+	 */
+	static #jellyGlow = true;
+
 	// Initialized fields in overlay
 	static initOverlay() {
 		// TODO
@@ -47,5 +53,36 @@ export default class Settings {
 	static unpause() {
 		Settings.paused = false;
 		document.getElementById("pausedOverlay").classList.add("hidden");
+	}
+
+	/**
+	 * Set whether jelly glow is enabled
+	 *
+	 * @static
+	 * @param {Boolean} val - Whether jelly glow should be on or off
+	 */
+	static setJellyGlow(val) {
+		this.#jellyGlow = val;
+	}
+
+	/**
+	 * Returns whether jelly glow is enabled
+	 *
+	 * @static
+	 * @returns {Boolean} Whether jelly glow is enabled
+	 */
+	static getJellyGlow() {
+		return this.#jellyGlow;
+	}
+
+	/**
+	 * Toggle whether jelly glow is enabled
+	 *
+	 * @static
+	 * @returns {Boolean} True if glow was enabled, false otherwise
+	 */
+	static toggleJellyGlow() {
+		this.#jellyGlow = !this.#jellyGlow;
+		return this.#jellyGlow;
 	}
 }
