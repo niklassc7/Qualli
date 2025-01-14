@@ -1,7 +1,8 @@
 import * as g from "../globals.js";
 import * as f from "../functions.js";
 import Button from "../objects/Button.js";
-import Bubble from "../objects/Bubble.js";
+// import Bubble from "../objects/Bubble.js";
+import Base from "../objects/bases/Base.js";
 
 // TODO make static?
 // TODO move to engine
@@ -29,6 +30,22 @@ export default class Input {
 		g.canvas.addEventListener('touchmove', this.touchmove, false);
 		g.canvas.addEventListener('touchend', this.touchend, false);
 
+
+		// TODO change Object when renamed
+		/**
+		  * List of clickable objects
+		  * @type {Array.<Object>}
+		*/
+		let clickable = [];
+	}
+
+	/**
+	 * Register obj as clickable
+	 *
+	 * @param {Object} obj - Object that should be registered
+	 */
+	registerClickable(obj) {
+		clickable.push(obj);
 	}
 
 	// Resets input state
@@ -78,7 +95,7 @@ export default class Input {
 
 		// Planet selection
 		if (typeof g.input.selectedTouch === "undefined") {
-			let overBubble = f.collision_point(g.input.x, g.input.y, Bubble);
+			let overBubble = f.collision_point(g.input.x, g.input.y, Base);
 			if (typeof overBubble !== "undefined") {
 				// Start drag method
 				g.input.selectedTouch = overBubble;
@@ -105,7 +122,7 @@ export default class Input {
 		}
 
 
-		let overBubble = f.collision_point(g.input.x, g.input.y, Bubble)
+		let overBubble = f.collision_point(g.input.x, g.input.y, Base)
 		if (typeof overBubble !== "undefined") {
 			if (typeof g.input.selectedTouch !== "undefined") {
 				if (overBubble === g.input.selectedTouch) {
@@ -127,9 +144,9 @@ export default class Input {
 		g.input.updateCooordinates(event);
 		g.input.ensureOwner();
 
-		// Planet selection
+		// Base selection
 		if (typeof g.input.selected === "undefined") {
-			let overBubble = f.collision_point(g.input.x, g.input.y, Bubble);
+			let overBubble = f.collision_point(g.input.x, g.input.y, Base);
 			if (typeof overBubble !== "undefined") {
 				// Start drag method
 				g.input.selected = overBubble;
@@ -154,7 +171,7 @@ export default class Input {
 			overButton.onClick()
 		}
 
-		let overBubble = f.collision_point(g.input.x, g.input.y, Bubble)
+		let overBubble = f.collision_point(g.input.x, g.input.y, Base)
 		if (typeof overBubble !== "undefined") {
 			if (typeof g.input.selected !== "undefined") {
 				if (overBubble === g.input.selected) {

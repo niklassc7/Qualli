@@ -36,6 +36,13 @@ export default class Object extends IObjlistentry {
 		this.opt_swapScreen = 0;
 	}
 
+	/**
+	 * Called when object is clicked or tapped (if object registered as clickable)
+	 */
+	click() {
+		
+	}
+
 	resize() {
 		this.xD = this.x * g.xScalar;
 		this.yD = this.y * g.yScalar;

@@ -67,6 +67,7 @@ export default class LevelRoom extends Room {
 	}
 
 	// Adds bubble to room
+	// TODO rename → should handle all bases
 	addBubble(bubble) {
 		this.bubbles.push(bubble);
 		this.addObject(bubble);

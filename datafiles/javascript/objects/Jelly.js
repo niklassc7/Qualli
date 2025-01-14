@@ -18,7 +18,8 @@ export default class Jelly extends SpriteObject {
 	 * @param {Bubble} ziel - [TODO:description]
 	 * @param {number} [size] - [TODO:description]
 	 */
-	constructor(x, y, team, ziel, size=1) {
+	// TODO swap target and ziel
+	constructor(x, y, team, ziel, source, size=1) {
 		// super(x, y, 32, 21, g.spr_Raumschiff[team]);
 		super(x, y, 1, 1, g.spr_Raumschiff[team]);
 
@@ -26,6 +27,7 @@ export default class Jelly extends SpriteObject {
 		// audio.play();
 
 		g.room.addObject(this); // Move to Superclass
+		this.source = source;
 
 		this.team = team;
 		this.ziel = ziel; // TODO rename
@@ -33,9 +35,8 @@ export default class Jelly extends SpriteObject {
 		// this.width *= size;
 		// this.height *= size;
 
-		this.widthShould = 32;
-		this.heightShould = 21;
-		console.log(this.widthShould, this.heightShould);
+		this.widthShould = 32 * this.size;
+		this.heightShould = 21 * this.size;
 
 		// Point that jelly is moving to initially when created, will adapt
 		// direction gradually
@@ -96,7 +97,8 @@ export default class Jelly extends SpriteObject {
 						this.parent.setDirection(this.parent.direction - turnSpeed);
 					}
 
-				if(Math.abs(zDir - this.parent.direction) <= turnSpeed && Math.abs(this.parent.speed - this.targetSpeed) <= acceleration) {
+				if(Math.abs(zDir - this.parent.direction) <= turnSpeed && Math.abs(this.parent.speed - this.targetSpeed) <= acceleration && this.parent.width === this.parent.widthShould) {
+					// TODO is this deleted when parents is deleted
 					this.parent.setSpeed(this.targetSpeed);
 					this.parent.setDirection(zDir);
 					this.destroy();
@@ -123,7 +125,7 @@ export default class Jelly extends SpriteObject {
 		)){
 			this.destroy();
 
-			this.ziel.receiveJellies(this.size, this.team);
+			this.ziel.receiveJellies(this.size, this.team, this.source);
 		}
 
 		// Check if jelly collided with target

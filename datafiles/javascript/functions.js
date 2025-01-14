@@ -1,7 +1,8 @@
 import * as g from "./globals.js";
 import Settings from "./engine/Settings.js";
 import Jelly from "./objects/Jelly.js";
-import Bubble from "./objects/Bubble.js";
+// import Bubble from "./objects/Bubble.js";
+import Base from "./objects/bases/Base.js";
 
 // TODO put functions in approrpirate places
 
@@ -158,7 +159,7 @@ export function pointInCircle(x, y, cx, cy, r) {
 
 	let dx = Math.abs(x - cx);
 	let dy = Math.abs(y - cy);
-	// let dist = Math.sqrt(dx^2 + dy^2);
+	// let dist = Math.sqrt(dx^2 + dy^2); // TODO should use ** instead of ^
 
 	// console.log(dist, r);
 	// console.log();
@@ -282,7 +283,7 @@ export function draw_roundrect(ctx, x, y, width, height, radius, fill, stroke) {
 // Checks if team has already lost
 export function checkIfLost(team) {
 	for(var i = 0; i < g.room.objects.length; i++) {
-		if(g.room.objects[i] instanceof Jelly || g.room.objects[i] instanceof Bubble) {
+		if(g.room.objects[i] instanceof Jelly || g.room.objects[i] instanceof Base) {
 			if(g.room.objects[i].team === team) {
 				return false;
 			}
