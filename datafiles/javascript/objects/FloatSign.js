@@ -1,6 +1,8 @@
 import Object from "../engine/objects/Object.js";
 import * as g from "../globals.js";
 
+
+// TODO extend effects
 export default class FloatSign extends Object {
 	constructor(text, x, y, color, fontSize=20, ttl=200) {
 		super(x, y, 0, 0);
