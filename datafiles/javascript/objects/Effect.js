@@ -1,3 +1,5 @@
+// TODO move to effects
+
 export default class Effect extends Object {
 	constructor(x, y, ttl) {
 		super(x, y, 0, 0);
