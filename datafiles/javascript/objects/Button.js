@@ -33,13 +33,12 @@ export default class Button extends SpriteObject {
 	// }
 
 	draw() {
-		g.ctx.lineWidth = Math.round(2 * g.xScalar);
+		let lw = Math.round(2 * g.xScalar);
 
 		if (f.point_in_rectangle(g.input.x, g.input.y, this.x, this.y, this.x+this.width, this.y+this.height)) {
-			g.ctx.lineWidth = Math.round(8 * g.xScalar);
+			lw = Math.round(8 * g.xScalar);
 		}
 
-		g.ctx.strokeStyle = this.borderColour;
 
 		// TODO sinus curve
 		let animationN = 32
@@ -51,8 +50,23 @@ export default class Button extends SpriteObject {
 		//  Scale 
 		fill = fill * 0.3
 
-		g.ctx.fillStyle = `rgba(200, 200, 255, ${fill})`;
+		// g.ctx.lineWidth = lw + "px";
+		g.ctx.lineWidth = lw * g.xScalar;
+		g.ctx.strokeStyle = "rgba(50, 50, 50, 0.3)";
+		f.draw_roundrect(
+			g.ctx,
+			this.xD,
+			this.yD,
+			this.widthD + lw*g.xScalar,
+			this.heightD + lw*g.xScalar,
+			6 * g.xScalar,
+			false,
+			true
+		);
 
+		g.ctx.strokeStyle = this.borderColour;
+
+		g.ctx.fillStyle = `rgba(200, 200, 255, ${fill})`;
 		f.draw_roundrect(
 			g.ctx,
 			this.xD,
@@ -60,6 +74,7 @@ export default class Button extends SpriteObject {
 			this.widthD,
 			this.heightD,
 			6 * g.xScalar,
+			true,
 			true
 		);
 
