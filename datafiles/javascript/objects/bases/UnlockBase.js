@@ -43,8 +43,8 @@ export default class UnlockBase extends Base {
 				// new Jelly(this.x, this.y, team, target, this, 3);
 
 				let size = 0.5
-				if (Math.random() < 0.001 && units != 1000)
-					size = 1000;
+				// if (Math.random() < 0.001 && units != 1000)
+				// 	size = 1000;
 
 				if (units === 1000 && target instanceof UnlockBase)
 					break;
