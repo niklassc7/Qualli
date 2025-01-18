@@ -1,19 +1,36 @@
-import Object from "../../engine/objects/Object.js";
+// import Object from "../../engine/objects/Object.js";
+import SpriteObject from "../../engine/objects/SpriteObject.js";
 import LevelRoom from "../../rooms/LevelRoom.js";
 import * as g from "../../globals.js";
 import * as f from "../../functions.js";
 import LinkedList from "../../engine/LinkedList/LinkedList.js";
 
-export default class SimBubble extends Object {
+export default class SimBubble extends SpriteObject {
 	// TODO Is this ever cleared? On room change?
 	static all = [];
 
 	constructor(x, y, r, basecolor) {
-		super(x, y, 2*r, 2*r);
+		// const offscreen = 
+		let padding = 8;
+		const sprite = new OffscreenCanvas(2*padding + 2*r, 2*padding + 2*r);
+		const ctx = sprite.getContext("2d");
+
+		super(x, y, 2*r, 2*r, sprite);
+		this.ox = r + padding; // TODO separate sprite and hitbox
+		this.oy = r + padding;
+
+
+		// ctx.fillStyle = "yellow";
+		// ctx.fillRect(0, 0, r, r);
+
+		this.r = r;
+		this.basecolor = basecolor;
+		this.generateSprite(sprite);
+
 		SimBubble.all.push(this);
 
 		this.ascendAcel = 0.0002 * r;
-		this.basecolor = basecolor;
+
 
 
 
@@ -28,6 +45,40 @@ export default class SimBubble extends Object {
 
 		this.setDirectionSpeed(direction, speed);
 		// console.log(this.speed, this.direction);
+	}
+
+	generateSprite(canvas) {
+		// TODO scale
+
+		// const offscreen = new OffscreenCanvas(w, h);
+		const ctx = canvas.getContext("2d");
+		ctx.translate(8, 8); // TODO do padding properly
+
+		ctx.strokeStyle = "rgba(220, 220, 250, 0.6)";
+		ctx.lineWidth = 4;
+		f.drawCircle(ctx, this.r, this.r, this.r, true);
+
+
+		ctx.fillStyle = "rgba(220, 220, 250, 0.1)";
+		f.drawCircle(ctx, this.r, this.r, this.r, false);
+
+
+		let lineNum = 5;
+		for (let i = 1; i < lineNum; i++) {
+			let alpha = 0.05 + 0.6 * (1 - i/lineNum)
+
+			ctx.strokeStyle = `rgba(${this.basecolor[0]}, ${this.basecolor[1]}, ${this.basecolor[2]}, ${alpha})`;
+			let lineWidth = 1;
+			ctx.lineWidth = lineWidth;
+			f.drawCircle(ctx, this.r, this.r, this.r - i*(lineWidth*2), true);
+			f.drawCircle(ctx, this.r, this.r, this.r + i*(lineWidth*2), true);
+		}
+
+		
+		ctx.translate(-8, -8); // TODO
+		// ctx.strokeStyle = "red";
+		// ctx.lineWidth = 1;
+		// ctx.strokeRect(0, 0, canvas.width, canvas.height);
 	}
 
 	destroy() {
@@ -140,34 +191,28 @@ export default class SimBubble extends Object {
 	draw() {
 		super.draw();
 
-		g.ctx.strokeStyle = "rgba(220, 220, 250, 0.6)";
-		g.ctx.lineWidth = 4 * g.xScalar;
-		f.draw_circle(this.xD, this.yD, this.widthD/2, true);
+		// g.ctx.strokeStyle = "rgba(220, 220, 250, 0.6)";
+		// g.ctx.lineWidth = 4 * g.xScalar;
+		// f.draw_circle(this.xD, this.yD, this.widthD/2, true);
 
 
-		g.ctx.fillStyle = "rgba(220, 220, 250, 0.1)";
-		f.draw_circle(this.xD, this.yD, this.widthD/2, false);
+		// g.ctx.fillStyle = "rgba(220, 220, 250, 0.1)";
+		// f.draw_circle(this.xD, this.yD, this.widthD/2, false);
 
 
-		let lineNum = 5;
-		for (let i = 1; i < lineNum; i++) {
-			let alpha = 0.05 + 0.6 * (1 - i/lineNum)
+		// let lineNum = 5;
+		// for (let i = 1; i < lineNum; i++) {
+		// 	let alpha = 0.05 + 0.6 * (1 - i/lineNum)
 
-			g.ctx.strokeStyle = `rgba(${this.basecolor[0]}, ${this.basecolor[1]}, ${this.basecolor[2]}, ${alpha})`;
-			let lineWidth = 1 * g.xScalar;
-			g.ctx.lineWidth = lineWidth;
-			f.draw_circle(this.xD, this.yD, this.widthD/2 - i*(lineWidth*2), true);
-			f.draw_circle(this.xD, this.yD, this.widthD/2 + i*(lineWidth*2), true);
-		}
+		// 	g.ctx.strokeStyle = `rgba(${this.basecolor[0]}, ${this.basecolor[1]}, ${this.basecolor[2]}, ${alpha})`;
+		// 	let lineWidth = 1 * g.xScalar;
+		// 	g.ctx.lineWidth = lineWidth;
+		// 	f.draw_circle(this.xD, this.yD, this.widthD/2 - i*(lineWidth*2), true);
+		// 	f.draw_circle(this.xD, this.yD, this.widthD/2 + i*(lineWidth*2), true);
+		// }
 	}
 
-
-	// attack(other) {
-	// 	let amount = Math.floor(this.units / 2)
-
-	// 	this.attackN(other, amount)
-	// }
-
+	// TODO remove
 	// Attack bubble other
 	attack(other, amount) {
 		// if (amount > this.units) {
