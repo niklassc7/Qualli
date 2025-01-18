@@ -65,8 +65,13 @@ export default class MenuOverview extends Room{
 
 		g.ctx.lineWidth = 4 * ((g.xScalar + g.yScalar) / 2);
 		g.ctx.font = Math.round(125 * ((g.xScalar + g.yScalar) / 2)) + "px fnt_Comforta_Light";
-		g.ctx.strokeStyle = "white"
 		g.ctx.textAlign = "center";
-		g.ctx.strokeText("Overview", g.roomWidth/2 * g.xScalar, 100 * g.yScalar)
+		let tx = g.roomWidth/2 * g.xScalar;
+		let ty = 100 * g.yScalar;
+		g.ctx.strokeStyle = "#333"
+		g.ctx.strokeText("Overview", tx + 2*g.xScalar, ty + 2*g.yScalar);
+		g.ctx.strokeStyle = "white"
+		g.ctx.strokeText("Overview", tx, ty);
+
 	}
 }
