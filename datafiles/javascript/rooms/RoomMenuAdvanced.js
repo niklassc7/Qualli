@@ -55,10 +55,10 @@ export default class RoomMenuAdvanced extends Room {
 	draw() {
 		super.draw();
 
-		g.ctx.lineWidth = 4;
-		g.ctx.font = "42px fnt_Comforta_Light";
-		g.ctx.fillStyle = "white"
-		g.ctx.textAlign = "center";
-		g.ctx.fillText("Advanced 🦈", g.roomWidth/2, 32);
+		this.g.ctx.lineWidth = 4;
+		this.g.ctx.font = "42px fnt_Comforta_Light";
+		this.g.ctx.fillStyle = "white"
+		this.g.ctx.textAlign = "center";
+		this.g.ctx.fillText("Advanced 🦈", this.g.roomWidth/2, 32);
 	}
 }
