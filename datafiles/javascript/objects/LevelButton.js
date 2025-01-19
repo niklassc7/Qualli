@@ -1,4 +1,5 @@
 import Button from "./Button.js";
+import * as globals from "../globals.js";
 
 export default class LevelButton extends Button {
 	constructor(g, text, x, y, width, height, level) {
@@ -7,15 +8,14 @@ export default class LevelButton extends Button {
 
 		this.level = level;
 
-
 		this.won = g.progressManager.getLevelStats(level.name).won;
 
 		if (this.won > 3) {
-			this.medal = g.sprMedalGold;
+			this.medal = globals.sprMedalGold;
 		} else if (this.won > 1) {
-			this.medal = g.sprMedalSilver;
+			this.medal = globals.sprMedalSilver;
 		} else if (this.won > 0) {
-			this.medal = g.sprMedalBronze;
+			this.medal = globals.sprMedalBronze;
 		} else {
 			this.medal = undefined;
 		}
@@ -31,7 +31,7 @@ export default class LevelButton extends Button {
 		let mHeight = 32; // Medal height → keep aspect ratio of sprite
 		let mMargin = 6;
 		if (this.medal != undefined) {
-			g.ctx.drawImage(this.medal,
+			this.g.ctx.drawImage(this.medal,
 				this.x + this.width - mWidth - mMargin,
 				this.y + mMargin,
 				mWidth,
