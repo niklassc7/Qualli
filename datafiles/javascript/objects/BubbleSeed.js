@@ -39,31 +39,31 @@ export default class BubbleSeed extends Object {
 		let shiftedStepCount = this.g.stepCount + this.created; // Shift counter by creation time because otherwise all seed instances show exactly the same
 		for(var i = 0; i < lineCount; i++){
 			this.g.ctx.beginPath();
-			this.g.ctx.arc(this.xD, this.yD, i * ((this.g.ctx.lineWidth-1)*2), (shiftedStepCount* (i*0.01+0.1)) + 1.25 * Math.PI, (shiftedStepCount*(i*0.01+0.1)) + 1.75 * Math.PI, false);
+			this.g.ctx.arc(this.x, this.y, i * ((this.g.ctx.lineWidth-1)*2), (shiftedStepCount* (i*0.01+0.1)) + 1.25 * Math.PI, (shiftedStepCount*(i*0.01+0.1)) + 1.75 * Math.PI, false);
 			this.g.ctx.stroke();
 			this.g.ctx.beginPath();
-			this.g.ctx.arc(this.xD, this.yD, this.g.ctx.lineWidth + i * ((this.g.ctx.lineWidth-1)*2), -(shiftedStepCount* (i*0.01+0.1)) + 1.25 * Math.PI, -(shiftedStepCount*(i*0.01+0.1)) + 1.75 * Math.PI, false);
+			this.g.ctx.arc(this.x, this.y, this.g.ctx.lineWidth + i * ((this.g.ctx.lineWidth-1)*2), -(shiftedStepCount* (i*0.01+0.1)) + 1.25 * Math.PI, -(shiftedStepCount*(i*0.01+0.1)) + 1.75 * Math.PI, false);
 			this.g.ctx.stroke();
 		}
 
 
 		// Background
 		this.g.ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
-		f.draw_circle(this.xD, this.yD, 0.9*this.widthD/2, false);
+		f.drawCircle(this.g.ctx, this.x, this.y, 0.9*this.width/2, false);
 
 		// Draw background of progress bar
-		let circleRadius = 1.1 * this.widthD / 2;
+		let circleRadius = 1.1 * this.width / 2;
 		this.g.ctx.lineWidth = 3;
 		this.g.ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
-		f.draw_circle(this.xD, this.yD, circleRadius, true);
+		f.drawCircle(this.x, this.y, circleRadius, true);
 		
 
 		// Draw progress bar of time left
 		this.g.ctx.lineWidth = 3;
 		this.g.ctx.strokeStyle = 'white';
 		this.g.ctx.beginPath();
-		this.g.ctx.arc(this.xD,
-			this.yD,
+		this.g.ctx.arc(this.x,
+			this.y,
 			circleRadius,
 			2.0 * Math.PI * (this.timeAlive/this.delay),
 			2.0 * Math.PI);

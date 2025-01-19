@@ -9,8 +9,6 @@ export default class Input {
 		this.g = g;
 		this.x = 0;
 		this.y = 0;
-		this.xD = this.x; // x it should be drawn at
-		this.yD = this.y; // y it should be drawn at
 
 		this.selected = undefined;
 		this.selectedTouch = undefined; // TODO merge again?
@@ -52,8 +50,6 @@ export default class Input {
 	reset() {
 		this.x = 0;
 		this.y = 0;
-		this.xD = this.x;
-		this.yD = this.y;
 
 		this.selected = undefined;
 		this.selectedTouch = undefined;
@@ -80,14 +76,14 @@ export default class Input {
 		// this.setY(f.yScreenToInternal(event.clientY));
 	}
 
+	// TODO remove?
 	setX(x) {
 		this.x = x;
-		this.xD = x; // x it should be drawn at TODO remove
 	}
 
+	// TODO remove?
 	setY(y) {
 		this.y = y;
-		this.yD = y; // y it should be drawn at TODO remove
 	}
 
 	touchstart(event) {
@@ -202,7 +198,7 @@ export default class Input {
 				let starty = selectedBubble.y + ndy*r;
 				this.g.ctx.strokeStyle = "white";
 				this.g.ctx.lineWidth = 3;
-				f.drawLine(this.ctx, startx, starty, this.xD, this.yD);
+				f.drawLine(this.ctx, startx, starty, this.x, this.y);
 			}
 
 			// Highlight selected bubble
@@ -210,9 +206,9 @@ export default class Input {
 			this.g.ctx.strokeStyle = "white";
 			for(let i = 0; i < 5 + Math.abs(this.circleCounter - this.circleCounterMax/2); i+=3) {
 				f.drawCircle(this.g.ctx,
-							selectedBubble.xD,
-							selectedBubble.yD,
-							selectedBubble.widthD / 2 + i,
+							selectedBubble.x,
+							selectedBubble.y,
+							selectedBubble.width / 2 + i,
 							true);
 			}
 

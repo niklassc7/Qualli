@@ -65,11 +65,10 @@ export default class UnlockBase extends Base {
 		this.g.ctx.textBaseline = "middle";
 		this.g.ctx.textAlign = "center";
 		// const fsize = 28 + 4*this.size;
-		const fsize = 42;
 
 		this.g.ctx.fillStyle = "#eceff1";
 		this.g.ctx.fillStyle = "rgba(245, 255, 245, 0.8)";
-		this.g.ctx.font = Math.round(fsize) + "px fnt_Comforta_Bold";
-		this.g.ctx.fillText(Math.floor(this.units), this.xD, this.yD);
+		this.g.ctx.font = "42px fnt_Comforta_Bold";
+		this.g.ctx.fillText(Math.floor(this.units), this.x, this.y);
 	}
 }

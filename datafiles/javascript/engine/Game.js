@@ -16,8 +16,6 @@ export default class Game {
 		// this.paddingHorz;
 
 		// TODO remove
-		globals.msgs.addFirst("Test");
-		globals.msgs.addFirst("Test2");
 		globals.spr_Raumschiff[1] = document.getElementById("qualleRed");
 		globals.spr_Raumschiff[2] = document.getElementById("qualleBlue");
 		globals.spr_Raumschiff[3] = document.getElementById("qualleGreen");

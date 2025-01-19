@@ -51,8 +51,8 @@ export default class FloatSign extends Object {
 
 		this.g.ctx.globalAlpha = this.ttl / this.startTtl;
 		
-		this.g.ctx.strokeText(this.text, this.xD, this.yD);
-		this.g.ctx.fillText(this.text, this.xD, this.yD);
+		this.g.ctx.strokeText(this.text, this.x, this.y);
+		this.g.ctx.fillText(this.text, this.x, this.y);
 
 		this.g.ctx.globalAlpha = 1;
 	}

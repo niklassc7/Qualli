@@ -21,7 +21,7 @@ export default class RadarEffect extends Effect {
 		this.g.ctx.lineWidth = 4;
 
 		this.g.ctx.globalAlpha = this.relTtl();
-		f.draw_circle(this.xD, this.yD, this.radius, true)
+		f.drawCircle(this.g.ctx, this.x, this.y, this.radius, true)
 		this.g.ctx.globalAlpha = 1.0;
 	}
 

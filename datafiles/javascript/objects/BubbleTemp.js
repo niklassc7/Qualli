@@ -63,9 +63,9 @@ export default class BubbleTemp extends Bubble {
 		this.g.ctx.lineWidth = 3;
 		this.g.ctx.strokeStyle = 'black';
 		this.g.ctx.beginPath();
-		this.g.ctx.arc(this.xD,
-			this.yD,
-			1.1 * this.widthD / 2,
+		this.g.ctx.arc(this.x,
+			this.y,
+			1.1 * this.width / 2,
 			2.0 * Math.PI * ((this.totalTtl-this.ttl)/this.totalTtl),
 			2.0 * Math.PI);
 

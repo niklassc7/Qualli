@@ -71,9 +71,9 @@ export default class Bubble extends Base {
 			} else {
 			}
 				this.g.ctx.lineWidth = Math.round(2 * 2); // TODO
-				f.drawCircle(this.g.ctx, this.xD, this.yD, this.widthD / 2, false);
+				f.drawCircle(this.g.ctx, this.x, this.y, this.width / 2, false);
 
-			f.drawCircle(this.g.ctx, this.xD, this.yD, this.widthD / 2, true);
+			f.drawCircle(this.g.ctx, this.x, this.y, this.width / 2, true);
 		// }
 
 
@@ -89,7 +89,7 @@ export default class Bubble extends Base {
 		// if (this.team !== 0)
 			// g.ctx.fillStyle = Colors.team[this.team].cRgba();
 		this.g.ctx.font = Math.round(fsize) + "px fnt_Comforta_Bold";
-		this.g.ctx.fillText(Math.floor(this.units), this.xD, this.yD);
+		this.g.ctx.fillText(Math.floor(this.units), this.x, this.y);
 		// }}}
 
 		// Queue
@@ -98,7 +98,7 @@ export default class Bubble extends Base {
 			this.g.ctx.font = "18px fnt_Comforta_Bold";
 			this.g.ctx.textBaseline = "middle";
 			this.g.ctx.textAlign = "center";
-			this.g.ctx.fillText(this.createQueue.size, this.xD, this.yD +32);
+			this.g.ctx.fillText(this.createQueue.size, this.x, this.y + 32);
 		}
 	}
 

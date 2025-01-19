@@ -30,33 +30,33 @@ export default class Startpage extends Room {
 		super.draw();
 
 		// Title
-		g.ctx.strokeStyle = "#ffffff";
-		g.ctx.font = "175px fnt_Comforta_Light";
-		g.ctx.textAlign = "center";
-		g.ctx.lineWidth = 8;
+		this.g.ctx.strokeStyle = "#ffffff";
+		this.g.ctx.font = "175px fnt_Comforta_Light";
+		this.g.ctx.textAlign = "center";
+		this.g.ctx.lineWidth = 8;
 		let fill = 0.9
 
 		let animationN = 16
 		let animationSpeed = 0.3
-		let blur = g.stepCount * animationSpeed % animationN
+		let blur = this.g.stepCount * animationSpeed % animationN
 		blur = Math.abs(blur - animationN/2)
 		// Normalize
 		blur = blur / (animationN/2)
 		blur = 2 + 4*blur
 
-		g.ctx.filter = `blur(${blur}px)`;
+		this.g.ctx.filter = `blur(${blur}px)`;
 
 		// Blur
-		g.ctx.strokeStyle = `rgba(210, 230, 255, ${fill})`;
-		g.ctx.filter = "none";
+		this.g.ctx.strokeStyle = `rgba(210, 230, 255, ${fill})`;
+		this.g.ctx.filter = "none";
 
 
 		// Shadow
-		g.ctx.fillStyle = `rgba(100, 100, 100, ${fill})`;
-		g.ctx.fillText("Qualli", g.roomWidth/2 + 4, 148 + 4);
+		this.g.ctx.fillStyle = `rgba(100, 100, 100, ${fill})`;
+		this.g.ctx.fillText("Qualli", this.g.roomWidth/2 + 4, 148 + 4);
 
 		// Gradient
-		const grad = g.ctx.createLinearGradient(300, 0, (g.roomWidth-300), (500 + blur*100));
+		const grad = this.g.ctx.createLinearGradient(300, 0, (this.g.roomWidth-300), (500 + blur*100));
 		// grad.addColorStop(0, "#b8f0ec");
 		// grad.addColorStop(1, "#139964");
 
@@ -67,24 +67,24 @@ export default class Startpage extends Room {
 		grad.addColorStop(1, "#125B9D");
 
 		// Main text
-		g.ctx.fillStyle = grad;
-		g.ctx.fillText("Qualli", g.roomWidth/2, 148);
+		this.g.ctx.fillStyle = grad;
+		this.g.ctx.fillText("Qualli", this.g.roomWidth/2, 148);
 
 		this.n_step++; // TODO remove
 
 
 		// TODO remove
 		if (Settings.debug) {
-			g.ctx.lineWidth = 5;
-			g.ctx.strokeStyle = 'white';
-			g.ctx.fillStyle = "white";
+			this.g.ctx.lineWidth = 5;
+			this.g.ctx.strokeStyle = 'white';
+			this.g.ctx.fillStyle = "white";
 			for(var i = 0; i < 5; i++){
-				g.ctx.beginPath();
-				g.ctx.arc(g.roomWidth / 2, g.roomHeight - 64, i * ((g.ctx.lineWidth-1)*2), (this.n_step* (i*0.01+0.1)) + 1.25 * Math.PI, (this.n_step*(i*0.01+0.1)) + 1.75 * Math.PI, false);
-				g.ctx.stroke();
-				g.ctx.beginPath();
-				g.ctx.arc(g.roomWidth / 2, g.roomHeight - 64, g.ctx.lineWidth+i * ((g.ctx.lineWidth-1)*2), -(this.n_step* (i*0.01+0.1)) + 1.25 * Math.PI, -(this.n_step*(i*0.01+0.1)) + 1.75 * Math.PI, false);
-				g.ctx.stroke();
+				this.g.ctx.beginPath();
+				this.g.ctx.arc(this.g.roomWidth / 2, this.g.roomHeight - 64, i * ((this.g.ctx.lineWidth-1)*2), (this.n_step* (i*0.01+0.1)) + 1.25 * Math.PI, (this.n_step*(i*0.01+0.1)) + 1.75 * Math.PI, false);
+				this.g.ctx.stroke();
+				this.g.ctx.beginPath();
+				this.g.ctx.arc(this.g.roomWidth / 2, this.g.roomHeight - 64, this.g.ctx.lineWidth+i * ((this.g.ctx.lineWidth-1)*2), -(this.n_step* (i*0.01+0.1)) + 1.25 * Math.PI, -(this.n_step*(i*0.01+0.1)) + 1.75 * Math.PI, false);
+				this.g.ctx.stroke();
 			}
 		}
 	}

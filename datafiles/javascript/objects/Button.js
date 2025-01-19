@@ -29,7 +29,7 @@ export default class Button extends SpriteObject {
 	draw() {
 		let lw = 2;
 
-		if (f.point_in_rectangle(g.input.x, g.input.y, this.x, this.y, this.x+this.width, this.y+this.height)) {
+		if (f.point_in_rectangle(this.g.input.x, this.g.input.y, this.x, this.y, this.x+this.width, this.y+this.height)) {
 			lw = 8;
 		}
 
@@ -37,35 +37,35 @@ export default class Button extends SpriteObject {
 		// TODO sinus curve
 		let animationN = 32
 		// let animationSpeed = 0.3
-		let fill = g.stepCount * this.animationSpeed % animationN
+		let fill = this.g.stepCount * this.animationSpeed % animationN
 		fill = Math.abs(fill - animationN / 2)
 		// Normalize
 		fill = fill / (animationN/2)
 		//  Scale 
 		fill = fill * 0.3
 
-		g.ctx.lineWidth = lw;
-		g.ctx.strokeStyle = "rgba(50, 50, 50, 0.3)";
+		this.g.ctx.lineWidth = lw;
+		this.g.ctx.strokeStyle = "rgba(50, 50, 50, 0.3)";
 		f.draw_roundrect(
-			g.ctx,
-			this.xD,
-			this.yD,
-			this.widthD + lw,
-			this.heightD + lw,
+			this.g.ctx,
+			this.x,
+			this.y,
+			this.width + lw,
+			this.height + lw,
 			6,
 			false,
 			true
 		);
 
-		g.ctx.strokeStyle = this.borderColour;
+		this.g.ctx.strokeStyle = this.borderColour;
 
-		g.ctx.fillStyle = `rgba(200, 200, 255, ${fill})`;
+		this.g.ctx.fillStyle = `rgba(200, 200, 255, ${fill})`;
 		f.draw_roundrect(
-			g.ctx,
-			this.xD,
-			this.yD,
-			this.widthD,
-			this.heightD,
+			this.g.ctx,
+			this.x,
+			this.y,
+			this.width,
+			this.height,
 			6,
 			true,
 			true
@@ -73,19 +73,19 @@ export default class Button extends SpriteObject {
 
 		// let locked = false; // TODO implement lock system
 		if(this.disabled) {
-			g.ctx.strokeStyle = "#607d8b";
-			g.ctx.fillStyle = "#607d8b";
-			g.ctx.drawImage(this.sprite, this.xD - this.oxD + this.widthD * 0.25, this.yD - this.oyD + this.heightD * 0.14, this.widthD * 0.5, this.heightD * 0.5);
+			this.g.ctx.strokeStyle = "#607d8b";
+			this.g.ctx.fillStyle = "#607d8b";
+			this.g.ctx.drawImage(this.sprite, this.x - this.ox + this.width * 0.25, this.y - this.oy + this.height * 0.14, this.width * 0.5, this.height * 0.5);
 		} else {
-			g.ctx.strokeStyle = "white";
-			g.ctx.fillStyle = "white";
+			this.g.ctx.strokeStyle = "white";
+			this.g.ctx.fillStyle = "white";
 		}
 
 
-		g.ctx.textAlign = "center";
-		g.ctx.textBaseline = "middle";
-		g.ctx.font = this.font;
-		g.ctx.fillText(
+		this.g.ctx.textAlign = "center";
+		this.g.ctx.textBaseline = "middle";
+		this.g.ctx.font = this.font;
+		this.g.ctx.fillText(
 			this.text,
 			this.x + this.width / 2,
 			this.y + this.height / 2

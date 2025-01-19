@@ -154,10 +154,10 @@ export default class Jelly extends SpriteObject {
 		if (Settings.getJellyGlow()) {
 			let c = Colors.team[this.team];
 			this.g.ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, 0.025`;
-			let maxr = Math.max(this.widthD, this.heightD);
+			let maxr = Math.max(this.width, this.height);
 
-			f.drawCircle(this.g.ctx, this.xD, this.yD, maxr * 2.7, false);
-			f.drawCircle(this.g.ctx, this.xD, this.yD, maxr * 2.0, false);
+			f.drawCircle(this.g.ctx, this.x, this.y, maxr * 2.7, false);
+			f.drawCircle(this.g.ctx, this.x, this.y, maxr * 2.0, false);
 		}
 
 		super.draw();

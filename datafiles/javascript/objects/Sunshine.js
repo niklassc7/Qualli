@@ -14,7 +14,6 @@ export default class Sunshine extends IObjlistentry {
 		// Modulate alpha value of beams (0 <= dAlphaMod <= 1)
 		this.dAlphaMod = new Array(2*this.ne).fill(0.5);
 		this.dAlphaMaxStep = 0.05;
-		// this.dAlphaMaxDiff = 
 	}
 
 	step() {
@@ -29,17 +28,14 @@ export default class Sunshine extends IObjlistentry {
 
 	draw() {
 		super.draw();
-		g.ctx.lineWidth = 140;
-
-		let xD = this.x;
-		let yD = this.y;
+		this.g.ctx.lineWidth = 140;
 
 		for (let i = -this.ne; i < this.ne; i++) {
 			let a = 0.02 + this.dAlphaMod[i+this.ne]*0.06;
-			g.ctx.strokeStyle = `rgba(255, 230, 150, ${a})`;
+			this.g.ctx.strokeStyle = `rgba(255, 230, 150, ${a})`;
 
-			let d = g.roomWidth / (2*this.ne);
-			f.drawLine(g.ctx, xD, yD, xD + i*d*1.2, g.roomHeight-0);
+			let d = this.g.roomWidth / (2*this.ne);
+			f.drawLine(this.g.ctx, this.x, this.y, this.x + i*d*1.2, this.g.roomHeight-0);
 		}
 	}
 }

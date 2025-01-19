@@ -46,14 +46,13 @@ export default class ProtectBase extends Base {
 
 	draw() {
 		this.g.ctx.fillStyle = Colors.team[this.team].cRgba();
-		f.draw_circle(this.xD, this.yD, this.widthD, false);
+		f.drawCircle(this.g.ctx, this.x, this.y, this.width, false);
 
 		super.draw();
 
 		this.g.ctx.fillStyle = "black";
-		let fsize = 24;
-		this.g.ctx.font = Math.round(fsize) + "px fnt_Comforta_Bold";
-		this.g.ctx.fillText(this.received, this.xD, this.yD);
+		this.g.ctx.font = "24px fnt_Comforta_Bold";
+		this.g.ctx.fillText(this.received, this.x, this.y);
 	}
 
 	protectStep() {
