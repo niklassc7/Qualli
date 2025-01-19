@@ -2,8 +2,8 @@ import SpriteObject from "../../engine/objects/SpriteObject.js";
 import Colors from "../../appEtc/color/Colors.js";
 
 export default class Base extends SpriteObject {
-	constructor(x, y, width, height, sprite, team = 0) {
-		super(x, y, width, height, sprite);
+	constructor(g, x, y, width, height, sprite, team = 0) {
+		super(g, x, y, width, height, sprite);
 
 		this.ox = this.width / 2;
 		this.oy = this.height / 2;

@@ -1,5 +1,5 @@
 import IObjlistentry from "../../appEtc/IObjlistentry.js";
-import * as g from "../../globals.js";
+// import * as g from "../../globals.js";
 import * as f from "../../functions.js";
 
 // TOOD rename
@@ -7,15 +7,15 @@ export default class Object extends IObjlistentry {
 	// static all = [];
 
 	// TODO default values
-	constructor(x, y, width, height) {
-		super();
+	constructor(g, x, y, width, height) {
+		super(g);
 
 		// Object.all.push(this);
 
 		this.x = x;
 		this.y = y;
-		this.xD = x * g.xScalar; // x it should be drawn at
-		this.yD = y * g.yScalar; // y it should be drawn at
+		this.xD = x; // TODO remove
+		this.yD = y; // TODO remove
 		this.ox = 0; // Origin
 		this.oy = 0;
 		this.oxD = 0;
@@ -26,8 +26,8 @@ export default class Object extends IObjlistentry {
 		this.speed = 0;
 		this.width = (width === undefined) ? 0 : width;
 		this.height = (height === undefined) ? 0 : height;;
-		this.widthD = this.width * g.xScalar;
-		this.heightD = this.height * g.yScalar;
+		this.widthD = this.width;
+		this.heightD = this.height;
 
 		// Set whether objects leaving the room should jump to the other side of
 		// the room:
@@ -44,12 +44,12 @@ export default class Object extends IObjlistentry {
 	}
 
 	resize() {
-		this.xD = this.x * g.xScalar;
-		this.yD = this.y * g.yScalar;
-		this.oxD = this.ox * g.xScalar;
-		this.oyD = this.oy * g.yScalar;
-		this.widthD = this.width * g.xScalar;
-		this.heightD = this.height * g.yScalar;
+		this.xD = this.x;
+		this.yD = this.y;
+		this.oxD = this.ox;
+		this.oyD = this.oy;
+		this.widthD = this.width;
+		this.heightD = this.height;
 	}
 
 	setDirection(direction) {
@@ -88,7 +88,7 @@ export default class Object extends IObjlistentry {
 		this.speed = Math.sqrt(this.hspeed * this.hspeed + this.vspeed * this.vspeed);
 	}
 
-	step() {
+	step(g) {
 		this.x += this.hspeed;
 		this.y += this.vspeed;
 		if(this.opt_swapScreen != 0) {
@@ -96,33 +96,26 @@ export default class Object extends IObjlistentry {
 		}
 	}
 
-	draw() {
+	draw(g) {
+		// TODO remove
 		this.resize(); // TODO optimise somehow?
 		// this.drawBorder(true)
 	}
 
 	// TODO obolsete (ORIGIN)
-	isOutsideRoom_vert() {
-		if( (this.x > g.canvas_width) || (this.width + this.x < 0) ) {
-			return true;
-		}
-		return false;
+	isOutsideRoom_vert(g) {
+		return (this.x > g.roomWidth) || (this.width + this.x < 0);
 	}
 
 	// TODO obolsete (ORIGIN)
-	isOutsideRoom_horz() {
-		if( (this.y > g.canvas_height) || (this.height + this.y < 0) ) {
-			return true;
-		}
-		return false;
+	isOutsideRoom_horz(g) {
+		return (this.y > g.roomHeight) || (this.height + this.y < 0);
 	}
 
 	// TODO obolsete (ORIGIN)
-	isOutsideRoom() {
-		if(this.isOutsideRoom_vert() || this.isOutsideRoom_horz()){
-		 return true;
-	 }
-		return false;
+	isOutsideRoom(g) {
+		return false
+		// return this.isOutsideRoom_vert(g) || this.isOutsideRoom_horz(g);
 	}
 
 	// TODO comment
@@ -170,18 +163,18 @@ export default class Object extends IObjlistentry {
 	}
 	
 	// For Debugging, draws (x,y)
-	drawXY() {
+	drawXY(g) {
 		g.ctx.strokeStyle = "red";
 		g.ctx.lineWidth = 3;
 
 		g.ctx.beginPath();
-		g.ctx.moveTo(this.xD - 10 * g.xScalar, this.yD - 10 * g.yScalar);
-		g.ctx.lineTo(this.xD + 10 * g.xScalar, this.yD + 10 * g.yScalar);
+		g.ctx.moveTo(this.xD - 10, this.yD - 10);
+		g.ctx.lineTo(this.xD + 10, this.yD + 10);
 		g.ctx.stroke();
 
 		g.ctx.beginPath();
-		g.ctx.moveTo(this.xD - 10 * g.xScalar, this.yD + 10 * g.yScalar);
-		g.ctx.lineTo(this.xD + 10 * g.xScalar, this.yD - 10 * g.yScalar);
+		g.ctx.moveTo(this.xD - 10, this.yD + 10);
+		g.ctx.lineTo(this.xD + 10, this.yD - 10);
 		g.ctx.stroke();
 	}
 }

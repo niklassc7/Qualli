@@ -1,4 +1,3 @@
-import * as g from "../../globals.js";
 import SimBubble from "./SimBubble.js";
 import IObjlistentry from "../../appEtc/IObjlistentry.js";
 import Color from "../../appEtc/color/Color.js";
@@ -6,25 +5,25 @@ import Color from "../../appEtc/color/Color.js";
 export default class SimBubbleEmitter extends IObjlistentry {
 	// TODO use color class → implement rgba rgb colors
 	// constructor(basecolor = [220, 220, 250], p = 0.1) {
-	constructor(basecolor = [120, 210, 255], p = 0.1) {
-		super();
+	constructor(g, basecolor = [120, 210, 255], p = 0.1) {
+		super(g);
 
 		this.basecolor = basecolor;
 		this.p = p;
 	}
 
 	step() {
-		super.step();
+		super.step(g);
 
 		if (Math.random() < this.p) {
-			let sourceX = g.roomWidth/2;
-			let sourceWidth = g.roomWidth;
+			let sourceX = this.g.roomWidth/2;
+			let sourceWidth = this.g.roomWidth;
 			
 			// let x = Math.random() * roomWidth;
 			let x = sourceX - sourceWidth + 2*Math.random()*sourceWidth;
 
 			let r = Math.random() * 64 + 8;
-			let y = g.roomHeight + r;
+			let y = this.g.roomHeight + r;
 
 			// DEBUG
 			// y -= 2*r;
@@ -41,8 +40,7 @@ export default class SimBubbleEmitter extends IObjlistentry {
 
 			let carr = [c[ci].r, c[ci].g, c[ci].b];
 
-			// room.addObject(new SimBubble(x, y, r, this.basecolor));
-			g.room.addObject(new SimBubble(x, y, r, carr));
+			this.g.room.addObject(new SimBubble(this.g, x, y, r, carr));
 		}
 	}
 }

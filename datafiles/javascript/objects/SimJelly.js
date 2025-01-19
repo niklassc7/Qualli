@@ -1,5 +1,5 @@
 import SpriteObject from "../engine/objects/SpriteObject.js";
-import * as g from "../globals.js";
+import * as globals from "../globals.js";
 
 // TODO remove?
 
@@ -7,8 +7,8 @@ export default class SimJelly extends SpriteObject {
 	// TODO Is this ever cleared? On room change?
 	static all = [];
 
-	constructor(x, y, team, ziel, size=1) {
-		super(x, y, 32, 21, g.spr_Raumschiff[team]);
+	constructor(g, x, y, team, ziel, size=1) {
+		super(g, x, y, 32, 21, globals.spr_Raumschiff[team]);
 		SimJelly.all.push(this);
 
 		room.addObject(this); // TODO Move to Superclass, or remove?
@@ -33,16 +33,16 @@ export default class SimJelly extends SpriteObject {
 		// increases speed and corrects direction until it is done and then deletes itself
 		// this reduces operations after getting to the targetSpeed and right direction
 		class StartHelper extends IObjlistentry {
-			constructor(parent, targetSpeed) {
-				super();
+			constructor(g, parent, targetSpeed) {
+				super(g);
 				this.parent = parent;
 				this.targetSpeed = targetSpeed;
 				room.addObject(this);
 			}
 
-			draw() {}
+			draw(g) {}
 
-			step() {
+			step(g) {
 				let acceleration = 0.03 + 0.4*Math.random();
 
 				if(this.parent.speed < this.targetSpeed)
@@ -71,19 +71,19 @@ export default class SimJelly extends SpriteObject {
 					// this.destroy();
 				}
 
-				if (this.parent.ziel.isOutsideRoom()) {
+				if (this.parent.ziel.isOutsideRoom(g)) {
 					this.destroy();
 				}
 			}
 		}
 
-		new StartHelper(this, 4 + 2 * Math.random());
+		new StartHelper(g, this, 4 + 2 * Math.random());
 	}
 
-	step(){
-		super.step();
+	step(g){
+		super.step(g);
 
-		if (this.isOutsideRoom()) {
+		if (this.isOutsideRoom(g)) {
 			this.destroy();
 		}
 		if (room instanceof LevelRoom) {
@@ -114,7 +114,7 @@ export default class SimJelly extends SpriteObject {
 		// TODO origin
 		// TODO ellipsis
 		let c = Colors.team[this.team];
-		g.ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, 0.025`;
+		this.g.ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, 0.025`;
 		let maxr = Math.max(this.widthD, this.heightD);
 
 		draw_circle(this.xD, this.yD, maxr * 2.7, false);

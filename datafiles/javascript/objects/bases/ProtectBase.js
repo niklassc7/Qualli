@@ -1,12 +1,12 @@
 import * as f from "../../functions.js";
-import * as g from "../../globals.js";
+import * as globals from "../../globals.js";
 import Jelly from "../Jelly.js";
 import Base from "./Base.js";
 import Colors from "../../appEtc/color/Colors.js";
 
 export default class ProtectBase extends Base {
-	constructor(x, y, width, height, subjects, team = 0) {
-		super(x, y, width, height, g.sprMedalSilver, team);
+	constructor(g, x, y, width, height, subjects, team = 0) {
+		super(g, x, y, width, height, globals.sprMedalSilver, team);
 
 		this.units = 100;
 		this.received = [];
@@ -45,15 +45,15 @@ export default class ProtectBase extends Base {
 	}
 
 	draw() {
-		g.ctx.fillStyle = Colors.team[this.team].cRgba();
+		this.g.ctx.fillStyle = Colors.team[this.team].cRgba();
 		f.draw_circle(this.xD, this.yD, this.widthD, false);
 
 		super.draw();
 
-		g.ctx.fillStyle = "black";
+		this.g.ctx.fillStyle = "black";
 		let fsize = 24;
-		g.ctx.font = Math.round(fsize * g.xScalar) + "px fnt_Comforta_Bold";
-		g.ctx.fillText(this.received, this.xD, this.yD);
+		this.g.ctx.font = Math.round(fsize) + "px fnt_Comforta_Bold";
+		this.g.ctx.fillText(this.received, this.xD, this.yD);
 	}
 
 	protectStep() {
@@ -67,9 +67,8 @@ export default class ProtectBase extends Base {
 			if (this.team !== subj.team) {
 				let n = Math.round(Math.random() * 10);
 				for (let j = 0; j < n; j++)
-					g.room.addObject(new Jelly(this.x, this.y, this.team, subj));
+					this.g.room.addObject(new Jelly(this.g, this.x, this.y, this.team, subj));
 			}
 		}
-
 	}
 }

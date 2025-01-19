@@ -1,5 +1,5 @@
 import SpriteObject from "../engine/objects/SpriteObject.js";
-import * as g from "../globals.js";
+import * as globals from "../globals.js";
 import * as f from "../functions.js";
 import IObjlistentry from "../appEtc/IObjlistentry.js";
 import Colors from "../appEtc/color/Colors.js";
@@ -19,14 +19,14 @@ export default class Jelly extends SpriteObject {
 	 * @param {number} [size] - [TODO:description]
 	 */
 	// TODO swap target and ziel
-	constructor(x, y, team, ziel, source, size=1) {
+	constructor(g, x, y, team, ziel, source, size=1) {
 		// super(x, y, 32, 21, g.spr_Raumschiff[team]);
-		super(x, y, 1, 1, g.spr_Raumschiff[team]);
+		super(g, x, y, 1, 1, globals.spr_Raumschiff[team]);
 
 		// let audio = new Audio("datafiles/sounds/2025_01_11_12_29_30.flac");
 		// audio.play();
 
-		g.room.addObject(this); // Move to Superclass
+		// g.room.addObject(this); // Move to Superclass
 		this.source = source;
 
 		this.team = team;
@@ -57,18 +57,15 @@ export default class Jelly extends SpriteObject {
 		// increases speed and corrects direction until it is done and then deletes itself
 		// this reduces operations after getting to the targetSpeed and right direction
 		class StartHelper extends IObjlistentry {
-			constructor(parent, targetSpeed) {
-				super();
+			constructor(g, parent, targetSpeed) {
+				super(g);
 				this.parent = parent;
 				this.targetSpeed = targetSpeed;
-				g.room.addObject(this);
+				this.g.room.addObject(this);
 			}
 
-			draw() {}
-
 			step() {
-				// this.parent.sizeScalar = Math.min(1, this.parent.sizeScalar + 0.01);
-				// this.parent.size = Math.min(this.parent.sizeShould, this.parent.size + 0.01);
+				super.step();
 
 				// TODO sometimes deleted before full size is reached
 				this.parent.width = Math.min(this.parent.widthShould, this.parent.width + 2.5);
@@ -106,7 +103,7 @@ export default class Jelly extends SpriteObject {
 			}
 		}
 
-		new StartHelper(this, 4 + 2 * Math.random());
+		new StartHelper(this.g, this, 4 + 2 * Math.random());
 	}
 
 	step(){
@@ -156,11 +153,11 @@ export default class Jelly extends SpriteObject {
 		// Jelly glow
 		if (Settings.getJellyGlow()) {
 			let c = Colors.team[this.team];
-			g.ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, 0.025`;
+			this.g.ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, 0.025`;
 			let maxr = Math.max(this.widthD, this.heightD);
 
-			f.draw_circle(this.xD, this.yD, maxr * 2.7, false);
-			f.draw_circle(this.xD, this.yD, maxr * 2.0, false);
+			f.drawCircle(this.g.ctx, this.xD, this.yD, maxr * 2.7, false);
+			f.drawCircle(this.g.ctx, this.xD, this.yD, maxr * 2.0, false);
 		}
 
 		super.draw();

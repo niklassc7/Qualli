@@ -1,7 +1,6 @@
 // import Object from "../../engine/objects/Object.js";
 import SpriteObject from "../../engine/objects/SpriteObject.js";
 import LevelRoom from "../../rooms/LevelRoom.js";
-import * as g from "../../globals.js";
 import * as f from "../../functions.js";
 import LinkedList from "../../engine/LinkedList/LinkedList.js";
 
@@ -9,13 +8,12 @@ export default class SimBubble extends SpriteObject {
 	// TODO Is this ever cleared? On room change?
 	static all = [];
 
-	constructor(x, y, r, basecolor) {
-		// const offscreen = 
+	constructor(g, x, y, r, basecolor) {
 		let padding = 8;
 		const sprite = new OffscreenCanvas(2*padding + 2*r, 2*padding + 2*r);
 		const ctx = sprite.getContext("2d");
 
-		super(x, y, 2*r, 2*r, sprite);
+		super(g, x, y, 2*r, 2*r, sprite);
 		this.ox = r + padding; // TODO separate sprite and hitbox
 		this.oy = r + padding;
 
@@ -81,8 +79,8 @@ export default class SimBubble extends SpriteObject {
 		// ctx.strokeRect(0, 0, canvas.width, canvas.height);
 	}
 
-	destroy() {
-		super.destroy();
+	destroy(g) {
+		super.destroy(g);
 
 		// Delete from SimBubble.all
 		for (let i = 0; i < SimBubble.all.length; i++) {
@@ -99,18 +97,18 @@ export default class SimBubble extends SpriteObject {
 
 		this.setVspeed(this.vspeed - this.ascendAcel);
 
-		if (g.room instanceof LevelRoom) {
+		if (this.g.room instanceof LevelRoom) {
 			this.setVspeed(this.vspeed - 40*this.ascendAcel);
 		}
 
-		if (this.isOutsideRoom()) {
-			this.destroy()
+		if (this.isOutsideRoom(g)) {
+			this.destroy(g)
 		}
 
 		// Create jellies
 		if (!this.createQueue.isEmpty()) {
 			let parameter = this.createQueue.removeFirst();
-			let newJelly = new SimJelly(parameter[0], parameter[1], parameter[2], parameter[3]);
+			let newJelly = new SimJelly(this.g, parameter[0], parameter[1], parameter[2], parameter[3]);
 			newJelly.setSpeeds(newJelly.hspeed + this.hspeed, newJelly.vspeed + this.vspeed);
 		}
 
@@ -130,15 +128,15 @@ export default class SimBubble extends SpriteObject {
 		let ax2 = this.x + this.width/2;
 		let ay2 = this.y + this.height/2
 
-		if (f.point_in_rectangle(g.input.x, g.input.y, ax1, ay1, ax2, ay2)) {
+		if (f.point_in_rectangle(this.g.input.x, this.g.input.y, ax1, ay1, ax2, ay2)) {
 			let a = 0.5;
-			if (this.x < g.input.x) {
+			if (this.x < this.g.input.x) {
 				this.setHspeed(this.hspeed - a);
 			} else {
 				this.setHspeed(this.hspeed + a);
 			}
 
-			if (this.y < g.input.y) {
+			if (this.y < this.g.input.y) {
 				this.setVspeed(this.vspeed - a);
 			} else {
 				this.setVspeed(this.vspeed + a);
@@ -188,41 +186,9 @@ export default class SimBubble extends SpriteObject {
 		}
 	}
 
-	draw() {
-		super.draw();
-
-		// g.ctx.strokeStyle = "rgba(220, 220, 250, 0.6)";
-		// g.ctx.lineWidth = 4 * g.xScalar;
-		// f.draw_circle(this.xD, this.yD, this.widthD/2, true);
-
-
-		// g.ctx.fillStyle = "rgba(220, 220, 250, 0.1)";
-		// f.draw_circle(this.xD, this.yD, this.widthD/2, false);
-
-
-		// let lineNum = 5;
-		// for (let i = 1; i < lineNum; i++) {
-		// 	let alpha = 0.05 + 0.6 * (1 - i/lineNum)
-
-		// 	g.ctx.strokeStyle = `rgba(${this.basecolor[0]}, ${this.basecolor[1]}, ${this.basecolor[2]}, ${alpha})`;
-		// 	let lineWidth = 1 * g.xScalar;
-		// 	g.ctx.lineWidth = lineWidth;
-		// 	f.draw_circle(this.xD, this.yD, this.widthD/2 - i*(lineWidth*2), true);
-		// 	f.draw_circle(this.xD, this.yD, this.widthD/2 + i*(lineWidth*2), true);
-		// }
-	}
-
 	// TODO remove
 	// Attack bubble other
 	attack(other, amount) {
-		// if (amount > this.units) {
-		// 	console.warn("Tried attacking with more units than bubble has.")
-		// 	amount = this.units
-		// }
-		// amount = Math.min(this.units, amount)
-
-		// this.units -= amount
-
 		for (let i = 0; i < amount; i++) {
 			// let newJelly = new Jelly(this.x, this.y, this.team, other)
 			// let team = 1; // TODO
@@ -234,4 +200,4 @@ export default class SimBubble extends SpriteObject {
 			this.createQueue.addLast([this.x, this.y, team, other])
 		}
 	}
-	}
+}

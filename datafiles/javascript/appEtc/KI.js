@@ -1,16 +1,18 @@
 import IObjlistentry from "./IObjlistentry.js";
-import * as g from "../globals.js";
 import * as f from "../functions.js";
 import Colors from "./color/Colors.js";
 import Jelly from "../objects/Jelly.js";
 import ProgressManager from "./ProgressManager.js";
 
 export default class KI extends IObjlistentry {
-	constructor(team) {
-		super();
+	constructor(g, team) {
+		super(g);
 		this.team = team;
 		this.alarm = [];
 		this.alarm[0] = 20;
+
+		// TODO is this necessary → does room reference suffice
+		// this.g = g;
 
 		this.modules = [];
 	}
@@ -32,21 +34,19 @@ export default class KI extends IObjlistentry {
 
 	// TODO Room should draw symbols
 	draw() {
-		g.ctx.fillStyle = Colors.team[this.team].cRgba();
-		g.ctx.strokeStyle = "rgba(50, 50, 50, 0.6)";
+		// console.log(this.team);
+		this.g.ctx.fillStyle = Colors.team[this.team].cRgba();
+		this.g.ctx.strokeStyle = "rgba(50, 50, 50, 0.6)";
 		let linew = 2;
-		g.ctx.lineWidth = linew * g.xScalar;
+		this.g.ctx.lineWidth = linew;
 		let symbolx = (32 + (this.team - 2) * 48);
 		let symboly = 32;
 		let r = 16;
-		let symbolxD = (32 + (this.team - 2) * 48) * g.xScalar;
-		let symbolyD = 32 * g.xScalar;
-		let rD = 16 * g.xScalar;
-		f.draw_circle(symbolxD, symbolyD, rD, false);
-		f.draw_circle(symbolxD, symbolyD, rD, true);
+		f.drawCircle(this.g.ctx, symbolx, symboly, r, false);
+		f.drawCircle(this.g.ctx, symbolx, symboly, r, true);
 
-		g.ctx.fillStyle = "rgba(50, 50, 50, 0.9)";
-		g.ctx.fillText(this.constructor.name, symbolxD, symbolyD);
+		this.g.ctx.fillStyle = "rgba(50, 50, 50, 0.9)";
+		this.g.ctx.fillText(this.constructor.name, symbolx, symboly);
 
 		// Modules
 		for (let i = 0; i < this.modules.length; i++) {
@@ -62,9 +62,9 @@ export default class KI extends IObjlistentry {
 
 	// TODO rename
 	pruefe_ob_eigene_Raumschiffe_im_Spiel() {
-		for(var i = 0; i < g.room.objects.length; i++) {
-			if(g.room.objects[i] instanceof Jelly) {
-				if(g.room.objects[i].team === this.team) return true;
+		for(var i = 0; i < this.g.room.objects.length; i++) {
+			if(this.g.room.objects[i] instanceof Jelly) {
+				if(this.g.room.objects[i].team === this.team) return true;
 			}
 		}
 		return false;
@@ -77,9 +77,9 @@ export default class KI extends IObjlistentry {
 	 */
 	getBubbles() {
 		var bubbles = [];
-		for(var i = 0; i < g.room.bubbles.length; i++) {
-			if(g.room.bubbles[i].team === this.team) {
-				bubbles[bubbles.length] = g.room.bubbles[i];
+		for(var i = 0; i < this.g.room.bubbles.length; i++) {
+			if(this.g.room.bubbles[i].team === this.team) {
+				bubbles[bubbles.length] = this.g.room.bubbles[i];
 			}
 		}
 		return bubbles;
@@ -118,9 +118,9 @@ export default class KI extends IObjlistentry {
 
 	getEnemyBubblesWeakerThan(n) {
 		var enemyList = [];
-		for(var i = 0; i < g.room.bubbles.length; i++) {
-			if(g.room.bubbles[i].team !== this.team && n > g.room.bubbles[i].units) {
-				enemyList[enemyList.length] = g.room.bubbles[i];
+		for(var i = 0; i < this.g.room.bubbles.length; i++) {
+			if(this.g.room.bubbles[i].team !== this.team && n > this.g.room.bubbles[i].units) {
+				enemyList[enemyList.length] = this.g.room.bubbles[i];
 			}
 		}
 		return enemyList;
@@ -148,8 +148,8 @@ export default class KI extends IObjlistentry {
 	// TODO do this in room
 	// TODO rename
 	pruefe_ob_gewonnen() {
-		for(var i = 0; i < g.room.objects.length; i++) {
-			if(g.room.objects[i] instanceof KI) {
+		for(var i = 0; i < this.g.room.objects.length; i++) {
+			if(this.g.room.objects[i] instanceof KI) {
 				return false;
 			}
 		}
@@ -172,12 +172,12 @@ export default class KI extends IObjlistentry {
 			this.destroy(); // TODO remove from room.ais
 
 			// Prüfen, ob noch eine KI da ist, sonst gewonnen.
-			if(g.room.status == "running" && this.pruefe_ob_gewonnen()){
+			if(this.g.room.status == "running" && this.pruefe_ob_gewonnen()){
 				f.showEndgame(true)
-				g.room.status = "won";
+				this.g.room.status = "won";
 
 				// TODO win/lose logic should be in LevelRoom
-				ProgressManager.updateLevelStats(g.room.constructor.name, true);
+				this.g.progressManager.updateLevelStats(this.g.room.constructor.name, true);
 			}
 			return true;
 		}

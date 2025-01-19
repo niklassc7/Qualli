@@ -1,7 +1,6 @@
 import Room from "./Room.js";
 import SimBubbleEmitter from "../objects/SimBubble/SimBubbleEmitter.js";
 import Button from "../objects/Button.js";
-import * as g from "../globals.js";
 import RoomMenuMain from "./RoomMenuMain.js";
 import RoomMenuAdvanced from "./RoomMenuAdvanced.js";
 import RoomMenuExperimental from "./RoomMenuExperimental.js";
@@ -12,12 +11,12 @@ import Startpage from "./Startpage.js";
 // TODO make this a general OptionsRoom and subclass it
 
 export default class MenuOverview extends Room{
-	constructor() {
-		super();
+	constructor(g) {
+		super(g);
 
-		this.addObject(new SimBubbleEmitter());
+		this.addObject(new SimBubbleEmitter(this.g));
 
-		this.addObject(new Button("←", 42, g.roomHeight - 128, 90, 90, () => { g.gotoRoom(Startpage); } )).setFontSize(24) ;
+		this.addObject(new Button(this.g, "←", 42, g.roomHeight - 128, 90, 90, () => { g.gotoRoom(Startpage); } )).setFontSize(24) ;
 
 
 		let buttonWidth = 300;
@@ -48,6 +47,7 @@ export default class MenuOverview extends Room{
 		for(let i = 0; i < itemsinColumn; i++)
 			for(let j = 0; j < itemsInRow && i*itemsInRow + j < options.length; j++) {
 				this.addObject(new Button(
+					this.g,
 					options[i*itemsInRow + j][1],
 					marginLeft + j * (buttonWidth + buttonMargin),
 					marginTop + i * (buttonHeight + buttonMargin),
@@ -60,16 +60,16 @@ export default class MenuOverview extends Room{
 
 	}
 
-	draw() {
-		super.draw()
+	draw(g) {
+		super.draw(g)
 
-		g.ctx.lineWidth = 4 * ((g.xScalar + g.yScalar) / 2);
-		g.ctx.font = Math.round(125 * ((g.xScalar + g.yScalar) / 2)) + "px fnt_Comforta_Light";
+		g.ctx.lineWidth = 4;
+		g.ctx.font = "125px fnt_Comforta_Light";
 		g.ctx.textAlign = "center";
-		let tx = g.roomWidth/2 * g.xScalar;
-		let ty = 100 * g.yScalar;
+		let tx = g.roomWidth/2;
+		let ty = 100;
 		g.ctx.strokeStyle = "#333"
-		g.ctx.strokeText("Overview", tx + 2*g.xScalar, ty + 2*g.yScalar);
+		g.ctx.strokeText("Overview", tx + 2, ty + 2);
 		g.ctx.strokeStyle = "white"
 		g.ctx.strokeText("Overview", tx, ty);
 

@@ -3,8 +3,8 @@ import KI from "./KI.js";
 // Passive
 
 export default class KI3 extends KI {
-	constructor(team) {
-		super(team);
+	constructor(g, team) {
+		super(g, team);
 
 		this.alarm = [];
 		this.alarm[0] = 20;

@@ -18,11 +18,12 @@
 		<link rel = "Stylesheet"  type = "text/css" href = "Master.css"/>
 
 		<script type="module">
-			import main from "./datafiles/javascript/main.js";
 			import * as f from "./datafiles/javascript/functions.js";
 			import * as g from "./datafiles/javascript/globals.js";
 			import Settings from "./datafiles/javascript/engine/Settings.js";
 			import ProgressManager from "./datafiles/javascript/appEtc/ProgressManager.js";
+
+			import Game from "./datafiles/javascript/engine/Game.js";
 
 			// TODO remove workaround
 			window.f = f;
@@ -30,14 +31,15 @@
 			window.Settings = Settings;
 			window.ProgressManager = ProgressManager;
 
-			main();
+			window.onload = () => {
+				var game = new Game();
+				window.game = game;
+				}
 		</script>
 	</head>
 
 	<!-- <body onLoad="main()" onresize="onResize()"> -->
-	<body onresize="f.onResize()">
-		<canvas id="myCanvas" width="1280" height="720"></canvas>
-
+	<body onresize="game.resizeCanvas()">
 		<div id="ressources" style="visibility: collapse; position: fixed;">
 			<img id="img_Erde" src="datafiles/sprites/Erde3.png" width="0" height="0"/>
 			<img id="img_Linsenreflex" src="datafiles/sprites/Linsenreflex.png" width="0" height="0"/>
@@ -73,7 +75,7 @@
 				<div>
 					<input id="egRestart" type="button" value="Restart ♻" onClick="g.room.restart(); f.hideEndgame();" />
 					<input id="egResume" type="button" value="Resume ▶" onClick="f.hideEndgame();" />
-					<input id="egExit" type="button" value="Exit 🚪" onClick="g.gotoRoom(g.room.prevRoom); f.hideEndgame()" />
+					<input id="egExit" type="button" value="Exit 🚪" onClick="game.room.return(); f.hideEndgame()" />
 				</div>
 			</div>
 		</div>

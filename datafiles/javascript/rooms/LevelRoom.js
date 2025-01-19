@@ -1,9 +1,12 @@
 import Room from "./Room.js";
-import * as g from "../globals.js";
+import * as globals from "../globals.js";
 import * as f from "../functions.js";
 import Button from "../objects/Button.js";
 import Settings from "../engine/Settings.js";
 import ProgressManager from "../appEtc/ProgressManager.js";
+import Jelly from "../objects/Jelly.js";
+import Base from "../objects/bases/Base.js";
+import Startpage from "./Startpage.js";
 
 
 // TODO Import these in the individual level rooms only when needed
@@ -14,10 +17,8 @@ import ProgressManager from "../appEtc/ProgressManager.js";
 export default class LevelRoom extends Room {
 	static background = "datafiles/sprites/bg8FullHd.png";
 
-	constructor(prevRoom){
-		super(prevRoom);
-
-		console.log(prevRoom, this.prevRoom)
+	constructor(g){
+		super(g);
 
 		if (this.constructor == LevelRoom) {
 			throw new Error("Abstract classes can't be instantiated.");
@@ -36,6 +37,7 @@ export default class LevelRoom extends Room {
 
 		// Pause button
 		let pauseButton = this.addObject(new Button(
+			this.g,
 			"⏸",
 			g.roomWidth - 60,
 			10,
@@ -77,9 +79,9 @@ export default class LevelRoom extends Room {
 
 	removeBubble(bubble) {
 		// TODO datastructure
-		for (var i = 0; i < g.room.bubbles.length; i++) {
-			if(g.room.bubbles[i] === bubble) {
-				g.room.bubbles.splice(i, 1);
+		for (var i = 0; i < globals.room.bubbles.length; i++) {
+			if(globals.room.bubbles[i] === bubble) {
+				globals.room.bubbles.splice(i, 1);
 				return true;
 			}
 		}
@@ -93,7 +95,7 @@ export default class LevelRoom extends Room {
 			return
 		}
 
-		g.gotoRoom(this.prevRoom)
+		globals.gotoRoom(Startpage)
 		Settings.unpause()
 	}
 
@@ -102,7 +104,7 @@ export default class LevelRoom extends Room {
 				return false;
 		}
 
-		g.gotoRoom(this.constructor)
+		globals.gotoRoom(this.constructor)
 		return false;
 	}
 
@@ -110,10 +112,10 @@ export default class LevelRoom extends Room {
 	alarmieren(nr) {
 		switch(nr) {
 			case 0:
-				if(this.status == "running" && f.checkIfLost(1)) {
+				if(this.status == "running" && this.checkIfLost(1)) {
 					this.status = "lost";
 					f.showEndgame(false)
-					ProgressManager.updateLevelStats(g.room.constructor.name, false);
+					ProgressManager.updateLevelStats(globals.room.constructor.name, false);
 				}
 				this.alarm[0] = 300;
 
@@ -123,5 +125,17 @@ export default class LevelRoom extends Room {
 				console.log("Error: alarm has no function.");
 				break;
 		}
+	}
+
+	// Checks if team has already lost
+	checkIfLost(team) {
+		for(var i = 0; i < this.objects.length; i++) {
+			if(this.objects[i] instanceof Jelly || this.objects[i] instanceof Base) {
+				if(this.objects[i].team === team) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 }

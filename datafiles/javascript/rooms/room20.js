@@ -1,14 +1,13 @@
 import LevelRoom from "./LevelRoom.js";
 import Bubble from "../objects/Bubble.js";
 import KI0 from "../appEtc/KI0.js";
-import * as g from "../globals.js";
 import Jelly from "../objects/Jelly.js";
 
 export default class room20 extends LevelRoom {
-	constructor(){
-		super();
+	constructor(g) {
+		super(g);
 
-		this.addObject(new KI0(2));
+		this.addObject(new KI0(this.g, 2));
 
 		let planetDistance = 200; // centre to centre
 		let itemsInRow = 6;
@@ -21,7 +20,7 @@ export default class room20 extends LevelRoom {
 			for(let j = 0; j < itemsInRow; j++) {
 				let newTeam = (j < itemsInRow / 2) ? 1 : 2;
 				let newSize = (i == 1) ? 2 : 1;
-				this.addBubble(new Bubble(startMargin + j * planetDistance, 160 + i * planetDistance, newTeam, newSize, 100));
+				this.addBubble(new Bubble(this.g, startMargin + j * planetDistance, 160 + i * planetDistance, newTeam, newSize, 100));
 			}
 		}
 
@@ -35,16 +34,16 @@ export default class room20 extends LevelRoom {
 		// Random walk
 		this.support_src_x += 10 - Math.random() * 20
 		if(this.support_src_x < 0)
-			this.support_src_x = g.roomWidth - 1
-		else if(this.support_src_x >= g.roomWidth)
+			this.support_src_x = this.g.roomWidth - 1
+		else if(this.support_src_x >= this.g.roomWidth)
 			this.support_src_x = 0
 
 		let tmp_team = this.getLosingTeamByPlanet()
 		if(tmp_team != 0) {
 			let tmp_x = this.support_src_x
 			let tmp_y = -100
-			let tmp_ziel = g.room.bubbles[Math.floor(Math.random() * g.room.bubbles.length)]
-			new Jelly(tmp_x, tmp_y, tmp_team, tmp_ziel)
+			let tmp_ziel = this.g.room.bubbles[Math.floor(Math.random() * this.g.room.bubbles.length)]
+			new Jelly(this.g, tmp_x, tmp_y, tmp_team, tmp_ziel)
 		}
 	}
 
@@ -53,10 +52,10 @@ export default class room20 extends LevelRoom {
 		let sum_team_1 = 0
 		let sum_team_2 = 0
 		
-		for(let i = 0; i < g.room.bubbles.length; i++) {
-			if(g.room.bubbles[i].team == 1)
+		for(let i = 0; i < this.g.room.bubbles.length; i++) {
+			if(this.g.room.bubbles[i].team == 1)
 				sum_team_1++
-			else if(g.room.bubbles[i].team == 2)
+			else if(this.g.room.bubbles[i].team == 2)
 				sum_team_2++
 		}
 

@@ -1,13 +1,12 @@
 import LevelRoom from "./LevelRoom.js";
 import Bubble from "../objects/Bubble.js";
 import KI0 from "../appEtc/KI0.js";
-import * as g from "../globals.js";
 
 export default class room22 extends LevelRoom {
-	constructor() {
-		super();
+	constructor(g) {
+		super(g);
 
-		this.addObject(new KI0(2));
+		this.addObject(new KI0(this.g, 2));
 
 		let planetDistance = 200; // centre to centre
 		let itemsInRow = 6;
@@ -25,7 +24,7 @@ export default class room22 extends LevelRoom {
 					newTeam = 2
 
 				let newSize = (i == 1) ? 2 : 1;
-				this.addBubble(new Bubble(startMargin + j * planetDistance, 160 + i * planetDistance, newTeam, newSize, 30));
+				this.addBubble(new Bubble(this.g, startMargin + j * planetDistance, 160 + i * planetDistance, newTeam, newSize, 30));
 			}
 		}
 	}

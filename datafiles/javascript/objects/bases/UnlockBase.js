@@ -1,14 +1,13 @@
 import Base from "./Base.js";
-import * as g from "../../globals.js";
 import Jelly from "../Jelly.js";
 
 export default class UnlockBase extends Base {
-	constructor(x, y, units) {
+	constructor(g, x, y, units) {
 		let w = 0.3*units + 150;
 		let h = 0.3*units + 150;
 		let spr = g.spr_Erde;
 
-		super(x, y, w, h, spr);
+		super(g, x, y, w, h, spr);
 
 		this.units = units;
 	}
@@ -29,8 +28,8 @@ export default class UnlockBase extends Base {
 			if (typeof target === "undefined") {
 				do {
 					// TODO endless loop possible if only one bubble
-					let ri = Math.floor(Math.random()*g.room.bubbles.length);
-					target = g.room.bubbles[ri];
+					let ri = Math.floor(Math.random()*this.g.room.bubbles.length);
+					target = this.g.room.bubbles[ri];
 				} while (target === this)
 
 			}
@@ -49,9 +48,9 @@ export default class UnlockBase extends Base {
 				if (units === 1000 && target instanceof UnlockBase)
 					break;
 
-				new Jelly(this.x, this.y, team, target, this, size);
-				new Jelly(this.x, this.y, team, target, this, size);
-				new Jelly(this.x, this.y, team, target, this, size);
+				new Jelly(this.g, this.x, this.y, team, target, this, size);
+				new Jelly(this.g, this.x, this.y, team, target, this, size);
+				new Jelly(this.g, this.x, this.y, team, target, this, size);
 			}
 			this.units = 0;
 		}
@@ -63,14 +62,14 @@ export default class UnlockBase extends Base {
 	draw() {
 		super.draw();
 
-		g.ctx.textBaseline = "middle";
-		g.ctx.textAlign = "center";
+		this.g.ctx.textBaseline = "middle";
+		this.g.ctx.textAlign = "center";
 		// const fsize = 28 + 4*this.size;
 		const fsize = 42;
 
-		g.ctx.fillStyle = "#eceff1";
-		g.ctx.fillStyle = "rgba(245, 255, 245, 0.8)";
-		g.ctx.font = Math.round(fsize * g.xScalar) + "px fnt_Comforta_Bold";
-		g.ctx.fillText(Math.floor(this.units), this.xD, this.yD);
+		this.g.ctx.fillStyle = "#eceff1";
+		this.g.ctx.fillStyle = "rgba(245, 255, 245, 0.8)";
+		this.g.ctx.font = Math.round(fsize) + "px fnt_Comforta_Bold";
+		this.g.ctx.fillText(Math.floor(this.units), this.xD, this.yD);
 	}
 }

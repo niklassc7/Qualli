@@ -1,9 +1,8 @@
 import KI from "./KI.js";
-import * as g from "../globals.js";
 
 export default class KI0 extends KI {
-	constructor(team) {
-		super(team);
+	constructor(g, team) {
+		super(g, team);
 	}
 
 	getEinnehmlist() {
@@ -11,9 +10,9 @@ export default class KI0 extends KI {
 		var strongestPlanet = this.getStrongestPlanet(); // TODO rename
 		if(strongestPlanet === undefined)
 			return [];
-		for(var i = 0; i < g.room.bubbles.length; i++) {
-			if(g.room.bubbles[i].team !== this.team && Math.floor(strongestPlanet.units / 2) > g.room.bubbles[i].units) {
-				einnehmlist[einnehmlist.length] = g.room.bubbles[i];
+		for(var i = 0; i < this.g.room.bubbles.length; i++) {
+			if(this.g.room.bubbles[i].team !== this.team && Math.floor(strongestPlanet.units / 2) > this.g.room.bubbles[i].units) {
+				einnehmlist[einnehmlist.length] = this.g.room.bubbles[i];
 			}
 		}
 		return einnehmlist;

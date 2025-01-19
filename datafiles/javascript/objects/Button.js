@@ -1,16 +1,15 @@
-import * as g from "../globals.js";
 import * as f from "../functions.js";
 import SpriteObject from "../engine/objects/SpriteObject.js";
 
 // TODO extend from Object instead of SpriteObject
 export default class Button extends SpriteObject {
-	constructor(text, x, y, width, height, onClick, disabled) {
-		super(x, y, width, height, g.sprLock);
+	constructor(g, text, x, y, width, height, onClick, disabled) {
+		super(g, x, y, width, height, g.sprLock);
 		this.text = text;
 		this.onClick = onClick;
 		this.borderColour = "white";
 		this.fontSize = 56;
-		this.font =  Math.round(this.fontSize * ((g.xScalar + g.yScalar) / 2)) + "px fnt_Comforta_Regular";
+		this.font =  Math.round(this.fontSize) + "px fnt_Comforta_Regular";
 		this.disabled = (disabled === undefined) ? false : disabled;
 		this.animationSpeed = 0.1 + Math.random() * 0.2
 
@@ -24,19 +23,14 @@ export default class Button extends SpriteObject {
 
 	resize() {
 		super.resize();
-		this.font =  Math.round(this.fontSize * ((g.xScalar + g.yScalar) / 2)) + "px fnt_Comforta_Regular";
+		this.font = Math.round(this.fontSize) + "px fnt_Comforta_Regular";
 	}
 
-	// step() {
-	// 	if(mouse.left_pressed && point_in_rectangle(mouse.x, mouse.y, this.x, this.y, this.x + this.width, this.y + this.height))
-	// 		this.onClick();
-	// }
-
-	draw() {
-		let lw = Math.round(2 * g.xScalar);
+	draw(g) {
+		let lw = 2;
 
 		if (f.point_in_rectangle(g.input.x, g.input.y, this.x, this.y, this.x+this.width, this.y+this.height)) {
-			lw = Math.round(8 * g.xScalar);
+			lw = 8;
 		}
 
 
@@ -50,16 +44,15 @@ export default class Button extends SpriteObject {
 		//  Scale 
 		fill = fill * 0.3
 
-		// g.ctx.lineWidth = lw + "px";
-		g.ctx.lineWidth = lw * g.xScalar;
+		g.ctx.lineWidth = lw;
 		g.ctx.strokeStyle = "rgba(50, 50, 50, 0.3)";
 		f.draw_roundrect(
 			g.ctx,
 			this.xD,
 			this.yD,
-			this.widthD + lw*g.xScalar,
-			this.heightD + lw*g.xScalar,
-			6 * g.xScalar,
+			this.widthD + lw,
+			this.heightD + lw,
+			6,
 			false,
 			true
 		);
@@ -73,7 +66,7 @@ export default class Button extends SpriteObject {
 			this.yD,
 			this.widthD,
 			this.heightD,
-			6 * g.xScalar,
+			6,
 			true,
 			true
 		);
@@ -94,8 +87,8 @@ export default class Button extends SpriteObject {
 		g.ctx.font = this.font;
 		g.ctx.fillText(
 			this.text,
-			(this.x + this.width / 2) * g.xScalar,
-			(this.y + this.height / 2) * g.yScalar
+			this.x + this.width / 2,
+			this.y + this.height / 2
 		);
 	}
 }

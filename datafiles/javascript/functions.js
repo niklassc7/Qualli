@@ -1,4 +1,4 @@
-import * as g from "./globals.js";
+import * as globals from "./globals.js";
 import Settings from "./engine/Settings.js";
 import Jelly from "./objects/Jelly.js";
 // import Bubble from "./objects/Bubble.js";
@@ -6,13 +6,14 @@ import Base from "./objects/bases/Base.js";
 
 // TODO put functions in approrpirate places
 
-export function onResize() {
-	// if it was not in fullScreen and it gets smaller than roomSize put in fullScreen
-	if(Settings.fullscreen)
-		resizeCanvas();
-	else if(window.innerWidth < roomWidth || window.innerHeight < roomHeight)
-		activateFullscreen();
-}
+// export function onResize() {
+// 	// if it was not in fullScreen and it gets smaller than roomSize put in fullScreen
+// 	resizeCanvas();
+// 	// if(Settings.fullscreen)
+// 	// 	resizeCanvas();
+// 	// else if(window.innerWidth < roomWidth || window.innerHeight < roomHeight)
+// 	// 	activateFullscreen();
+// }
 
 /**
  * Returns a random element
@@ -26,6 +27,7 @@ export function chooseRandom(arr) {
 
 }
 
+// TODO remove?
 export function activateFullscreen() {
 	document.getElementById("myCanvas").classList.add("fullscreen");
 	document.getElementById("myCanvas").requestFullscreen();
@@ -33,98 +35,31 @@ export function activateFullscreen() {
 	resizeCanvas();
 }
 
+// TODO remove?
 export function deactivateFullscreen() {
 	document.getElementById("myCanvas").classList.remove("fullscreen");
 	Settings.fullscreen = false;
 
-	g.canvas.width = g.roomWidth;
-	g.canvas.height = g.roomHeight;
+	globals.canvas.width = globals.roomWidth;
+	globals.canvas.height = globals.roomHeight;
 	// TODO fix
 	xScalar = 1;
 	yScalar = 1;
 
-	for(let i = 0; i < g.room.objects.length; i++)
-		g.room.objects[i].resize();
+	for(let i = 0; i < globals.room.objects.length; i++)
+		globals.room.objects[i].resize();
 }
 
+
+// TODO remove?
 export function toggleFullscreen() {
-	if(g.fullscreen)
-		if(window.innerWidth < g.roomWidth || window.innerHeight < g.roomHeight)
+	if(globals.fullscreen)
+		if(window.innerWidth < globals.roomWidth || window.innerHeight < globals.roomHeight)
 			alert("Window too small for window mode");
 	else
 		deactivateFullscreen();
 	else
 		activateFullscreen();
-}
-
-export function resizeCanvas() {
-	let ratioW = 16;
-	let ratioH = 9;
-	// fp4
-	// let ratioW = 913
-	// let ratioH = 437
-
-	let scale;
-	if (Settings.scaling) {
-		scale = window.devicePixelRatio;
-	} else {
-		scale = 1.0;
-	}
-
-	let availWidth = window.innerWidth * scale;
-	let availHeight = window.innerHeight * scale;
-	// let availWidth = window.innerWidth
-	// let availHeight = window.innerHeight
-
-
-	// TODO tmp
-	// canvas.width = availWidth
-	// canvas.height = availHeight
-
-	// Aspect ratio
-	if(availWidth * (ratioH / ratioW) > availHeight) {
-		g.canvas.width = availHeight * (ratioW / ratioH);
-		g.canvas.height = availHeight;
-	} else {
-		g.canvas.width = availWidth;
-		g.canvas.height = availWidth * (ratioH / ratioW);
-	}
-
-	// canvas.width = window.innerWidth * scale;
-    // canvas.height = window.innerHeight * scale;
-
-
-	// Fit screen TODO combine with if-clause above
-	if(window.innerWidth * (ratioH / ratioW) > window.innerHeight) {
-		g.setCanvasStyleWidth(window.innerHeight * (ratioW / ratioH));
-		g.setCanvasStyleHeight(window.innerHeight);
-		g.canvas.style.width = `${g.canvasStyleWidth}px`
-		g.canvas.style.height = `${g.canvasStyleHeight}px`
-	} else {
-		g.setCanvasStyleWidth(window.innerWidth);
-		g.setCanvasStyleHeight(window.innerWidth * (ratioH / ratioW));
-		g.canvas.style.width = `${g.canvasStyleWidth}px`
-		g.canvas.style.height = `${g.canvasStyleHeight}px`
-	}
-	// canvas.style.width = `${window.innerWidth}px`;
-	// canvas.style.height = `${window.innerHeight}px`;
-
-	// TODO just one scaling?
-	g.setXScalar(g.canvas.width / g.roomWidth);
-	g.setYScalar(g.canvas.height / g.roomHeight);
-
-	// TODO check
-	try {
-		g.room;
-	} catch(e) {
-		if (e.name == "ReferenceError") {
-			return;
-		}
-	}
-
-	// Reposition objects
-	for(let i = 0; i < g.room.objects.length; i++)
-		g.room.objects[i].resize();
 }
 
 export function radtodeg(rad) {
@@ -192,39 +127,22 @@ export function mMod(a, b) {
 	return ((a % b + b) % b);
 }
 
-// TODO move to static method in Object?
-// TODO cls has to be of type Object as it needs to have x,y,ox,oy,width,height
-// Checks if the point (x,y) collides with an object of class cls
-// @param {number} - X-coordinate
-// @param {number} - Y-coordinate
-// @param {Object} - Class
-// @return {(Object|undefined)} of type cls or undefined
-export function collision_point(x, y, cls) { // return obj oder undefined
-	/* Prüft, ob Punkt mit einem Objekt der Klasse cls kollidiert.
-	* Nur unpräzise Prüfung (point_in_rectangle).
-	*/
-	for(var i = 0; i < g.room.objects.length; i++) {
-		var obj = g.room.objects[i];
-		if(obj instanceof cls){
-			var x1 = obj.x - obj.ox
-			var y1 = obj.y - obj.oy
-			var x2 = x1 + obj.width
-			var y2 = y1 + obj.height
-			if(point_in_rectangle(x, y, x1, y1, x2, y2)) return obj;
-		}
-	}
-	return undefined;
-}
-
 // TODO camelCase
 /**
  * Draws a line from point (x1,y1) to (x2,y2) on g.ctx
  */
-export function draw_line(x1, y1, x2, y2) {
-	g.ctx.beginPath();
-	g.ctx.moveTo(x1, y1);
-	g.ctx.lineTo(x2, y2);
-	g.ctx.stroke();
+// export function draw_line(x1, y1, x2, y2) {
+// 	g.ctx.beginPath();
+// 	g.ctx.moveTo(x1, y1);
+// 	g.ctx.lineTo(x2, y2);
+// 	g.ctx.stroke();
+// }
+
+export function drawLine(ctx, x1, y1, x2, y2) {
+	ctx.beginPath();
+	ctx.moveTo(x1, y1);
+	ctx.lineTo(x2, y2);
+	ctx.stroke();
 }
 
 // TODO ctx as default value?
@@ -240,9 +158,9 @@ export function drawCircle(ctx, x, y, r, outline) {
 // TODO fillCircle and strokeCircle
 // TODO camelCase
 // Put in static method of a graphics class
-export function draw_circle(x, y, r, outline) {
-	drawCircle(g.ctx, x, y, r, outline);
-}
+// export function draw_circle(x, y, r, outline) {
+// 	drawCircle(globals.ctx, x, y, r, outline);
+// }
 
 // TODO camelCase
 // TODO ctx should be handled the same in any draw-function
@@ -280,20 +198,23 @@ export function draw_roundrect(ctx, x, y, width, height, radius, fill, stroke) {
 	}
 }
 
-// Checks if team has already lost
-export function checkIfLost(team) {
-	for(var i = 0; i < g.room.objects.length; i++) {
-		if(g.room.objects[i] instanceof Jelly || g.room.objects[i] instanceof Base) {
-			if(g.room.objects[i].team === team) {
-				return false;
-			}
-		}
-	}
-	return true;
-}
+// // Checks if team has already lost
+// // TODO move to room?
+// export function checkIfLost(g, team) {
+// 	for(var i = 0; i < g.room.objects.length; i++) {
+// 		if(g.room.objects[i] instanceof Jelly || g.room.objects[i] instanceof Base) {
+// 			if(g.room.objects[i].team === team) {
+// 				return false;
+// 			}
+// 		}
+// 	}
+// 	return true;
+// }
 
 export function showEndgame(won) {
-	let levelTimeS = (Date.now() - g.room.roomEntered) / 1000
+	// let levelTimeS = (Date.now() - globals.room.roomEntered) / 1000
+	// TODO
+	let levelTimeS = Number.MAX_VALUE;
 
 	document.getElementById("egWon").innerHTML = won ? "won 🥳" : "lost 🤬"
 	document.getElementById("egTime").innerHTML = `${levelTimeS} seconds`
@@ -302,14 +223,4 @@ export function showEndgame(won) {
 
 export function hideEndgame() {
 	document.getElementById("endgameOverlay").classList.add("hidden")
-}
-
-// Converts xD to x
-export function xScreenToInternal(xD) {
-	return xD / g.canvasStyleWidth * g.roomWidth;
-}
-
-// Converts yD to y
-export function yScreenToInternal(yD) {
-	return yD / g.canvasStyleHeight * g.roomHeight;
 }

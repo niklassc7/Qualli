@@ -42,12 +42,8 @@ export default class ModDefend extends AiModule {
 	}
 
 	drawIcon(x, y, r) {
-		let xd = x * g.xScalar;
-		let yd = y * g.yScalar;
-		let rd = r * g.yScalar;
-
-		f.draw_circle(xd, yd, rd, true);
+		f.draw_circle(x, y, r, true);
 		g.ctx.fillStyle = "#5fbf20";
-		f.draw_circle(xd, yd, rd, false);
+		f.draw_circle(x, y, r, false);
 	}
 }

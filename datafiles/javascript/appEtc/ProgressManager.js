@@ -1,24 +1,30 @@
-import * as g from "../globals.js";
+import * as globals from "../globals.js";
 import LevelStats from "./LevelStats.js";
 
 // This class manages storing statistics about games and which levels are unlocked
 
+// TODO not static → instantiate with storage backend
+
 export default class ProgressManager {
+	constructor(storage) {
+		this.storage = storage;
+	}
+
 	// Resets progress
-	static reset() {
+	reset() {
 		let text = "Do you really want to reset your entire progress?";
 		if (!confirm(text)) {
 			return;
 		}
 
 		// TODO only clear progress (in case other things like settings are stored)
-		g.storage.clear();
+		this.storage.clear();
 
 		alert("Your progress has been reset.");
 	}
 
-	static updateLevelStats(levelName, won) {
-		let levelStats = g.storage.get(levelName);
+	updateLevelStats(levelName, won) {
+		let levelStats = this.storage.get(levelName);
 
 		if (levelStats == undefined) {
 			levelStats = new LevelStats(levelName, 0, 0);
@@ -32,12 +38,12 @@ export default class ProgressManager {
 			levelStats.lost++;
 		}
 
-		g.storage.set(levelName, JSON.stringify(levelStats));
+		this.storage.set(levelName, JSON.stringify(levelStats));
 	}
 
 	// Returns object of type LevelStats
-	static getLevelStats(levelName) {
-		let levelStats = g.storage.get(levelName);
+	getLevelStats(levelName) {
+		let levelStats = this.storage.get(levelName);
 		
 		if (levelStats == undefined) {
 			return new LevelStats(levelName, 0, 0);
@@ -47,12 +53,12 @@ export default class ProgressManager {
 	}
 
 	// Stores that `level` has been unlocked
-	static unlockLevel(level) {
+	unlockLevel(level) {
 		
 	}
 
 	// @return {boolean} Whether `level` is unlocked
-	static isUnlocked(level) {
+	isUnlocked(level) {
 		
 	}
 
