@@ -60,8 +60,8 @@ export default class MenuOverview extends Room{
 
 	}
 
-	draw(g) {
-		super.draw(g)
+	draw() {
+		super.draw();
 
 		g.ctx.lineWidth = 4;
 		g.ctx.font = "125px fnt_Comforta_Light";

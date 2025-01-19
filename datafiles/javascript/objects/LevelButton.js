@@ -24,8 +24,8 @@ export default class LevelButton extends Button {
 		// TODO calculate font size
 	}
 
-	draw(g) {
-		super.draw(g);
+	draw() {
+		super.draw();
 
 		let mWidth = 21; // Medal width → keep aspect ratio of sprite
 		let mHeight = 32; // Medal height → keep aspect ratio of sprite

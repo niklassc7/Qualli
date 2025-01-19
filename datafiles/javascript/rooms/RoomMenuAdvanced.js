@@ -52,8 +52,8 @@ export default class RoomMenuAdvanced extends Room {
 
 	}
 
-	draw(g) {
-		super.draw(g)
+	draw() {
+		super.draw();
 
 		g.ctx.lineWidth = 4;
 		g.ctx.font = "42px fnt_Comforta_Light";

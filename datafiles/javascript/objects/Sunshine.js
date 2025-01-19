@@ -17,8 +17,8 @@ export default class Sunshine extends IObjlistentry {
 		// this.dAlphaMaxDiff = 
 	}
 
-	step(g) {
-		super.step(g);
+	step() {
+		super.step();
 
 		for (let i = 0; i < this.dAlphaMod.length; i++) {
 			this.dAlphaMod[i] += (2*Math.random()*this.dAlphaMaxStep - this.dAlphaMaxStep);
@@ -27,8 +27,8 @@ export default class Sunshine extends IObjlistentry {
 		}
 	}
 
-	draw(g) {
-		super.draw(g);
+	draw() {
+		super.draw();
 		g.ctx.lineWidth = 140;
 
 		let xD = this.x;

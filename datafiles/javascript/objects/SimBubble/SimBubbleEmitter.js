@@ -13,7 +13,7 @@ export default class SimBubbleEmitter extends IObjlistentry {
 	}
 
 	step() {
-		super.step(g);
+		super.step();
 
 		if (Math.random() < this.p) {
 			let sourceX = this.g.roomWidth/2;

@@ -26,7 +26,7 @@ export default class Button extends SpriteObject {
 		this.font = Math.round(this.fontSize) + "px fnt_Comforta_Regular";
 	}
 
-	draw(g) {
+	draw() {
 		let lw = 2;
 
 		if (f.point_in_rectangle(g.input.x, g.input.y, this.x, this.y, this.x+this.width, this.y+this.height)) {

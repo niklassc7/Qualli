@@ -40,9 +40,9 @@ export default class SimJelly extends SpriteObject {
 				room.addObject(this);
 			}
 
-			draw(g) {}
+			step() {
+				super.step();
 
-			step(g) {
 				let acceleration = 0.03 + 0.4*Math.random();
 
 				if(this.parent.speed < this.targetSpeed)
@@ -71,7 +71,7 @@ export default class SimJelly extends SpriteObject {
 					// this.destroy();
 				}
 
-				if (this.parent.ziel.isOutsideRoom(g)) {
+				if (this.parent.ziel.isOutsideRoom()) {
 					this.destroy();
 				}
 			}
@@ -80,10 +80,10 @@ export default class SimJelly extends SpriteObject {
 		new StartHelper(g, this, 4 + 2 * Math.random());
 	}
 
-	step(g){
-		super.step(g);
+	step(){
+		super.step();
 
-		if (this.isOutsideRoom(g)) {
+		if (this.isOutsideRoom()) {
 			this.destroy();
 		}
 		if (room instanceof LevelRoom) {

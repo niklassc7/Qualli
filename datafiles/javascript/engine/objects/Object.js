@@ -88,7 +88,7 @@ export default class Object extends IObjlistentry {
 		this.speed = Math.sqrt(this.hspeed * this.hspeed + this.vspeed * this.vspeed);
 	}
 
-	step(g) {
+	step() {
 		this.x += this.hspeed;
 		this.y += this.vspeed;
 		if(this.opt_swapScreen != 0) {
@@ -96,26 +96,25 @@ export default class Object extends IObjlistentry {
 		}
 	}
 
-	draw(g) {
+	draw() {
 		// TODO remove
 		this.resize(); // TODO optimise somehow?
 		// this.drawBorder(true)
 	}
 
 	// TODO obolsete (ORIGIN)
-	isOutsideRoom_vert(g) {
-		return (this.x > g.roomWidth) || (this.width + this.x < 0);
+	isOutsideRoom_vert() {
+		return (this.x > this.g.roomWidth) || (this.width + this.x < 0);
 	}
 
 	// TODO obolsete (ORIGIN)
-	isOutsideRoom_horz(g) {
-		return (this.y > g.roomHeight) || (this.height + this.y < 0);
+	isOutsideRoom_horz() {
+		return (this.y > this.g.roomHeight) || (this.height + this.y < 0);
 	}
 
 	// TODO obolsete (ORIGIN)
-	isOutsideRoom(g) {
-		return false
-		// return this.isOutsideRoom_vert(g) || this.isOutsideRoom_horz(g);
+	isOutsideRoom() {
+		return this.isOutsideRoom_vert() || this.isOutsideRoom_horz();
 	}
 
 	// TODO comment

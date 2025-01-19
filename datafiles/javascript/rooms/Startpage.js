@@ -26,7 +26,7 @@ export default class Startpage extends Room {
 		this.addObject(new Sunshine(this.g, g.roomWidth / 2, -400));
 	}
 
-	draw(g) {
+	draw() {
 		super.draw();
 
 		// Title

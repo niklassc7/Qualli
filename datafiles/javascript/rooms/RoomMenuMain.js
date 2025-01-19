@@ -81,7 +81,7 @@ export default class RoomMenuMain extends Room {
 
 	}
 
-	draw(g) {
+	draw() {
 		super.draw()
 
 		g.ctx.lineWidth = 4;
