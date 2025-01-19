@@ -1,11 +1,8 @@
 import IObjlistentry from "../../appEtc/IObjlistentry.js";
-// import * as g from "../../globals.js";
 import * as f from "../../functions.js";
 
 // TOOD rename
 export default class Object extends IObjlistentry {
-	// static all = [];
-
 	// TODO default values
 	constructor(g, x, y, width, height) {
 		super(g);
@@ -14,20 +11,14 @@ export default class Object extends IObjlistentry {
 
 		this.x = x;
 		this.y = y;
-		this.xD = x; // TODO remove
-		this.yD = y; // TODO remove
 		this.ox = 0; // Origin
 		this.oy = 0;
-		this.oxD = 0;
-		this.oyD = 0;
 		this.hspeed = 0;
 		this.vspeed = 0;
 		this.direction = 0; // TODO document starting angle, deg/rad
 		this.speed = 0;
 		this.width = (width === undefined) ? 0 : width;
 		this.height = (height === undefined) ? 0 : height;;
-		this.widthD = this.width;
-		this.heightD = this.height;
 
 		// Set whether objects leaving the room should jump to the other side of
 		// the room:
@@ -44,12 +35,7 @@ export default class Object extends IObjlistentry {
 	}
 
 	resize() {
-		this.xD = this.x;
-		this.yD = this.y;
-		this.oxD = this.ox;
-		this.oyD = this.oy;
-		this.widthD = this.width;
-		this.heightD = this.height;
+		// TODO remove?
 	}
 
 	setDirection(direction) {
@@ -149,31 +135,31 @@ export default class Object extends IObjlistentry {
 			let y2 = y1 + this.height
 			if (f.point_in_rectangle(input.x, input.y, x1, y1, x2, y2)) {
 				g.ctx.fillStyle = "rgba(255, 0, 0, 0.3)";
-				g.ctx.fillRect(this.xD - this.oxD, this.yD - this.oyD, this.widthD, this.heightD);
+				g.ctx.fillRect(this.x - this.ox, this.y - this.oy, this.width, this.height);
 			}
 		}
 
 		g.ctx.strokeStyle = "red";
 		g.ctx.lineWidth = 3;
 		g.ctx.setLineDash([6]);
-		g.ctx.strokeRect(this.xD - this.oxD, this.yD - this.oyD, this.widthD, this.heightD);
+		g.ctx.strokeRect(this.x - this.ox, this.y - this.oy, this.width, this.height);
 		g.ctx.setLineDash([]);
 
 	}
 	
 	// For Debugging, draws (x,y)
-	drawXY(g) {
-		g.ctx.strokeStyle = "red";
-		g.ctx.lineWidth = 3;
+	drawXY() {
+		this.g.ctx.strokeStyle = "red";
+		this.g.ctx.lineWidth = 3;
 
-		g.ctx.beginPath();
-		g.ctx.moveTo(this.xD - 10, this.yD - 10);
-		g.ctx.lineTo(this.xD + 10, this.yD + 10);
-		g.ctx.stroke();
+		this.g.ctx.beginPath();
+		this.g.ctx.moveTo(this.x - 10, this.y - 10);
+		this.g.ctx.lineTo(this.x + 10, this.y + 10);
+		this.g.ctx.stroke();
 
-		g.ctx.beginPath();
-		g.ctx.moveTo(this.xD - 10, this.yD + 10);
-		g.ctx.lineTo(this.xD + 10, this.yD - 10);
-		g.ctx.stroke();
+		this.g.ctx.beginPath();
+		this.g.ctx.moveTo(this.x - 10, this.y + 10);
+		this.g.ctx.lineTo(this.x + 10, this.y - 10);
+		this.g.ctx.stroke();
 	}
 }
