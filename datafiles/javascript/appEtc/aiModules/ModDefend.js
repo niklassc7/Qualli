@@ -5,8 +5,8 @@ import KI from "../KI.js";
 
 export default class ModDefend extends AiModule {
 	// TODO store ai in this
-	constructor() {
-		super();
+	constructor(g) {
+		super(g);
 	}
 
 
@@ -42,8 +42,8 @@ export default class ModDefend extends AiModule {
 	}
 
 	drawIcon(x, y, r) {
-		f.draw_circle(x, y, r, true);
-		g.ctx.fillStyle = "#5fbf20";
-		f.draw_circle(x, y, r, false);
+		f.drawCircle(this.g.ctx, x, y, r, true);
+		this.g.ctx.fillStyle = "#5fbf20";
+		f.drawCircle(this.g.ctx, x, y, r, false);
 	}
 }

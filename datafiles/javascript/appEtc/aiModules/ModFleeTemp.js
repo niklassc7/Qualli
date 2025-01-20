@@ -7,8 +7,8 @@ import BubbleTemp from "../../objects/BubbleTemp.js";
 // bubble if available. Otherwise to random other bubble.
 
 export default class ModFleeTemp extends AiModule {
-	constructor() {
-		super();
+	constructor(g) {
+		super(g);
 	}
 
 	modStep(ai) {
@@ -45,8 +45,8 @@ export default class ModFleeTemp extends AiModule {
 	}
 
 	drawIcon(x, y, r) {
-		f.draw_circle(x, y, r, true);
-		g.ctx.fillStyle = "#ffdf20";
-		f.draw_circle(x, y, r, false);
+		f.drawCircle(this.g.ctx, x, y, r, true);
+		this.g.ctx.fillStyle = "#ffdf20";
+		f.drawCircle(this.g.ctx, x, y, r, false);
 	}
 }
