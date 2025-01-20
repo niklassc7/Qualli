@@ -55,7 +55,7 @@ export default class BubbleSeed extends Object {
 		let circleRadius = 1.1 * this.width / 2;
 		this.g.ctx.lineWidth = 3;
 		this.g.ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
-		f.drawCircle(this.x, this.y, circleRadius, true);
+		f.drawCircle(this.g.ctx, this.x, this.y, circleRadius, true);
 		
 
 		// Draw progress bar of time left

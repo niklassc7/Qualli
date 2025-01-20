@@ -1,11 +1,12 @@
 import Base from "./Base.js";
 import Jelly from "../Jelly.js";
+import * as globals from "../../globals.js";
 
 export default class UnlockBase extends Base {
 	constructor(g, x, y, units) {
 		let w = 0.3*units + 150;
 		let h = 0.3*units + 150;
-		let spr = g.spr_Erde;
+		let spr = globals.spr_Erde;
 
 		super(g, x, y, w, h, spr);
 
@@ -48,9 +49,9 @@ export default class UnlockBase extends Base {
 				if (units === 1000 && target instanceof UnlockBase)
 					break;
 
-				new Jelly(this.g, this.x, this.y, team, target, this, size);
-				new Jelly(this.g, this.x, this.y, team, target, this, size);
-				new Jelly(this.g, this.x, this.y, team, target, this, size);
+				this.g.room.addObject(new Jelly(this.g, this.x, this.y, team, target, this, size));
+				this.g.room.addObject(new Jelly(this.g, this.x, this.y, team, target, this, size));
+				this.g.room.addObject(new Jelly(this.g, this.x, this.y, team, target, this, size));
 			}
 			this.units = 0;
 		}

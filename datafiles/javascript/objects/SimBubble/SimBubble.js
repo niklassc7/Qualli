@@ -1,4 +1,3 @@
-// import Object from "../../engine/objects/Object.js";
 import SpriteObject from "../../engine/objects/SpriteObject.js";
 import LevelRoom from "../../rooms/LevelRoom.js";
 import * as f from "../../functions.js";
@@ -79,8 +78,8 @@ export default class SimBubble extends SpriteObject {
 		// ctx.strokeRect(0, 0, canvas.width, canvas.height);
 	}
 
-	destroy(g) {
-		super.destroy(g);
+	destroy() {
+		super.destroy();
 
 		// Delete from SimBubble.all
 		for (let i = 0; i < SimBubble.all.length; i++) {
@@ -101,9 +100,8 @@ export default class SimBubble extends SpriteObject {
 			this.setVspeed(this.vspeed - 40*this.ascendAcel);
 		}
 
-		if (this.isOutsideRoom(g)) {
-			this.destroy(g)
-		}
+		if (this.y < -this.height + this.oy)
+			this.destroy();
 
 		// Create jellies
 		if (!this.createQueue.isEmpty()) {
@@ -112,17 +110,8 @@ export default class SimBubble extends SpriteObject {
 			newJelly.setSpeeds(newJelly.hspeed + this.hspeed, newJelly.vspeed + this.vspeed);
 		}
 
-		// // Randomly start attack
-		// if (Math.random() < 0.0005) {
-		// 	let amount = Math.round(Math.random() * 50) + 3;
-		// 	let ri = Math.floor(SimBubble.all.length * Math.random());
-		// 	let target = SimBubble.all[ri];
-
-		// 	this.attack(target, amount);
-		// }
-
-
 		// Collision with cursor
+		// TODO move to input?
 		let ax1 = this.x - this.width/2;
 		let ay1 = this.y - this.height/2
 		let ax2 = this.x + this.width/2;
