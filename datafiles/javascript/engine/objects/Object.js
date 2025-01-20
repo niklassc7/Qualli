@@ -7,8 +7,6 @@ export default class Object extends IObjlistentry {
 	constructor(g, x, y, width, height) {
 		super(g);
 
-		// Object.all.push(this);
-
 		this.x = x;
 		this.y = y;
 		this.ox = 0; // Origin
@@ -77,7 +75,7 @@ export default class Object extends IObjlistentry {
 	step() {
 		this.x += this.hspeed;
 		this.y += this.vspeed;
-		if(this.opt_swapScreen != 0) {
+		if(this.opt_swapScreen !== 0) {
 			this.swapScreen();
 		}
 	}
