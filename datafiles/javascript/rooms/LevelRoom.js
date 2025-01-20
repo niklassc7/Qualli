@@ -1,9 +1,7 @@
 import Room from "./Room.js";
-import * as globals from "../globals.js";
 import * as f from "../functions.js";
 import Button from "../objects/Button.js";
 import Settings from "../engine/Settings.js";
-import ProgressManager from "../appEtc/ProgressManager.js";
 import Jelly from "../objects/Jelly.js";
 import Base from "../objects/bases/Base.js";
 import Startpage from "./Startpage.js";
@@ -79,9 +77,9 @@ export default class LevelRoom extends Room {
 
 	removeBubble(bubble) {
 		// TODO datastructure
-		for (var i = 0; i < globals.room.bubbles.length; i++) {
-			if(globals.room.bubbles[i] === bubble) {
-				globals.room.bubbles.splice(i, 1);
+		for (var i = 0; i < this.g.room.bubbles.length; i++) {
+			if (this.g.room.bubbles[i] === bubble) {
+				this.g.room.bubbles.splice(i, 1);
 				return true;
 			}
 		}
@@ -95,7 +93,7 @@ export default class LevelRoom extends Room {
 			return
 		}
 
-		globals.gotoRoom(Startpage)
+		this.g.gotoRoom(Startpage)
 		Settings.unpause()
 	}
 
@@ -104,8 +102,8 @@ export default class LevelRoom extends Room {
 				return false;
 		}
 
-		globals.gotoRoom(this.constructor)
-		return false;
+		this.g.gotoRoom(this.constructor)
+		return true;
 	}
 
 	// TODO rename → timer
@@ -115,7 +113,7 @@ export default class LevelRoom extends Room {
 				if(this.status == "running" && this.checkIfLost(1)) {
 					this.status = "lost";
 					f.showEndgame(false)
-					ProgressManager.updateLevelStats(globals.room.constructor.name, false);
+					this.g.progressManager.updateLevelStats(this.g.room.constructor.name, false);
 				}
 				this.alarm[0] = 300;
 

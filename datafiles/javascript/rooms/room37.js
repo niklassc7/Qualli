@@ -11,7 +11,7 @@ export default class room37 extends LevelRoom {
 		let ki1 = this.addObject(new KI0(this.g, 3));
 		this.addObject(new KI0(this.g, 4));
 
-		let mod1 = new ModDefend();
+		let mod1 = new ModDefend(g);
 		ki1.modules.push(mod1);
 
 		let planetDistance = 200; // centre to centre

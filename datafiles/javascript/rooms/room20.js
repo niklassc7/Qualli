@@ -43,7 +43,7 @@ export default class room20 extends LevelRoom {
 			let tmp_x = this.support_src_x
 			let tmp_y = -100
 			let tmp_ziel = this.g.room.bubbles[Math.floor(Math.random() * this.g.room.bubbles.length)]
-			new Jelly(this.g, tmp_x, tmp_y, tmp_team, tmp_ziel)
+			this.g.room.addObject(new Jelly(this.g, tmp_x, tmp_y, tmp_team, tmp_ziel));
 		}
 	}
 

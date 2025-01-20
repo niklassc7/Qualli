@@ -12,7 +12,7 @@ export default class room41 extends LevelRoom {
 
 
 		let ai0 = this.addObject(new KI3(this.g, 2));
-		let mod0 = new ModDefend();
+		let mod0 = new ModDefend(g);
 		ai0.modules.push(mod0);
 
 		this.addObject(new KI0(this.g, 3));
