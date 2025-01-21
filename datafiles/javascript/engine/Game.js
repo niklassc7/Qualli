@@ -43,6 +43,8 @@ export default class Game {
 		this.room = new Startpage(this);
 
 		setInterval(() => this.step(), 1000/60); // 60 FPS
+
+		// setTimeout(() => this.resizeCanvas(), 100);
 	}
 
 	resizeCanvas() {
@@ -50,8 +52,8 @@ export default class Game {
 		this.canvas.style.width = window.innerWidth;
 		this.canvas.style.height = window.innerHeight;
 
-		this.canvas.width = window.innerWidth //* window.devicePixelRatio;
-		this.canvas.height = window.innerHeight //* window.devicePixelRatio;
+		this.canvas.width = window.innerWidth * window.devicePixelRatio;
+		this.canvas.height = window.innerHeight * window.devicePixelRatio;
 
 
 		// Calculate room view
@@ -89,8 +91,10 @@ export default class Game {
 		let xScalar = window.innerWidth / this.viewWidth;
 		let yScalar = window.innerHeight / this.viewHeight;
 
-		// xScalar *= window.devicePixelRatio;
-		// yScalar *= window.devicePixelRatio;
+		// xScalar /= window.devicePixelRatio;
+		// yScalar /= window.devicePixelRatio;
+		xScalar *= window.devicePixelRatio;
+		yScalar *= window.devicePixelRatio;
 
 		console.log("scalars", xScalar, yScalar);
 
@@ -122,13 +126,10 @@ export default class Game {
 		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 		this.ctx.clearRect(-this.paddingHorz, -this.paddingVert, this.roomWidth + 2*this.paddingHorz, this.roomHeight + 2*this.paddingVert);
 
-		// this.ctx.fillStyle = "green";
-		// // this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-		// this.ctx.fillRect(0, 0, this.roomWidth, this.roomHeight);
+		// // Debug
+		// this.ctx.lineWidth = "4";
 		// this.ctx.strokeStyle = "red";
-		// this.ctx.lineWidth = 2;
-		// this.ctx.strokeRect(-this.paddingHorz, -this.paddingVert, this.roomWidth + 2*this.paddingHorz, this.roomHeight + 2*this.paddingVert);
-		// console.log("padding", this.paddingHorz, this.paddingVert);
+		// this.ctx.strokeRect(0, 0, this.roomWidth, this.roomHeight);
 
 		this.room.draw(this);
 
