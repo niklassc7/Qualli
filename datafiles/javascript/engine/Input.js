@@ -221,8 +221,8 @@ export default class Input {
 		this.selectedDrawing(this.selected);
 		this.selectedDrawing(this.selectedTouch);
 
-		this.g.ctx.fillStyle = "red";
-		f.drawCircle(this.g.ctx, this.x, this.y, 8, false);
+		// this.g.ctx.fillStyle = "red";
+		// f.drawCircle(this.g.ctx, this.x, this.y, 8, false);
 	}
 
 
