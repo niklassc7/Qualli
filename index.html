@@ -1,16 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"> -->
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-		<!-- <meta name = "viewport" content = "width = device-width, user-scalable = no"/> -->
-
-		<!-- <meta name = "viewport" content = "width = device-width, user-scalable = no, scale = 1"/> -->
-
-		<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> -->
-
-		<!-- <meta name="viewport" content="width=device-width; user-scalable=no; initial-scale=1.0; minimum-scale=1.0; maximum-scale=1.0; target-densityDpi=device-dpi;" /> -->
-		<!-- <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi" /> -->
 
 		<link rel="shortcut icon" href="datafiles/icon.ico" />
 
@@ -18,11 +9,12 @@
 		<link rel = "Stylesheet"  type = "text/css" href = "Master.css"/>
 
 		<script type="module">
-			import main from "./datafiles/javascript/main.js";
 			import * as f from "./datafiles/javascript/functions.js";
 			import * as g from "./datafiles/javascript/globals.js";
 			import Settings from "./datafiles/javascript/engine/Settings.js";
 			import ProgressManager from "./datafiles/javascript/appEtc/ProgressManager.js";
+
+			import Game from "./datafiles/javascript/engine/Game.js";
 
 			// TODO remove workaround
 			window.f = f;
@@ -30,14 +22,15 @@
 			window.Settings = Settings;
 			window.ProgressManager = ProgressManager;
 
-			main();
+			window.onload = () => {
+				var game = new Game();
+				window.game = game;
+				}
 		</script>
 	</head>
 
 	<!-- <body onLoad="main()" onresize="onResize()"> -->
-	<body onresize="f.onResize()">
-		<canvas id="myCanvas" width="1280" height="720"></canvas>
-
+	<body onresize="game.resizeCanvas()">
 		<div id="ressources" style="visibility: collapse; position: fixed;">
 			<img id="img_Erde" src="datafiles/sprites/Erde3.png" width="0" height="0"/>
 			<img id="img_Linsenreflex" src="datafiles/sprites/Linsenreflex.png" width="0" height="0"/>
@@ -71,9 +64,9 @@
 				<div id="egTime"></div>
 				<br>
 				<div>
-					<input id="egRestart" type="button" value="Restart ♻" onClick="g.room.restart(); f.hideEndgame();" />
+					<input id="egRestart" type="button" value="Restart ♻" onClick="game.room.restart(); f.hideEndgame();" />
 					<input id="egResume" type="button" value="Resume ▶" onClick="f.hideEndgame();" />
-					<input id="egExit" type="button" value="Exit 🚪" onClick="g.gotoRoom(g.room.prevRoom); f.hideEndgame()" />
+					<input id="egExit" type="button" value="Exit 🚪" onClick="game.room.return(); f.hideEndgame()" />
 				</div>
 			</div>
 		</div>
@@ -88,8 +81,8 @@
 				<br>
 				<br>
 				<div>
-					<input id="pRestart" type="button" value="Restart ♻" onClick="if(g.room.restart(true) != false) { Settings.unpause() }" />
-					<input id="pExit" type="button" value="Exit 🏳" onClick="g.room.surrender()" />
+					<input id="pRestart" type="button" value="Restart ♻" onClick="if(game.room.restart(true) != false) { Settings.unpause() }" />
+					<input id="pExit" type="button" value="Exit 🏳" onClick="game.room.surrender()" />
 				</div>
 			</div>
 		</div>
@@ -117,7 +110,7 @@
 				<br>
 
 				<div>
-					<input id="sReset" type="button" value="Reset Progress ♻" onClick="ProgressManager.reset()" />
+					<input id="sReset" type="button" value="Reset Progress ♻" onClick="game.progressManager.reset()" />
 					<input id="sClose" type="button" value="Close Settings ❌" onClick="Settings.hide()" />
 				</div>
 			</div>

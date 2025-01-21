@@ -1,11 +1,11 @@
 import Object from "../engine/objects/Object.js";
-import * as g from "../globals.js";
+import * as globals from "../globals.js";
 
 
 // TODO extend effects
 export default class FloatSign extends Object {
-	constructor(text, x, y, color, fontSize=20, ttl=200) {
-		super(x, y, 0, 0);
+	constructor(g, text, x, y, color, fontSize=20, ttl=200) {
+		super(g, x, y, 0, 0);
 		this.text = text;
 		this.color = color;
 
@@ -26,7 +26,7 @@ export default class FloatSign extends Object {
 
 	resize() {
 		super.resize();
-		this.font =	Math.round(this.fontSize * ((g.xScalar + g.yScalar) / 2)) + "px fnt_Comforta_Bold";
+		this.font =	Math.round(this.fontSize) + "px fnt_Comforta_Bold";
 	}
 
 	step() {
@@ -42,37 +42,19 @@ export default class FloatSign extends Object {
 	draw() {
 		this.resize();
 
-		g.ctx.font = this.font;
-
-		// TODO implement → maybe subclass
-		// // Background
-		// let bgpad = 15 * xScalar;
-		// let textm = ctx.measureText(this.text);
-		// let textw  = textm.width;
-		// let texth  = this.fontSize;
-		// let x1 = this.xD - textw/2 - bgpad;
-		// // let x2 = this.xD + textw/2;
-		// let y1 = this.yD - texth/2 - bgpad;
-		// // let y2 = this.yD + texth/2;
-		// ctx.fillStyle = "rgba(255, 100, 100, 0.3)";
-		// ctx.strokeStyle = "black";
-		// ctx.lineWidth = 4 * xScalar;
-		// // draw_roundrect(ctx, x1, y1, textw + bgpad*2, texth + bgpad*2, 10, true, true);
-		// ctx.fillRect(x1, y1, textw + bgpad*2, texth + bgpad*2);
-		// ctx.strokeRect(x1, y1, textw + bgpad*2, texth + bgpad*2);
-
+		this.g.ctx.font = this.font;
 
 		// Text
-		g.ctx.lineWidth = 4 * g.xScalar;
-		g.ctx.fillStyle = this.color;
-		g.ctx.strokeStyle = this.background;
+		this.g.ctx.lineWidth = 4;
+		this.g.ctx.fillStyle = this.color;
+		this.g.ctx.strokeStyle = this.background;
 
-		g.ctx.globalAlpha = this.ttl / this.startTtl;
+		this.g.ctx.globalAlpha = this.ttl / this.startTtl;
 		
-		g.ctx.strokeText(this.text, this.xD, this.yD);
-		g.ctx.fillText(this.text, this.xD, this.yD);
+		this.g.ctx.strokeText(this.text, this.x, this.y);
+		this.g.ctx.fillText(this.text, this.x, this.y);
 
-		g.ctx.globalAlpha = 1;
+		this.g.ctx.globalAlpha = 1;
 	}
 }
 

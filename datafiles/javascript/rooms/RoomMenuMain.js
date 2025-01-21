@@ -1,5 +1,4 @@
 import Room from "./Room.js";
-import * as g from "../globals.js";
 import SimBubbleEmitter from "../objects/SimBubble/SimBubbleEmitter.js";
 import Button from "../objects/Button.js";
 import LevelButton from "../objects/LevelButton.js";
@@ -22,10 +21,10 @@ import room22 from "./room22.js";
 import room23 from "./room23.js";
 
 export default class RoomMenuMain extends Room {
-	constructor(){
-		super();
+	constructor(g){
+		super(g);
 
-		this.addObject(new SimBubbleEmitter([120, 255, 120]));
+		this.addObject(new SimBubbleEmitter(this.g, [120, 255, 120]));
 
 		this.n_step = 0;
 
@@ -46,7 +45,7 @@ export default class RoomMenuMain extends Room {
                      room22,
                      room23];
 
-		this.addObject(new Button("←", 42, g.roomHeight - 128, 90, 90, () => { g.gotoRoom(MenuOverview); } )).setFontSize(24) ;
+		this.addObject(new Button(this.g, "←", 42, g.roomHeight - 128, 90, 90, () => { g.gotoRoom(MenuOverview); } )).setFontSize(24) ;
 
 		let buttonWidth = 128;
 		let buttonHeight = 128;
@@ -70,12 +69,13 @@ export default class RoomMenuMain extends Room {
 		for(let i = 0; i < itemsinColumn; i++)
 			for(let j = 0; j < itemsInRow && i*itemsInRow + j < rooms.length; j++) {
 				this.addObject(new LevelButton(
+					this.g,
 					i*itemsInRow + j,
 					marginLeft + j * (buttonWidth + buttonMargin),
 					marginTop + i * (buttonHeight + buttonMargin),
 					buttonWidth,
 					buttonHeight,
-					rooms[i*itemsInRow + j]
+					rooms[i*itemsInRow + j],
 				)).setFontSize(36);
 			}
 
@@ -84,10 +84,10 @@ export default class RoomMenuMain extends Room {
 	draw() {
 		super.draw()
 
-		g.ctx.lineWidth = 4 * ((g.xScalar + g.yScalar) / 2);
-		g.ctx.font = Math.round(42 * ((g.xScalar + g.yScalar) / 2)) + "px fnt_Comforta_Light";
-		g.ctx.fillStyle = "white"
-		g.ctx.textAlign = "center";
-		g.ctx.fillText("Main 🐟", g.roomWidth/2 * g.xScalar, 32 * g.yScalar)
+		this.g.ctx.lineWidth = 4;
+		this.g.ctx.font = "42px fnt_Comforta_Light";
+		this.g.ctx.fillStyle = "white"
+		this.g.ctx.textAlign = "center";
+		this.g.ctx.fillText("Main 🐟", this.g.roomWidth/2, 32);
 	}
 }

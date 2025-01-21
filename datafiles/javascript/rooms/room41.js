@@ -1,6 +1,5 @@
 import LevelRoom from "./LevelRoom.js";
 import Bubble from "../objects/Bubble.js";
-// import * as g from "../globals.js";
 import ModDefend from "../appEtc/aiModules/ModDefend.js";
 import KI0 from "../appEtc/KI0.js";
 import KI3 from "../appEtc/KI3.js";
@@ -8,31 +7,29 @@ import UnlockBase from "../objects/bases/UnlockBase.js";
 import ProtectBase from "../objects/bases/ProtectBase.js";
 
 export default class room41 extends LevelRoom {
-	constructor() {
-		super();
+	constructor(g) {
+		super(g);
 
 
-		// this.addObject(new KI2(2));
-		let ai0 = this.addObject(new KI3(2));
-		let mod0 = new ModDefend();
+		let ai0 = this.addObject(new KI3(this.g, 2));
+		let mod0 = new ModDefend(g);
 		ai0.modules.push(mod0);
 
-		this.addObject(new KI0(3));
-
-		// this.addObject(new KI0(1));
+		this.addObject(new KI0(this.g, 3));
 
 
-		let s0 = this.addBubble(new Bubble(150, 150, 1, 1, 150));
 
-		let s1 = this.addBubble(new Bubble(500, 650, 2, 1, 10));
-		this.addBubble(new Bubble(1000, 500, 2, 10, 3000));
+		let s0 = this.addBubble(new Bubble(this.g, 150, 150, 1, 1, 150));
 
-		this.addBubble(new Bubble(500, 300, 3, 1, 220));
+		let s1 = this.addBubble(new Bubble(this.g, 500, 650, 2, 1, 10));
+		this.addBubble(new Bubble(this.g, 1000, 500, 2, 10, 3000));
+
+		this.addBubble(new Bubble(this.g, 500, 300, 3, 1, 220));
 
 
-		this.addBubble(new UnlockBase(1000, 150, 100));
-		this.addBubble(new UnlockBase(100, 600, 100));
+		this.addBubble(new UnlockBase(this.g, 1000, 150, 100));
+		this.addBubble(new UnlockBase(this.g, 100, 600, 100));
 
-		this.addBubble(new ProtectBase(200, 450, 32, 32, [s0, s1]));
+		this.addBubble(new ProtectBase(this.g, 200, 450, 32, 32, [s0, s1]));
 	}
 }

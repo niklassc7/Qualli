@@ -1,12 +1,11 @@
 import Bubble from "./Bubble.js";
-import * as g from "../globals.js";
 import BubbleSeed from "./BubbleSeed.js";
 import Colors from "../appEtc/color/Colors.js";
 import FloatSign from "./FloatSign.js";
 
 export default class BubbleTemp extends Bubble {
-	constructor(x, y, team, size, units, ttl) {
-		super(x, y, team, size, units);
+	constructor(g, x, y, team, size, units, ttl) {
+		super(g, x, y, team, size, units);
 
 		// TODO dont randomize by default
 		if (ttl == undefined) {
@@ -37,7 +36,7 @@ export default class BubbleTemp extends Bubble {
 				signFontSize += 10;
 			}
 
-			g.room.addObject(new FloatSign(lostMsg, this.x, this.y, signColor, signFontSize));
+			this.g.room.addObject(new FloatSign(this.g, lostMsg, this.x, this.y, signColor, signFontSize));
 
 	}
 
@@ -46,8 +45,8 @@ export default class BubbleTemp extends Bubble {
 		this.ttl--;
 
 		if (this.ttl <= 0) {
-			let futureBubble = new BubbleTemp(this.x, this.y, 0, this.size, 0, undefined);
-			g.room.addObject(new BubbleSeed(1000, futureBubble));
+			let futureBubble = new BubbleTemp(this.g, this.x, this.y, 0, this.size, 0, undefined);
+			this.g.room.addObject(new BubbleSeed(this.g, 1000, futureBubble));
 
 			if (this.team !== 0) {
 				this.createLostSign();
@@ -61,15 +60,15 @@ export default class BubbleTemp extends Bubble {
 		super.draw();
 
 		// Draw circle-indicator of left ttl
-		g.ctx.lineWidth = 3 * g.xScalar;
-		g.ctx.strokeStyle = 'black';
-		g.ctx.beginPath();
-		g.ctx.arc(this.xD,
-			this.yD,
-			1.1 * this.widthD / 2,
+		this.g.ctx.lineWidth = 3;
+		this.g.ctx.strokeStyle = 'black';
+		this.g.ctx.beginPath();
+		this.g.ctx.arc(this.x,
+			this.y,
+			1.1 * this.width / 2,
 			2.0 * Math.PI * ((this.totalTtl-this.ttl)/this.totalTtl),
 			2.0 * Math.PI);
 
-		g.ctx.stroke();
+		this.g.ctx.stroke();
 	}
 }

@@ -1,33 +1,22 @@
 import IObjlistentry from "../../appEtc/IObjlistentry.js";
-import * as g from "../../globals.js";
 import * as f from "../../functions.js";
 
 // TOOD rename
 export default class Object extends IObjlistentry {
-	// static all = [];
-
 	// TODO default values
-	constructor(x, y, width, height) {
-		super();
-
-		// Object.all.push(this);
+	constructor(g, x, y, width, height) {
+		super(g);
 
 		this.x = x;
 		this.y = y;
-		this.xD = x * g.xScalar; // x it should be drawn at
-		this.yD = y * g.yScalar; // y it should be drawn at
 		this.ox = 0; // Origin
 		this.oy = 0;
-		this.oxD = 0;
-		this.oyD = 0;
 		this.hspeed = 0;
 		this.vspeed = 0;
 		this.direction = 0; // TODO document starting angle, deg/rad
 		this.speed = 0;
 		this.width = (width === undefined) ? 0 : width;
 		this.height = (height === undefined) ? 0 : height;;
-		this.widthD = this.width * g.xScalar;
-		this.heightD = this.height * g.yScalar;
 
 		// Set whether objects leaving the room should jump to the other side of
 		// the room:
@@ -44,12 +33,7 @@ export default class Object extends IObjlistentry {
 	}
 
 	resize() {
-		this.xD = this.x * g.xScalar;
-		this.yD = this.y * g.yScalar;
-		this.oxD = this.ox * g.xScalar;
-		this.oyD = this.oy * g.yScalar;
-		this.widthD = this.width * g.xScalar;
-		this.heightD = this.height * g.yScalar;
+		// TODO remove?
 	}
 
 	setDirection(direction) {
@@ -91,38 +75,30 @@ export default class Object extends IObjlistentry {
 	step() {
 		this.x += this.hspeed;
 		this.y += this.vspeed;
-		if(this.opt_swapScreen != 0) {
+		if(this.opt_swapScreen !== 0) {
 			this.swapScreen();
 		}
 	}
 
 	draw() {
+		// TODO remove
 		this.resize(); // TODO optimise somehow?
 		// this.drawBorder(true)
 	}
 
 	// TODO obolsete (ORIGIN)
 	isOutsideRoom_vert() {
-		if( (this.x > g.canvas_width) || (this.width + this.x < 0) ) {
-			return true;
-		}
-		return false;
+		return (this.x > this.g.roomWidth) || (this.width + this.x < 0);
 	}
 
 	// TODO obolsete (ORIGIN)
 	isOutsideRoom_horz() {
-		if( (this.y > g.canvas_height) || (this.height + this.y < 0) ) {
-			return true;
-		}
-		return false;
+		return (this.y > this.g.roomHeight) || (this.height + this.y < 0);
 	}
 
 	// TODO obolsete (ORIGIN)
 	isOutsideRoom() {
-		if(this.isOutsideRoom_vert() || this.isOutsideRoom_horz()){
-		 return true;
-	 }
-		return false;
+		return this.isOutsideRoom_vert() || this.isOutsideRoom_horz();
 	}
 
 	// TODO comment
@@ -157,31 +133,31 @@ export default class Object extends IObjlistentry {
 			let y2 = y1 + this.height
 			if (f.point_in_rectangle(input.x, input.y, x1, y1, x2, y2)) {
 				g.ctx.fillStyle = "rgba(255, 0, 0, 0.3)";
-				g.ctx.fillRect(this.xD - this.oxD, this.yD - this.oyD, this.widthD, this.heightD);
+				g.ctx.fillRect(this.x - this.ox, this.y - this.oy, this.width, this.height);
 			}
 		}
 
 		g.ctx.strokeStyle = "red";
 		g.ctx.lineWidth = 3;
 		g.ctx.setLineDash([6]);
-		g.ctx.strokeRect(this.xD - this.oxD, this.yD - this.oyD, this.widthD, this.heightD);
+		g.ctx.strokeRect(this.x - this.ox, this.y - this.oy, this.width, this.height);
 		g.ctx.setLineDash([]);
 
 	}
 	
 	// For Debugging, draws (x,y)
 	drawXY() {
-		g.ctx.strokeStyle = "red";
-		g.ctx.lineWidth = 3;
+		this.g.ctx.strokeStyle = "red";
+		this.g.ctx.lineWidth = 3;
 
-		g.ctx.beginPath();
-		g.ctx.moveTo(this.xD - 10 * g.xScalar, this.yD - 10 * g.yScalar);
-		g.ctx.lineTo(this.xD + 10 * g.xScalar, this.yD + 10 * g.yScalar);
-		g.ctx.stroke();
+		this.g.ctx.beginPath();
+		this.g.ctx.moveTo(this.x - 10, this.y - 10);
+		this.g.ctx.lineTo(this.x + 10, this.y + 10);
+		this.g.ctx.stroke();
 
-		g.ctx.beginPath();
-		g.ctx.moveTo(this.xD - 10 * g.xScalar, this.yD + 10 * g.yScalar);
-		g.ctx.lineTo(this.xD + 10 * g.xScalar, this.yD - 10 * g.yScalar);
-		g.ctx.stroke();
+		this.g.ctx.beginPath();
+		this.g.ctx.moveTo(this.x - 10, this.y + 10);
+		this.g.ctx.lineTo(this.x + 10, this.y - 10);
+		this.g.ctx.stroke();
 	}
 }

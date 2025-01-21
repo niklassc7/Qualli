@@ -1,8 +1,8 @@
 import KI from "./KI.js";
 
 export default class KI1 extends KI {
-	constructor(team) {
-		super(team);
+	constructor(g, team) {
+		super(g, team);
 		this.a;
 		this.b;
 	}

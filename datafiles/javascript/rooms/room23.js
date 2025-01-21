@@ -1,13 +1,12 @@
 import LevelRoom from "./LevelRoom.js";
 import Bubble from "../objects/Bubble.js";
 import KI0 from "../appEtc/KI0.js";
-import * as g from "../globals.js";
 
 export default class room23 extends LevelRoom {
-	constructor(){
-		super();
+	constructor(g) {
+		super(g);
 
-		this.addObject(new KI0(2));
+		this.addObject(new KI0(this.g, 2));
 
 		let planetDistance = 160; // centre to centre
 		let itemsInRow = 6;
@@ -24,7 +23,7 @@ export default class room23 extends LevelRoom {
 				let newTeam = 1
 				// TODO const
 				let newSize = (i == 1) ? 2 : 1;
-				this.addBubble(new Bubble(startMargin + j * planetDistance, 200 + i * planetDistance, newTeam, newSize, jellyAmount));
+				this.addBubble(new Bubble(this.g, startMargin + j * planetDistance, 200 + i * planetDistance, newTeam, newSize, jellyAmount));
 			}
 		}
 
@@ -55,8 +54,8 @@ export default class room23 extends LevelRoom {
 		// TODO move effect? → Mixin
 		if (Math.random() < 0.3 ) {
 			// Move
-			let source = g.room.bubbles[Math.floor(Math.random() * g.room.bubbles.length)];
-			let target = g.room.bubbles[Math.floor(Math.random() * g.room.bubbles.length)];
+			let source = this.g.room.bubbles[Math.floor(Math.random() * this.g.room.bubbles.length)];
+			let target = this.g.room.bubbles[Math.floor(Math.random() * this.g.room.bubbles.length)];
 
 			let amount = Math.round(Math.random() * 10)
 			source.attackN(target, amount)

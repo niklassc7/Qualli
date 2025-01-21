@@ -1,16 +1,15 @@
-import * as g from "../globals.js";
 import * as f from "../functions.js";
 import SpriteObject from "../engine/objects/SpriteObject.js";
 
 // TODO extend from Object instead of SpriteObject
 export default class Button extends SpriteObject {
-	constructor(text, x, y, width, height, onClick, disabled) {
-		super(x, y, width, height, g.sprLock);
+	constructor(g, text, x, y, width, height, onClick, disabled) {
+		super(g, x, y, width, height, g.sprLock);
 		this.text = text;
 		this.onClick = onClick;
 		this.borderColour = "white";
 		this.fontSize = 56;
-		this.font =  Math.round(this.fontSize * ((g.xScalar + g.yScalar) / 2)) + "px fnt_Comforta_Regular";
+		this.font =  Math.round(this.fontSize) + "px fnt_Comforta_Regular";
 		this.disabled = (disabled === undefined) ? false : disabled;
 		this.animationSpeed = 0.1 + Math.random() * 0.2
 
@@ -24,78 +23,72 @@ export default class Button extends SpriteObject {
 
 	resize() {
 		super.resize();
-		this.font =  Math.round(this.fontSize * ((g.xScalar + g.yScalar) / 2)) + "px fnt_Comforta_Regular";
+		this.font = Math.round(this.fontSize) + "px fnt_Comforta_Regular";
 	}
 
-	// step() {
-	// 	if(mouse.left_pressed && point_in_rectangle(mouse.x, mouse.y, this.x, this.y, this.x + this.width, this.y + this.height))
-	// 		this.onClick();
-	// }
-
 	draw() {
-		let lw = Math.round(2 * g.xScalar);
+		let lw = 2;
 
-		if (f.point_in_rectangle(g.input.x, g.input.y, this.x, this.y, this.x+this.width, this.y+this.height)) {
-			lw = Math.round(8 * g.xScalar);
+		if (f.point_in_rectangle(this.g.input.x, this.g.input.y, this.x, this.y, this.x+this.width, this.y+this.height)) {
+			lw = 8;
 		}
 
 
 		// TODO sinus curve
 		let animationN = 32
 		// let animationSpeed = 0.3
-		let fill = g.stepCount * this.animationSpeed % animationN
+		let fill = this.g.stepCount * this.animationSpeed % animationN
 		fill = Math.abs(fill - animationN / 2)
 		// Normalize
 		fill = fill / (animationN/2)
 		//  Scale 
 		fill = fill * 0.3
 
-		// g.ctx.lineWidth = lw + "px";
-		g.ctx.lineWidth = lw * g.xScalar;
-		g.ctx.strokeStyle = "rgba(50, 50, 50, 0.3)";
+		this.g.ctx.lineWidth = lw;
+		this.g.ctx.strokeStyle = "rgba(50, 50, 50, 0.3)";
 		f.draw_roundrect(
-			g.ctx,
-			this.xD,
-			this.yD,
-			this.widthD + lw*g.xScalar,
-			this.heightD + lw*g.xScalar,
-			6 * g.xScalar,
+			this.g.ctx,
+			this.x,
+			this.y,
+			this.width + lw,
+			this.height + lw,
+			6,
 			false,
 			true
 		);
 
-		g.ctx.strokeStyle = this.borderColour;
+		this.g.ctx.strokeStyle = this.borderColour;
 
-		g.ctx.fillStyle = `rgba(200, 200, 255, ${fill})`;
+		this.g.ctx.fillStyle = `rgba(200, 200, 255, ${fill})`;
 		f.draw_roundrect(
-			g.ctx,
-			this.xD,
-			this.yD,
-			this.widthD,
-			this.heightD,
-			6 * g.xScalar,
+			this.g.ctx,
+			this.x,
+			this.y,
+			this.width,
+			this.height,
+			6,
 			true,
 			true
 		);
 
 		// let locked = false; // TODO implement lock system
 		if(this.disabled) {
-			g.ctx.strokeStyle = "#607d8b";
-			g.ctx.fillStyle = "#607d8b";
-			g.ctx.drawImage(this.sprite, this.xD - this.oxD + this.widthD * 0.25, this.yD - this.oyD + this.heightD * 0.14, this.widthD * 0.5, this.heightD * 0.5);
+			this.g.ctx.strokeStyle = "#607d8b";
+			this.g.ctx.fillStyle = "#607d8b";
+			this.g.ctx.drawImage(this.sprite, this.x - this.ox + this.width * 0.25, this.y - this.oy + this.height * 0.14, this.width * 0.5, this.height * 0.5);
 		} else {
-			g.ctx.strokeStyle = "white";
-			g.ctx.fillStyle = "white";
+			this.g.ctx.strokeStyle = "white";
+			this.g.ctx.fillStyle = "white";
 		}
 
 
-		g.ctx.textAlign = "center";
-		g.ctx.textBaseline = "middle";
-		g.ctx.font = this.font;
-		g.ctx.fillText(
+		this.g.ctx.textAlign = "center";
+		this.g.ctx.textBaseline = "middle";
+		this.g.ctx.font = this.font;
+		this.g.ctx.fillText(
 			this.text,
-			(this.x + this.width / 2) * g.xScalar,
-			(this.y + this.height / 2) * g.yScalar
+			this.x + this.width / 2,
+			this.y + this.height / 2
 		);
 	}
 }

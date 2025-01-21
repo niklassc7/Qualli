@@ -1,8 +1,8 @@
 // TODO move to effects
 
 export default class Effect extends Object {
-	constructor(x, y, ttl) {
-		super(x, y, 0, 0);
+	constructor(g, x, y, ttl) {
+		super(g, x, y, 0, 0);
 		this.totalTtl = ttl;
 		this.ttl = ttl;
 		// this.x;
