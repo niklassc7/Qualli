@@ -6,6 +6,7 @@ export default class Settings {
 	static scaling = true;
 	static paused = false;
 	static fullscreen = false; // TODO check / remove
+	static mute = false;
 
 	/**
 	 * Whether jellies glow
@@ -84,5 +85,10 @@ export default class Settings {
 	static toggleJellyGlow() {
 		this.#jellyGlow = !this.#jellyGlow;
 		return this.#jellyGlow;
+	}
+
+	static toggleMute() {
+		this.mute = !this.mute;
+		return this.mute;
 	}
 }

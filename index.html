@@ -91,6 +91,10 @@
 			<div id="settingsContent" class="overlayContent">
 				<h1>Settings</h1>
 				<br>
+				<label for="sMute">Mute</label>
+				<input id="sMute" type="checkbox" onchange="Settings.toggleMute()" />
+				<br>
+
 				<label for="sScaling">Scaling</label>
 				<!-- TODO intialize checkboxes in program -->
 				<input id="sScaling" type="checkbox" checked onchange="Settings.toggleScaling()" />
