@@ -210,17 +210,3 @@ export function draw_roundrect(ctx, x, y, width, height, radius, fill, stroke) {
 // 	}
 // 	return true;
 // }
-
-export function showEndgame(won) {
-	// let levelTimeS = (Date.now() - globals.room.roomEntered) / 1000
-	// TODO
-	let levelTimeS = Number.MAX_VALUE;
-
-	document.getElementById("egWon").innerHTML = won ? "won 🥳" : "lost 🤬"
-	document.getElementById("egTime").innerHTML = `${levelTimeS} seconds`
-	document.getElementById("endgameOverlay").classList.remove("hidden")
-}
-
-export function hideEndgame() {
-	document.getElementById("endgameOverlay").classList.add("hidden")
-}

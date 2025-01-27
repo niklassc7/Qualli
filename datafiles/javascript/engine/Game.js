@@ -34,6 +34,7 @@ export default class Game {
 		document.body.insertBefore(this.canvas, document.body.childNodes[0]);
 		this.resizeCanvas();
 
+		// Counts steps, paused when game is paused
 		this.stepCount = 0;
 
 		this.input = new Input(this);
@@ -189,5 +190,17 @@ export default class Game {
 
 		document.body.style.background = `url(${newRoom.background})`;
 		document.body.style.backgroundSize = "cover";
+	}
+
+	showEndgame(won) {
+		let levelTime = (this.stepCount / 60).toFixed(1);
+
+		document.getElementById("egWon").innerHTML = won ? "won 🥳" : "lost 🤬"
+		document.getElementById("egTime").innerHTML = `${levelTime} seconds`
+		document.getElementById("endgameOverlay").classList.remove("hidden")
+	}
+
+	hideEndgame() {
+		document.getElementById("endgameOverlay").classList.add("hidden")
 	}
 }

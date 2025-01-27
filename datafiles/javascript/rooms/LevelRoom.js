@@ -1,5 +1,4 @@
 import Room from "./Room.js";
-import * as f from "../functions.js";
 import Button from "../objects/Button.js";
 import Settings from "../engine/Settings.js";
 import Jelly from "../objects/Jelly.js";
@@ -112,7 +111,7 @@ export default class LevelRoom extends Room {
 			case 0:
 				if(this.status == "running" && this.checkIfLost(1)) {
 					this.status = "lost";
-					f.showEndgame(false)
+					this.g.showEndgame(false)
 					this.g.progressManager.updateLevelStats(this.g.room.constructor.name, false);
 				}
 				this.alarm[0] = 300;

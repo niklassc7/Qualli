@@ -2,7 +2,6 @@ import IObjlistentry from "./IObjlistentry.js";
 import * as f from "../functions.js";
 import Colors from "./color/Colors.js";
 import Jelly from "../objects/Jelly.js";
-import ProgressManager from "./ProgressManager.js";
 
 export default class KI extends IObjlistentry {
 	constructor(g, team) {
@@ -173,7 +172,7 @@ export default class KI extends IObjlistentry {
 
 			// Prüfen, ob noch eine KI da ist, sonst gewonnen.
 			if(this.g.room.status == "running" && this.pruefe_ob_gewonnen()){
-				f.showEndgame(true)
+				this.g.showEndgame(true)
 				this.g.room.status = "won";
 
 				// TODO win/lose logic should be in LevelRoom

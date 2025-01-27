@@ -13,8 +13,7 @@ export default class Room {
 
 		this.g = g;
 
-		// TODO check
-		this.roomEntered = Date.now()
+		this.roomEntered = this.g.stepCount;
 
 		// TODO fix
 		// if (prevRoom instanceof Room) {
